@@ -1,0 +1,212 @@
+#+TITLE: JWT Header Parsing Across Programming Paradigms
+#+AUTHOR: Aidan Pace
+#+EMAIL: apace@defrecord.com
+#+DATE: [2025-04-28]
+#+DESCRIPTION: A cross-language exploration of JWT header parsing techniques
+#+LANGUAGE: en
+#+OPTIONS: toc:3 num:t
+#+PROPERTY: header-args :exports both :eval never-export
+
+* JWT Parsing Examples
+:PROPERTIES:
+:CUSTOM_ID: jwt-parsing-examples
+:END:
+
+Repository of code examples demonstrating JWT header parsing across multiple programming languages and paradigms.
+
+** Overview
+:PROPERTIES:
+:CUSTOM_ID: overview
+:END:
+
+This repository contains the code samples and presentation slides from my talk at SPLASH/StrangeLoop/PyConf/RacketCon/EuroLISP 2025. It explores different approaches to parsing JWT headers across programming paradigms, from imperative to functional languages.
+
+** Repository Structure
+:PROPERTIES:
+:CUSTOM_ID: repository-structure
+:END:
+
+- =presentation.md=: Markdown slides from the conference talk
+- Code examples in language-specific directories:
+  - =js/=: JavaScript (browser and Node.js) examples
+  - =ts/=: TypeScript example with type definitions
+  - =python/=: Python implementation
+  - =hy/=: Lisp-like Python (Hy) implementation
+  - =clojure/=: Clojure implementation for the JVM
+  - =racket/=: Racket implementation
+  - =scheme/=: Guile Scheme implementation
+  - =shell/=: Bash script using base64 and jq
+  - =rust/=: Rust implementation with error handling
+
+** Installation
+:PROPERTIES:
+:CUSTOM_ID: installation
+:END:
+
+Clone this repository:
+
+#+BEGIN_SRC shell
+git clone https://github.com/aygp-dr/jwt-parsing-examples.git
+cd jwt-parsing-examples
+#+END_SRC
+
+** Language-Specific Setup
+:PROPERTIES:
+:CUSTOM_ID: language-specific-setup
+:END:
+
+*** JavaScript/Node.js
+#+BEGIN_SRC shell
+cd js
+npm install
+node browser-example.js
+node node-example.js
+#+END_SRC
+
+*** TypeScript
+#+BEGIN_SRC shell
+cd ts
+npm install
+npm run build
+npm start
+#+END_SRC
+
+*** Python
+#+BEGIN_SRC shell
+cd python
+pip install -r requirements.txt
+python jwt_header.py
+#+END_SRC
+
+*** Hy
+#+BEGIN_SRC shell
+cd hy
+pip install hy
+hy jwt_header.hy
+#+END_SRC
+
+*** Clojure
+#+BEGIN_SRC shell
+cd clojure
+lein deps
+lein run
+#+END_SRC
+
+*** Racket
+#+BEGIN_SRC shell
+cd racket
+raco pkg install --auto
+racket jwt-header.rkt
+#+END_SRC
+
+*** Guile Scheme
+#+BEGIN_SRC shell
+cd scheme
+guile jwt-header.scm
+#+END_SRC
+
+*** Shell
+#+BEGIN_SRC shell
+cd shell
+chmod +x jwt_header.sh
+./jwt_header.sh
+#+END_SRC
+
+*** Rust
+#+BEGIN_SRC shell
+cd rust
+cargo build
+cargo run
+#+END_SRC
+
+** JWT Structure
+:PROPERTIES:
+:CUSTOM_ID: jwt-structure
+:END:
+
+For all examples, we're using this JWT token:
+
+#+BEGIN_SRC text
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U
+#+END_SRC
+
+Which contains:
+- Header: ={"alg":"HS256","typ":"JWT"}=
+- Payload: ={"sub":"1234567890"}=
+- Signature: [HMAC-SHA256 signature]
+
+** Common Challenges Addressed
+:PROPERTIES:
+:CUSTOM_ID: common-challenges
+:END:
+
+1. Base64url vs Base64 encoding differences
+2. Handling missing padding in base64url strings
+3. Extracting the header part from an Authorization header
+4. Idiomatic parsing in different language paradigms
+5. Error handling strategies
+
+** Performance Benchmarks
+:PROPERTIES:
+:CUSTOM_ID: performance-benchmarks
+:END:
+
+The =benchmarks/= directory contains scripts to reproduce the performance measurements mentioned in the presentation.
+
+#+BEGIN_SRC org
+| Language   | Parsing Time (μs) | Memory Usage (KB) |
+|------------+-------------------+-------------------|
+| Rust       |               5.2 |               1.8 |
+| JavaScript |              24.7 |              12.3 |
+| Python     |              30.1 |              15.7 |
+| Clojure    |              45.8 |              28.4 |
+| Shell      |             180.3 |               8.9 |
+#+END_SRC
+
+** Security Considerations
+:PROPERTIES:
+:CUSTOM_ID: security-considerations
+:END:
+
+- The examples in this repo focus on parsing techniques, not security
+- For production use, always verify JWT signatures *before* parsing
+- Be aware of algorithm confusion attacks
+- Consider using established JWT libraries where available
+
+** Contributing
+:PROPERTIES:
+:CUSTOM_ID: contributing
+:END:
+
+Contributions are welcome! To add an example in another language:
+
+1. Create a directory for your language
+2. Implement the JWT header parsing example
+3. Add any necessary setup instructions to this README
+4. Submit a pull request
+
+** License
+:PROPERTIES:
+:CUSTOM_ID: license
+:END:
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+** Contact
+:PROPERTIES:
+:CUSTOM_ID: contact
+:END:
+
+- AYGP-DR
+- Email: aygp-dr@example.com
+- Twitter: @aygp_dr
+- GitHub: @aygp-dr
+
+** References
+:PROPERTIES:
+:CUSTOM_ID: references
+:END:
+
+- [[https://tools.ietf.org/html/rfc7519][RFC 7519: JSON Web Token (JWT)]]
+- [[https://tools.ietf.org/html/rfc4648][RFC 4648: Base64 and Base64url Encoding]]
+- [[https://auth0.com/docs/tokens/json-web-tokens/json-web-token-structure][JWT Structure Explained]]

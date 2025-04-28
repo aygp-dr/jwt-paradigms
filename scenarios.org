@@ -1,0 +1,1008 @@
+#+TITLE: JWT Token Examples: Subscription, Proxy, Refresh, and Revocation
+#+AUTHOR: Aidan Pace
+#+EMAIL: apace@defrecord.com
+#+DATE: [2025-04-28]
+#+DESCRIPTION: Advanced JWT token usage patterns across languages
+#+LANGUAGE: en
+#+OPTIONS: toc:3 num:t ^:nil
+#+STARTUP: showeverything
+#+PROPERTY: header-args :exports both :eval never-export
+
+* JWT Advanced Use Cases
+:PROPERTIES:
+:CUSTOM_ID: advanced-jwt-use-cases
+:END:
+
+** Subscription Tokens
+:PROPERTIES:
+:CUSTOM_ID: subscription-tokens
+:END:
+
+Subscription tokens encode user subscription status, plan details, and expiration information. They allow services to verify access rights without database lookups.
+
+*** Node.js Implementation
+#+BEGIN_SRC javascript :tangle examples/subscription/node.js :mkdirp yes
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = process.env.JWT_SECRET || 'your-secret-key';
+
+// Generate a subscription token
+function generateSubscriptionToken(userId, planDetails) {
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    sub: userId,
+    iat: now,
+    exp: now + (planDetails.durationDays * 86400), // Convert days to seconds
+    plan: {
+      name: planDetails.name,
+      tier: planDetails.tier,
+      features: planDetails.features,
+      isActive: true
+    },
+    meta: {
+      lastBillingDate: planDetails.lastBillingDate,
+      nextBillingDate: planDetails.nextBillingDate
+    }
+  };
+  
+  return jwt.sign(payload, SECRET_KEY, { algorithm: 'HS256' });
+}
+
+// Verify a subscription token
+function verifySubscriptionAccess(token) {
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    
+    // Check if token contains subscription plan
+    if (!decoded.plan || !decoded.plan.isActive) {
+      return { valid: false, reason: 'No active subscription found' };
+    }
+    
+    // Check for required features
+    return {
+      valid: true,
+      userId: decoded.sub,
+      plan: decoded.plan.name,
+      tier: decoded.plan.tier,
+      features: decoded.plan.features,
+      expiresAt: new Date(decoded.exp * 1000)
+    };
+  } catch (error) {
+    if (error.name === 'TokenExpiredError') {
+      return { valid: false, reason: 'Subscription expired' };
+    }
+    return { valid: false, reason: 'Invalid token' };
+  }
+}
+
+// Example usage
+const planDetails = {
+  name: 'Premium',
+  tier: 2,
+  features: ['content-access', 'hd-streaming', 'offline-download'],
+  durationDays: 30,
+  lastBillingDate: '2025-04-01',
+  nextBillingDate: '2025-05-01'
+};
+
+const token = generateSubscriptionToken('user123', planDetails);
+console.log('Subscription Token:', token);
+
+const verification = verifySubscriptionAccess(token);
+console.log('Verification Result:', verification);
+#+END_SRC
+
+*** Python Implementation
+#+BEGIN_SRC python :tangle examples/subscription/python_sub.py :mkdirp yes
+import jwt
+import time
+import os
+from datetime import datetime, timedelta
+
+SECRET_KEY = os.environ.get('JWT_SECRET', 'your-secret-key')
+
+def generate_subscription_token(user_id, plan_details):
+    """Generate a JWT token containing subscription information"""
+    now = int(time.time())
+    expiration = now + (plan_details['duration_days'] * 86400)  # Convert days to seconds
+    
+    payload = {
+        'sub': user_id,
+        'iat': now,
+        'exp': expiration,
+        'plan': {
+            'name': plan_details['name'],
+            'tier': plan_details['tier'],
+            'features': plan_details['features'],
+            'is_active': True
+        },
+        'meta': {
+            'last_billing_date': plan_details['last_billing_date'],
+            'next_billing_date': plan_details['next_billing_date']
+        }
+    }
+    
+    return jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+def verify_subscription_access(token):
+    """Verify a subscription token and check if the user has access"""
+    try:
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        
+        # Check if token contains subscription plan
+        if not decoded.get('plan') or not decoded['plan'].get('is_active'):
+            return {'valid': False, 'reason': 'No active subscription found'}
+        
+        # Return subscription details
+        return {
+            'valid': True,
+            'user_id': decoded['sub'],
+            'plan': decoded['plan']['name'],
+            'tier': decoded['plan']['tier'],
+            'features': decoded['plan']['features'],
+            'expires_at': datetime.fromtimestamp(decoded['exp']).isoformat()
+        }
+    except jwt.ExpiredSignatureError:
+        return {'valid': False, 'reason': 'Subscription expired'}
+    except (jwt.InvalidTokenError, KeyError):
+        return {'valid': False, 'reason': 'Invalid token'}
+
+# Example usage
+if __name__ == "__main__":
+    plan_details = {
+        'name': 'Premium',
+        'tier': 2,
+        'features': ['content-access', 'hd-streaming', 'offline-download'],
+        'duration_days': 30,
+        'last_billing_date': '2025-04-01',
+        'next_billing_date': '2025-05-01'
+    }
+    
+    token = generate_subscription_token('user123', plan_details)
+    print(f"Subscription Token: {token}")
+    
+    verification = verify_subscription_access(token)
+    print(f"Verification Result: {verification}")
+#+END_SRC
+
+** Proxy Authentication Tokens
+:PROPERTIES:
+:CUSTOM_ID: proxy-tokens
+:END:
+
+Proxy tokens allow a service to make authenticated requests to another service on behalf of a user without exposing the original user's credentials.
+
+*** TypeScript Implementation
+#+BEGIN_SRC typescript :tangle examples/proxy/typescript_proxy.ts :mkdirp yes
+import * as jwt from 'jsonwebtoken';
+import * as crypto from 'crypto';
+import { Request, Response, NextFunction } from 'express';
+
+// Configuration
+const SECRET_KEY = process.env.JWT_SECRET || 'your-secret-key';
+const SERVICE_ID = 'analytics-service';
+const TTL_SECONDS = 300; // 5 minutes
+
+interface ProxyTokenPayload {
+  sub: string;        // Original user ID
+  iss: string;        // Issuing service
+  aud: string;        // Target service
+  orig: string;       // Original token fingerprint
+  iat: number;        // Issued at time
+  exp: number;        // Expiration time
+  scope: string[];    // Allowed actions
+  ctx: {              // Context data
+    req_id: string;
+    source_ip: string;
+    [key: string]: any;
+  };
+}
+
+/**
+ * Generate a proxy token for making downstream service calls
+ */
+function generateProxyToken(
+  userId: string,
+  originalToken: string,
+  targetService: string,
+  scopes: string[],
+  requestContext: Record<string, any>
+): string {
+  // Create fingerprint of original token to prevent token substitution attacks
+  const tokenFingerprint = crypto
+    .createHash('sha256')
+    .update(originalToken)
+    .digest('hex');
+  
+  const now = Math.floor(Date.now() / 1000);
+  
+  const payload: ProxyTokenPayload = {
+    sub: userId,
+    iss: SERVICE_ID,
+    aud: targetService,
+    orig: tokenFingerprint,
+    iat: now,
+    exp: now + TTL_SECONDS,
+    scope: scopes,
+    ctx: {
+      req_id: requestContext.requestId || crypto.randomUUID(),
+      source_ip: requestContext.ip || '0.0.0.0',
+      ...requestContext
+    }
+  };
+  
+  return jwt.sign(payload, SECRET_KEY, { algorithm: 'HS256' });
+}
+
+/**
+ * Verify a proxy token in a downstream service
+ */
+function verifyProxyToken(token: string, expectedAudience: string): ProxyTokenPayload | null {
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY, {
+      algorithms: ['HS256'],
+      audience: expectedAudience
+    }) as ProxyTokenPayload;
+    
+    return decoded;
+  } catch (error) {
+    console.error('Proxy token verification failed:', error);
+    return null;
+  }
+}
+
+/**
+ * Express middleware for proxy authentication
+ */
+function proxyAuthMiddleware(req: Request, res: Response, next: NextFunction): void {
+  const proxyToken = req.headers.authorization?.replace('Bearer ', '');
+  
+  if (!proxyToken) {
+    res.status(401).json({ error: 'Proxy authentication required' });
+    return;
+  }
+  
+  const serviceId = req.headers['x-service-id'] as string;
+  
+  if (!serviceId) {
+    res.status(400).json({ error: 'Service ID header required' });
+    return;
+  }
+  
+  const decoded = verifyProxyToken(proxyToken, SERVICE_ID);
+  
+  if (!decoded) {
+    res.status(403).json({ error: 'Invalid proxy token' });
+    return;
+  }
+  
+  // Check if the calling service is the expected issuer
+  if (decoded.iss !== serviceId) {
+    res.status(403).json({ error: 'Token issuer mismatch' });
+    return;
+  }
+  
+  // Add the proxy context to the request for later use
+  req['proxyContext'] = {
+    userId: decoded.sub,
+    scopes: decoded.scope,
+    context: decoded.ctx
+  };
+  
+  next();
+}
+
+// Example usage
+const originalUserToken = 'eyJhbGciOiJIUzI1NiIsInR...';
+const userId = 'user456';
+const targetService = 'payment-service';
+const allowedScopes = ['read:transactions', 'process:refund'];
+const requestContext = {
+  requestId: 'req_12345',
+  ip: '192.168.1.100',
+  userAgent: 'Mozilla/5.0...',
+  route: '/api/transactions'
+};
+
+const proxyToken = generateProxyToken(
+  userId,
+  originalUserToken,
+  targetService,
+  allowedScopes,
+  requestContext
+);
+
+console.log('Proxy Token:', proxyToken);
+
+// Simulate verification in the target service
+const verificationResult = verifyProxyToken(proxyToken, targetService);
+console.log('Verification Result:', verificationResult);
+#+END_SRC
+
+*** Rust Implementation
+#+BEGIN_SRC rust :tangle examples/proxy/rust_proxy.rs :mkdirp yes
+use jsonwebtoken::{decode, encode, Algorithm, DecodingKey, EncodingKey, Header, Validation};
+use serde::{Deserialize, Serialize};
+use sha2::{Digest, Sha256};
+use std::collections::HashMap;
+use std::env;
+use std::time::{SystemTime, UNIX_EPOCH};
+use uuid::Uuid;
+
+// Configuration constants
+const SERVICE_ID: &str = "analytics-service";
+const TTL_SECONDS: u64 = 300; // 5 minutes
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Context {
+    req_id: String,
+    source_ip: String,
+    #[serde(flatten)]
+    additional: HashMap<String, serde_json::Value>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct ProxyTokenClaims {
+    sub: String,      // Original user ID
+    iss: String,      // Issuing service
+    aud: String,      // Target service
+    orig: String,     // Original token fingerprint
+    iat: u64,         // Issued at time
+    exp: u64,         // Expiration time
+    scope: Vec<String>, // Allowed actions
+    ctx: Context,     // Context data
+}
+
+/// Generate a proxy token for making downstream service calls
+fn generate_proxy_token(
+    user_id: &str,
+    original_token: &str,
+    target_service: &str,
+    scopes: Vec<String>,
+    request_context: HashMap<String, serde_json::Value>,
+) -> Result<String, jsonwebtoken::errors::Error> {
+    // Create fingerprint of original token to prevent token substitution attacks
+    let mut hasher = Sha256::new();
+    hasher.update(original_token.as_bytes());
+    let token_fingerprint = format!("{:x}", hasher.finalize());
+    
+    let now = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("Time went backwards")
+        .as_secs();
+    
+    // Extract specific fields or set defaults
+    let req_id = match request_context.get("requestId") {
+        Some(serde_json::Value::String(id)) => id.clone(),
+        _ => Uuid::new_v4().to_string(),
+    };
+    
+    let source_ip = match request_context.get("ip") {
+        Some(serde_json::Value::String(ip)) => ip.clone(),
+        _ => "0.0.0.0".to_string(),
+    };
+    
+    // Create a new HashMap for additional context, excluding fields we've already used
+    let mut additional_ctx = request_context.clone();
+    additional_ctx.remove("requestId");
+    additional_ctx.remove("ip");
+    
+    let claims = ProxyTokenClaims {
+        sub: user_id.to_string(),
+        iss: SERVICE_ID.to_string(),
+        aud: target_service.to_string(),
+        orig: token_fingerprint,
+        iat: now,
+        exp: now + TTL_SECONDS,
+        scope: scopes,
+        ctx: Context {
+            req_id,
+            source_ip,
+            additional: additional_ctx,
+        },
+    };
+    
+    let secret_key = env::var("JWT_SECRET").unwrap_or_else(|_| "your-secret-key".to_string());
+    encode(
+        &Header::new(Algorithm::HS256),
+        &claims,
+        &EncodingKey::from_secret(secret_key.as_bytes()),
+    )
+}
+
+/// Verify a proxy token in a downstream service
+fn verify_proxy_token(
+    token: &str,
+    expected_audience: &str,
+) -> Result<ProxyTokenClaims, jsonwebtoken::errors::Error> {
+    let secret_key = env::var("JWT_SECRET").unwrap_or_else(|_| "your-secret-key".to_string());
+    
+    let mut validation = Validation::new(Algorithm::HS256);
+    validation.set_audience(&[expected_audience]);
+    
+    let token_data = decode::<ProxyTokenClaims>(
+        token,
+        &DecodingKey::from_secret(secret_key.as_bytes()),
+        &validation,
+    )?;
+    
+    Ok(token_data.claims)
+}
+
+fn main() {
+    // Example usage
+    let original_user_token = "eyJhbGciOiJIUzI1NiIsInR...";
+    let user_id = "user456";
+    let target_service = "payment-service";
+    let allowed_scopes = vec![
+        "read:transactions".to_string(),
+        "process:refund".to_string(),
+    ];
+    
+    // Create a request context
+    let mut request_context = HashMap::new();
+    request_context.insert("requestId".to_string(), serde_json::Value::String("req_12345".to_string()));
+    request_context.insert("ip".to_string(), serde_json::Value::String("192.168.1.100".to_string()));
+    request_context.insert("userAgent".to_string(), serde_json::Value::String("Mozilla/5.0...".to_string()));
+    request_context.insert("route".to_string(), serde_json::Value::String("/api/transactions".to_string()));
+    
+    match generate_proxy_token(
+        user_id,
+        original_user_token,
+        target_service,
+        allowed_scopes,
+        request_context,
+    ) {
+        Ok(proxy_token) => {
+            println!("Proxy Token: {}", proxy_token);
+            
+            // Simulate verification in the target service
+            match verify_proxy_token(&proxy_token, target_service) {
+                Ok(verification_result) => {
+                    println!("Verification successful: {:?}", verification_result);
+                }
+                Err(e) => {
+                    println!("Verification failed: {}", e);
+                }
+            }
+        }
+        Err(e) => {
+            println!("Token generation failed: {}", e);
+        }
+    }
+}
+#+END_SRC
+
+** Refresh Tokens
+:PROPERTIES:
+:CUSTOM_ID: refresh-tokens
+:END:
+
+Refresh tokens enable obtaining new access tokens without re-authentication. They typically have a longer lifetime and are stored securely.
+
+*** Python Implementation
+#+BEGIN_SRC python :tangle examples/refresh/python_refresh.py :mkdirp yes
+import jwt
+import secrets
+import time
+import uuid
+import redis
+import os
+from datetime import datetime, timedelta
+
+# Configuration
+SECRET_KEY = os.environ.get('JWT_SECRET', 'your-secret-key')
+REFRESH_SECRET = os.environ.get('REFRESH_SECRET', 'your-refresh-secret')
+
+# Redis connection for token storage and revocation
+redis_client = redis.Redis(
+    host=os.environ.get('REDIS_HOST', 'localhost'),
+    port=int(os.environ.get('REDIS_PORT', 6379)),
+    db=int(os.environ.get('REDIS_DB', 0)),
+    decode_responses=True
+)
+
+class TokenService:
+    """Service for managing access and refresh tokens"""
+    
+    def __init__(self):
+        self.access_ttl = 900  # 15 minutes
+        self.refresh_ttl = 2592000  # 30 days
+    
+    def generate_token_pair(self, user_id, roles, permissions):
+        """Generate a new access+refresh token pair"""
+        now = int(time.time())
+        
+        # Create a unique refresh token ID
+        refresh_jti = str(uuid.uuid4())
+        
+        # Access token payload
+        access_payload = {
+            'sub': user_id,
+            'iat': now,
+            'exp': now + self.access_ttl,
+            'jti': str(uuid.uuid4()),
+            'roles': roles,
+            'permissions': permissions
+        }
+        
+        # Refresh token payload
+        refresh_payload = {
+            'sub': user_id,
+            'iat': now,
+            'exp': now + self.refresh_ttl,
+            'jti': refresh_jti,
+            'type': 'refresh'
+        }
+        
+        # Create tokens
+        access_token = jwt.encode(access_payload, SECRET_KEY, algorithm='HS256')
+        refresh_token = jwt.encode(refresh_payload, REFRESH_SECRET, algorithm='HS256')
+        
+        # Store refresh token in Redis for validation/revocation
+        self._store_refresh_token(refresh_jti, user_id, now + self.refresh_ttl)
+        
+        return {
+            'access_token': access_token,
+            'token_type': 'Bearer',
+            'expires_in': self.access_ttl,
+            'refresh_token': refresh_token,
+            'refresh_expires_in': self.refresh_ttl
+        }
+    
+    def refresh_access_token(self, refresh_token):
+        """Use a refresh token to generate a new access token"""
+        try:
+            # Verify the refresh token
+            decoded = jwt.decode(refresh_token, REFRESH_SECRET, algorithms=['HS256'])
+            
+            # Check if it's a refresh token
+            if decoded.get('type') != 'refresh':
+                return {'error': 'Invalid token type'}
+            
+            # Check if token has been revoked
+            if not self._validate_refresh_token(decoded['jti']):
+                return {'error': 'Token has been revoked'}
+            
+            # Get user data (in a real app, you'd get the latest roles/permissions)
+            user_id = decoded['sub']
+            user_data = self._get_user_data(user_id)
+            
+            # Generate a new access token
+            now = int(time.time())
+            new_access_payload = {
+                'sub': user_id,
+                'iat': now,
+                'exp': now + self.access_ttl,
+                'jti': str(uuid.uuid4()),
+                'roles': user_data['roles'],
+                'permissions': user_data['permissions']
+            }
+            
+            new_access_token = jwt.encode(new_access_payload, SECRET_KEY, algorithm='HS256')
+            
+            return {
+                'access_token': new_access_token,
+                'token_type': 'Bearer',
+                'expires_in': self.access_ttl
+            }
+            
+        except jwt.ExpiredSignatureError:
+            return {'error': 'Refresh token expired'}
+        except jwt.InvalidTokenError:
+            return {'error': 'Invalid token'}
+    
+    def revoke_refresh_token(self, refresh_token):
+        """Revoke a refresh token"""
+        try:
+            decoded = jwt.decode(refresh_token, REFRESH_SECRET, algorithms=['HS256'])
+            self._revoke_refresh_token(decoded['jti'])
+            return {'success': True, 'message': 'Token revoked'}
+        except (jwt.InvalidTokenError, KeyError):
+            return {'error': 'Invalid token'}
+    
+    def _store_refresh_token(self, jti, user_id, expiry):
+        """Store refresh token metadata in Redis"""
+        # Key format: refresh_token:{jti}
+        key = f"refresh_token:{jti}"
+        redis_client.hset(key, mapping={
+            'user_id': user_id,
+            'created_at': int(time.time()),
+            'revoked': 'false'
+        })
+        # Set expiration
+        redis_client.expireat(key, expiry)
+    
+    def _validate_refresh_token(self, jti):
+        """Check if a refresh token is valid and not revoked"""
+        key = f"refresh_token:{jti}"
+        # Check if token exists and is not revoked
+        token_data = redis_client.hgetall(key)
+        return token_data and token_data.get('revoked') == 'false'
+    
+    def _revoke_refresh_token(self, jti):
+        """Mark a refresh token as revoked"""
+        key = f"refresh_token:{jti}"
+        redis_client.hset(key, 'revoked', 'true')
+    
+    def _get_user_data(self, user_id):
+        """Get latest user data (roles/permissions)"""
+        # In a real app, you would fetch this from your database
+        # This is a mockup for demonstration
+        return {
+            'roles': ['user', 'subscriber'],
+            'permissions': ['read:content', 'post:comments']
+        }
+
+# Example usage
+if __name__ == "__main__":
+    token_service = TokenService()
+    
+    # Generate token pair for a user
+    user_id = 'user789'
+    roles = ['user', 'subscriber']
+    permissions = ['read:content', 'post:comments']
+    
+    token_pair = token_service.generate_token_pair(user_id, roles, permissions)
+    print(f"Token Pair: {token_pair}\n")
+    
+    # Simulate using the refresh token to get a new access token
+    refresh_result = token_service.refresh_access_token(token_pair['refresh_token'])
+    print(f"Refresh Result: {refresh_result}\n")
+    
+    # Revoke the refresh token
+    revoke_result = token_service.revoke_refresh_token(token_pair['refresh_token'])
+    print(f"Revoke Result: {revoke_result}\n")
+    
+    # Try to use the revoked refresh token
+    failed_refresh = token_service.refresh_access_token(token_pair['refresh_token'])
+    print(f"Using Revoked Token: {failed_refresh}")
+#+END_SRC
+
+*** TypeScript Implementation
+#+BEGIN_SRC typescript :tangle examples/refresh/typescript_refresh.ts :mkdirp yes
+import * as jwt from 'jsonwebtoken';
+import * as crypto from 'crypto';
+import { RedisClientType } from 'redis';
+
+// Configuration
+const SECRET_KEY = process.env.JWT_SECRET || 'your-secret-key';
+const REFRESH_SECRET = process.env.REFRESH_SECRET || 'your-refresh-secret';
+
+interface AccessTokenPayload {
+  sub: string;        // User ID
+  iat: number;        // Issued at time
+  exp: number;        // Expiration time
+  jti: string;        // JWT ID
+  roles: string[];    // User roles
+  permissions: string[]; // Specific permissions
+}
+
+interface RefreshTokenPayload {
+  sub: string;        // User ID
+  iat: number;        // Issued at time
+  exp: number;        // Expiration time
+  jti: string;        // JWT ID
+  type: 'refresh';    // Token type
+}
+
+interface UserData {
+  roles: string[];
+  permissions: string[];
+}
+
+interface TokenPair {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  refresh_token: string;
+  refresh_expires_in: number;
+}
+
+interface TokenRefreshResult {
+  access_token?: string;
+  token_type?: string;
+  expires_in?: number;
+  error?: string;
+}
+
+interface TokenRevokeResult {
+  success?: boolean;
+  message?: string;
+  error?: string;
+}
+
+class TokenService {
+  private redisClient: RedisClientType;
+  private accessTtl: number = 900;    // 15 minutes
+  private refreshTtl: number = 2592000; // 30 days
+  
+  constructor(redisClient: RedisClientType) {
+    this.redisClient = redisClient;
+  }
+  
+  /**
+   * Generate a new access+refresh token pair
+   */
+  public async generateTokenPair(
+    userId: string,
+    roles: string[],
+    permissions: string[]
+  ): Promise<TokenPair> {
+    const now = Math.floor(Date.now() / 1000);
+    
+    // Create a unique refresh token ID
+    const refreshJti = crypto.randomUUID();
+    
+    // Access token payload
+    const accessPayload: AccessTokenPayload = {
+      sub: userId,
+      iat: now,
+      exp: now + this.accessTtl,
+      jti: crypto.randomUUID(),
+      roles,
+      permissions
+    };
+    
+    // Refresh token payload
+    const refreshPayload: RefreshTokenPayload = {
+      sub: userId,
+      iat: now,
+      exp: now + this.refreshTtl,
+      jti: refreshJti,
+      type: 'refresh'
+    };
+    
+    // Create tokens
+    const accessToken = jwt.sign(accessPayload, SECRET_KEY, { algorithm: 'HS256' });
+    const refreshToken = jwt.sign(refreshPayload, REFRESH_SECRET, { algorithm: 'HS256' });
+    
+    // Store refresh token in Redis for validation/revocation
+    await this.storeRefreshToken(refreshJti, userId, now + this.refreshTtl);
+    
+    return {
+      access_token: accessToken,
+      token_type: 'Bearer',
+      expires_in: this.accessTtl,
+      refresh_token: refreshToken,
+      refresh_expires_in: this.refreshTtl
+    };
+  }
+  
+  /**
+   * Use a refresh token to generate a new access token
+   */
+  public async refreshAccessToken(refreshToken: string): Promise<TokenRefreshResult> {
+    try {
+      // Verify the refresh token
+      const decoded = jwt.verify(refreshToken, REFRESH_SECRET) as RefreshTokenPayload;
+      
+      // Check if it's a refresh token
+      if (decoded.type !== 'refresh') {
+        return { error: 'Invalid token type' };
+      }
+      
+      // Check if token has been revoked
+      const isValid = await this.validateRefreshToken(decoded.jti);
+      if (!isValid) {
+        return { error: 'Token has been revoked' };
+      }
+      
+      // Get user data (in a real app, you'd get the latest roles/permissions)
+      const userId = decoded.sub;
+      const userData = await this.getUserData(userId);
+      
+      // Generate a new access token
+      const now = Math.floor(Date.now() / 1000);
+      const newAccessPayload: AccessTokenPayload = {
+        sub: userId,
+        iat: now,
+        exp: now + this.accessTtl,
+        jti: crypto.randomUUID(),
+        roles: userData.roles,
+        permissions: userData.permissions
+      };
+      
+      const newAccessToken = jwt.sign(newAccessPayload, SECRET_KEY, { algorithm: 'HS256' });
+      
+      return {
+        access_token: newAccessToken,
+        token_type: 'Bearer',
+        expires_in: this.accessTtl
+      };
+      
+    } catch (error) {
+      if (error instanceof jwt.TokenExpiredError) {
+        return { error: 'Refresh token expired' };
+      }
+      return { error: 'Invalid token' };
+    }
+  }
+  
+  /**
+   * Revoke a refresh token
+   */
+  public async revokeRefreshToken(refreshToken: string): Promise<TokenRevokeResult> {
+    try {
+      const decoded = jwt.verify(refreshToken, REFRESH_SECRET) as RefreshTokenPayload;
+      await this.revokeRefreshTokenById(decoded.jti);
+      return { success: true, message: 'Token revoked' };
+    } catch (error) {
+      return { error: 'Invalid token' };
+    }
+  }
+  
+  /**
+   * Store refresh token metadata in Redis
+   */
+  private async storeRefreshToken(jti: string, userId: string, expiry: number): Promise<void> {
+    // Key format: refresh_token:{jti}
+    const key = `refresh_token:${jti}`;
+    
+    await this.redisClient.hSet(key, {
+      user_id: userId,
+      created_at: Math.floor(Date.now() / 1000).toString(),
+      revoked: 'false'
+    });
+    
+    // Set expiration
+    await this.redisClient.expireAt(key, expiry);
+  }
+  
+  /**
+   * Check if a refresh token is valid and not revoked
+   */
+  private async validateRefreshToken(jti: string): Promise<boolean> {
+    const key = `refresh_token:${jti}`;
+    // Check if token exists and is not revoked
+    const tokenData = await this.redisClient.hGetAll(key);
+    return !!tokenData && tokenData.revoked === 'false';
+  }
+  
+  /**
+   * Mark a refresh token as revoked
+   */
+  private async revokeRefreshTokenById(jti: string): Promise<void> {
+    const key = `refresh_token:${jti}`;
+    await this.redisClient.hSet(key, 'revoked', 'true');
+  }
+  
+  /**
+   * Get latest user data (roles/permissions)
+   */
+  private async getUserData(userId: string): Promise<UserData> {
+    // In a real app, you would fetch this from your database
+    // This is a mockup for demonstration
+    return {
+      roles: ['user', 'subscriber'],
+      permissions: ['read:content', 'post:comments']
+    };
+  }
+}
+
+// Example usage in an Express app:
+/*
+import express from 'express';
+import { createClient } from 'redis';
+
+const app = express();
+app.use(express.json());
+
+// Initialize Redis client
+const redisClient = createClient({
+  url: process.env.REDIS_URL || 'redis://localhost:6379'
+});
+redisClient.connect().catch(console.error);
+
+// Initialize token service
+const tokenService = new TokenService(redisClient);
+
+// Login endpoint
+app.post('/api/auth/login', async (req, res) => {
+  // Validate credentials (not shown)
+  const { username, password } = req.body;
+  
+  // Get user from database (not shown)
+  const user = { id: 'user123', roles: ['user'], permissions: ['read:content'] };
+  
+  // Generate tokens
+  const tokenPair = await tokenService.generateTokenPair(
+    user.id,
+    user.roles,
+    user.permissions
+  );
+  
+  res.json(tokenPair);
+});
+
+// Refresh token endpoint
+app.post('/api/auth/refresh', async (req, res) => {
+  const { refresh_token } = req.body;
+  
+  if (!refresh_token) {
+    return res.status(400).json({ error: 'Refresh token is required' });
+  }
+  
+  const result = await tokenService.refreshAccessToken(refresh_token);
+  
+  if (result.error) {
+    return res.status(401).json({ error: result.error });
+  }
+  
+  res.json(result);
+});
+
+// Logout endpoint
+app.post('/api/auth/logout', async (req, res) => {
+  const { refresh_token } = req.body;
+  
+  if (!refresh_token) {
+    return res.status(400).json({ error: 'Refresh token is required' });
+  }
+  
+  const result = await tokenService.revokeRefreshToken(refresh_token);
+  
+  if (result.error) {
+    return res.status(401).json({ error: result.error });
+  }
+  
+  res.json(result);
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+*/
+#+END_SRC
+
+** Token Revocation
+:PROPERTIES:
+:CUSTOM_ID: token-revocation
+:END:
+
+Token revocation enables invalidating tokens before their expiration, essential for security events like logouts or password changes.
+
+*** Go Implementation
+#+BEGIN_SRC go :tangle examples/revocation/go_revocation.go :mkdirp yes
+package main
+
+import (
+	"context"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"log"
+	"os"
+	"time"
+
+	"github.com/go-redis/redis/v8"
+	"github.com/golang-jwt/jwt/v4"
+	"github.com/google/uuid"
+)
+
+// Configuration
+var (
+	secretKey    = getEnv("JWT_SECRET", "your-secret-key")
+	redisAddr    = getEnv("REDIS_ADDR", "localhost:6379")
+	redisPwd     = getEnv("REDIS_PWD", "")
+	redisDB      = 0
+	accessTTL    = 15 * time.Minute
+	revokePrefix = "revoked_token:"
+)
+
+// Custom claims with a family identifier for token revocation
+type CustomClaims struct {
+	jwt.RegisteredClaims
+	Roles       []string          `json:"roles"`
+	Permissions []string          `json:"permissions"`
+	Family      string            `json:"fam,omitempty"` // Token family identifier
+	Metadata    map[string]string `json:"meta,omitempty"`
+}
+
+// RevocationService manages token revocation
+type RevocationService struct {
+	redisClient *redis.Client
+	ctx         context.Context
+}
+
+// NewRevocationService creates a
