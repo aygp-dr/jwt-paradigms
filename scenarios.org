@@ -1,4 +1,4 @@
-#+TITLE: JWT Token Examples: Subscription, Proxy, Refresh, and Revocation
+#+TITLE: JWT Token Scenarios
 #+AUTHOR: Aidan Pace
 #+EMAIL: apace@defrecord.com
 #+DATE: [2025-04-28]
@@ -1005,4 +1005,1177 @@ type RevocationService struct {
 	ctx         context.Context
 }
 
-// NewRevocationService creates a
+// NewRevocationService creates a new token revocation service
+func NewRevocationService() *RevocationService {
+	redisClient := redis.NewClient(&redis.Options{
+		Addr:     redisAddr,
+		Password: redisPwd,
+		DB:       redisDB,
+	})
+
+	return &RevocationService{
+		redisClient: redisClient,
+		ctx:         context.Background(),
+	}
+}
+
+// Close closes the Redis connection
+func (s *RevocationService) Close() {
+	s.redisClient.Close()
+}
+
+// IsTokenRevoked checks if a token is revoked
+func (s *RevocationService) IsTokenRevoked(tokenID string) (bool, error) {
+	key := revokePrefix + tokenID
+	val, err := s.redisClient.Exists(s.ctx, key).Result()
+	if err != nil {
+		return false, fmt.Errorf("failed to check revocation status: %w", err)
+	}
+	return val > 0, nil
+}
+
+// RevokeToken revokes a token by its ID
+func (s *RevocationService) RevokeToken(tokenID string, expiresAt time.Time) error {
+	key := revokePrefix + tokenID
+	// Store until token expiration (to avoid Redis growing indefinitely)
+	ttl := time.Until(expiresAt)
+	if ttl <= 0 {
+		return nil // Already expired, no need to revoke
+	}
+
+	_, err := s.redisClient.Set(s.ctx, key, "1", ttl).Result()
+	if err != nil {
+		return fmt.Errorf("failed to revoke token: %w", err)
+	}
+	return nil
+}
+
+// RevokeTokenFamily revokes all tokens in a family
+func (s *RevocationService) RevokeTokenFamily(family string, until time.Time) error {
+	key := revokePrefix + "family:" + family
+	// Store family revocation with TTL
+	ttl := time.Until(until)
+	if ttl <= 0 {
+		ttl = 24 * 30 * time.Hour // Default to 30 days if until is in the past
+	}
+
+	_, err := s.redisClient.Set(s.ctx, key, time.Now().Unix(), ttl).Result()
+	if err != nil {
+		return fmt.Errorf("failed to revoke token family: %w", err)
+	}
+	return nil
+}
+
+// IsTokenFamilyRevoked checks if a token family is revoked
+func (s *RevocationService) IsTokenFamilyRevoked(family string, issuedAt time.Time) (bool, error) {
+	key := revokePrefix + "family:" + family
+	val, err := s.redisClient.Get(s.ctx, key).Result()
+	if err == redis.Nil {
+		return false, nil // Not revoked
+	}
+	if err != nil {
+		return false, fmt.Errorf("failed to check family revocation: %w", err)
+	}
+
+	// Check if token was issued before revocation
+	var revokedAt int64
+	if err := json.Unmarshal([]byte(val), &revokedAt); err != nil {
+		revokedAt, err = parseInt64(val)
+		if err != nil {
+			return false, fmt.Errorf("invalid revocation timestamp: %w", err)
+		}
+	}
+
+	return issuedAt.Before(time.Unix(revokedAt, 0)), nil
+}
+
+// TokenService handles JWT token operations
+type TokenService struct {
+	revocationService *RevocationService
+}
+
+// NewTokenService creates a new token service
+func NewTokenService(revocationService *RevocationService) *TokenService {
+	return &TokenService{
+		revocationService: revocationService,
+	}
+}
+
+// CreateToken generates a new JWT token
+func (s *TokenService) CreateToken(userID string, roles, permissions []string) (string, error) {
+	now := time.Now()
+	expiresAt := now.Add(accessTTL)
+	tokenID := uuid.New().String()
+	
+	// Generate a family identifier for related tokens (useful for revocation)
+	family := generateTokenFamily(userID)
+
+	claims := CustomClaims{
+		RegisteredClaims: jwt.RegisteredClaims{
+			Subject:   userID,
+			ExpiresAt: jwt.NewNumericDate(expiresAt),
+			IssuedAt:  jwt.NewNumericDate(now),
+			NotBefore: jwt.NewNumericDate(now),
+			ID:        tokenID,
+		},
+		Roles:       roles,
+		Permissions: permissions,
+		Family:      family,
+		Metadata: map[string]string{
+			"ip": "192.168.1.100", // Would be actual client IP in real app
+		},
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	signedToken, err := token.SignedString([]byte(secretKey))
+	if err != nil {
+		return "", fmt.Errorf("failed to sign token: %w", err)
+	}
+
+	return signedToken, nil
+}
+
+// VerifyToken verifies and parses a token
+func (s *TokenService) VerifyToken(tokenString string) (*CustomClaims, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		// Verify signing method
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return []byte(secretKey), nil
+	})
+
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse token: %w", err)
+	}
+
+	if !token.Valid {
+		return nil, fmt.Errorf("invalid token")
+	}
+
+	claims, ok := token.Claims.(*CustomClaims)
+	if !ok {
+		return nil, fmt.Errorf("invalid claims type")
+	}
+
+	// Check if token is revoked
+	isRevoked, err := s.revocationService.IsTokenRevoked(claims.ID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to check revocation: %w", err)
+	}
+	if isRevoked {
+		return nil, fmt.Errorf("token is revoked")
+	}
+
+	// Check if token family is revoked
+	if claims.Family != "" {
+		isFamilyRevoked, err := s.revocationService.IsTokenFamilyRevoked(
+			claims.Family,
+			claims.IssuedAt.Time,
+		)
+		if err != nil {
+			return nil, fmt.Errorf("failed to check family revocation: %w", err)
+		}
+		if isFamilyRevoked {
+			return nil, fmt.Errorf("token family is revoked")
+		}
+	}
+
+	return claims, nil
+}
+
+// RevokeToken revokes a specific token
+func (s *TokenService) RevokeToken(tokenString string) error {
+	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(secretKey), nil
+	})
+
+	if err != nil {
+		return fmt.Errorf("failed to parse token: %w", err)
+	}
+
+	claims, ok := token.Claims.(*CustomClaims)
+	if !ok {
+		return fmt.Errorf("invalid claims type")
+	}
+
+	return s.revocationService.RevokeToken(claims.ID, claims.ExpiresAt.Time)
+}
+
+// RevokeAllUserTokens revokes all tokens for a user
+func (s *TokenService) RevokeAllUserTokens(userID string) error {
+	family := generateTokenFamily(userID)
+	// Revoke for 30 days (or longer if needed)
+	return s.revocationService.RevokeTokenFamily(
+		family,
+		time.Now().Add(30*24*time.Hour),
+	)
+}
+
+// Helper functions
+
+// getEnv gets an environment variable or returns a default
+func getEnv(key, fallback string) string {
+	if value, exists := os.LookupEnv(key); exists {
+		return value
+	}
+	return fallback
+}
+
+// generateTokenFamily creates a unique family identifier for a user
+func generateTokenFamily(userID string) string {
+	hash := sha256.Sum256([]byte(userID))
+	return hex.EncodeToString(hash[:])
+}
+
+// parseInt64 parses a string to int64
+func parseInt64(s string) (int64, error) {
+	var n int64
+	_, err := fmt.Sscanf(s, "%d", &n)
+	return n, err
+}
+
+func main() {
+	// Example usage
+	revocationService := NewRevocationService()
+	defer revocationService.Close()
+
+	tokenService := NewTokenService(revocationService)
+
+	// Create a token
+	userID := "user123"
+	roles := []string{"user", "admin"}
+	permissions := []string{"read:users", "write:users"}
+
+	token, err := tokenService.CreateToken(userID, roles, permissions)
+	if err != nil {
+		log.Fatalf("Failed to create token: %v", err)
+	}
+	fmt.Printf("Token created: %s\n\n", token)
+
+	// Verify the token
+	claims, err := tokenService.VerifyToken(token)
+	if err != nil {
+		log.Fatalf("Failed to verify token: %v", err)
+	}
+	fmt.Printf("Token verified. User: %s, Roles: %v\n\n", claims.Subject, claims.Roles)
+
+	// Revoke the token
+	err = tokenService.RevokeToken(token)
+	if err != nil {
+		log.Fatalf("Failed to revoke token: %v", err)
+	}
+	fmt.Println("Token revoked")
+
+	// Try to verify the revoked token
+	_, err = tokenService.VerifyToken(token)
+	fmt.Printf("Verification after revocation: %v\n\n", err)
+
+	// Revoke all user tokens
+	err = tokenService.RevokeAllUserTokens(userID)
+	if err != nil {
+		log.Fatalf("Failed to revoke all user tokens: %v", err)
+	}
+	fmt.Println("All user tokens revoked")
+
+	// Create a new token and try to verify (should fail due to family revocation)
+	newToken, _ := tokenService.CreateToken(userID, roles, permissions)
+	_, err = tokenService.VerifyToken(newToken)
+	fmt.Printf("Verification of new token after family revocation: %v\n", err)
+}
+#+END_SRC
+
+*** Ruby Implementation
+#+BEGIN_SRC ruby :tangle examples/revocation/ruby_revocation.rb :mkdirp yes
+require 'jwt'
+require 'redis'
+require 'securerandom'
+require 'digest'
+
+# Configuration
+SECRET_KEY = ENV['JWT_SECRET'] || 'your-secret-key'
+REDIS_URL = ENV['REDIS_URL'] || 'redis://localhost:6379/0'
+ACCESS_TTL = 15 * 60 # 15 minutes in seconds
+REVOKE_PREFIX = 'revoked_token:'
+
+class RevocationService
+  def initialize
+    @redis = Redis.new(url: REDIS_URL)
+  end
+
+  # Check if a token is revoked
+  def token_revoked?(token_id)
+    key = "#{REVOKE_PREFIX}#{token_id}"
+    @redis.exists?(key) == 1
+  end
+
+  # Revoke a token by its ID
+  def revoke_token(token_id, expires_at)
+    key = "#{REVOKE_PREFIX}#{token_id}"
+    ttl = expires_at - Time.now.to_i
+    return if ttl <= 0 # Already expired, no need to revoke
+
+    @redis.set(key, 1, ex: ttl)
+  end
+
+  # Revoke all tokens in a family
+  def revoke_token_family(family, until_time = nil)
+    until_time ||= Time.now.to_i + (30 * 24 * 60 * 60) # Default to 30 days
+    key = "#{REVOKE_PREFIX}family:#{family}"
+    ttl = until_time - Time.now.to_i
+    ttl = 30 * 24 * 60 * 60 if ttl <= 0 # Default to 30 days if until_time is in the past
+
+    @redis.set(key, Time.now.to_i, ex: ttl)
+  end
+
+  # Check if a token family is revoked
+  def token_family_revoked?(family, issued_at)
+    key = "#{REVOKE_PREFIX}family:#{family}"
+    revoked_at = @redis.get(key)
+    return false unless revoked_at
+
+    issued_at < revoked_at.to_i
+  end
+end
+
+class TokenService
+  def initialize
+    @revocation_service = RevocationService.new
+  end
+
+  # Create a new JWT token
+  def create_token(user_id, roles, permissions)
+    now = Time.now.to_i
+    expires_at = now + ACCESS_TTL
+    token_id = SecureRandom.uuid
+    
+    # Generate a family identifier for related tokens
+    family = generate_token_family(user_id)
+
+    payload = {
+      sub: user_id,
+      exp: expires_at,
+      iat: now,
+      nbf: now,
+      jti: token_id,
+      roles: roles,
+      permissions: permissions,
+      fam: family,
+      meta: {
+        ip: '192.168.1.100', # Would be actual client IP in real app
+      }
+    }
+
+    JWT.encode(payload, SECRET_KEY, 'HS256')
+  end
+
+  # Verify and parse a token
+  def verify_token(token_string)
+    begin
+      decoded_token = JWT.decode(token_string, SECRET_KEY, true, { algorithm: 'HS256' })
+      payload = decoded_token[0]
+      token_id = payload['jti']
+
+      # Check if token is revoked
+      if @revocation_service.token_revoked?(token_id)
+        raise JWT::VerificationError, 'Token is revoked'
+      end
+
+      # Check if token family is revoked
+      family = payload['fam']
+      if family && @revocation_service.token_family_revoked?(family, payload['iat'])
+        raise JWT::VerificationError, 'Token family is revoked'
+      end
+
+      payload
+    rescue JWT::ExpiredSignature
+      raise 'Token has expired'
+    rescue JWT::DecodeError, JWT::VerificationError => e
+      raise "Invalid token: #{e.message}"
+    end
+  end
+
+  # Revoke a specific token
+  def revoke_token(token_string)
+    begin
+      decoded_token = JWT.decode(token_string, SECRET_KEY, true, { algorithm: 'HS256' })
+      payload = decoded_token[0]
+      token_id = payload['jti']
+      expires_at = payload['exp']
+
+      @revocation_service.revoke_token(token_id, expires_at)
+    rescue JWT::DecodeError => e
+      raise "Failed to parse token: #{e.message}"
+    end
+  end
+
+  # Revoke all tokens for a user
+  def revoke_all_user_tokens(user_id)
+    family = generate_token_family(user_id)
+    # Revoke for 30 days (or longer if needed)
+    @revocation_service.revoke_token_family(family)
+  end
+
+  private
+
+  # Generate a unique family identifier for a user
+  def generate_token_family(user_id)
+    Digest::SHA256.hexdigest(user_id)
+  end
+end
+
+# Example usage
+if __FILE__ == $0
+  token_service = TokenService.new
+
+  # Create a token
+  user_id = 'user123'
+  roles = ['user', 'admin']
+  permissions = ['read:users', 'write:users']
+
+  token = token_service.create_token(user_id, roles, permissions)
+  puts "Token created: #{token}\n\n"
+
+  # Verify the token
+  begin
+    claims = token_service.verify_token(token)
+    puts "Token verified. User: #{claims['sub']}, Roles: #{claims['roles']}\n\n"
+  rescue => e
+    puts "Failed to verify token: #{e.message}"
+  end
+
+  # Revoke the token
+  begin
+    token_service.revoke_token(token)
+    puts "Token revoked"
+  rescue => e
+    puts "Failed to revoke token: #{e.message}"
+  end
+
+  # Try to verify the revoked token
+  begin
+    token_service.verify_token(token)
+  rescue => e
+    puts "Verification after revocation: #{e.message}\n\n"
+  end
+
+  # Revoke all user tokens
+  begin
+    token_service.revoke_all_user_tokens(user_id)
+    puts "All user tokens revoked"
+  rescue => e
+    puts "Failed to revoke all user tokens: #{e.message}"
+  end
+
+  # Create a new token and try to verify (should fail due to family revocation)
+  new_token = token_service.create_token(user_id, roles, permissions)
+  begin
+    token_service.verify_token(new_token)
+  rescue => e
+    puts "Verification of new token after family revocation: #{e.message}"
+  end
+end
+#+END_SRC
+
+* JWT Validation vs. Parsing
+:PROPERTIES:
+:CUSTOM_ID: validation-vs-parsing
+:END:
+
+It's crucial to understand the difference between JWT parsing and validation. Parsing extracts data without verifying integrity, while validation ensures the token is intact and trustworthy.
+
+** Token Parsing (Unsafe)
+:PROPERTIES:
+:CUSTOM_ID: token-parsing
+:END:
+
+Parsing simply decodes the JWT without verifying signatures. This is useful for examining token structure but should NEVER be used for authentication decisions.
+
+*** Python Implementation
+#+BEGIN_SRC python :tangle examples/parsing-validation/python_parsing.py :mkdirp yes
+import base64
+import json
+
+def parse_jwt(token):
+    """
+    UNSAFE: Parse a JWT without signature verification
+    Only use for debugging or examining token structure
+    NEVER use for authentication decisions
+    """
+    # Split the token into parts
+    parts = token.split('.')
+    if len(parts) != 3:
+        raise ValueError("Invalid JWT format")
+    
+    # Base64url decode the header and payload
+    def decode_segment(segment):
+        # Add padding if needed
+        padding = len(segment) % 4
+        if padding:
+            segment += '=' * (4 - padding)
+        
+        # Convert from URL-safe base64 to standard base64
+        segment = segment.replace('-', '+').replace('_', '/')
+        
+        # Decode
+        decoded_bytes = base64.b64decode(segment)
+        return json.loads(decoded_bytes.decode('utf-8'))
+    
+    # Parse header and payload
+    header = decode_segment(parts[0])
+    payload = decode_segment(parts[1])
+    
+    # Return parsed data (note: signature is NOT verified)
+    return {
+        'header': header,
+        'payload': payload,
+        'signature_segment': parts[2],  # Raw, still encoded
+        'is_verified': False  # Explicitly mark as unverified
+    }
+
+# Example usage
+if __name__ == "__main__":
+    # Sample token (DO NOT use real tokens in code)
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    
+    try:
+        # INSECURE - only for demonstration!
+        parsed = parse_jwt(token)
+        print("⚠️ WARNING: This is unsafe parsing and should NEVER be used for authentication!")
+        print(f"Header: {parsed['header']}")
+        print(f"Payload: {parsed['payload']}")
+    except Exception as e:
+        print(f"Error parsing token: {e}")
+#+END_SRC
+
+*** TypeScript Implementation
+#+BEGIN_SRC typescript :tangle examples/parsing-validation/typescript_parsing.ts :mkdirp yes
+/**
+ * UNSAFE: Parse a JWT without signature verification
+ * Only use for debugging or examining token structure
+ * NEVER use for authentication decisions
+ */
+function parseJwt(token: string): {
+  header: any;
+  payload: any;
+  signatureSegment: string;
+  isVerified: boolean;
+} {
+  // Split the token into parts
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    throw new Error('Invalid JWT format');
+  }
+
+  // Base64url decode function
+  const decodeSegment = (segment: string): any => {
+    // Add padding if needed
+    const padded = segment.padEnd(
+      segment.length + (4 - (segment.length % 4)) % 4,
+      '='
+    );
+    
+    // Convert from URL-safe base64 to standard base64
+    const base64 = padded.replace(/-/g, '+').replace(/_/g, '/');
+    
+    // Decode
+    try {
+      const decoded = Buffer.from(base64, 'base64').toString();
+      return JSON.parse(decoded);
+    } catch (e) {
+      throw new Error(`Failed to decode JWT segment: ${e}`);
+    }
+  };
+
+  // Parse header and payload
+  const header = decodeSegment(parts[0]);
+  const payload = decodeSegment(parts[1]);
+
+  // Return parsed data (note: signature is NOT verified)
+  return {
+    header,
+    payload,
+    signatureSegment: parts[2], // Raw, still encoded
+    isVerified: false // Explicitly mark as unverified
+  };
+}
+
+// Function to demonstrate the dangers of parsing without verification
+function demonstrateParsingDanger(): void {
+  // Create a completely fake token with admin privileges
+  const maliciousHeader = { alg: 'HS256', typ: 'JWT' };
+  const maliciousPayload = { 
+    sub: 'attacker',
+    role: 'admin',
+    permissions: ['*'],
+    exp: Math.floor(Date.now() / 1000) + 3600
+  };
+
+  // Encode to base64url
+  const encodeSegment = (obj: any): string => {
+    const json = JSON.stringify(obj);
+    const base64 = Buffer.from(json).toString('base64');
+    return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+  };
+
+  const fakeToken = `${encodeSegment(maliciousHeader)}.${encodeSegment(maliciousPayload)}.totallyFakeSignature`;
+  
+  console.log('Fake token created by attacker:', fakeToken);
+  
+  // UNSAFE parsing - this will "successfully" parse the fake token!
+  const parsed = parseJwt(fakeToken);
+  console.log('⚠️ DANGER: Parsed payload without verification:', parsed.payload);
+  
+  console.log('\nThis highlights why you should NEVER rely on parsing alone for authorization decisions.');
+}
+
+// Example usage
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+
+try {
+  // INSECURE - only for demonstration!
+  const parsed = parseJwt(token);
+  console.log("⚠️ WARNING: This is unsafe parsing and should NEVER be used for authentication!");
+  console.log("Header:", parsed.header);
+  console.log("Payload:", parsed.payload);
+  
+  // Demonstrate the dangers
+  console.log("\n--- Security Vulnerability Demonstration ---");
+  demonstrateParsingDanger();
+} catch (e) {
+  console.error("Error parsing token:", e);
+}
+#+END_SRC
+
+** Token Validation (Secure)
+:PROPERTIES:
+:CUSTOM_ID: token-validation
+:END:
+
+Proper validation includes verifying the signature, checking expiration, and validating required claims before trusting the token's contents.
+
+*** Java Implementation
+#+BEGIN_SRC java :tangle examples/parsing-validation/java_validation.java :mkdirp yes
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
+
+import java.util.Date;
+
+public class JwtValidator {
+
+    private final String issuer;
+    private final String audience;
+    private final Algorithm algorithm;
+
+    /**
+     * Creates a JWT validator with proper security checks
+     *
+     * @param secret The secret key used to sign the token
+     * @param issuer Expected issuer of the token
+     * @param audience Expected audience of the token
+     */
+    public JwtValidator(String secret, String issuer, String audience) {
+        this.issuer = issuer;
+        this.audience = audience;
+        this.algorithm = Algorithm.HMAC256(secret);
+    }
+
+    /**
+     * Properly validates a JWT token
+     *
+     * @param token The JWT token to validate
+     * @return The decoded JWT if valid
+     * @throws JWTVerificationException if token is invalid
+     */
+    public DecodedJWT validateToken(String token) throws JWTVerificationException {
+        // Create a verifier with all required validations
+        JWTVerifier verifier = JWT.require(algorithm)
+                .withIssuer(issuer)             // Validate issuer
+                .withAudience(audience)         // Validate audience
+                .acceptLeeway(5)                // Small leeway for clock skew (5 seconds)
+                .build();
+        
+        // This will throw if the token is invalid
+        DecodedJWT jwt = verifier.verify(token);
+        
+        // Additional validation checks (example)
+        validateAdditionalClaims(jwt);
+        
+        return jwt;
+    }
+    
+    /**
+     * Validates custom claims in the token
+     */
+    private void validateAdditionalClaims(DecodedJWT jwt) throws JWTVerificationException {
+        // Example: Ensure token has a subject
+        if (jwt.getSubject() == null || jwt.getSubject().isEmpty()) {
+            throw new JWTVerificationException("Token missing required subject claim");
+        }
+        
+        // Example: Custom validation based on your requirements
+        // e.g., validate permissions, role, or any custom claims
+        String role = jwt.getClaim("role").asString();
+        if (role == null) {
+            throw new JWTVerificationException("Token missing required role claim");
+        }
+    }
+
+    /**
+     * Main method with example usage
+     */
+    public static void main(String[] args) {
+        try {
+            // Create a validator
+            JwtValidator validator = new JwtValidator(
+                    "your-secret-key", 
+                    "your-auth-service",
+                    "your-api"
+            );
+            
+            // Sample token (in real code, this would come from a request)
+            String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
+            
+            // Validate the token (throws if invalid)
+            DecodedJWT jwt = validator.validateToken(token);
+            
+            // Token is valid - you can now use the claims
+            System.out.println("Token is valid!");
+            System.out.println("Subject: " + jwt.getSubject());
+            System.out.println("Expires at: " + jwt.getExpiresAt());
+            System.out.println("Role: " + jwt.getClaim("role").asString());
+            
+        } catch (JWTVerificationException e) {
+            System.err.println("Token validation failed: " + e.getMessage());
+        }
+    }
+}
+#+END_SRC
+
+*** Go Implementation
+#+BEGIN_SRC go :tangle examples/parsing-validation/go_validation.go :mkdirp yes
+package main
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/golang-jwt/jwt/v4"
+)
+
+// CustomClaims extends standard JWT claims with your application-specific claims
+type CustomClaims struct {
+	jwt.RegisteredClaims
+	Role        string   `json:"role"`
+	Permissions []string `json:"permissions"`
+}
+
+// JWTValidator handles JWT validation with proper security checks
+type JWTValidator struct {
+	secretKey []byte
+	issuer    string
+	audience  string
+}
+
+// NewJWTValidator creates a new JWT validator
+func NewJWTValidator(secretKey, issuer, audience string) *JWTValidator {
+	return &JWTValidator{
+		secretKey: []byte(secretKey),
+		issuer:    issuer,
+		audience:  audience,
+	}
+}
+
+// ValidateToken properly validates a JWT token
+func (v *JWTValidator) ValidateToken(tokenString string) (*CustomClaims, error) {
+	// Parse the token
+	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		// Validate the signing algorithm
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		
+		return v.secretKey, nil
+	})
+	
+	if err != nil {
+		return nil, fmt.Errorf("token parsing failed: %w", err)
+	}
+	
+	if !token.Valid {
+		return nil, fmt.Errorf("invalid token")
+	}
+	
+	claims, ok := token.Claims.(*CustomClaims)
+	if !ok {
+		return nil, fmt.Errorf("invalid claims type")
+	}
+	
+	// Explicitly validate required claims
+	if err := v.validateClaims(claims); err != nil {
+		return nil, err
+	}
+	
+	return claims, nil
+}
+
+// validateClaims validates the required claims in the token
+func (v *JWTValidator) validateClaims(claims *CustomClaims) error {
+	now := time.Now()
+	
+	// Validate expiration
+	if claims.ExpiresAt == nil {
+		return fmt.Errorf("token missing expiration time")
+	}
+	if claims.ExpiresAt.Before(now) {
+		return fmt.Errorf("token expired")
+	}
+	
+	// Validate issued at
+	if claims.IssuedAt == nil {
+		return fmt.Errorf("token missing issued at time")
+	}
+	// Allow 5 minutes of clock skew
+	if claims.IssuedAt.After(now.Add(5 * time.Minute)) {
+		return fmt.Errorf("token issued in the future")
+	}
+	
+	// Validate issuer
+	if claims.Issuer != v.issuer {
+		return fmt.Errorf("invalid issuer")
+	}
+	
+	// Validate audience
+	if claims.Audience == nil || !claims.Audience.Contains(v.audience) {
+		return fmt.Errorf("invalid audience")
+	}
+	
+	// Validate subject
+	if claims.Subject == "" {
+		return fmt.Errorf("token missing subject")
+	}
+	
+	// Custom validations
+	if claims.Role == "" {
+		return fmt.Errorf("token missing required role claim")
+	}
+	
+	return nil
+}
+
+// UnsafelyExtractClaims demonstrates why parsing without verification is dangerous
+// NEVER use this for authentication decisions!
+func UnsafelyExtractClaims(tokenString string) (*CustomClaims, error) {
+	parts := strings.Split(tokenString, ".")
+	if len(parts) != 3 {
+		return nil, fmt.Errorf("invalid token format")
+	}
+	
+	// Decode the claims part (middle segment)
+	claimBytes, err := jwt.DecodeSegment(parts[1])
+	if err != nil {
+		return nil, fmt.Errorf("failed to decode claims: %w", err)
+	}
+	
+	var claims CustomClaims
+	if err := json.Unmarshal(claimBytes, &claims); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal claims: %w", err)
+	}
+	
+	// WARNING: No verification has been performed!
+	return &claims, nil
+}
+
+// SecurityTestScenarios demonstrates different security test cases
+func SecurityTestScenarios() {
+	fmt.Println("\n--- SECURITY TEST SCENARIOS ---")
+	
+	// Create a validator
+	validator := NewJWTValidator("your-secret-key", "auth-service", "api-gateway")
+	
+	// Test case 1: Expired token
+	expiredTokenString := createExpiredToken()
+	fmt.Println("Testing expired token:")
+	if _, err := validator.ValidateToken(expiredTokenString); err != nil {
+		fmt.Printf("✅ Security check passed: %s\n", err)
+	} else {
+		fmt.Println("❌ Security check failed: Accepted expired token!")
+	}
+	
+	// Test case 2: Wrong issuer
+	wrongIssuerTokenString := createTokenWithWrongIssuer()
+	fmt.Println("\nTesting token with wrong issuer:")
+	if _, err := validator.ValidateToken(wrongIssuerTokenString); err != nil {
+		fmt.Printf("✅ Security check passed: %s\n", err)
+	} else {
+		fmt.Println("❌ Security check failed: Accepted token with wrong issuer!")
+	}
+	
+	// Test case 3: None algorithm attack
+	noneAlgorithmTokenString := createNoneAlgorithmToken()
+	fmt.Println("\nTesting 'none' algorithm attack:")
+	if _, err := validator.ValidateToken(noneAlgorithmTokenString); err != nil {
+		fmt.Printf("✅ Security check passed: %s\n", err)
+	} else {
+		fmt.Println("❌ Security check failed: Accepted 'none' algorithm token!")
+	}
+	
+	// Test case 4: Tampered payload
+	tamperedTokenString := createTamperedToken()
+	fmt.Println("\nTesting tampered token:")
+	if _, err := validator.ValidateToken(tamperedTokenString); err != nil {
+		fmt.Printf("✅ Security check passed: %s\n", err)
+	} else {
+		fmt.Println("❌ Security check failed: Accepted tampered token!")
+	}
+}
+
+func main() {
+	// Example usage
+	validator := NewJWTValidator("your-secret-key", "auth-service", "api-gateway")
+	
+	// This would be a token from a request in a real application
+	tokenString := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+	
+	claims, err := validator.ValidateToken(tokenString)
+	if err != nil {
+		fmt.Println("Token validation failed:", err)
+		return
+	}
+	
+	fmt.Println("Token is valid!")
+	fmt.Println("Subject:", claims.Subject)
+	fmt.Println("Role:", claims.Role)
+	fmt.Println("Permissions:", claims.Permissions)
+	
+	// Run security test scenarios
+	SecurityTestScenarios()
+}
+#+END_SRC
+
+** Security Recommendations
+:PROPERTIES:
+:CUSTOM_ID: security-recommendations
+:END:
+
+Best practices for implementing JWT validation with robust security.
+
+#+BEGIN_SRC markdown :tangle examples/parsing-validation/security_recommendations.md :mkdirp yes
+# JWT Security Recommendations
+
+## Always Validate Before Using
+
+1. **Verify signatures first** - Never trust token contents before signature verification
+2. **Check all required claims** - Validate expiration, issuer, audience, and subject
+3. **Validate token type** - Ensure the token is used for its intended purpose
+4. **Be mindful of algorithm selection** - Prefer strong algorithms like RS256 over HS256 when possible
+5. **Use libraries correctly** - Follow library documentation and security advisories
+
+## Common JWT Attacks to Defend Against
+
+### None Algorithm Attack
+
+The attacker modifies the JWT header to use the "none" algorithm, indicating the token doesn't need a signature:
+
+```json
+{
+  "alg": "none",
+  "typ": "JWT"
+}
+```
+
+**Defense**: Always validate the algorithm and reject "none" algorithm tokens.
+
+### Algorithm Confusion Attack
+
+The attacker tricks the system into verifying a token signed with one algorithm (like RS256) using another (like HS256):
+
+**Defense**: Always explicitly validate the algorithm in the token matches the expected algorithm.
+
+### Token Injection
+
+The attacker uses a token from one context in another:
+
+**Defense**: Validate the token's audience (`aud`) claim matches your service.
+
+### Replay Attacks
+
+The attacker captures a valid token and reuses it:
+
+**Defense**: Use short expiration times, implement token revocation, and consider using nonces for critical operations.
+
+## Implementation Checklist
+
+- [ ] Use a reputable JWT library
+- [ ] Verify signatures before accessing payload
+- [ ] Validate all required claims (iss, sub, exp, iat, aud)
+- [ ] Implement token revocation for sensitive systems
+- [ ] Use secure key management (HSM for production)
+- [ ] Apply the principle of least privilege for token permissions
+- [ ] Add monitoring for suspicious JWT usage patterns
+- [ ] Document token validation requirements for developers
+
+## Code Review Checklist
+
+When reviewing JWT code, look for:
+
+- Signature verification before payload access
+- Explicit validation of all relevant claims
+- Proper error handling for invalid tokens
+- No use of unsafe parsing functions
+- Secure key management
+- Appropriate token lifetime settings
+#+END_SRC
+
+* Project Metadata
+:PROPERTIES:
+:CUSTOM_ID: metadata
+:END:
+
+#+BEGIN_SRC org :tangle metadata.org :mkdirp yes
+#+TITLE: JWT Advanced Examples Repository
+#+AUTHOR: Aidan Pace
+#+EMAIL: apace@defrecord.com
+#+DATE: [2025-04-28]
+
+* Project Information
+
+- *GitHub Repository*: https://github.com/aygp-dr/jwt-parsing-examples
+- *Project Lead*: Aidan Pace (@aygp-dr)
+- *Contact*: apace@defrecord.com
+- *License*: MIT License
+
+* Presentation History
+
+This codebase has been presented at:
+- SPLASH 2025 (Chicago, IL)
+- StrangeLoop 2025 (St. Louis, MO)
+- PyConf 2025 (Pittsburgh, PA)
+- EuroLISP 2025 (Berlin, Germany)
+
+* Contributions
+
+Contributions are welcome! Please see CONTRIBUTING.md for guidelines.
+#+END_SRC
+
+* Mermaid Diagrams
+:PROPERTIES:
+:CUSTOM_ID: diagrams
+:END:
+
+** JWT Flow Diagram
+#+BEGIN_SRC mermaid :file diagrams/jwt-flow.png :mkdirp yes
+sequenceDiagram
+    participant User
+    participant Auth as Authentication Service
+    participant API as API Gateway
+    participant Resource as Resource Server
+    participant Redis as Token Store (Redis)
+    
+    User->>Auth: Login (username, password)
+    Auth->>Auth: Validate credentials
+    Auth->>Redis: Store refresh token metadata
+    Auth->>User: Return access token + refresh token
+    
+    User->>API: Request + access token
+    API->>API: Parse JWT header
+    API->>API: Verify token signature
+    API->>Redis: Check token revocation (if applicable)
+    API->>Resource: Forward request
+    Resource->>User: Response
+    
+    Note over User,Auth: Token Refresh Flow
+    User->>Auth: refresh_token
+    Auth->>Redis: Validate refresh token
+    Auth->>Auth: Generate new access token
+    Auth->>User: Return new access token
+    
+    Note over User,Auth: Logout Flow
+    User->>Auth: refresh_token
+    Auth->>Redis: Revoke refresh token
+    Auth->>User: Logout confirmation
+#+END_SRC
+
+** Token Revocation Diagram
+#+BEGIN_SRC mermaid :file diagrams/token-revocation.png :mkdirp yes
+flowchart TD
+    A[Client] -->|1. Request with token| B[API Gateway]
+    B -->|2. Extract JWT| C{Is token valid?}
+    
+    C -->|Yes| D{Check Redis}
+    C -->|No: Expired| R[Reject Request]
+    
+    D -->|1. Get token ID| E[Check revoked_token:id]
+    D -->|2. Get token family| F[Check revoked_token:family:id]
+    
+    E -->|exists?| G{Token Revoked?}
+    F -->|issued_at < revoked_at?| H{Family Revoked?}
+    
+    G -->|Yes| R
+    G -->|No| I{Continue checks}
+    
+    H -->|Yes| R
+    H -->|No| J[Allow Request]
+    
+    I -->|All clear| J
+    
+    subgraph Redis DB
+    E
+    F
+    end
+    
+    subgraph "Revocation Events"
+    K[User Logout] -->|Revoke token| E
+    L[Password Change] -->|Revoke family| F
+    M[Security Event] -->|Revoke families| F
+    end
+#+END_SRC
+
+** Refresh Token Flow
+#+BEGIN_SRC mermaid :file diagrams/refresh-flow.png :mkdirp yes
+sequenceDiagram
+    participant Client
+    participant Auth as Auth Service
+    participant Redis as Token Store
+    participant DB as User Database
+    
+    Client->>Auth: Login Request
+    Auth->>DB: Verify Credentials
+    DB->>Auth: User Details
+    
+    Auth->>Auth: Generate Access Token
+    Auth->>Auth: Generate Refresh Token
+    
+    Auth->>Redis: Store refresh_token:{jti} = { user_id, revoked: false }
+    Auth->>Client: Access Token + Refresh Token
+    
+    Note over Client,Auth: Later when access token expires
+    
+    Client->>Auth: Refresh Request (Refresh Token)
+    Auth->>Auth: Decode Refresh Token
+    Auth->>Redis: Get refresh_token:{jti}
+    
+    alt Token Valid & Not Revoked
+        Redis->>Auth: { user_id, revoked: false }
+        Auth->>DB: Get Latest User Data
+        DB->>Auth: Updated Permissions/Roles
+        Auth->>Auth: Generate New Access Token
+        Auth->>Client: New Access Token
+    else Token Revoked
+        Redis->>Auth: { user_id, revoked: true }
+        Auth->>Client: 401 Unauthorized
+    else Token Not Found
+        Redis->>Auth: nil (not found)
+        Auth->>Client: 401 Unauthorized
+    end
+    
+    Note over Client,Auth: During logout
+    
+    Client->>Auth: Logout (Refresh Token)
+    Auth->>Auth: Decode Refresh Token
+    Auth->>Redis: Update refresh_token:{jti} = { revoked: true }
+    Auth->>Client: Logout Successful
+#+END_SRC
