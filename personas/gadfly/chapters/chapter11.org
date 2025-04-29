@@ -70,8 +70,7 @@ Various solutions have emerged to address these challenges:
 
 **Remote Procedure Calls (RPCs)** systems like gRPC provide language-agnostic interface definitions and efficient serialization:
 
-#+BEGIN_EXAMPLE
-// Protocol Buffers IDL
+#+BEGIN_SRC proto :tangle "../examples/proto/user_service.proto"
 syntax = "proto3";
 
 service UserService {
@@ -94,13 +93,13 @@ message UserResponse {
   string email = 3;
   uint64 created_at = 4;
 }
-#+END_EXAMPLE
+#+END_SRC
 
 This interface definition can generate client and server code in multiple languages, enabling type-safe communication across language boundaries.
 
 **Foreign Function Interfaces (FFIs)** allow direct calls between different language runtimes:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC rust :tangle "../examples/rust/ffi_example.rs"
 // Rust code calling a C library
 extern "C" {
     fn process_data(input: *const u8, len: usize) -> i32;
@@ -111,12 +110,12 @@ fn call_c_function(data: &[u8]) -> i32 {
         process_data(data.as_ptr(), data.len())
     }
 }
-#+END_EXAMPLE
+#+END_SRC
 
 **Message queues and event buses** decouple components, allowing them to communicate asynchronously across language boundaries:
 
-#+BEGIN_EXAMPLE
-// Python producer
+#+BEGIN_SRC python :tangle "../examples/python/rabbitmq_producer.py"
+# Python producer
 import pika
 
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
@@ -128,9 +127,9 @@ channel.basic_publish(
     body='{"id": 123, "action": "process"}',
     properties=pika.BasicProperties(delivery_mode=2)
 )
-#+END_EXAMPLE
+#+END_SRC
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC java :tangle "../examples/java/rabbitmq_consumer.java"
 // Java consumer
 ConnectionFactory factory = new ConnectionFactory();
 factory.setHost("localhost");
@@ -145,7 +144,7 @@ DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 };
 
 channel.basicConsume("task_queue", true, deliverCallback, consumerTag -> {});
-#+END_EXAMPLE
+#+END_SRC
 
 These approaches each involve tradeoffs. RPC systems provide strong typing but introduce coupling. FFIs offer efficiency but can compromise safety. Message queues enable loose coupling but add complexity and latency.
 
@@ -203,24 +202,24 @@ Organizations adopt various models to address these challenges:
 
 **The Specialist Model** organizes teams around language domains, with dedicated experts for each language or stack. This approach maximizes technical depth but creates potential silos and integration challenges:
 
-```
+#+BEGIN_SRC text :tangle "../examples/polyglot/specialist_model.txt"
 Team A (Java Backend)  →  Team B (Python Data)  →  Team C (TypeScript Frontend)
-```
+#+END_SRC
 
 **The T-Shaped Model** cultivates developers with deep expertise in one language and working knowledge of others. This hybrid approach provides both specialization and cross-functional capability:
 
-```
+#+BEGIN_SRC text :tangle "../examples/polyglot/t_shaped_model.txt"
 Developer 1: Java (Expert) + Python/TypeScript (Proficient)
 Developer 2: Python (Expert) + Java/TypeScript (Proficient)
 Developer 3: TypeScript (Expert) + Java/Python (Proficient)
-```
+#+END_SRC
 
 **The Full-Stack Generalist Model** emphasizes versatility across the entire stack. While this approach maximizes flexibility, it may sacrifice depth of expertise:
 
-```
+#+BEGIN_SRC text :tangle "../examples/polyglot/generalist_model.txt"
 All developers proficient in Java, Python, and TypeScript,
 with varying levels of expertise across domains
-```
+#+END_SRC
 
 Most successful polyglot organizations blend these approaches, creating teams with complementary skills and ensuring sufficient overlap for collaboration. This hybrid model mitigates the risks of both excessive specialization and diluted expertise.
 

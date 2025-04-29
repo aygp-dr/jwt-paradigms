@@ -31,12 +31,12 @@ The most successful and enduring example of declarative programming is SQL (Stru
 
 SQL's success stems from its declarative nature. Consider a simple query:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC sql :tangle ../examples/sql/employee_query.sql
 SELECT name, department
 FROM employees
 WHERE salary > 50000
 ORDER BY department, name;
-#+END_EXAMPLE
+#+END_SRC
 
 This statement describes what data to retrieve without specifying how to obtain it. The database engine determines the optimal execution strategy—whether to use indexes, which join algorithms to apply, or how to parallelize operations.
 
@@ -60,7 +60,7 @@ The true lesson of SQL is not just about database queries but about the power of
 
 Another enduring example of declarative programming is Make, the build system developed by Stuart Feldman at Bell Labs in 1976. Make pioneered a declarative approach to specifying build dependencies and transformations:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC makefile :tangle ../examples/make/simple_build.mk
 main.o: main.c defs.h
 	gcc -c main.c
 
@@ -69,7 +69,7 @@ utils.o: utils.c utils.h defs.h
 
 main: main.o utils.o
 	gcc -o main main.o utils.o
-#+END_EXAMPLE
+#+END_SRC
 
 This Makefile declares relationships between files rather than prescribing a sequence of commands. Make determines which targets need rebuilding based on file modification times and dependency relationships, executing only the necessary steps in the appropriate order.
 
@@ -90,7 +90,7 @@ The lesson extends beyond build systems to any domain with complex dependency re
 
 A more recent manifestation of declarative thinking is the "Infrastructure as Code" movement, exemplified by tools like Terraform, AWS CloudFormation, and Kubernetes manifests. These systems apply declarative principles to infrastructure management:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC hcl :tangle ../examples/terraform/web_server.tf
 # Terraform example
 resource "aws_instance" "web" {
   ami           = "ami-0c55b159cbfafe1f0"
@@ -112,7 +112,7 @@ resource "aws_security_group" "allow_http" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-#+END_EXAMPLE
+#+END_SRC
 
 Rather than specifying imperative commands to create, modify, or delete infrastructure components, these tools describe the desired state of the infrastructure. The underlying system then determines the necessary operations to achieve that state from the current state.
 
@@ -134,7 +134,7 @@ Perhaps the purest expression of declarative thinking appears in constraint sati
 
 Consider MiniZinc, a constraint modeling language:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC minizinc :tangle ../examples/minizinc/send_more_money.mzn
 % Variables
 var 1..9: S;
 var 0..9: E;
@@ -152,7 +152,7 @@ constraint S*1000 + E*100 + N*10 + D + M*1000 + O*100 + R*10 + E == M*10000 + O*
 
 % Solve
 solve satisfy;
-#+END_EXAMPLE
+#+END_SRC
 
 This program solves the classic SEND+MORE=MONEY cryptarithmetic puzzle without specifying any algorithm for finding a solution. Instead, it declares the variables, their domains, and the constraints they must satisfy. The constraint solver then employs sophisticated techniques like constraint propagation, backtracking, and heuristics to find solutions.
 
@@ -173,7 +173,7 @@ This represents perhaps the purest form of declarative thinking: the complete se
 
 A domain where declarative approaches have gained significant traction is user interface development. Modern UI frameworks like React, SwiftUI, and Flutter employ declarative programming models:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC jsx :tangle ../examples/react/user_profile.jsx
 // React example
 function UserProfile({ user }) {
   return (
@@ -185,7 +185,7 @@ function UserProfile({ user }) {
     </div>
   );
 }
-#+END_EXAMPLE
+#+END_SRC
 
 Rather than imperatively manipulating DOM elements, React developers declare what the UI should look like based on the current application state. The framework determines how to efficiently update the DOM to reflect this description.
 
@@ -240,7 +240,7 @@ Perhaps most significantly, imperative thinking limits our ability to leverage s
 Consider the difference between these approaches to data processing:
 
 **Imperative:**
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC java :tangle ../examples/java/imperative_filtering.java
 List<Person> result = new ArrayList<>();
 for (Person p : people) {
     if (p.getAge() > 21) {
@@ -252,15 +252,15 @@ Collections.sort(result, new Comparator<Person>() {
         return p1.getName().compareTo(p2.getName());
     }
 });
-#+END_EXAMPLE
+#+END_SRC
 
 **Declarative (Java Streams):**
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC java :tangle ../examples/java/declarative_filtering.java
 List<Person> result = people.stream()
     .filter(p -> p.getAge() > 21)
     .sorted(Comparator.comparing(Person::getName))
     .collect(Collectors.toList());
-#+END_EXAMPLE
+#+END_SRC
 
 The declarative version not only is more concise but also enables the runtime to apply optimizations like:
 - Parallelizing the operations
