@@ -79,35 +79,35 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-1
 :END:
 
-#+INCLUDE: "chapters/chapter1.org::*Chapter 1: Imperative Programming and Its Discontents" :only-contents t
+#+INCLUDE: "chapters/chapter01.org::*Chapter 1: Imperative Programming and Its Discontents" :only-contents t
 
 ** Chapter 2: The Functional Ideal
 :PROPERTIES:
 :CUSTOM_ID: chapter-2
 :END:
 
-#+INCLUDE: "chapters/chapter2.org::*Chapter 2: The Functional Ideal" :only-contents t
+#+INCLUDE: "chapters/chapter02.org::*Chapter 2: The Functional Ideal" :only-contents t
 
 ** Chapter 3: Object-Oriented Programming: The Promise and the Reality
 :PROPERTIES:
 :CUSTOM_ID: chapter-3
 :END:
 
-#+INCLUDE: "chapters/chapter3.org::*Chapter 3: Object-Oriented Programming: The Promise and the Reality" :only-contents t
+#+INCLUDE: "chapters/chapter03.org::*Chapter 3: Object-Oriented Programming: The Promise and the Reality" :only-contents t
 
 ** Chapter 4: Logic Programming: The Road Not Taken
 :PROPERTIES:
 :CUSTOM_ID: chapter-4
 :END:
 
-#+INCLUDE: "chapters/chapter4.org::*Chapter 4: Logic Programming: The Road Not Taken" :only-contents t
+#+INCLUDE: "chapters/chapter04.org::*Chapter 4: Logic Programming: The Road Not Taken" :only-contents t
 
 ** Chapter 5: Dataflow and Reactive Programming: Rediscovering the Wheel
 :PROPERTIES:
 :CUSTOM_ID: chapter-5
 :END:
 
-#+INCLUDE: "chapters/chapter5.org::*Chapter 5: Dataflow and Reactive Programming: Rediscovering the Wheel" :only-contents t
+#+INCLUDE: "chapters/chapter05.org::*Chapter 5: Dataflow and Reactive Programming: Rediscovering the Wheel" :only-contents t
 
 * Part II: What Was Lost
 :PROPERTIES:
@@ -119,28 +119,28 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-6
 :END:
 
-#+INCLUDE: "chapters/chapter6.org::*Chapter 6: Simplicity Versus Easiness" :only-contents t
+#+INCLUDE: "chapters/chapter06.org::*Chapter 6: Simplicity Versus Easiness" :only-contents t
 
 ** Chapter 7: The Expression Problem and False Solutions
 :PROPERTIES:
 :CUSTOM_ID: chapter-7
 :END:
 
-#+INCLUDE: "chapters/chapter7.org::*Chapter 7: The Expression Problem and False Solutions" :only-contents t
+#+INCLUDE: "chapters/chapter07.org::*Chapter 7: The Expression Problem and False Solutions" :only-contents t
 
 ** Chapter 8: Type Systems: Protection or Straitjacket?
 :PROPERTIES:
 :CUSTOM_ID: chapter-8
 :END:
 
-#+INCLUDE: "chapters/chapter8.org::*Chapter 8: Type Systems: Protection or Straitjacket?" :only-contents t
+#+INCLUDE: "chapters/chapter08.org::*Chapter 8: Type Systems: Protection or Straitjacket?" :only-contents t
 
 ** Chapter 9: Homoiconicity and Linguistic Abstraction
 :PROPERTIES:
 :CUSTOM_ID: chapter-9
 :END:
 
-#+INCLUDE: "chapters/chapter9.org::*Chapter 9: Homoiconicity and Linguistic Abstraction" :only-contents t
+#+INCLUDE: "chapters/chapter09.org::*Chapter 9: Homoiconicity and Linguistic Abstraction" :only-contents t
 
 ** Chapter 10: Declarative Systems: The Forgotten Paradigm
 :PROPERTIES:

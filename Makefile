@@ -44,19 +44,16 @@ slides: presentation.org
 	@echo "Done! Generated presentation.pdf"
 
 # Generate PDF from paradigms_lost.org
-book: personas/gadfly/paradigms_lost.org
-	@echo "Generating book PDF..."
-	@emacs --batch --eval "(require 'org)" --eval "(load-theme 'tango t)" \
-		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
-		--visit="personas/gadfly/paradigms_lost.org" \
-		--funcall org-latex-export-to-pdf
-	@echo "Done! Generated personas/gadfly/paradigms_lost.pdf"
+book: personas/gadfly/paradigms_lost.pdf
 
 # Direct target for the book PDF
-personas/gadfly/paradigms_lost.pdf: personas/gadfly/paradigms_lost.org personas/gadfly/chapters/*.org
+personas/gadfly/paradigms_lost.pdf: personas/gadfly/paradigms_lost.org personas/gadfly/chapters/*.org .dir-locals.el
 	@echo "Generating paradigms_lost.pdf..."
 	@emacs --batch --eval "(require 'org)" --eval "(load-theme 'tango t)" \
-		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
+		--eval "(require 'htmlize)" \
+		--eval "(setq org-latex-pdf-process '(\"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\" \"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\" \"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\"))" \
+		--eval "(setq org-latex-listings 'minted)" \
+		--eval "(add-to-list 'org-latex-packages-alist '(\"\" \"minted\"))" \
 		--visit="personas/gadfly/paradigms_lost.org" \
 		--funcall org-latex-export-to-pdf
 	@echo "Done! Generated personas/gadfly/paradigms_lost.pdf"
