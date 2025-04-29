@@ -1,4 +1,4 @@
-% Created 2025-04-29 Tue 15:14
+% Created 2025-04-29 Tue 19:23
 % Intended LaTeX compiler: pdflatex
 \documentclass[presentation,aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
@@ -23,12 +23,12 @@
  pdftitle={Parsing JWT Headers Across Programming Paradigms},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdfcreator={Emacs 31.0.50 (Org mode 9.7.11)}, 
  pdflang={English}}
 \begin{document}
 
 \maketitle
-\begin{frame}[label={sec:org2ae2373}]{Introduction}
+\begin{frame}[label={sec:org7307491}]{Introduction}
 \begin{block}{Parsing JWT Headers Across Programming Paradigms}
 \begin{itemize}[<+->]
 \item A cross-language exploration of JWT header parsing techniques
@@ -38,17 +38,30 @@
 \end{block}
 \begin{block}{What We'll Cover}
 \begin{itemize}[<+->]
-\item JWT structure: quick review
+\item Historical context and authentication evolution
+\item JWT structure and fundamentals (🔰 beginner-friendly)
 \item Base64url encoding challenges
 \item Header parsing patterns across languages
 \item Functional vs object-oriented approaches
-\item Language-specific idioms and pitfalls
-\item Performance considerations
+\item Language-specific idioms and best practices
+\item Security considerations and common attacks
+\item Performance analysis and real-world applications
 \end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:org73ce3d5},fragile]{JWT Basics}
- \begin{block}{JWT Structure Refresher}
+\begin{frame}[label={sec:orga89144f}]{Authentication Evolution}
+\begin{block}{Historical Context of Authentication}
+\begin{itemize}[<+->]
+\item Early authentication: Username/password pairs
+\item Server-side sessions with cookies (stateful)
+\item Token-based authentication emergence (stateless)
+\item JWT standardization (RFC 7519, May 2015)
+\item Modern authentication flows (OAuth 2.0, OIDC)
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orga2169dd},fragile]{JWT Basics}
+ \begin{block}{JWT Structure Refresher 🔰}
 \begin{verbatim}
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U
 \end{verbatim}
@@ -59,22 +72,61 @@ Three dot-separated base64url-encoded segments:
 \item \alert{Payload} (claims)
 \item \alert{Signature}
 \end{enumerate}
+
+\begin{verbatim}
+digraph {
+  rankdir=LR;
+  node [shape=box, style=filled, fillcolor="#e6f3ff", fontname="monospace"];
+  edge [fontname="Arial"];
+
+  Header [label="Header\n{\"alg\":\"HS256\",\n\"typ\":\"JWT\"}"];
+  Payload [label="Payload\n{\"sub\":\"1234\",\n\"name\":\"User\",\n\"exp\":1516239022}"];
+  Signature [label="Signature\nHMAC-SHA256(\n  base64UrlEncode(header) + '.' +\n  base64UrlEncode(payload),\n  secret\n)"];
+
+  Header -> Payload [label="  .  "];
+  Payload -> Signature [label="  .  "];
+}
+\end{verbatim}
+\end{block}
+\begin{block}{JWT Claims \& Use Cases 🔰}
+\alert{Standard Claims:}
+\begin{itemize}
+\item \texttt{iss} - Issuer (who created the token)
+\item \texttt{sub} - Subject (whom the token refers to)
+\item \texttt{aud} - Audience (who should accept the token)
+\item \texttt{exp} - Expiration time
+\item \texttt{nbf} - Not before time
+\item \texttt{iat} - Issued at time
+\item \texttt{jti} - JWT ID (unique identifier)
+\end{itemize}
+
+\alert{Common Use Cases:}
+\begin{itemize}
+\item Authentication after login
+\item API authorization
+\item Information exchange between services
+\item Single Sign-On (SSO)
+\end{itemize}
 \end{block}
 \begin{block}{The Base64url Challenge}
 Standard Base64 vs Base64url encoding:
 \begin{itemize}
 \item URL-safe variant replaces \texttt{+} with \texttt{-} and \texttt{/} with \texttt{\_}
 \item Padding (\texttt{=} ) often omitted
+\item Used to ensure tokens can be safely transmitted in URLs
 \end{itemize}
 
 \alert{Every language handles this differently!}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:orgcc4e74b},fragile]{Language Implementations}
- \begin{block}{JavaScript (Browser)}
+\begin{frame}[label={sec:orgcc55a06},fragile]{Language Implementations}
+ \begin{block}{JavaScript (Browser) 🧩}
 \begin{verbatim}
 const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
 const token = authHeader.split(' ')[1];
+
+// IMPORTANT: In production, verify signature before parsing!
+// This example is for demonstration only
 
 // Decode the header part
 const headerPart = token.split('.')[0];
@@ -84,11 +136,15 @@ console.log(decodedHeader);
 
 \alert{Note}: \texttt{atob()} handles base64 but not base64url specifically
 \end{block}
-\begin{block}{Node.js}
+\begin{block}{Node.js 🧩}
 \begin{verbatim}
 // Using built-in modules
 const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
 const token = authHeader.split(' ')[1];
+
+// IMPORTANT: In production, verify signature before parsing!
+// This example is for demonstration only
+
 const headerPart = token.split('.')[0];
 const decodedHeader = JSON.parse(
   Buffer.from(headerPart, 'base64').toString()
@@ -96,16 +152,20 @@ const decodedHeader = JSON.parse(
 console.log(decodedHeader);
 \end{verbatim}
 \end{block}
-\begin{block}{TypeScript with Type Safety}
+\begin{block}{TypeScript with Type Safety 🧩}
 \begin{verbatim}
 interface JwtHeader {
   alg: string;
   typ: string;
+  kid?: string;  // Key identifier, optional
 }
 
 function decodeJwtHeader(authHeader: string): JwtHeader {
   const token: string = authHeader.split(' ')[1];
   const headerPart: string = token.split('.')[0];
+
+  // IMPORTANT: In production, verify signature before parsing!
+  // This example is for demonstration only
 
   // Add padding if needed
   const base64 = headerPart.replace(/-/g, '+').replace(/_/g, '/');
@@ -118,12 +178,18 @@ function decodeJwtHeader(authHeader: string): JwtHeader {
 }
 \end{verbatim}
 \end{block}
-\begin{block}{Python Implementation}
+\begin{block}{Python Implementation 🧩}
 \begin{verbatim}
 import base64
 import json
+import typing
 
-def decode_jwt_header(auth_header):
+def decode_jwt_header(auth_header: str) -> typing.Dict[str, str]:
+    """Decode JWT header from Authorization header.
+
+    IMPORTANT: In production, verify signature before parsing!
+    This example is for demonstration only.
+    """
     token = auth_header.split(' ')[1]
     header_part = token.split('.')[0]
 
@@ -140,9 +206,13 @@ def decode_jwt_header(auth_header):
     return json.loads(decoded_str)
 \end{verbatim}
 \end{block}
-\begin{block}{Functional Approaches: Clojure}
+\begin{block}{Functional Approaches: Clojure 🧩}
 \begin{verbatim}
-(defn decode-jwt-header [auth-header]
+;; IMPORTANT: In production, verify signature before parsing!
+;; This example is for demonstration only.
+(defn decode-jwt-header 
+  "Decode JWT header from Authorization header."
+  [auth-header]
   (let [token (second (clojure.string/split auth-header #" "))
         header-part (first (clojure.string/split token #"\."))
         decoder (Base64/getUrlDecoder)
@@ -154,8 +224,9 @@ def decode_jwt_header(auth_header):
 
 \alert{Note}: JVM's Base64 has a URL decoder built-in!
 \end{block}
-\begin{block}{Functional Approaches: Racket}
+\begin{block}{Functional Approaches: Racket ⚠️}
 \begin{verbatim}
+;; Convert base64url to standard base64 and decode
 (define (base64url->bytes str)
   (define padding (make-string (modulo (- 0 (string-length str)) 4) #\=))
   (define base64 (string-map (λ (c)
@@ -166,7 +237,10 @@ def decode_jwt_header(auth_header):
                              str))
   (base64-decode (string-append base64 padding)))
 
+;; IMPORTANT: In production, verify signature before parsing!
+;; This example is for demonstration only and uses functional composition
 (define (decode-jwt-header auth-header)
+  ;; Pipeline of transformations
   (define token (second (string-split auth-header)))
   (define header-part (first (string-split token ".")))
   (define decoded-bytes (base64url->bytes header-part))
@@ -174,30 +248,41 @@ def decode_jwt_header(auth_header):
   (string->jsexpr decoded-str))
 \end{verbatim}
 \end{block}
-\begin{block}{Low-Level Implementation: Rust}
+\begin{block}{Low-Level Implementation: Rust ⚠️}
 \begin{verbatim}
 #[derive(Debug, Serialize, Deserialize)]
 struct JwtHeader {
     alg: String,
     typ: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    kid: Option<String>,  // Optional key identifier
 }
 
+/// Decode JWT header from Authorization header
+/// 
+/// # IMPORTANT
+/// In production, verify signature before parsing!
+/// This example is for demonstration only.
+/// 
+/// # Error Handling
+/// Returns Result with either parsed header or descriptive error
 fn decode_jwt_header(auth_header: &str) -> Result<JwtHeader, Box<dyn std::error::Error>> {
+    // Extract token with error handling
     let token = auth_header.split_whitespace().nth(1).ok_or("Invalid auth header")?;
     let header_part = token.split('.').next().ok_or("Invalid token format")?;
 
-    // Decode base64url to bytes
+    // Decode base64url to bytes (using proper URL-safe decoder)
     let decoded_bytes = general_purpose::URL_SAFE_NO_PAD.decode(header_part)?;
 
-    // Parse JSON
+    // Parse JSON with strong typing
     let header: JwtHeader = serde_json::from_slice(&decoded_bytes)?;
     Ok(header)
 }
 \end{verbatim}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:org6e27c17},fragile]{Analysis}
- \begin{block}{Common Patterns \& Variations}
+\begin{frame}[label={sec:org6c8891c},fragile]{Analysis}
+ \begin{block}{Common Patterns \& Variations 🧩}
 \begin{enumerate}[<+->]
 \item \alert{Token extraction}: Split by space or regex
 \item \alert{Base64url handling}:
@@ -210,7 +295,7 @@ fn decode_jwt_header(auth_header: &str) -> Result<JwtHeader, Box<dyn std::error:
 \item \alert{Error handling}: Idiomatic differences
 \end{enumerate}
 \end{block}
-\begin{block}{Cross-Language Performance Analysis}
+\begin{block}{Cross-Language Performance Analysis ⚠️}
 \begin{center}
 \begin{tabular}{lrr}
 Language & Parsing Time (μs) & Memory Usage (KB)\\
@@ -225,22 +310,71 @@ Shell & 180.3 & 8.9\\
 
 \alert{Note: Average of 1000 runs, single-threaded}
 \end{block}
-\begin{block}{Security Considerations}
+\end{frame}
+\begin{frame}[label={sec:org3f2080a},fragile]{Security Considerations}
+ \begin{block}{JWT Security Best Practices ⚠️}
 \begin{itemize}[<+->]
-\item Header parsing before signature verification is risky
-\item \texttt{"alg": "none"} attack
-\item Type confusion vulnerabilities
-\item Always validate signature first in production!
+\item \alert{Always verify signatures before parsing or using payload}
+\item Use strong algorithms (prefer RS256/ES256 over HS256)
+\item Implement proper key management (rotation, secure storage)
+\item Set appropriate token lifetimes (short-lived access tokens)
+\item Include essential claims (iss, sub, exp, aud, iat)
 \end{itemize}
 \end{block}
+\begin{block}{Common JWT Attacks ⚠️}
+\begin{itemize}[<+->]
+\item \alert{"alg": "none" attack} - Attacker removes signature validation requirement
+\item \alert{Algorithm confusion} - Switching from asymmetric (RS256) to symmetric (HS256)
+\item \alert{Token tampering} - Modifying claims without invalidating signature
+\item \alert{Token injection} - Using a token from one context in another
+\item \alert{Replay attacks} - Reusing captured tokens
+\end{itemize}
+\end{block}
+\begin{block}{Token Lifecycle Management ⚠️}
+\begin{itemize}[<+->]
+\item \alert{Refresh token patterns} - Securely obtain new access tokens
+\item \alert{Token revocation} - Invalidate tokens before expiration
+\item \alert{Token validation pipeline} - Proper order of operations
+\item \alert{Blacklisting} - Tracking compromised or logged-out tokens
+\end{itemize}
+
+\begin{verbatim}
+digraph {
+  node [shape=box, style=filled, fillcolor="#f5f5f5"];
+  edge [fontname="Arial"];
+
+  issue [label="Token Issuance", fillcolor="#e6ffe6"];
+  validate [label="Token Validation", fillcolor="#e6f3ff"];
+  refresh [label="Token Refresh", fillcolor="#fff0e6"];
+  revoke [label="Token Revocation", fillcolor="#ffe6e6"];
+
+  issue -> validate -> refresh -> validate;
+  validate -> revoke;
+}
+\end{verbatim}
+\end{block}
 \end{frame}
-\begin{frame}[label={sec:org898983a},fragile]{Real-World Applications}
- \begin{block}{JWT in Production}
+\begin{frame}[label={sec:orgec5a272},fragile]{Real-World Applications}
+ \begin{block}{Cross-Language Implementation Comparison}
+\begin{center}
+\begin{tabular}{llllll}
+Feature & JavaScript & Python & Rust & Clojure & TypeScript\\
+\hline
+Type Safety & Limited & Optional & Strong & Dynamic & Strong\\
+Base64 Handling & Manual & Built-in & Crates & JVM & Manual\\
+Error Handling & try/catch & Exceptions & Result & Monadic & try/catch\\
+Performance & Medium & Low & High & Medium & Medium\\
+JWT Libraries & Many & Several & Few & Few & Many\\
+\end{tabular}
+\end{center}
+\end{block}
+\begin{block}{JWT in Production}
 \begin{itemize}[<+->]
 \item API Gateway token validation
 \item Microservice authorization
 \item Single Sign-On implementations
 \item Mobile app authentication
+\item Server-to-server communication
 \end{itemize}
 \end{block}
 \begin{block}{JWT Flow}
@@ -248,32 +382,81 @@ Shell & 180.3 & 8.9\\
 digraph {
   rankdir=LR;
   node [shape=box, style=rounded];
+  subgraph cluster_validation {
+    label="Secure Validation Process";
+    style=dashed;
+    color=gray;
+    "Extract JWT" -> "Verify Signature" -> "Validate Claims" -> "Check Revocation";
+  }
+
   Client -> "Auth Service" [label="1. Login"];
   "Auth Service" -> Client [label="2. JWT"];
   Client -> "API Gateway" [label="3. Request + JWT"];
-  "API Gateway" -> "API Gateway" [label="4. Parse Header"];
-  "API Gateway" -> "API Gateway" [label="5. Verify Signature"];
-  "API Gateway" -> "Microservice" [label="6. Forward Request"];
-  "Microservice" -> Client [label="7. Response"];
+  "API Gateway" -> "Extract JWT";
+  "Check Revocation" -> "Microservice" [label="4. Authorized Request"];
+  "Microservice" -> Client [label="5. Response"];
 }
 \end{verbatim}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:org64b9327}]{Conclusion}
+\begin{frame}[label={sec:org164154d}]{Debugging \& Troubleshooting}
+\begin{block}{Common JWT Issues and Solutions}
+\begin{itemize}[<+->]
+\item \alert{Invalid signature} - Check key matching, algorithm consistency
+\item \alert{Expired tokens} - Verify client/server clock synchronization
+\item \alert{Malformed tokens} - Inspect encoding, ensure proper base64url handling
+\item \alert{Missing claims} - Validate token structure against expected schema
+\item \alert{Algorithm mismatch} - Confirm header alg matches implementation
+\end{itemize}
+\end{block}
+\begin{block}{Debugging Tools}
+\begin{itemize}[<+->]
+\item Online JWT debugger (jwt.io)
+\item Language-specific JWT libraries with debug options
+\item Base64 inspection tools
+\item Request/response inspection with developer tools
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org52354a6}]{Conclusion}
+\begin{block}{Cross-Paradigm Insights}
+\begin{center}
+\begin{tabular}{lll}
+Paradigm & Strengths & JWT Application\\
+\hline
+Object-Oriented & Encapsulation, inheritance & Token with validation methods\\
+Functional & Composition, immutability & Transform pipeline for parsing\\
+Procedural & Simplicity, performance & Lightweight validators\\
+Reactive & Event handling & Token verification in async flows\\
+\end{tabular}
+\end{center}
+\end{block}
 \begin{block}{Takeaways}
 \begin{enumerate}[<+->]
 \item Base64url encoding requires special attention
 \item Each language has idiomatic parsing advantages
 \item Functional approaches shine for transformation pipelines
+\item Security first: always verify signatures before parsing
+\item Consider token lifecycle for complete implementation
 \item Libraries save time but understanding internals matters
-\item Consider performance for high-volume applications
+\item Follow language-specific best practices
 \end{enumerate}
+\end{block}
+\begin{block}{Learning Resources}
+\begin{itemize}[<+->]
+\item JWT RFC 7519: \url{https://tools.ietf.org/html/rfc7519}
+\item JWT Security Best Practices (IETF): \url{https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp}
+\item OWASP JWT Cheat Sheet: \url{https://cheatsheetseries.owasp.org/cheatsheets/JSON\_Web\_Token\_for\_Java\_Cheat\_Sheet.html}
+\item Language-specific security guides: see repository docs
+\end{itemize}
 \end{block}
 \begin{block}{Questions?}
 Thank you!
 
 \alert{Slides \& examples available at:} 
 github.com/aidan-pace/jwt-parsing-examples
+
+\alert{Difficulty levels:} 🔰 Beginner | 🧩 Intermediate | ⚠️ Advanced
 \end{block}
 \end{frame}
 \end{document}
