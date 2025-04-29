@@ -80,26 +80,18 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 * Part I: The Great Paradigms
 
 ** Chapter 1: Imperative Programming and Its Discontents
+:PROPERTIES:
+:CUSTOM_ID: chapter-1
+:END:
 
-/This chapter examines the dominant imperative programming paradigm, tracing its origins from machine code to structured programming. It argues that while imperative programming maps cleanly to hardware execution models, it creates unnecessary cognitive complexity by conflating what computation should be performed with how it should be executed./
-
-Key sections include:
-- The von Neumann Architecture and Its Influence
-- From Assembly to Structured Programming
-- The Cognitive Burden of State
-- Concurrency: The Achilles Heel
-- When Imperative Programming Shines
+#+INCLUDE: "chapters/chapter1.org::*Chapter 1: Imperative Programming and Its Discontents" :only-contents t
 
 ** Chapter 2: The Functional Ideal
+:PROPERTIES:
+:CUSTOM_ID: chapter-2
+:END:
 
-/This chapter explores functional programming from its theoretical foundations to its practical applications. It examines how functional programming addresses many of imperative programming's shortcomings, while introducing challenges of its own./
-
-Key sections include:
-- Lambda Calculus: Computing from First Principles
-- Referential Transparency and Equational Reasoning
-- The Reality of Performance and the Abstraction Tax
-- From Lisp to Haskell: Evolution of Functional Programming
-- Why Mainstream Adoption Remains Elusive
+#+INCLUDE: "chapters/chapter2.org::*Chapter 2: The Functional Ideal" :only-contents t
 
 ** Chapter 3: Object-Oriented Programming: The Promise and the Reality
 
