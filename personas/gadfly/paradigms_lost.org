@@ -4,8 +4,12 @@
 #+PUBLISHER: Cambridge University Press
 #+LANGUAGE: en
 #+OPTIONS: toc:3 num:t
+#+OPTIONS: broken-links:mark
 
 * Foreword
+:PROPERTIES:
+:CUSTOM_ID: foreword
+:END:
 
 /By Alan Kay, Computer Scientist/
 
@@ -16,6 +20,9 @@ When Marcus Wellington asked me to write the foreword for this book, I initially
 In an age of ephemeral frameworks and reinvented wheels, this book dares to ask: what wisdom have we abandoned along the way?
 
 * Preface
+:PROPERTIES:
+:CUSTOM_ID: preface
+:END:
 
 This book began as a series of lectures I delivered at the Symposium on Programming Language Design and Implementation in 2018. The response—equal parts enthusiasm and outrage—convinced me that a more thorough examination was warranted. 
 
@@ -57,6 +64,9 @@ To my colleagues who will undoubtedly find fault with many of my arguments: I we
 - [[#index][Index]]
 
 * Introduction: The Amnesia of Progress
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
 
 #+BEGIN_QUOTE
 "Those who cannot remember the past are condemned to repeat it."
@@ -78,6 +88,9 @@ My critique is not intended as a Luddite rejection of progress, but rather as a 
 Let us begin by examining the major paradigms that have shaped programming, before turning to what has been lost in their translation to modern practice.
 
 * Part I: The Great Paradigms
+:PROPERTIES:
+:CUSTOM_ID: part-i
+:END:
 
 ** Chapter 1: Imperative Programming and Its Discontents
 :PROPERTIES:
@@ -94,6 +107,9 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 #+INCLUDE: "chapters/chapter2.org::*Chapter 2: The Functional Ideal" :only-contents t
 
 ** Chapter 3: Object-Oriented Programming: The Promise and the Reality
+:PROPERTIES:
+:CUSTOM_ID: chapter-3
+:END:
 
 /This chapter distinguishes between Alan Kay's original vision of object-oriented programming—message-passing between encapsulated objects—and what OOP has become in languages like Java and C++. It argues that mainstream OOP lost much of the paradigm's power by focusing on inheritance hierarchies rather than message-passing protocols./
 
@@ -105,6 +121,9 @@ Key sections include:
 - Objects as Universal Abstraction: Dream or Delusion?
 
 ** Chapter 4: Logic Programming: The Road Not Taken
+:PROPERTIES:
+:CUSTOM_ID: chapter-4
+:END:
 
 /This chapter examines logic programming, exemplified by Prolog, as a paradigm that separates "what" from "how" more dramatically than any other. It explores why logic programming, despite its elegant approach to certain problems, failed to achieve mainstream adoption./
 
@@ -116,6 +135,9 @@ Key sections include:
 - Logic Programming Concepts in Modern Systems
 
 ** Chapter 5: Dataflow and Reactive Programming: Rediscovering the Wheel
+:PROPERTIES:
+:CUSTOM_ID: chapter-5
+:END:
 
 /This chapter connects historical dataflow languages to modern reactive programming, showing how contemporary frameworks often reinvent concepts from languages like Lucid. It argues that the fundamental insights of dataflow programming—the propagation of changes through a dependency network—have been repeatedly rediscovered and forgotten./
 
@@ -127,8 +149,14 @@ Key sections include:
 - Time as a First-Class Concept
 
 * Part II: What Was Lost
+:PROPERTIES:
+:CUSTOM_ID: part-ii
+:END:
 
 ** Chapter 6: Simplicity Versus Easiness
+:PROPERTIES:
+:CUSTOM_ID: chapter-6
+:END:
 
 /This chapter, inspired by Rich Hickey's distinction between simple and easy, examines how modern languages and frameworks often prioritize initial developer experience ("easiness") over long-term maintainability and comprehensibility ("simplicity"). It argues that this tradeoff has significant consequences for software quality and developer productivity./
 
@@ -140,6 +168,9 @@ Key sections include:
 - The Economics of Technical Debt
 
 ** Chapter 7: The Expression Problem and False Solutions
+:PROPERTIES:
+:CUSTOM_ID: chapter-7
+:END:
 
 /This chapter explores the expression problem—the challenge of adding both new operations and new data types to a system without modifying existing code. It examines how different paradigms approach this problem and why many purported solutions fail in practice./
 
@@ -151,6 +182,9 @@ Key sections include:
 - The Expression Problem as Paradigm Benchmark
 
 ** Chapter 8: Type Systems: Protection or Straitjacket?
+:PROPERTIES:
+:CUSTOM_ID: chapter-8
+:END:
 
 /This chapter examines the ongoing debate between static and dynamic typing, arguing that both extremes miss important nuances. It explores how type systems shape programming paradigms and the tradeoffs involved in different approaches to typing./
 
@@ -162,6 +196,9 @@ Key sections include:
 - When Types Help and When They Hinder
 
 ** Chapter 9: Homoiconicity and Linguistic Abstraction
+:PROPERTIES:
+:CUSTOM_ID: chapter-9
+:END:
 
 /This chapter explores how homoiconic languages—those where code is represented as data structures within the language itself—enable powerful metaprogramming capabilities. It argues that the loss of homoiconicity in mainstream languages has limited our ability to create domain-specific abstractions./
 
@@ -173,6 +210,9 @@ Key sections include:
 - Why Metaprogramming Remains Niche
 
 ** Chapter 10: Declarative Systems: The Forgotten Paradigm
+:PROPERTIES:
+:CUSTOM_ID: chapter-10
+:END:
 
 /This chapter examines declarative programming beyond functional and logic paradigms, including configuration management, build systems, and query languages. It argues that declarative approaches excel at expressing complex relationships and constraints but remain underutilized./
 
@@ -184,8 +224,14 @@ Key sections include:
 - Declarative User Interfaces
 
 * Part III: Paths Forward
+:PROPERTIES:
+:CUSTOM_ID: part-iii
+:END:
 
 ** Chapter 11: Polyglot Programming: The Pragmatic Compromise
+:PROPERTIES:
+:CUSTOM_ID: chapter-11
+:END:
 
 /This chapter explores polyglot programming—using different languages for different parts of a system based on their strengths. It examines the benefits and challenges of this approach and how it allows teams to leverage the strengths of multiple paradigms./
 
@@ -197,6 +243,9 @@ Key sections include:
 - Case Studies in Effective Polyglotism
 
 ** Chapter 12: Language Workbenches and Meta-Programming
+:PROPERTIES:
+:CUSTOM_ID: chapter-12
+:END:
 
 /This chapter examines language workbenches and other tools for creating domain-specific languages, arguing that they represent one path toward combining the expressiveness of specialized languages with the integration benefits of a common platform./
 
@@ -208,6 +257,9 @@ Key sections include:
 - The Economics of Language Creation
 
 ** Chapter 13: Verification Beyond Testing
+:PROPERTIES:
+:CUSTOM_ID: chapter-13
+:END:
 
 /This chapter explores formal methods and advanced type systems as ways to increase software reliability beyond traditional testing. It examines real-world applications of these approaches and their limitations./
 
@@ -219,6 +271,9 @@ Key sections include:
 - The Spectrum of Formal Methods
 
 ** Chapter 14: Reviving Smalltalk: Lessons from a Lost Paradigm
+:PROPERTIES:
+:CUSTOM_ID: chapter-14
+:END:
 
 /This chapter uses Smalltalk as a case study of a paradigm that embodied many powerful ideas that remain relevant today, including image-based development, live programming, and uniform object models. It examines how these ideas might be revived in modern contexts./
 
@@ -230,6 +285,9 @@ Key sections include:
 - Pharo and Contemporary Smalltalk
 
 ** Chapter 15: Toward a Synthesis
+:PROPERTIES:
+:CUSTOM_ID: chapter-15
+:END:
 
 /This chapter argues for a more thoughtful synthesis of programming paradigms, drawing on their complementary strengths while avoiding their individual weaknesses. It examines languages and systems that successfully combine paradigms and suggests directions for future language design./
 
@@ -241,6 +299,9 @@ Key sections include:
 - The Next Great Paradigm?
 
 * Epilogue: Computing as Thought
+:PROPERTIES:
+:CUSTOM_ID: epilogue
+:END:
 
 In closing, I wish to return to a fundamental question: what is programming? Beyond its practical applications, programming represents a unique form of thought—a way of formalizing processes and interactions that has no direct analog in pre-computing human experience.
 
@@ -255,6 +316,9 @@ This is not a call for universalism—no single paradigm will ever be optimal fo
 In the end, computing is too important, too fundamental a technology to allow its evolution to be driven solely by fashion, commercial interests, or path dependency. We owe it to ourselves and to future generations to preserve and develop the full spectrum of programming paradigms, ensuring that no powerful mode of computational thinking becomes truly lost.
 
 * Acknowledgments
+:PROPERTIES:
+:CUSTOM_ID: acknowledgments
+:END:
 
 I am deeply indebted to the many colleagues and students who have challenged and refined my thinking over the years. Particular thanks are due to the Programming Languages research group at Carnegie Mellon, where many of these ideas were first explored during my doctoral work.
 
@@ -265,6 +329,9 @@ For their patient support during the writing process, I thank my wife Eleanor an
 Finally, I am grateful to Cambridge University Press, particularly my editor Sarah Thompson, for believing in this somewhat unconventional project.
 
 * Bibliography
+:PROPERTIES:
+:CUSTOM_ID: bibliography
+:END:
 
 Adams, Michael. "The Evolution of Prolog." In History of Programming Languages Conference (HOPL-II), 1993.
 
@@ -297,6 +364,9 @@ Steele, Guy L., and Gerald J. Sussman. "The Art of the Interpreter or the Modula
 Wadler, Philip. "The Expression Problem." Email to the Java-Genericity mailing list, 1998.
 
 * Index
+:PROPERTIES:
+:CUSTOM_ID: index
+:END:
 
 Abstraction, 45, 132, 198
 Actor model, 78, 201, 324
