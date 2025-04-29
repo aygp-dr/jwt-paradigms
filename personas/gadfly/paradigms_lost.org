@@ -158,14 +158,7 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-9
 :END:
 
-/This chapter explores how homoiconic languages—those where code is represented as data structures within the language itself—enable powerful metaprogramming capabilities. It argues that the loss of homoiconicity in mainstream languages has limited our ability to create domain-specific abstractions./
-
-Key sections include:
-- Lisp Macros and Syntactic Abstraction
-- Code as Data: The Lisp Advantage
-- DSLs Internal and External
-- The Expression Problem Revisited
-- Why Metaprogramming Remains Niche
+#+INCLUDE: "chapters/chapter9.org::*Chapter 9: Homoiconicity and Linguistic Abstraction" :only-contents t
 
 ** Chapter 10: Declarative Systems: The Forgotten Paradigm
 :PROPERTIES:
