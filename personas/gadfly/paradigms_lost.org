@@ -36,32 +36,7 @@ To my colleagues who will undoubtedly find fault with many of my arguments: I we
 /Cambridge, Massachusetts/
 /April 2022/
 
-* Table of Contents                                                    :TOC:
-- [[#foreword][Foreword]]
-- [[#preface][Preface]]
-- [[#introduction-the-amnesia-of-progress][Introduction: The Amnesia of Progress]]
-- [[#part-i-the-great-paradigms][Part I: The Great Paradigms]]
-  - [[#chapter-1-imperative-programming-and-its-discontents][Chapter 1: Imperative Programming and Its Discontents]]
-  - [[#chapter-2-the-functional-ideal][Chapter 2: The Functional Ideal]]
-  - [[#chapter-3-object-oriented-programming-the-promise-and-the-reality][Chapter 3: Object-Oriented Programming: The Promise and the Reality]]
-  - [[#chapter-4-logic-programming-the-road-not-taken][Chapter 4: Logic Programming: The Road Not Taken]]
-  - [[#chapter-5-dataflow-and-reactive-programming-rediscovering-the-wheel][Chapter 5: Dataflow and Reactive Programming: Rediscovering the Wheel]]
-- [[#part-ii-what-was-lost][Part II: What Was Lost]]
-  - [[#chapter-6-simplicity-versus-easiness][Chapter 6: Simplicity Versus Easiness]]
-  - [[#chapter-7-the-expression-problem-and-false-solutions][Chapter 7: The Expression Problem and False Solutions]]
-  - [[#chapter-8-type-systems-protection-or-straitjacket][Chapter 8: Type Systems: Protection or Straitjacket?]]
-  - [[#chapter-9-homoiconicity-and-linguistic-abstraction][Chapter 9: Homoiconicity and Linguistic Abstraction]]
-  - [[#chapter-10-declarative-systems-the-forgotten-paradigm][Chapter 10: Declarative Systems: The Forgotten Paradigm]]
-- [[#part-iii-paths-forward][Part III: Paths Forward]]
-  - [[#chapter-11-polyglot-programming-the-pragmatic-compromise][Chapter 11: Polyglot Programming: The Pragmatic Compromise]]
-  - [[#chapter-12-language-workbenches-and-meta-programming][Chapter 12: Language Workbenches and Meta-Programming]]
-  - [[#chapter-13-verification-beyond-testing][Chapter 13: Verification Beyond Testing]]
-  - [[#chapter-14-reviving-smalltalk-lessons-from-a-lost-paradigm][Chapter 14: Reviving Smalltalk: Lessons from a Lost Paradigm]]
-  - [[#chapter-15-toward-a-synthesis][Chapter 15: Toward a Synthesis]]
-- [[#epilogue-computing-as-thought][Epilogue: Computing as Thought]]
-- [[#acknowledgments][Acknowledgments]]
-- [[#bibliography][Bibliography]]
-- [[#index][Index]]
+#+TOC: headlines 3
 
 * Introduction: The Amnesia of Progress
 :PROPERTIES:
@@ -184,56 +159,28 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-12
 :END:
 
-/This chapter examines language workbenches and other tools for creating domain-specific languages, arguing that they represent one path toward combining the expressiveness of specialized languages with the integration benefits of a common platform./
-
-Key sections include:
-- Jetbrains MPS and Language-Oriented Programming
-- Racket and Language Creation
-- Embedded DSLs versus External DSLs
-- Meta-Object Protocols
-- The Economics of Language Creation
+#+INCLUDE: "chapters/chapter12.org::*Chapter 12: Language Workbenches and Meta-Programming" :only-contents t
 
 ** Chapter 13: Verification Beyond Testing
 :PROPERTIES:
 :CUSTOM_ID: chapter-13
 :END:
 
-/This chapter explores formal methods and advanced type systems as ways to increase software reliability beyond traditional testing. It examines real-world applications of these approaches and their limitations./
-
-Key sections include:
-- Model Checking and Formal Verification
-- Dependent Types in Practice
-- Property-Based Testing
-- Designing for Verification
-- The Spectrum of Formal Methods
+#+INCLUDE: "chapters/chapter13.org::*Chapter 13: Verification Beyond Testing" :only-contents t
 
 ** Chapter 14: Reviving Smalltalk: Lessons from a Lost Paradigm
 :PROPERTIES:
 :CUSTOM_ID: chapter-14
 :END:
 
-/This chapter uses Smalltalk as a case study of a paradigm that embodied many powerful ideas that remain relevant today, including image-based development, live programming, and uniform object models. It examines how these ideas might be revived in modern contexts./
-
-Key sections include:
-- The Smalltalk Environment as IDE Precursor
-- Image-Based Development versus File-Based Development
-- Live Programming and Immediate Feedback
-- Smalltalk's Influence on Modern Systems
-- Pharo and Contemporary Smalltalk
+#+INCLUDE: "chapters/chapter14.org::*Chapter 14: Reviving Smalltalk: Lessons from a Lost Paradigm" :only-contents t
 
 ** Chapter 15: Toward a Synthesis
 :PROPERTIES:
 :CUSTOM_ID: chapter-15
 :END:
 
-/This chapter argues for a more thoughtful synthesis of programming paradigms, drawing on their complementary strengths while avoiding their individual weaknesses. It examines languages and systems that successfully combine paradigms and suggests directions for future language design./
-
-Key sections include:
-- Multi-Paradigm Languages: Scala, F#, and Beyond
-- Ecosystem Design Beyond Language Design
-- Human Factors in Programming Practice
-- Education and the Perpetuation of Paradigms
-- The Next Great Paradigm?
+#+INCLUDE: "chapters/chapter15.org::*Chapter 15: Toward a Synthesis" :only-contents t
 
 * Epilogue: Computing as Thought
 :PROPERTIES:

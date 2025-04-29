@@ -1,4 +1,4 @@
-.PHONY: all clean build tangle examples slides pdf view book tangle-all
+.PHONY: all clean build tangle examples slides pdf view present book tangle-all paradigms_lost.pdf
 
 # Default target - lists available commands
 all:
@@ -8,7 +8,9 @@ all:
 	@echo "  make slides       - Generate presentation.pdf from presentation.org"
 	@echo "  make pdf          - Same as slides"
 	@echo "  make view         - View the generated PDF (if available)"
+	@echo "  make present      - Present slides using pdfpc (optimal presentation tool)"
 	@echo "  make book         - Generate PDF from personas/gadfly/paradigms_lost.org"
+	@echo "  make paradigms_lost.pdf - Direct target to generate the book PDF"
 	@echo "  make clean        - Remove generated files"
 	@echo "  make build        - Build all artifacts (tangle code and generate PDFs)"
 
@@ -48,14 +50,28 @@ book: personas/gadfly/paradigms_lost.org
 		--funcall org-latex-export-to-pdf
 	@echo "Done! Generated personas/gadfly/paradigms_lost.pdf"
 
+# Direct target for the book PDF
+personas/gadfly/paradigms_lost.pdf: personas/gadfly/paradigms_lost.org personas/gadfly/chapters/*.org
+	@echo "Generating paradigms_lost.pdf..."
+	@emacs --batch --eval "(require 'org)" --eval "(load-theme 'tango t)" \
+		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
+		--visit="personas/gadfly/paradigms_lost.org" \
+		--funcall org-latex-export-to-pdf
+	@echo "Done! Generated personas/gadfly/paradigms_lost.pdf"
+
 pdf: slides
 
 # View the generated PDF (platform dependent)
 view:
 	@if [ -f presentation.pdf ]; then \
-		if command -v xdg-open > /dev/null; then \
+		if command -v pdfpc > /dev/null; then \
+			echo "Opening with pdfpc (recommended for presentations)..."; \
+			pdfpc presentation.pdf; \
+		elif command -v xdg-open > /dev/null; then \
+			echo "Opening with default PDF viewer..."; \
 			xdg-open presentation.pdf; \
 		elif command -v open > /dev/null; then \
+			echo "Opening with default PDF viewer..."; \
 			open presentation.pdf; \
 		else \
 			echo "PDF viewer not found. Please open presentation.pdf manually."; \
@@ -70,6 +86,20 @@ view:
 		fi; \
 	else \
 		echo "No PDF files found. Run 'make slides' or 'make book' first."; \
+	fi
+
+# Present the slides using pdfpc (recommended for presentations)
+present: presentation.pdf
+	@if command -v pdfpc > /dev/null; then \
+		echo "Starting presentation with pdfpc..."; \
+		pdfpc presentation.pdf; \
+	else \
+		echo "pdfpc not found. For optimal presentation experience, please install:"; \
+		echo "  - FreeBSD: pkg install pdfpc"; \
+		echo "  - Linux: apt install pdfpc (Debian/Ubuntu) or dnf install pdfpc (Fedora)"; \
+		echo "  - macOS: brew install pdfpc"; \
+		echo "Falling back to regular PDF viewer..."; \
+		make view; \
 	fi
 
 # Build everything
