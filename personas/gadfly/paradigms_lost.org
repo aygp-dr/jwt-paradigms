@@ -177,14 +177,7 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-11
 :END:
 
-/This chapter explores polyglot programming—using different languages for different parts of a system based on their strengths. It examines the benefits and challenges of this approach and how it allows teams to leverage the strengths of multiple paradigms./
-
-Key sections include:
-- The Right Tool for the Job
-- Interoperability Challenges
-- Cognitive Load of Multiple Languages
-- Building Polyglot Teams
-- Case Studies in Effective Polyglotism
+#+INCLUDE: "chapters/chapter11.org::*Chapter 11: Polyglot Programming: The Pragmatic Compromise" :only-contents t
 
 ** Chapter 12: Language Workbenches and Meta-Programming
 :PROPERTIES:
