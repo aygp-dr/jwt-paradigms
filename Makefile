@@ -50,7 +50,7 @@ book: personas/gadfly/paradigms_lost.pdf
 personas/gadfly/paradigms_lost.pdf: personas/gadfly/paradigms_lost.org personas/gadfly/chapters/*.org .dir-locals.el
 	@echo "Generating paradigms_lost.pdf..."
 	@emacs --batch --eval "(require 'org)" --eval "(load-theme 'tango t)" \
-		--eval "(require 'htmlize)" \
+		--eval "(condition-case nil (require 'htmlize) (error (message \"Note: htmlize package not available. Syntax highlighting may be limited.\")))" \
 		--eval "(setq org-latex-pdf-process '(\"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\" \"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\" \"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\"))" \
 		--eval "(setq org-latex-listings 'minted)" \
 		--eval "(add-to-list 'org-latex-packages-alist '(\"\" \"minted\"))" \
