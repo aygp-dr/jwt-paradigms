@@ -1,1 +1,4 @@
 _minted*
+*.new
+*.core
+WebKitWebProcess.core
