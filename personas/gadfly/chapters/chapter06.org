@@ -35,7 +35,7 @@ Crucially, simplicity is not the same as familiarity. A system can be objectivel
 
 Consider the following code snippets, which both compute the sum of squares of even numbers in an array:
 
-#+BEGIN_SRC javascript
+#+BEGIN_SRC javascript :tangle ../examples/javascript/chapter06_sum_squares.js :mkdirp yes
 // Approach 1: Imperative, mutable
 function sumOfSquaresOfEvens(numbers) {
   let sum = 0;
@@ -80,7 +80,7 @@ The distinction matters because essential complexity must be managed, while acci
 
 Consider database access in a typical enterprise application:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle ../examples/java/chapter06_complexity.java :mkdirp yes
 // Approach with accidental complexity
 public List<Customer> getActiveCustomers() {
     Session session = null;
@@ -165,7 +165,7 @@ Several aspects of Clojure's design exemplify the pursuit of simplicity:
 
 Consider this Clojure code for updating a user's profile:
 
-#+BEGIN_SRC clojure
+#+BEGIN_SRC clojure :tangle ../examples/clojure/chapter06_profile.clj :mkdirp yes
 (defn update-profile [user-id profile-updates]
   (let [current-profile (get-profile user-id)
         updated-profile (merge current-profile profile-updates)
