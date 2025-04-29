@@ -1,4 +1,4 @@
-.PHONY: all clean build tangle examples slides pdf view present book tangle-all paradigms_lost.pdf
+.PHONY: all clean build build-all tangle examples slides pdf view present book book-examples tangle-all paradigms_lost.pdf
 
 # Default target - lists available commands
 all:
@@ -11,8 +11,10 @@ all:
 	@echo "  make present      - Present slides using pdfpc (optimal presentation tool)"
 	@echo "  make book         - Generate PDF from personas/gadfly/paradigms_lost.org"
 	@echo "  make paradigms_lost.pdf - Direct target to generate the book PDF"
+	@echo "  make book-examples - Extract and validate code examples from book chapters"
 	@echo "  make clean        - Remove generated files"
 	@echo "  make build        - Build all artifacts (tangle code and generate PDFs)"
+	@echo "  make build-all    - Build everything including code examples from the book"
 
 # Extract code examples from examples.org
 examples: examples.org
@@ -105,10 +107,21 @@ present: presentation.pdf
 # Build everything
 build: tangle slides book
 
+# Tangle and validate code examples from the book
+book-examples:
+	@echo "Processing code examples from book chapters..."
+	@cd personas/gadfly && $(MAKE) tangle-examples && $(MAKE) check-examples
+	@echo "Code examples processed and checked."
+
+# Build everything including code examples
+build-all: tangle slides book book-examples
+
 # Clean generated files
 clean:
 	@echo "Cleaning generated files..."
 	@rm -f presentation.pdf personas/gadfly/paradigms_lost.pdf
 	@rm -f *.tex *.aux *.log *.out *.toc *.nav *.snm *.vrb
 	@rm -f personas/gadfly/*.tex personas/gadfly/*.aux personas/gadfly/*.log personas/gadfly/*.out personas/gadfly/*.toc
+	@echo "Cleaning book examples..."
+	@cd personas/gadfly && $(MAKE) clean
 	@echo "Done!"

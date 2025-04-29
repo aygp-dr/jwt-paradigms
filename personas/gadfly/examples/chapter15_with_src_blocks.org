@@ -1,0 +1,108 @@
+* Chapter 15: Toward a Synthesis (With Source Blocks)
+
+This is a modified excerpt from Chapter 15 that uses proper source blocks for code examples.
+
+** Multi-Paradigm Languages: Unifying Diverse Approaches
+
+*** Scala: Unifying Object-Oriented and Functional Programming
+
+Consider this example of pattern matching (typically associated with functional programming) applied to class hierarchies (a staple of object-oriented design):
+
+#+BEGIN_SRC scala :tangle ../examples/scala/shape_pattern_matching.scala
+sealed trait Shape
+case class Circle(radius: Double) extends Shape
+case class Rectangle(width: Double, height: Double) extends Shape
+case class Triangle(base: Double, height: Double) extends Shape
+
+def area(shape: Shape): Double = shape match {
+  case Circle(r) => math.Pi * r * r
+  case Rectangle(w, h) => w * h
+  case Triangle(b, h) => 0.5 * b * h
+}
+
+// Test the area function
+println(area(Circle(5.0)))
+println(area(Rectangle(4.0, 3.0)))
+println(area(Triangle(6.0, 2.0)))
+#+END_SRC
+
+*** F#: Functional-First with Object-Oriented Capabilities
+
+Consider this example combining functional data processing with object-oriented interfacing to external systems:
+
+#+BEGIN_SRC fsharp :tangle ../examples/fsharp/data_repository.fs
+// Functional data processing
+let calculateStatistics data =
+    let average = Seq.average data
+    let stdDev = 
+        data
+        |> Seq.map (fun x -> (x - average) ** 2.0)
+        |> Seq.average
+        |> sqrt
+    (average, stdDev)
+
+// Object-oriented interface to database
+type DataRepository(connectionString) =
+    member this.GetData() =
+        // Note: This is simplified for the example
+        // In a real implementation, this would use actual database access
+        printfn "Connecting to database with %s" connectionString
+        [1.0; 2.0; 3.0; 4.0; 5.0]
+        
+    member this.SaveStatistics(average, stdDev) =
+        // Simplified database operation
+        printfn "Saving statistics to database: avg=%f, stdDev=%f" average stdDev
+
+// Combining the approaches
+let processData connectionString =
+    let repository = DataRepository(connectionString)
+    let data = repository.GetData()
+    let stats = calculateStatistics data
+    repository.SaveStatistics stats
+    stats
+
+// Test the function
+let avg, std = processData "server=localhost;database=testdb"
+printfn "Result: average=%f, stdDev=%f" avg std
+#+END_SRC
+
+*** TypeScript: Gradual Typing for JavaScript
+
+This example demonstrates incremental typing in TypeScript:
+
+#+BEGIN_SRC typescript :tangle ../examples/typescript/gradual_typing.ts
+// Untyped JavaScript - works in TypeScript
+function processData(data) {
+    return data.filter(item => item.value > 0)
+               .map(item => item.value * 2);
+}
+
+// Partially typed - adds some safety
+function processData2(data: any[]): number[] {
+    return data.filter(item => item.value > 0)
+               .map(item => item.value * 2);
+}
+
+// Fully typed - maximum safety and documentation
+interface DataItem {
+    id: string;
+    value: number;
+    timestamp: Date;
+}
+
+function processData3(data: DataItem[]): number[] {
+    return data.filter(item => item.value > 0)
+               .map(item => item.value * 2);
+}
+
+// Test data
+const testData = [
+    { id: "a1", value: 10, timestamp: new Date() },
+    { id: "a2", value: -5, timestamp: new Date() },
+    { id: "a3", value: 8, timestamp: new Date() }
+];
+
+console.log("Untyped result:", processData(testData));
+console.log("Partially typed result:", processData2(testData));
+console.log("Fully typed result:", processData3(testData));
+#+END_SRC
