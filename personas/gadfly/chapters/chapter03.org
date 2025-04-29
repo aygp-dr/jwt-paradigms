@@ -39,7 +39,7 @@ This model had profound implications. By emphasizing message passing over proced
 
 Moreover, Smalltalk was not merely a language but an environment—an integrated system that included graphics, windowing, text editing, and development tools, all implemented as objects communicating through messages. This environment demonstrated the scalability of the object model to complete systems, not just isolated programs.
 
-#+BEGIN_SRC smalltalk
+#+BEGIN_SRC smalltalk :tangle ../examples/smalltalk/chapter03_message_passing.st :mkdirp yes
 "A simple example in Smalltalk"
 | stack |
 stack := OrderedCollection new.  "Creating an object via message passing"
@@ -70,7 +70,7 @@ Java, emerging in the mid-1990s, refined the C++ approach but maintained many of
 
 The contrast between the original vision and its mainstream realization can be seen in a simple example. Here's a typical Java class definition:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle ../examples/java/chapter03_account.java :mkdirp yes
 public class Account {
     private double balance;
     
@@ -134,7 +134,7 @@ These inheritance hierarchies create severe maintenance problems:
 
 Consider this classic example of inheritance gone wrong:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle ../examples/java/chapter03_square_rectangle.java :mkdirp yes
 // The infamous Square/Rectangle problem
 class Rectangle {
     protected int width;
@@ -175,7 +175,7 @@ The alternative to inheritance is composition—building objects by combining si
 
 Here's how the Rectangle/Square problem might be addressed using composition:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle ../examples/java/chapter03_composition.java :mkdirp yes
 interface Shape {
     int area();
 }
@@ -247,7 +247,7 @@ In contrast, mainstream object-oriented languages like Java and C++ rely primari
 
 Consider this example in Java:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle ../examples/java/chapter03_dispatch.java :mkdirp yes
 // Static vs. dynamic dispatch in Java
 class Animal {
     public void makeSound() {
@@ -289,7 +289,7 @@ This constraint reflects a fundamental limitation of static typing in traditiona
 
 Dynamic languages like Ruby, Python, and JavaScript preserve more of the original message-passing model with their "duck typing" approach—if an object has a method that matches a message, it can respond to that message, regardless of its class or type. This allows for more flexible and adaptable code, at the cost of some compile-time safety guarantees.
 
-#+BEGIN_SRC ruby
+#+BEGIN_SRC ruby :tangle ../examples/ruby/chapter03_duck_typing.rb :mkdirp yes
 # Duck typing in Ruby
 class Duck
   def quack
