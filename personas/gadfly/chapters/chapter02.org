@@ -28,7 +28,7 @@ The significance of the lambda calculus for our discussion is profound: it prove
 
 Consider this simple example of factorial in lambda calculus notation:
 
-#+BEGIN_SRC
+#+BEGIN_SRC text :tangle ../examples/lambda/factorial.lambda :mkdirp yes
 factorial = λn.if (n == 0) then 1 else n * factorial(n-1)
 #+END_SRC
 
@@ -44,7 +44,7 @@ This property, which seems almost trivial at first glance, has profound implicat
 
 Consider a simple example:
 
-#+BEGIN_SRC haskell
+#+BEGIN_SRC haskell :tangle ../examples/haskell/referential_transparency.hs :mkdirp yes
 -- A pure function in Haskell
 sum [1, 2, 3, 4]
 -- We can substitute equals for equals
@@ -57,7 +57,7 @@ Each expression produces the same result, and we can freely substitute one for a
 
 Contrast this with an imperative function that depends on or modifies external state:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle ../examples/java/chapter02_impure.java :mkdirp yes
 // An impure function in Java
 int getAndIncrementCounter() {
     int current = counter;
@@ -100,7 +100,7 @@ However, the abstraction tax has decreased substantially over time through sever
 
 Consider this example of mapping a function over a large collection. In a naive implementation, it might create an entirely new collection:
 
-#+BEGIN_SRC clojure
+#+BEGIN_SRC clojure :tangle ../examples/clojure/chapter02_map.clj :mkdirp yes
 ;; In Clojure
 (map inc (range 1000000))
 #+END_SRC

@@ -4,20 +4,14 @@
 all: tangle
 
 # List of chapter files (add more as needed)
-CHAPTERS = chapters/chapter7.org chapters/chapter8.org chapters/chapter9.org \
+CHAPTERS = chapters/chapter01.org chapters/chapter02.org chapters/chapter03.org \
+           chapters/chapter04.org chapters/chapter05.org chapters/chapter06.org \
+           chapters/chapter07.org chapters/chapter08.org chapters/chapter09.org \
            chapters/chapter10.org chapters/chapter11.org chapters/chapter12.org \
            chapters/chapter13.org chapters/chapter14.org chapters/chapter15.org
 
-# Directories for extracted code examples
-EXAMPLE_DIRS = examples/tla examples/idris examples/scala examples/fsharp \
-               examples/typescript examples/python examples/racket examples/smalltalk
-
-# Create example directories if they don't exist
-$(EXAMPLE_DIRS):
-	mkdir -p $@
-
 # Target to tangle code from all chapters
-tangle: $(EXAMPLE_DIRS)
+tangle: 
 	@echo "Extracting code examples from chapters..."
 	@for chapter in $(CHAPTERS); do \
 		echo "Tangling $$chapter..."; \
