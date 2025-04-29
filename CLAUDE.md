@@ -17,8 +17,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Formatting**: Follow language-specific conventions (PEP 8 for Python, standard JS for JavaScript)
 - **Imports**: Group imports by stdlib → third-party → local with blank lines between groups
 - **Types**: Use type annotations in TypeScript and Python; structs in Rust
-- **Error handling**: Use idiomatic approaches (try/except in Python, Result in Rust)
+- **Naming**: snake_case for Python, camelCase for JS variables, PascalCase for classes
+- **Error handling**: Use idiomatic approaches (try/except in Python, Result in Rust, etc.)
 - **Base64url handling**: Correctly handle URL-safe base64 (`-` → `+`, `_` → `/`) and padding
 - **JWT parsing**: Extract header before payload, handle authentication headers properly
-- **Security**: Note that examples focus on parsing, not security; in production code, verify signatures first
+- **Security**: Verify signatures before parsing in production code
 - **Functions**: Prefer pure functions for transformation steps in parsing
+- **Documentation**: Add docstrings/JSDoc comments explaining parsing logic
