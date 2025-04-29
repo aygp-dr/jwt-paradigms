@@ -48,7 +48,7 @@ book: personas/gadfly/paradigms_lost.org
 	@echo "Generating book PDF..."
 	@emacs --batch --eval "(require 'org)" --eval "(load-theme 'tango t)" \
 		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
-		--visit="$<" \
+		--visit="personas/gadfly/paradigms_lost.org" \
 		--funcall org-latex-export-to-pdf
 	@echo "Done! Generated personas/gadfly/paradigms_lost.pdf"
 

@@ -1,0 +1,27 @@
+(use-modules (ice-9 iconv)
+             (json)
+             (rnrs bytevectors)
+             (srfi srfi-60))
+
+(define (base64url-decode str)
+  (let* ((padding (make-string (modulo (- 0 (string-length str)) 4) #\=))
+         (base64 (string-map (lambda (c)
+                               (case c
+                                 ((#\-) #\+)
+                                 ((#\_) #\/)
+                                 (else c)))
+                             str))
+         (padded (string-append base64 padding)))
+    (base64-decode padded)))
+
+(define (decode-jwt-header auth-header)
+  (let* ((token (cadr (string-split auth-header #\ )))
+         (header-part (car (string-split token #\.)))
+         (decoded-bytes (base64url-decode header-part))
+         (decoded-str (bytevector->string decoded-bytes "UTF-8"))
+         (header (json-string->scm decoded-str)))
+    header))
+
+(define auth-header "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U")
+(display (decode-jwt-header auth-header))
+(newline)

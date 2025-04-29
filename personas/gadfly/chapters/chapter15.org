@@ -25,7 +25,7 @@ Scala represents one of the most ambitious attempts to unify object-oriented and
 
 Consider this example of pattern matching (typically associated with functional programming) applied to class hierarchies (a staple of object-oriented design):
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC scala :tangle ../examples/scala/shape_pattern_matching.scala
 sealed trait Shape
 case class Circle(radius: Double) extends Shape
 case class Rectangle(width: Double, height: Double) extends Shape
@@ -36,7 +36,12 @@ def area(shape: Shape): Double = shape match {
   case Rectangle(w, h) => w * h
   case Triangle(b, h) => 0.5 * b * h
 }
-#+END_EXAMPLE
+
+// Test the area function
+println(area(Circle(5.0)))
+println(area(Rectangle(4.0, 3.0)))
+println(area(Triangle(6.0, 2.0)))
+#+END_SRC
 
 This code combines:
 - Object-oriented subtyping and inheritance
@@ -53,7 +58,7 @@ F# takes a different approach to multi-paradigm design, starting from a function
 
 Consider this example combining functional data processing with object-oriented interfacing to external systems:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC fsharp :tangle ../examples/fsharp/data_repository.fs
 // Functional data processing
 let calculateStatistics data =
     let average = Seq.average data
@@ -67,19 +72,14 @@ let calculateStatistics data =
 // Object-oriented interface to database
 type DataRepository(connectionString) =
     member this.GetData() =
-        use connection = new SqlConnection(connectionString)
-        connection.Open()
-        use command = new SqlCommand("SELECT Value FROM Measurements", connection)
-        use reader = command.ExecuteReader()
-        [ while reader.Read() do yield reader.GetDouble(0) ]
+        // Note: This is simplified for the example
+        // In a real implementation, this would use actual database access
+        printfn "Connecting to database with %s" connectionString
+        [1.0; 2.0; 3.0; 4.0; 5.0]
         
     member this.SaveStatistics(average, stdDev) =
-        use connection = new SqlConnection(connectionString)
-        connection.Open()
-        use command = new SqlCommand("INSERT INTO Statistics VALUES (@avg, @std)", connection)
-        command.Parameters.AddWithValue("@avg", average) |> ignore
-        command.Parameters.AddWithValue("@std", stdDev) |> ignore
-        command.ExecuteNonQuery()
+        // Simplified database operation
+        printfn "Saving statistics to database: avg=%f, stdDev=%f" average stdDev
 
 // Combining the approaches
 let processData connectionString =
@@ -88,7 +88,11 @@ let processData connectionString =
     let stats = calculateStatistics data
     repository.SaveStatistics stats
     stats
-#+END_EXAMPLE
+
+// Test the function
+let avg, std = processData "server=localhost;database=testdb"
+printfn "Result: average=%f, stdDev=%f" avg std
+#+END_SRC
 
 This example demonstrates a thoughtful separation of concerns:
 - Pure functional code handles the statistical calculations
@@ -108,7 +112,7 @@ TypeScript's gradual typing system allows developers to:
 
 Consider this example of incremental typing:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC typescript :tangle ../examples/typescript/gradual_typing.ts
 // Untyped JavaScript - works in TypeScript
 function processData(data) {
     return data.filter(item => item.value > 0)
@@ -132,7 +136,18 @@ function processData3(data: DataItem[]): number[] {
     return data.filter(item => item.value > 0)
                .map(item => item.value * 2);
 }
-#+END_EXAMPLE
+
+// Test data
+const testData = [
+    { id: "a1", value: 10, timestamp: new Date() },
+    { id: "a2", value: -5, timestamp: new Date() },
+    { id: "a3", value: 8, timestamp: new Date() }
+];
+
+console.log("Untyped result:", processData(testData));
+console.log("Partially typed result:", processData2(testData));
+console.log("Fully typed result:", processData3(testData));
+#+END_SRC
 
 This continuum of typing options enables teams to make context-specific tradeoffs between safety and flexibility, rather than committing to a single approach for an entire codebase or project.
 

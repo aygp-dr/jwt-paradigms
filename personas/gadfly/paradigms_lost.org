@@ -5,6 +5,13 @@
 #+LANGUAGE: en
 #+OPTIONS: toc:3 num:t
 #+OPTIONS: broken-links:mark
+#+PROPERTY: header-args :exports both
+#+PROPERTY: header-args:scala :exports both :results output
+#+PROPERTY: header-args:fsharp :exports both :results output
+#+PROPERTY: header-args:typescript :exports both :results output
+#+PROPERTY: header-args:python :exports both :results output
+#+PROPERTY: header-args:racket :exports both :results output
+#+PROPERTY: header-args:idris :exports both :results output
 
 * Foreword
 :PROPERTIES:
