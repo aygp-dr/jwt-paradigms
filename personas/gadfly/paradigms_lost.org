@@ -118,28 +118,14 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-4
 :END:
 
-/This chapter examines logic programming, exemplified by Prolog, as a paradigm that separates "what" from "how" more dramatically than any other. It explores why logic programming, despite its elegant approach to certain problems, failed to achieve mainstream adoption./
-
-Key sections include:
-- Declarative Problem Specification
-- Unification and Backtracking
-- Logic Programming in the Real World
-- Fifth Generation Project: Ambition and Failure
-- Logic Programming Concepts in Modern Systems
+#+INCLUDE: "chapters/chapter4.org::*Chapter 4: Logic Programming: The Road Not Taken" :only-contents t
 
 ** Chapter 5: Dataflow and Reactive Programming: Rediscovering the Wheel
 :PROPERTIES:
 :CUSTOM_ID: chapter-5
 :END:
 
-/This chapter connects historical dataflow languages to modern reactive programming, showing how contemporary frameworks often reinvent concepts from languages like Lucid. It argues that the fundamental insights of dataflow programming—the propagation of changes through a dependency network—have been repeatedly rediscovered and forgotten./
-
-Key sections include:
-- Lucid and the Origins of Dataflow
-- Spreadsheets as Successful Dataflow Systems
-- FRP and Modern Reactive Frameworks
-- The Stream Processing Renaissance
-- Time as a First-Class Concept
+#+INCLUDE: "chapters/chapter5.org::*Chapter 5: Dataflow and Reactive Programming: Rediscovering the Wheel" :only-contents t
 
 * Part II: What Was Lost
 :PROPERTIES:
@@ -151,14 +137,7 @@ Key sections include:
 :CUSTOM_ID: chapter-6
 :END:
 
-/This chapter, inspired by Rich Hickey's distinction between simple and easy, examines how modern languages and frameworks often prioritize initial developer experience ("easiness") over long-term maintainability and comprehensibility ("simplicity"). It argues that this tradeoff has significant consequences for software quality and developer productivity./
-
-Key sections include:
-- Defining Simplicity in Software
-- Accidental versus Essential Complexity
-- The Seduction of Easiness
-- Simple Made Easy: Clojure's Approach
-- The Economics of Technical Debt
+#+INCLUDE: "chapters/chapter6.org::*Chapter 6: Simplicity Versus Easiness" :only-contents t
 
 ** Chapter 7: The Expression Problem and False Solutions
 :PROPERTIES:

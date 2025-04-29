@@ -1,0 +1,2 @@
+# Mark PDF files in personas/gadfly as generated
+personas/gadfly/paradigms_lost.pdf linguist-generated=true
