@@ -144,28 +144,14 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-7
 :END:
 
-/This chapter explores the expression problem—the challenge of adding both new operations and new data types to a system without modifying existing code. It examines how different paradigms approach this problem and why many purported solutions fail in practice./
-
-Key sections include:
-- Formulating the Expression Problem
-- Functional versus Object-Oriented Approaches
-- Visitor Pattern and Its Limitations
-- Extensibility through Protocols and Typeclasses
-- The Expression Problem as Paradigm Benchmark
+#+INCLUDE: "chapters/chapter7.org::*Chapter 7: The Expression Problem and False Solutions" :only-contents t
 
 ** Chapter 8: Type Systems: Protection or Straitjacket?
 :PROPERTIES:
 :CUSTOM_ID: chapter-8
 :END:
 
-/This chapter examines the ongoing debate between static and dynamic typing, arguing that both extremes miss important nuances. It explores how type systems shape programming paradigms and the tradeoffs involved in different approaches to typing./
-
-Key sections include:
-- Types as Propositions: The Curry-Howard Correspondence
-- Hindley-Milner and Type Inference
-- Duck Typing and Structural Types
-- Gradual Typing: The Middle Path?
-- When Types Help and When They Hinder
+#+INCLUDE: "chapters/chapter8.org::*Chapter 8: Type Systems: Protection or Straitjacket?" :only-contents t
 
 ** Chapter 9: Homoiconicity and Linguistic Abstraction
 :PROPERTIES:
