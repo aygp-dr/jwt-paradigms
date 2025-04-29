@@ -111,14 +111,7 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-3
 :END:
 
-/This chapter distinguishes between Alan Kay's original vision of object-oriented programming—message-passing between encapsulated objects—and what OOP has become in languages like Java and C++. It argues that mainstream OOP lost much of the paradigm's power by focusing on inheritance hierarchies rather than message-passing protocols./
-
-Key sections include:
-- Simula, Smalltalk, and the Original Vision
-- The Java/C++ Distortion
-- Inheritance versus Composition
-- Static versus Dynamic Dispatch
-- Objects as Universal Abstraction: Dream or Delusion?
+#+INCLUDE: "chapters/chapter3.org::*Chapter 3: Object-Oriented Programming: The Promise and the Reality" :only-contents t
 
 ** Chapter 4: Logic Programming: The Road Not Taken
 :PROPERTIES:
