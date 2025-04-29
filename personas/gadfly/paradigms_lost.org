@@ -165,14 +165,7 @@ Let us begin by examining the major paradigms that have shaped programming, befo
 :CUSTOM_ID: chapter-10
 :END:
 
-/This chapter examines declarative programming beyond functional and logic paradigms, including configuration management, build systems, and query languages. It argues that declarative approaches excel at expressing complex relationships and constraints but remain underutilized./
-
-Key sections include:
-- SQL: The Most Successful Declarative Language
-- Make and Declarative Build Systems
-- Infrastructure as Code
-- Constraint Satisfaction Problems
-- Declarative User Interfaces
+#+INCLUDE: "chapters/chapter10.org::*Chapter 10: Declarative Systems: The Forgotten Paradigm" :only-contents t
 
 * Part III: Paths Forward
 :PROPERTIES:
