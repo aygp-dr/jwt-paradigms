@@ -25,7 +25,7 @@ In Lucid, variables represent streams of values that evolve over time, and opera
 
 Consider this simple Lucid program for computing the Fibonacci sequence:
 
-#+BEGIN_SRC
+#+BEGIN_SRC text :tangle ../examples/lucid/chapter05_fibonacci.lucid :mkdirp yes
 fib = 1 fby (1 fby (fib + next fib));
 #+END_SRC
 
@@ -98,7 +98,7 @@ Then, beginning around 2010, a wave of "reactive programming" frameworks emerged
 
 Consider this example in React.js:
 
-#+BEGIN_SRC jsx
+#+BEGIN_SRC jsx :tangle ../examples/jsx/chapter05_counter.jsx :mkdirp yes
 function Counter() {
   const [count, setCount] = React.useState(0);
   
@@ -135,7 +135,7 @@ Systems like Apache Storm, Spark Streaming, Flink, and Kafka Streams all impleme
 
 Consider this example in Apache Spark:
 
-#+BEGIN_SRC scala
+#+BEGIN_SRC scala :tangle ../examples/scala/chapter05_spark_streaming.scala :mkdirp yes
 val lines = spark.readStream.format("kafka").option("subscribe", "topic").load()
 val words = lines.as[String].flatMap(_.split(" "))
 val wordCounts = words.groupBy("value").count()
@@ -180,7 +180,7 @@ Dataflow programming offers an alternative model, where time is not an implicit 
 
 Consider how React handles time in UI updates:
 
-#+BEGIN_SRC jsx
+#+BEGIN_SRC jsx :tangle ../examples/jsx/chapter05_clock.jsx :mkdirp yes
 function Clock() {
   const [time, setTime] = useState(new Date());
   
@@ -199,7 +199,7 @@ In this component, the `time` state is a discrete approximation of a continuousl
 
 A more general and explicit treatment of time would allow programmers to define and compose time-varying values more directly, as in this hypothetical FRP-style code:
 
-#+BEGIN_SRC
+#+BEGIN_SRC scala :tangle ../examples/scala/chapter05_frp_clock.scala :mkdirp yes
 val clock = Signal.periodic(1.second).map(_ => new Date())
 val displayTime = clock.map(time => time.toLocaleTimeString())
 val view = displayTime.map(timeStr => div("Current time: " + timeStr))
