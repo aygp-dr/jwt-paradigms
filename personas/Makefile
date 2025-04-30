@@ -54,6 +54,19 @@ images: generate-persona-images.org ## Generate persona headshots
 images/placeholder.png:
 	convert -size 400x400 xc:gray -fill white -gravity center -font Arial -pointsize 40 -annotate 0 "FPO" $@
 
+replace-placeholders: ## Replace placeholder images with Gemini versions
+	@$(SCRIPTS_DIR)/replace_placeholders.sh
+
+scale-all-gemini: ## Optional: A target to create scaled versions of all Gemini images
+	@echo "Scaling all Gemini images to 400x400..."
+	@mkdir -p images/scaled
+	@for img in images/gemini/*.png; do \
+		filename=$$(basename $$img); \
+		convert "$$img" -geometry 400x400 "images/scaled/$$filename"; \
+		echo "Scaled $$filename"; \
+	done
+	@echo "Done scaling. Files are in images/scaled/"
+
 dalle: $(IMAGES_DIR) ## Generate headshots using DALL-E
 	@for file in $(ORG_FILES); do \
 		echo "Executing DALL-E blocks in $file"; \
@@ -68,7 +81,11 @@ dalle: $(IMAGES_DIR) ## Generate headshots using DALL-E
 	done
 
 gemini: images/gemini ## Generate headshots using Gemini
-	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py 
+	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py
+
+gemini-replace: gemini ## Generate headshots and replace placeholders
+	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py --copy-to-target
+	$(SCRIPTS_DIR)/replace_placeholders.sh
 
 tangle: $(OUTPUT_DIR) ## Extract code blocks to files
 	@for file in $(ORG_FILES); do \

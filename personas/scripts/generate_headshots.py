@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-Test script for generating headshots using Google's Gemini API.
-This script uses persona descriptions from the persona_prompts module.
+Script for generating persona headshots using Google's Gemini API.
+This script uses persona definitions from the persona_prompts module.
 """
 
 import logging
 import os
 import sys
 import time
+import argparse
 from pathlib import Path
 
 try:
@@ -18,8 +19,8 @@ try:
     from google import genai
     from google.genai import types
 
-    # Import persona prompts
-    from persona_prompts import PERSONA_PROMPTS
+    # Import persona data
+    from persona_prompts import PERSONAS
     from PIL import Image
 except ImportError:
     print("Missing required packages. Please install with:")
@@ -30,65 +31,7 @@ except ImportError:
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
-logger = logging.getLogger("gemini_headshots_test")
-
-# Define personas using prompts from the imported module
-TEST_PERSONAS = [
-    {
-        "name": "Professor Wellington",
-        "role": "Academic Gadfly",
-        "filename": "spark_wellington.png",
-        "prompt": PERSONA_PROMPTS["wellington"],
-    },
-    {
-        "name": "Raj Patel",
-        "role": "Polyglot Developer",
-        "filename": "raj_patel.png",
-        "prompt": PERSONA_PROMPTS["raj"],
-    },
-    {
-        "name": "Dr. Maya Ramirez",
-        "role": "Python Security Expert",
-        "filename": "maya_ramirez.png",
-        "prompt": PERSONA_PROMPTS["maya"],
-    },
-    {
-        "name": "Hannah Chen",
-        "role": "Security Architect",
-        "filename": "hannah_chen.png",
-        "prompt": PERSONA_PROMPTS["hannah"],
-    },
-    {
-        "name": "Alex Chen",
-        "role": "Paradigm Purist",
-        "filename": "zero_chen.png",
-        "prompt": PERSONA_PROMPTS["zero"],
-    },
-    {
-        "name": "Sofia Martinez",
-        "role": "Beginner-Friendly Developer",
-        "filename": "sofia_martinez.png",
-        "prompt": PERSONA_PROMPTS["sofia"],
-    },
-    {
-        "name": "Dr. Neha Kapoor",
-        "role": "Performance Engineer",
-        "filename": "neha_kapoor.png",
-        "prompt": PERSONA_PROMPTS["neha"],
-    },
-    {
-        "name": "Marco Hernandez",
-        "role": "Accessibility Advocate",
-        "filename": "marco_hernandez.png",
-        "prompt": PERSONA_PROMPTS["marco"],
-    },
-    {
-        "name": "Dr. Eleanor Reynolds",
-        "role": "VP of Engineering",
-        "filename": "eleanor_reynolds.png",
-        "prompt": PERSONA_PROMPTS["eleanor"],
-    },
-]
+logger = logging.getLogger("gemini_headshots_generator")
 
 
 def check_api_key():
@@ -101,8 +44,19 @@ def check_api_key():
     return True
 
 
-def generate_image(prompt, output_path):
+def generate_image(prompt, output_path, force=False):
     """Generate an image using Google's Gemini API."""
+    # Skip generation if file exists and force is False
+    output_path = Path(output_path)
+    if output_path.exists() and not force:
+        filesize = output_path.stat().st_size
+        # If the file is very small (likely a placeholder), regenerate it
+        if filesize < 5000:  # Less than 5KB is probably a placeholder
+            logger.info(f"Existing image at {output_path} appears to be a placeholder ({filesize} bytes). Will regenerate.")
+        else:
+            logger.info(f"Image already exists at {output_path} ({filesize} bytes). Skipping (use --force to override)")
+            return True
+        
     try:
         # Get API key from environment
         api_key = os.environ.get("GEMINI_API_KEY")
@@ -124,6 +78,7 @@ def generate_image(prompt, output_path):
 
         # Save the image
         image = Image.open(BytesIO(response.generated_images[0].image.image_bytes))
+        output_path.parent.mkdir(parents=True, exist_ok=True)  # Ensure output directory exists
         image.save(output_path)
 
         logger.info(f"Image saved to {output_path}")
@@ -136,35 +91,89 @@ def generate_image(prompt, output_path):
 
 def main():
     """Main entry point for the script."""
-    logger.info("Starting Gemini headshots test")
+    # Set up argument parser
+    parser = argparse.ArgumentParser(description="Generate headshots using Google's Gemini API")
+    parser.add_argument(
+        "--force", 
+        action="store_true", 
+        help="Force regeneration of images even if they already exist"
+    )
+    parser.add_argument(
+        "--persona",
+        type=str,
+        help="Generate headshot only for the specified persona (by ID or filename without extension)"
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default="images/gemini",
+        help="Directory where generated images will be saved"
+    )
+    parser.add_argument(
+        "--target-dir",
+        type=str,
+        default="images",
+        help="Directory where final images should be placed (after processing)"
+    )
+    parser.add_argument(
+        "--copy-to-target",
+        action="store_true",
+        help="Copy generated images to the target directory automatically"
+    )
+    args = parser.parse_args()
+    
+    logger.info("Starting Gemini headshots generation")
+    logger.info(f"Force mode: {'ON' if args.force else 'OFF'}")
 
     # Check for API key
     if not check_api_key():
         return 1
 
     # Ensure output directory exists
-    output_dir = Path("images/gemini")
+    output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Filter personas if a specific one was requested
+    personas_to_process = PERSONAS
+    if args.persona:
+        target = args.persona
+        # Try to match by ID or filename without extension
+        personas_to_process = [p for p in PERSONAS if p["id"] == target or p["filename"].split('.')[0] == target]
+        if not personas_to_process:
+            logger.error(f"No persona found with ID or filename '{target}'")
+            return 1
+        logger.info(f"Processing only persona: {target}")
 
     # Process each persona
     success_count = 0
-    for persona in TEST_PERSONAS:
+    for persona in personas_to_process:
         output_path = output_dir / persona["filename"]
 
         logger.info(f"Processing {persona['name']} ({persona['role']})")
 
-        success = generate_image(persona["prompt"], output_path)
+        success = generate_image(persona["prompt"], output_path, force=args.force)
 
         if success:
             success_count += 1
-            logger.info(f"Successfully generated headshot for {persona['name']}")
+            logger.info(f"Successfully processed headshot for {persona['name']}")
+            
+            # Optionally copy to target directory
+            if args.copy_to_target:
+                target_path = Path(args.target_dir) / persona["filename"]
+                try:
+                    import shutil
+                    target_path.parent.mkdir(parents=True, exist_ok=True)  # Ensure target directory exists
+                    shutil.copy2(output_path, target_path)
+                    logger.info(f"Copied to {target_path}")
+                except Exception as e:
+                    logger.error(f"Error copying to target directory: {e}")
         else:
-            logger.error(f"Failed to generate headshot for {persona['name']}")
+            logger.error(f"Failed to process headshot for {persona['name']}")
 
         # Add a delay to avoid rate limits
         time.sleep(2)
 
-    logger.info(f"Completed generation of {success_count}/{len(TEST_PERSONAS)} headshots")
+    logger.info(f"Completed processing of {success_count}/{len(personas_to_process)} headshots")
 
     return 0
 
