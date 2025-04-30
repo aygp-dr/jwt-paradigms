@@ -1,0 +1,30 @@
+statemachine TrafficLight {
+  events
+    vehicleApproach
+    timeout
+    pedestrianButton
+    
+  state Red {
+    on pedestrianButton -> RedPedestrian
+    on timeout -> Green
+  }
+  
+  state RedPedestrian {
+    on timeout -> Green
+  }
+  
+  state Green {
+    on vehicleApproach -> ExtendedGreen
+    on timeout -> Yellow
+  }
+  
+  state ExtendedGreen {
+    on timeout -> Yellow
+  }
+  
+  state Yellow {
+    on timeout -> Red
+  }
+  
+  initial -> Red
+}
