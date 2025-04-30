@@ -13,11 +13,14 @@ images/png/
 images/gemini/
 images/khoj/
 images/dalle/
+images/backup/
+images/scaled/
 
 # Development files
 issues/
 uv.lock
 
+tmp/
 
-# Optional: if you want to track the Makefile, pyproject.toml, scripts and main.py
-# remove them from this list
+
+
