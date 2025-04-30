@@ -25,7 +25,7 @@ Scala represents one of the most ambitious attempts to unify object-oriented and
 
 Consider this example of pattern matching (typically associated with functional programming) applied to class hierarchies (a staple of object-oriented design):
 
-#+BEGIN_SRC scala :tangle ../examples/scala/shape_pattern_matching.scala
+#+BEGIN_SRC scala :tangle ../examples/scala/shape_pattern_matching.scala :mkdirp yes
 sealed trait Shape
 case class Circle(radius: Double) extends Shape
 case class Rectangle(width: Double, height: Double) extends Shape
@@ -58,7 +58,7 @@ F# takes a different approach to multi-paradigm design, starting from a function
 
 Consider this example combining functional data processing with object-oriented interfacing to external systems:
 
-#+BEGIN_SRC fsharp :tangle ../examples/fsharp/data_repository.fs
+#+BEGIN_SRC fsharp :tangle ../examples/fsharp/data_repository.fs :mkdirp yes
 // Functional data processing
 let calculateStatistics data =
     let average = Seq.average data
@@ -112,7 +112,7 @@ TypeScript's gradual typing system allows developers to:
 
 Consider this example of incremental typing:
 
-#+BEGIN_SRC typescript :tangle ../examples/typescript/gradual_typing.ts
+#+BEGIN_SRC typescript :tangle ../examples/typescript/gradual_typing.ts :mkdirp yes
 // Untyped JavaScript - works in TypeScript
 function processData(data) {
     return data.filter(item => item.value > 0)

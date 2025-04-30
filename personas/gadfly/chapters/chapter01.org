@@ -21,7 +21,7 @@ However, this architecture also cast a long shadow over programming language des
 
 This architectural influence created what Maurice Wilkes called "the von Neumann bottleneck"—the limited throughput between processor and memory—which remains a fundamental constraint. More subtly, it created a bottleneck in our thinking about computation itself. We became conditioned to view programs primarily as sequences of actions rather than as expressions of relationships or as logical specifications.
 
-#+BEGIN_SRC c
+#+BEGIN_SRC c :tangle ../examples/c/chapter01_von_neumann.c :mkdirp yes
 // The von Neumann influence manifested in C
 int sum(int n) {
     int result = 0;  // Mutable state
@@ -42,7 +42,7 @@ Structured programming, formalized by Edsger Dijkstra, Tony Hoare, and others in
 
 Languages like Pascal, designed explicitly to support structured programming, further advanced the cause by promoting modular design and data abstraction. The benefits were substantial: more reliable software, improved maintainability, and enhanced programmer productivity.
 
-#+BEGIN_SRC pascal
+#+BEGIN_SRC pascal :tangle ../examples/pascal/chapter01_structured.pas :mkdirp yes
 (* Structured programming in Pascal *)
 function Sum(n: Integer): Integer;
 var
@@ -67,7 +67,7 @@ When reading imperative code, programmers must mentally simulate the computer's 
 
 Consider a simple example:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle ../examples/java/chapter01_user_status.java :mkdirp yes
 // A seemingly innocent piece of imperative code
 public void updateUserStatus(User user) {
     if (user.isLoggedIn()) {
@@ -98,7 +98,7 @@ The fundamental issue is that imperative programming's mental model—sequential
 
 Consider a classic example:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle ../examples/java/chapter01_counter.java :mkdirp yes
 // A simple counter with a race condition
 public class Counter {
     private int count = 0;
@@ -135,7 +135,7 @@ Imperative programming excels when:
 
 4. *Small-scale, straightforward algorithms are being implemented.* For simple algorithms with minimal state, the cognitive burden of imperative programming is manageable, and its directness can be an advantage.
 
-#+BEGIN_SRC c
+#+BEGIN_SRC c :tangle ../examples/c/chapter01_swap.c :mkdirp yes
 // A simple, efficient algorithm in C
 void swap(int *a, int *b) {
     int temp = *a;

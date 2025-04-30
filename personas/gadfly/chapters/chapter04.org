@@ -27,7 +27,7 @@ Prolog, the most widely known logic programming language, was developed in the e
 
 Consider this simple Prolog program:
 
-#+BEGIN_SRC prolog
+#+BEGIN_SRC prolog :tangle ../examples/prolog/chapter04_family.pl :mkdirp yes
 % Facts
 parent(john, mary).    % John is a parent of Mary
 parent(john, tom).     % John is a parent of Tom
@@ -71,7 +71,7 @@ Unification, combined with a search strategy called backtracking, provides the e
 
 Consider this simple program for path finding in a graph:
 
-#+BEGIN_SRC prolog
+#+BEGIN_SRC prolog :tangle ../examples/prolog/chapter04_path.pl :mkdirp yes
 % Define direct connections between nodes
 edge(a, b).
 edge(a, c).
@@ -103,7 +103,7 @@ What's remarkable is how much complexity is hidden from the programmer. The back
 
 This approach is particularly powerful for problems involving search, constraint satisfaction, parsing, and symbolic reasoning. For example, a natural language parser in Prolog can often be written as a direct translation of formal grammar rules, without needing to implement the parsing algorithm explicitly:
 
-#+BEGIN_SRC prolog
+#+BEGIN_SRC prolog :tangle ../examples/prolog/chapter04_grammar.pl :mkdirp yes
 sentence(S) --> noun_phrase(NP), verb_phrase(VP).
 noun_phrase(NP) --> determiner(D), noun(N).
 verb_phrase(VP) --> verb(V).
@@ -132,7 +132,7 @@ In practice, Prolog programmers must often be acutely aware of the execution mod
 
 Consider this example of finding the minimum of two numbers:
 
-#+BEGIN_SRC prolog
+#+BEGIN_SRC prolog :tangle ../examples/prolog/chapter04_min.pl :mkdirp yes
 % A purely declarative approach
 min(X, Y, X) :- X =< Y.
 min(X, Y, Y) :- X > Y.
@@ -221,7 +221,7 @@ Perhaps most significantly, the concept of declarative programming itself—spec
 
 Consider this example in a modern declarative framework, the React JavaScript library:
 
-#+BEGIN_SRC jsx
+#+BEGIN_SRC jsx :tangle ../examples/jsx/chapter04_counter.jsx :mkdirp yes
 function Counter() {
   const [count, setCount] = useState(0);
   
@@ -240,7 +240,7 @@ This React component doesn't directly manipulate the DOM or specify when updates
 
 Similar principles appear in domain-specific declarative languages like TensorFlow for machine learning, where models are defined as computational graphs that the framework then optimizes and executes:
 
-#+BEGIN_SRC python
+#+BEGIN_SRC python :tangle ../examples/python/chapter04_tensorflow.py :mkdirp yes
 import tensorflow as tf
 
 # Declaratively define the computation graph

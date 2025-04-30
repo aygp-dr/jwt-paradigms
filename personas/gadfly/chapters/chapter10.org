@@ -31,7 +31,7 @@ The most successful and enduring example of declarative programming is SQL (Stru
 
 SQL's success stems from its declarative nature. Consider a simple query:
 
-#+BEGIN_SRC sql :tangle ../examples/sql/employee_query.sql
+#+BEGIN_SRC sql :tangle ../examples/sql/employee_query.sql :mkdirp yes
 SELECT name, department
 FROM employees
 WHERE salary > 50000
@@ -60,7 +60,7 @@ The true lesson of SQL is not just about database queries but about the power of
 
 Another enduring example of declarative programming is Make, the build system developed by Stuart Feldman at Bell Labs in 1976. Make pioneered a declarative approach to specifying build dependencies and transformations:
 
-#+BEGIN_SRC makefile :tangle ../examples/make/simple_build.mk
+#+BEGIN_SRC makefile :tangle ../examples/make/simple_build.mk :mkdirp yes
 main.o: main.c defs.h
 	gcc -c main.c
 
@@ -90,7 +90,7 @@ The lesson extends beyond build systems to any domain with complex dependency re
 
 A more recent manifestation of declarative thinking is the "Infrastructure as Code" movement, exemplified by tools like Terraform, AWS CloudFormation, and Kubernetes manifests. These systems apply declarative principles to infrastructure management:
 
-#+BEGIN_SRC hcl :tangle ../examples/terraform/web_server.tf
+#+BEGIN_SRC hcl :tangle ../examples/terraform/web_server.tf :mkdirp yes
 # Terraform example
 resource "aws_instance" "web" {
   ami           = "ami-0c55b159cbfafe1f0"
@@ -134,7 +134,7 @@ Perhaps the purest expression of declarative thinking appears in constraint sati
 
 Consider MiniZinc, a constraint modeling language:
 
-#+BEGIN_SRC minizinc :tangle ../examples/minizinc/send_more_money.mzn
+#+BEGIN_SRC minizinc :tangle ../examples/minizinc/send_more_money.mzn :mkdirp yes
 % Variables
 var 1..9: S;
 var 0..9: E;
@@ -173,7 +173,7 @@ This represents perhaps the purest form of declarative thinking: the complete se
 
 A domain where declarative approaches have gained significant traction is user interface development. Modern UI frameworks like React, SwiftUI, and Flutter employ declarative programming models:
 
-#+BEGIN_SRC jsx :tangle ../examples/react/user_profile.jsx
+#+BEGIN_SRC jsx :tangle ../examples/react/user_profile.jsx :mkdirp yes
 // React example
 function UserProfile({ user }) {
   return (
@@ -240,7 +240,7 @@ Perhaps most significantly, imperative thinking limits our ability to leverage s
 Consider the difference between these approaches to data processing:
 
 **Imperative:**
-#+BEGIN_SRC java :tangle ../examples/java/imperative_filtering.java
+#+BEGIN_SRC java :tangle ../examples/java/imperative_filtering.java :mkdirp yes
 List<Person> result = new ArrayList<>();
 for (Person p : people) {
     if (p.getAge() > 21) {
@@ -255,7 +255,7 @@ Collections.sort(result, new Comparator<Person>() {
 #+END_SRC
 
 **Declarative (Java Streams):**
-#+BEGIN_SRC java :tangle ../examples/java/declarative_filtering.java
+#+BEGIN_SRC java :tangle ../examples/java/declarative_filtering.java :mkdirp yes
 List<Person> result = people.stream()
     .filter(p -> p.getAge() > 21)
     .sorted(Comparator.comparing(Person::getName))
