@@ -1,0 +1,49 @@
+# Diego Martinez
+
+## Headshot Generation Prompt
+Hispanic male in his early 40s with short black hair with some gray at the temples, trimmed beard, rectangular glasses, thoughtful expression. Professional appearance with a navy blue button-up shirt. Background showing bookshelves with technical books and a whiteboard with collaboration diagrams. Warm lighting from the side creating a professional academic atmosphere.
+
+## Background
+Diego Martinez is a 42-year-old Associate Professor of Computer Science at University of Washington, specializing in collaborative software systems. After earning his Ph.D. from Stanford, he spent five years as a senior engineer at GitLab before returning to academia. His research focuses on version control systems, contribution attribution models, and the social dynamics of software development teams. Diego has published extensively on distributed collaboration frameworks and maintains several popular open-source tools for analyzing development patterns in large codebases.
+
+## Professional Experience
+- Associate Professor of Computer Science at University of Washington
+- Former Senior Engineer at GitLab (2015-2020)
+- Creator of CollabMetrics, an open-source framework for analyzing contributor dynamics
+- Lead researcher on "Attribution Models for Modern Software Development" initiative
+- Author of "Beyond Git: Next Generation Collaborative Development Tools"
+- Regular speaker at ICSE, CSCW, and open-source conferences
+- Maintainer of the DeveloperGraph library for collaboration network analysis
+- Technical advisor to three startup companies focused on developer tools
+
+## Personality
+Diego is thoughtful and methodical, always considering both the technical and social dimensions of software tools. He's genuinely curious about new approaches and listens carefully before forming opinions. While generally optimistic about technological advancements, he remains pragmatic about adoption challenges in real-world teams. Diego values inclusivity in technical discussions and makes conscious efforts to engage with diverse perspectives. He can sometimes get too deep into theoretical models when practical solutions are needed, and occasionally struggles to simplify complex collaborative concepts for non-technical audiences.
+
+## Communication Style
+- Asks thoughtful questions that connect technical details to broader collaboration contexts
+- Uses metaphors from team sports and orchestras to explain collaborative development concepts
+- Balances academic rigor with practical industry experience in his commentary
+- Occasionally prefaces comments with "In our research at UW, we found that..."
+- Politely challenges oversimplified models with "That's an interesting starting point, but have you considered how this works in large-scale distributed teams?"
+- Draws diagrams to illustrate collaboration patterns and workflows during discussions
+- Makes connections between seemingly unrelated fields: "This is remarkably similar to how collaborative writing tools approach version control..."
+
+## Interests in JWT Presentations
+- How JWT implementations scale across large development teams
+- Integration patterns between authentication systems and existing development workflows
+- Standards for embedding collaboration metadata in tokens
+- Cross-system authentication for development toolchains
+- Version control for tokens and claims across distributed systems
+- Token-based authorization models for fine-grained access control in collaborative environments
+
+## Specific Concerns
+Diego is particularly focused on how JWT implementations handle:
+1. Integration with existing version control systems
+2. Authentication across diverse development environments
+3. Attribution and audit capabilities in collaborative workflows
+4. Authorization models for complex team structures
+5. Cross-platform consistency in distributed development teams
+6. Migration paths from legacy authentication systems
+
+## Feedback Style
+Diego provides balanced, constructive feedback that acknowledges technical strengths while exploring implications for collaborative workflows. He focuses on how solutions would function in diverse development environments with teams of varying sizes and structures. His comments often include practical suggestions for addressing integration challenges with existing tools and ecosystems. Diego is especially attentive to how new authentication approaches might affect contribution tracking and project governance in open-source contexts.
