@@ -1,0 +1,1 @@
+fib = 1 fby (1 fby (fib + next fib));

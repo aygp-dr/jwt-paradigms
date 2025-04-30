@@ -1,0 +1,3 @@
+Developer 1: Java (Expert) + Python/TypeScript (Proficient)
+Developer 2: Python (Expert) + Java/TypeScript (Proficient)
+Developer 3: TypeScript (Expert) + Java/Python (Proficient)
