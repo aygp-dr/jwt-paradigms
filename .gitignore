@@ -2,3 +2,14 @@ _minted*
 *.new
 *.core
 WebKitWebProcess.core
+
+# Generated PDFs and LaTeX
+*.pdf
+*.tex
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
