@@ -25,7 +25,7 @@ Unlike traditional text-based languages, MPS uses a projectional editing approac
 
 Consider this example of a state machine definition in an MPS-based DSL:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC mermaid :tangle ../examples/mermaid/chapter12_traffic_light.mmd :mkdirp yes
 statemachine TrafficLight {
   events
     vehicleApproach
@@ -56,13 +56,13 @@ statemachine TrafficLight {
   
   initial -> Red
 }
-#+END_EXAMPLE
+#+END_SRC
 
 Behind this seemingly simple notation lies a sophisticated projection that directly manipulates the state machine's conceptual structure. The user isn't editing text but rather interacting with a specialized editor that understands the semantics of state machines.
 
 MPS enables not just the creation of new languages but their composition. For instance, the state machine language could be embedded within a larger system model, with embedded expressions in other languages for state actions or guard conditions:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC mermaid :tangle ../examples/mermaid/chapter12_green_state.mmd :mkdirp yes
 state Green {
   entry {
     turnOn(greenLight);
@@ -76,7 +76,7 @@ state Green {
   
   on timeout -> Yellow
 }
-#+END_EXAMPLE
+#+END_SRC
 
 Here, the state machine language is composed with an action language for entry actions and a boolean expression language for guard conditions. This composition would be challenging with traditional parsing approaches due to context-dependent syntax.
 
@@ -101,7 +101,7 @@ Racket's approach to language creation builds on the macro system we discussed i
 
 Consider this simple language definition in Racket:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC racket :tangle ../examples/racket/chapter12_imperative.rkt :mkdirp yes
 #lang racket
 
 (provide (all-defined-out))
@@ -117,11 +117,11 @@ Consider this simple language definition in Racket:
   
 (define-syntax-rule (dec! x)
   (set! x (- x 1)))
-#+END_EXAMPLE
+#+END_SRC
 
 This defines a small imperative language with `while` loops and increment/decrement operators. A program in this language might look like:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC racket :tangle ../examples/racket/chapter12_imperative_example.rkt :mkdirp yes
 #lang s-exp "imperative.rkt"
 
 (define x 0)
@@ -129,11 +129,11 @@ This defines a small imperative language with `while` loops and increment/decrem
 (while (< x 10)
   (displayln x)
   (inc! x))
-#+END_EXAMPLE
+#+END_SRC
 
 Racket's language creation facilities enable more sophisticated languages with custom syntax beyond S-expressions. Here's a definition of a simple logo-like turtle graphics language:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC racket :tangle ../examples/racket/chapter12_turtle.rkt :mkdirp yes
 #lang racket
 
 (provide (all-from-out racket)
@@ -163,11 +163,11 @@ Racket's language creation facilities enable more sophisticated languages with c
 
 (define (pendown)
   (set! turtle-pen-down #t))
-#+END_EXAMPLE
+#+END_SRC
 
 A program in this language would directly express turtle movements:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC racket :tangle ../examples/racket/chapter12_turtle_example.rkt :mkdirp yes
 #lang s-exp "turtle.rkt"
 
 (define (square size)
@@ -182,7 +182,7 @@ A program in this language would directly express turtle movements:
 (square 100)
 (right 45)
 (square 70)
-#+END_EXAMPLE
+#+END_SRC
 
 What distinguishes Racket's approach is its seamless integration with existing language infrastructure. New languages benefit from Racket's module system, runtime environment, and development tools. Languages can be imported, composed, and extended using familiar mechanisms.
 
@@ -219,31 +219,31 @@ The capabilities of embedded DSLs depend heavily on the host language's flexibil
 Compare these implementations of a simple query language:
 
 **External DSL:**
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC sql :tangle ../examples/sql/chapter12_query.sql :mkdirp yes
 from customers
 where age > 21 and status = 'active'
 select name, email
 order by name
 limit 10
-#+END_EXAMPLE
+#+END_SRC
 
 **Ruby EDSL:**
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC ruby :tangle ../examples/ruby/chapter12_query_dsl.rb :mkdirp yes
 query = customers.
   where { |c| c.age > 21 && c.status == :active }.
   select(:name, :email).
   order_by(:name).
   limit(10)
-#+END_EXAMPLE
+#+END_SRC
 
 **Haskell EDSL:**
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC haskell :tangle ../examples/haskell/chapter12_query_dsl.hs :mkdirp yes
 query = from customers
         & where_ (\c -> age c > 21 && status c == Active)
         & select [name, email]
         & orderBy name
         & limit 10
-#+END_EXAMPLE
+#+END_SRC
 
 The external DSL offers custom syntax that closely resembles SQL, potentially more accessible to database analysts. The Ruby EDSL leverages blocks and method chaining to create a relatively natural syntax within Ruby's constraints. The Haskell EDSL uses operator overloading and higher-order functions to create a syntax that approximates the external DSL.
 
@@ -259,7 +259,7 @@ A meta-object protocol, as pioneered in the Common Lisp Object System (CLOS), ex
 
 Consider this example from CLOS, which customizes the method dispatch mechanism:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC lisp :tangle ../examples/lisp/chapter12_method_combination.lisp :mkdirp yes
 (defclass prioritized-method-combination (standard-method-combination)
   ((priority :initarg :priority :accessor priority)))
 
@@ -272,7 +272,7 @@ Consider this example from CLOS, which customizes the method dispatch mechanism:
     ;; Call the highest priority method first
     `(call-method ,(first sorted-methods)
                   ,(rest sorted-methods))))
-#+END_EXAMPLE
+#+END_SRC
 
 This code modifies how methods are combined in multi-method dispatch, prioritizing methods based on explicit priority values rather than the standard specificity rules. The key insight is that the method dispatch mechanism itself is implemented using objects and methods that can be extended through the same mechanisms used for application objects.
 
@@ -280,7 +280,7 @@ Modern languages have adopted aspects of meta-object protocols to varying degree
 
 **Python's descriptor protocol** enables customization of attribute access:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC python :tangle ../examples/python/chapter12_descriptor.py :mkdirp yes
 class ValidatedProperty:
     def __init__(self, validator):
         self.validator = validator
@@ -308,11 +308,11 @@ class Person:
     
     def __init__(self, age):
         self.age = age
-#+END_EXAMPLE
+#+END_SRC
 
 **Ruby's method_missing** enables dynamic method handling:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC ruby :tangle ../examples/ruby/chapter12_method_missing.rb :mkdirp yes
 class RecordFinder
   def initialize(model_class)
     @model_class = model_class
@@ -335,7 +335,7 @@ end
 # Usage
 user_finder = RecordFinder.new(User)
 user = user_finder.find_by_email('example@example.com')
-#+END_EXAMPLE
+#+END_SRC
 
 These mechanisms enable a form of linguistic extension within the bounds of the host language. While less powerful than full language creation, they offer a more accessible approach to customizing language behavior for specific domains.
 
