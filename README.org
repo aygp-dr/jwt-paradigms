@@ -28,6 +28,8 @@ This repository contains the code samples and presentation slides from my talk a
 
 - =presentation.org=: Org-mode source for the presentation slides
 - =presentation.pdf=: PDF slides from the conference talk
+- =examples.org=: Tangled code examples
+- =scenarios.org=: Advanced JWT token usage scenarios
 - Code examples in language-specific directories:
   - =js/=: JavaScript (browser and Node.js) examples
   - =ts/=: TypeScript example with type definitions
@@ -38,6 +40,11 @@ This repository contains the code samples and presentation slides from my talk a
   - =scheme/=: Guile Scheme implementation
   - =shell/=: Bash script using base64 and jq
   - =rust/=: Rust implementation with error handling
+  - =examples/parsing-validation/=: Security validation examples
+  - =examples/refresh/=: Token refresh implementations
+  - =examples/revocation/=: Token revocation strategies
+  - =examples/subscription/=: Subscription token patterns
+  - =examples/proxy/=: Proxy authentication tokens
 
 ** Installation
 :PROPERTIES:
@@ -177,6 +184,7 @@ The =benchmarks/= directory contains scripts to reproduce the performance measur
 - Use strong algorithms (prefer RS256/ES256 over HS256)
 - Consider token lifecycle management (revocation, refresh)
 - Use established JWT libraries with proper configuration where available
+- Follow difficulty level indicators in the presentation: 🔰 Beginner, 🧩 Intermediate, ⚠️ Advanced
 
 For comprehensive security guidance, see the =examples/parsing-validation/security_recommendations.md= file.
 
@@ -233,6 +241,21 @@ For those reviewing the presentation, we recommend:
 - Aidan Pace
 - Email: apace@defrecord.com
 - GitHub: @aygp-dr
+
+** Advanced JWT Scenarios
+:PROPERTIES:
+:CUSTOM_ID: advanced-scenarios
+:END:
+
+The repository includes examples of advanced JWT usage patterns in =scenarios.org=:
+
+- Subscription Tokens: Encode subscription status and plan details
+- Proxy Authentication: Allow services to make requests on behalf of users
+- Token Refresh: Patterns for obtaining new access tokens securely
+- Token Revocation: Methods to invalidate tokens before expiration
+- Proper JWT Validation: Ensuring tokens are verified before use
+
+These examples include both the theory and practical implementations across different languages.
 
 ** References
 :PROPERTIES:
