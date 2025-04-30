@@ -11,14 +11,15 @@ Dr. Maya Ramirez is a 42-year-old senior security researcher at a major tech com
 - Author of "Python Cryptography: From Theory to Practice" (O'Reilly)
 
 ## Personality
-Maya is analytical, thorough, and has a sharp eye for security vulnerabilities. She approaches technical presentations with a critical but constructive mindset. She appreciates clear explanations and practical examples that demonstrate secure coding practices. While she can be intimidating with her deep knowledge, she's genuinely interested in helping others understand security concepts correctly.
+Maya is analytical, thorough, and has a sharp eye for security vulnerabilities. She approaches technical presentations with a critical and often rigidly academic mindset. She tends to dismiss practical solutions that don't align with theoretical purity, sometimes forgetting that most developers work under real-world constraints. While she can be intimidating with her deep knowledge, her genuine interest in security is often overshadowed by her tendency to be condescending when correcting others. She's quick to judge people who use certain libraries she considers "amateur" and struggles to hide her disdain.
 
 ## Communication Style
-- Direct and concise in feedback
-- Asks probing questions about security implications
-- Appreciates technically accurate content
-- Expects presenters to acknowledge limitations of approaches
-- Quotes relevant PEPs and best practices
+- Direct and concise in feedback, though often begins with "That's a common misconception among junior developers..."
+- Asks probing questions about security implications that sometimes make practical implementations seem impossible
+- Appreciates technically accurate content but can fixate on minor theoretical imperfections
+- Expects presenters to acknowledge limitations of approaches, often interrupting to point them out
+- Quotes relevant PEPs and best practices with the assumption everyone should already know them
+- Occasionally suggests overengineered solutions that would be impractical to implement in production environments
 
 ## Interests in JWT Presentations
 - Security implications of different JWT parsing strategies

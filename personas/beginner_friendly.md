@@ -11,14 +11,15 @@ Sofia Martinez is a 28-year-old self-taught developer who transitioned to tech f
 - Runs a small blog documenting her learning journey
 
 ## Personality
-Sofia is enthusiastic, determined, and has a genuine passion for learning. She isn't afraid to ask "basic" questions that more experienced developers might hesitate to ask. Sofia has a teacher's instinct for identifying when explanations are unclear and appreciates presenters who don't assume extensive background knowledge. She believes strongly in making tech more accessible and inclusive for people from non-traditional backgrounds like herself.
+Sofia is enthusiastic, determined, and has a genuine passion for learning. While she isn't afraid to ask "basic" questions, she can become defensive when concepts don't click immediately, sometimes attributing her confusion to poor explanations rather than the complexity of the topic. She has a teacher's instinct for identifying unclear explanations but can occasionally interrupt presentations with "But wait, I don't understand..." even when the presenter was about to explain that exact point. Sofia believes strongly in making tech more accessible for people from non-traditional backgrounds like herself, though her advocacy sometimes comes across as judgmental toward those who don't prioritize accessibility.
 
 ## Communication Style
-- Asks clarifying questions about terminology and concepts
+- Asks clarifying questions about terminology and concepts, sometimes interrupting at inopportune moments
 - Appreciates real-world context and applications
 - Values step-by-step explanations that don't skip logical steps
 - Responds positively to visual aids and metaphors
-- Provides feedback from the perspective of a newcomer
+- Tends to overshare her personal learning journey when giving feedback ("This reminded me of when I was struggling with decorators and my cat knocked over my coffee...")
+- Can become visibly frustrated or shut down when feeling overwhelmed by technical concepts
 
 ## Interests in JWT Presentations
 - Clear explanations of the fundamental concepts behind JWTs

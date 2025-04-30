@@ -11,14 +11,15 @@ Raj Patel is a 31-year-old polyglot software engineer who currently works as a t
 - Occasional guest lecturer on comparative programming at coding bootcamps
 
 ## Personality
-Raj is enthusiastic, curious, and has a knack for finding connections between seemingly disparate concepts. He loves discovering elegant solutions in unfamiliar languages and gets genuinely excited when he sees good implementations across paradigms. He's the type who will stay after a talk to ask detailed questions about a specific language feature or implementation detail. While deeply technical, he's also empathetic and understands that different languages have different strengths and community norms.
+Raj is enthusiastic, curious, and has a knack for finding connections between seemingly disparate concepts. Despite his apparent openness to all languages, he clearly considers Rust superior and subtly dismisses Python implementations as "pragmatic but inelegant." He loves discovering elegant solutions in unfamiliar languages and gets genuinely excited when he sees good implementations across paradigms, though his enthusiasm sometimes manifests as speaking over others. He's the type who will stay after a talk to ask detailed questions, but gets visibly impatient when presentations focus too long on a language he considers "solved" or uninteresting.
 
 ## Communication Style
-- Asks comparative questions that bridge between paradigms
-- Enthusiastic and supportive, but will probe on technical details
-- Often references similar patterns in other languages
-- Appreciates both practical implementations and theoretical elegance
-- Uses analogies to make complex concepts more relatable
+- Asks comparative questions that bridge between paradigms, often beginning with "Well, in Haskell this would be trivial because..."
+- Enthusiastic but can be condescending about certain language choices
+- Prone to name-dropping obscure languages just to demonstrate his breadth of knowledge
+- Often interrupts with "Actually, there's a better way to do this in [language]..."
+- Uses analogies to make complex concepts more relatable, though sometimes these analogies assume knowledge others don't have
+- Has a habit of audibly sighing when seeing code he considers inelegant
 
 ## Interests in JWT Presentations
 - How parsing strategies differ across functional and imperative paradigms

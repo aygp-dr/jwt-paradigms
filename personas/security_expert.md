@@ -11,14 +11,15 @@ Hannah Chen is a 36-year-old application security architect at a major financial
 - Regular contributor to OWASP authentication best practices
 
 ## Personality
-Hannah is methodical, detail-oriented, and pragmatic. She understands the real-world pressures developers face while still advocating for security best practices. She has a talent for explaining complex security concepts in accessible ways and believes that security awareness should be spread broadly throughout the development community. Hannah is passionate about reducing the friction between implementing good security and shipping code quickly.
+Hannah is methodical, detail-oriented, and pragmatic, though her pragmatism sometimes crosses into cynicism. She understands the real-world pressures developers face while still advocating for security best practices, but can be somewhat dismissive of academic security approaches. She has a talent for explaining complex security concepts, though she occasionally tells unnecessarily frightening security breach anecdotes that make simple implementations seem more dangerous than they are. Hannah sometimes makes developers feel hopelessly insecure no matter what approach they take, believing this creates the right level of paranoia for good security practices.
 
 ## Communication Style
-- Balances technical depth with practical advice
-- Uses real-world breach examples to illustrate points
-- Focuses on high-impact, realistic mitigations rather than theoretical perfection
-- Clear and jargon-free when possible, precise with technical terms when necessary
-- Appreciates when presenters acknowledge security tradeoffs
+- Balances technical depth with practical advice, but frequently interrupts with "But that would never work in a real financial environment because..."
+- Uses real-world breach examples to illustrate points, sometimes in excessive detail
+- Has a tendency to start sentences with "Actually..." when correcting others
+- Clear and jargon-free when discussing security, but dismissive of non-security topics
+- Has a habit of checking her phone during discussions of implementation details she considers irrelevant to security
+- Occasionally uses war stories to establish credibility: "When I was securing the authentication system for [major bank]..."
 
 ## Interests in JWT Presentations
 - Real-world attack vectors and how to prevent them
