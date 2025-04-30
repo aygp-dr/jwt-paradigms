@@ -161,7 +161,6 @@ Which contains:
 
 The =benchmarks/= directory contains scripts to reproduce the performance measurements mentioned in the presentation.
 
-#+BEGIN_SRC org
 | Language   | Parsing Time (μs) | Memory Usage (KB) |
 |------------+-------------------+-------------------|
 | Rust       |               5.2 |               1.8 |
@@ -169,7 +168,6 @@ The =benchmarks/= directory contains scripts to reproduce the performance measur
 | Python     |              30.1 |              15.7 |
 | Clojure    |              45.8 |              28.4 |
 | Shell      |             180.3 |               8.9 |
-#+END_SRC
 
 ** Security Considerations
 :PROPERTIES:
