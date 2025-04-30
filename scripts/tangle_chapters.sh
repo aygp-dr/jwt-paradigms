@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script to tangle all chapter files
 
 # Use the directory where the script is located as the base
