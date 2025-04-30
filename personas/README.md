@@ -10,7 +10,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Cross-language patterns, idiomatic approaches, implementation tradeoffs
 - **Review Command:** `/review-presentation-raj`
 
-![Raj Patel](images/png/raj_patel.png)
+![Raj Patel](images/raj_patel.png)
 
 ### Dr. Maya Ramirez (Python Security Expert)
 - **File:** [python_expert.md](python_expert.md)
@@ -18,7 +18,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Security implications, best practices, efficient implementations
 - **Review Command:** `/review-presentation-maya`
 
-![Dr. Maya Ramirez](images/png/maya_ramirez.png)
+![Dr. Maya Ramirez](images/maya_ramirez.png)
 
 ### Hannah Chen (Security Architect)
 - **File:** [security_expert.md](security_expert.md)
@@ -26,7 +26,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Real-world security concerns, practical mitigations, balancing security with usability
 - **Review Command:** `/review-presentation-hannah`
 
-![Hannah Chen](images/png/hannah_chen.png)
+![Hannah Chen](images/hannah_chen.png)
 
 ### Dr. Eleanor Reynolds (VP of Engineering)
 - **File:** [executive_sponsor.md](executive_sponsor.md)
@@ -34,7 +34,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Strategic implications, organizational impact, business alignment
 - **Review Command:** `/review-presentation-eleanor`
 
-![Dr. Eleanor Reynolds](images/png/eleanor_reynolds.png)
+![Dr. Eleanor Reynolds](images/eleanor_reynolds.png)
 
 ## Secondary Reviewers
 
@@ -44,7 +44,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Idiomatic functional implementations, pattern matching, code elegance
 - **Review Command:** `/review-presentation-zero`
 
-![Alex "Zero" Chen](images/png/zero_chen.png)
+![Alex "Zero" Chen](images/zero_chen.png)
 
 ### Dr. Neha Kapoor (Performance Engineer)
 - **File:** [performance_engineer.md](performance_engineer.md)
@@ -52,7 +52,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Performance metrics, benchmarking methodology, optimization tradeoffs
 - **Review Command:** `/review-presentation-neha`
 
-![Dr. Neha Kapoor](images/png/neha_kapoor.png)
+![Dr. Neha Kapoor](images/neha_kapoor.png)
 
 ### Sofia Martinez (Beginner-Friendly Developer)
 - **File:** [beginner_friendly.md](beginner_friendly.md)
@@ -60,7 +60,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Clear explanations, approachability, newcomer perspective
 - **Review Command:** `/review-presentation-sofia`
 
-![Sofia Martinez](images/png/sofia_martinez.png)
+![Sofia Martinez](images/sofia_martinez.png)
 
 ### Marco Hernandez (Accessibility Advocate)
 - **File:** [accessibility_advocate.md](accessibility_advocate.md)
@@ -68,7 +68,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Inclusive presentations, assistive technology compatibility, cognitive accessibility
 - **Review Command:** `/review-presentation-marco`
 
-![Marco Hernandez](images/png/marco_hernandez.png)
+![Marco Hernandez](images/marco_hernandez.png)
 
 ### Professor Marcus "Spark" Wellington (Academic Gadfly)
 - **File:** [gadfly.md](gadfly.md)
@@ -76,7 +76,7 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **Focus:** Theoretical foundations, historical context, philosophical underpinnings
 - **Review Command:** `/review-presentation-wellington`
 
-![Professor Wellington](images/png/spark_wellington.png)
+![Professor Wellington](images/spark_wellington.png)
 
 ## Using These Personas
 

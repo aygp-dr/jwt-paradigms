@@ -1,0 +1,23 @@
+# Environment files
+.env
+.env*
+.envrc
+.python-version
+.venv
+.direnv/
+
+# Generated images
+#images/*.png
+images/tmp/
+images/png/
+images/gemini/
+images/khoj/
+images/dalle/
+
+# Development files
+issues/
+uv.lock
+
+
+# Optional: if you want to track the Makefile, pyproject.toml, scripts and main.py
+# remove them from this list

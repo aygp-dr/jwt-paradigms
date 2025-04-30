@@ -1,0 +1,26 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Build & Test Commands
+- **Setup**: `make setup` (create Python 3.11 virtual environment and install dependencies)
+- **Lint**: `make lint` (run ruff checks) or `make fix` (auto-fix issues)
+- **Format**: `make format` (format Python code with ruff)
+- **Run**: `python main.py` or as module `python -m personas` 
+- **Generate Images**: `make images` (standard) or `make alternatives` (alternative versions)
+- **Tangle Org Files**: `make tangle` (extract code blocks from org files)
+- **Process All**: `make process-all` (extract code, publish to markdown, generate images)
+- **Test Specific Script**: Run a specific script directly, e.g., `python scripts/generate_headshots.py`
+
+## Code Style Guidelines
+- **Python Version**: Requires Python 3.11+
+- **Formatting**: Follow ruff format rules (line length 100, double quotes, space indentation)
+- **Imports**: Group by standard library → third-party → local with blank lines between
+- **Linting**: Follow ruff's selected rules (E, F, I, W, B)
+- **Types**: Use type annotations for function parameters and return values
+- **Naming**: Use snake_case for variables/functions, PascalCase for classes
+- **Error Handling**: Use try/except with specific error types, log errors appropriately
+- **Org Mode**: Use structured org-mode files with proper headers for documentation
+- **Documentation**: Include docstrings for all functions, classes and modules
+- **File Structure**: Keep personas in markdown files with consistent formatting
+- **Logging**: Use the logging module with appropriate log levels
