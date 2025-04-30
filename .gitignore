@@ -14,3 +14,4 @@ WebKitWebProcess.core
 
 # Ignore intermediate .tex files but keep PDFs
 *.tex
+.tmp/
