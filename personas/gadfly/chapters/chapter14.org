@@ -45,7 +45,7 @@ Smalltalk took a radically different approach. The development environment wasn'
 
 Rather than organizing code into files and directories, Smalltalk used a System Browser that presented code according to its logical structure—classes grouped into categories, with methods organized by purpose:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC text :tangle ../examples/smalltalk/chapter14_browser.txt :mkdirp yes
 Categories         Classes         Protocols     Methods
 -------------     ------------    -----------   -------------
 Collections       Array           accessing     at: index
@@ -54,7 +54,7 @@ Collections       Array           accessing     at: index
 Graphics          Point           private       remove: anObject
                   Rectangle       converting    asString
                   Canvas          enumerating   do: aBlock
-#+END_EXAMPLE
+#+END_SRC
 
 This organization transcended the artificial constraints of file-based storage, presenting code in terms of its conceptual structure rather than its storage representation. Developers navigated code conceptually rather than spatially, focusing on relationships between components rather than their storage locations.
 
@@ -76,7 +76,7 @@ Debuggers in conventional environments provide a window into program execution a
 
 Any object could be inspected at any time, revealing its internal structure and relationships:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC smalltalk :tangle ../examples/smalltalk/chapter14_inspector.st :mkdirp yes
 Inspector on: aCustomer
 
 Instance variables:
@@ -86,7 +86,7 @@ orders        #<OrderCollection (3 items)>
 creditLimit   1000
 
 Self evaluates to: #<Customer: "John Smith">
-#+END_EXAMPLE
+#+END_SRC
 
 This transparency extended to the system itself—every aspect of Smalltalk, from the compiler to the user interface, was implemented in Smalltalk and available for inspection and modification. This uniform accessibility created an environment where nothing was hidden or magical—any behavior could be understood by examining the objects that implemented it.
 
@@ -218,7 +218,7 @@ This minimal syntax shifted complexity from the language to the library—most c
 
 For example, control structures that are syntax elements in most languages were implemented as messages in Smalltalk:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC smalltalk :tangle ../examples/smalltalk/chapter14_control_structures.st :mkdirp yes
 "If-then-else in Smalltalk"
 condition
     ifTrue: [ doSomething ]
@@ -229,7 +229,7 @@ condition
 
 "For loop in Smalltalk"
 1 to: 10 do: [ :i | doSomethingWith: i ]
-#+END_EXAMPLE
+#+END_SRC
 
 This library-based approach to language features enabled greater extensibility—new control structures and language capabilities could be added without modifying the language itself.
 
