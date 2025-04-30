@@ -19,8 +19,9 @@ images/scaled/
 # Development files
 issues/
 uv.lock
+__pycache__/
+*.py[cod]
+*$py.class
 
 tmp/
-
-
 
