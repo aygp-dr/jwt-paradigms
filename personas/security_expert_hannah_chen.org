@@ -7,7 +7,7 @@
    :CUSTOM_ID: image-generation
    :END:
 
-#+begin_ai :image
+#+begin_ai :image :file images/hannah_chen.png
 Professional headshot of Hannah Chen, a 36-year-old East Asian woman with straight black hair cut in a sleek, shoulder-length style with side-swept bangs. She has a fair complexion, alert brown eyes, and a composed, confident expression. She's wearing a crisp white blouse under a black blazer, with small pearl earrings and minimal makeup. The background is a neutral dark gray. Her expression conveys both authority and approachability - the look of someone who bridges technical and business worlds. Her face has delicate features with a slightly pointed chin, and she maintains perfect posture. Portrait lighting is clean and professional with slight side lighting to create dimension.
 #+end_ai
 

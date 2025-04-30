@@ -215,14 +215,7 @@ and interests help ensure the presentation is accessible, technically
 accurate, and addresses concerns from multiple perspectives.
 
 Each persona has been designed with a distinct voice and feedback style
-to simulate realistic audience responses. Use the included Claude review
-commands to get feedback from specific personas.
+to simulate realistic audience responses.
 
-To get a full review from any persona, use the corresponding command in
-Claude Code:
-
-#+begin_example
-/review-presentation-[persona]
-#+end_example
-
-For example: =/review-presentation-raj= or =/review-presentation-maya=
+Note: The command integration for these personas is currently being updated to work with org-mode files. 
+See GitHub issue #43 for details.

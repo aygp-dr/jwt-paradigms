@@ -60,8 +60,8 @@ $(OUTPUT_DIR):
 $(CLAUDE_DIR):
 	@mkdir -p $@
 
-images: generate-persona-images.org ## Generate persona headshots
-	$(PYTHON) $(SCRIPTS_DIR)/extract_personas.py --org-file generate-persona-images.org
+images: ## Generate persona headshots
+	$(PYTHON) $(SCRIPTS_DIR)/extract_personas.py --org-file "*_*_*.org"
 
 images/placeholder.png:
 	convert -size 400x400 xc:gray -fill white -gravity center -font Arial -pointsize 40 -annotate 0 "FPO" $@
