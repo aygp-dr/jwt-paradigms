@@ -79,6 +79,9 @@ def generate_image(prompt, output_path, force=False):
         # Save the image
         image = Image.open(BytesIO(response.generated_images[0].image.image_bytes))
         output_path.parent.mkdir(parents=True, exist_ok=True)  # Ensure output directory exists
+        
+        # Resize to 400x400 while preserving aspect ratio
+        image = image.resize((400, 400), Image.LANCZOS)
         image.save(output_path)
 
         logger.info(f"Image saved to {output_path}")
