@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import base64
 import json
 from typing import Dict, Any, Optional, List, Union, TypedDict

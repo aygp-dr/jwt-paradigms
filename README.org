@@ -213,8 +213,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 This repository uses Org-mode and LaTeX for presentations. The included Makefile provides several commands to generate and view the presentation:
 
 #+BEGIN_SRC shell
+# On Linux/macOS:
 # Generate the presentation slides (PDF)
 make slides
+
+# On FreeBSD:
+# Generate the presentation slides (PDF)
+gmake slides
 
 # View the presentation with pdfpc (optimized for presentations)
 make present
@@ -226,8 +231,13 @@ make examples
 make build
 #+END_SRC
 
+*** Cross-Platform Compatibility Notes
+- On FreeBSD systems, use =gmake= instead of =make= to ensure GNU Make compatibility
+- All shell scripts in this repository use =/usr/bin/env= in shebangs for cross-platform compatibility
+- The repository has been tested on FreeBSD, Linux, and macOS environments
+
 For those reviewing the presentation, we recommend:
-1. Run =make slides= to generate the latest PDF
+1. Run =make slides= (or =gmake slides= on FreeBSD) to generate the latest PDF
 2. Use =make present= for optimal presentation viewing with speaker notes
 3. Examine the language-specific examples in their respective directories
 
