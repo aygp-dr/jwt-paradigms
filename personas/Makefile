@@ -1,6 +1,6 @@
 # Reviewer Personas Tooling
 
-.PHONY: all setup images tangle detangle publish clean help .venv alternatives dalle gemini claude-commands process-all
+.PHONY: all setup images tangle detangle publish clean help .venv alternatives dalle gemini claude-commands process-all org-lint org-ai-images
 
 # Configuration variables
 VENV := . .venv/bin/activate &&
@@ -38,6 +38,18 @@ fix: ## Fix Python code
 
 format: ## Format Python code
 	$(UV) ruff format $(SCRIPTS_DIR)
+
+org-lint: ## Check org files for syntax issues
+	@for file in $(ORG_FILES); do \
+		echo "Running org-lint on $$file"; \
+		$(EMACS) --batch -l org \
+			--eval "(progn \
+				(require 'org) \
+				(find-file \"$$file\") \
+				(org-lint) \
+				(with-current-buffer \"*Org Lint*\" \
+					(princ (buffer-string))))"; \
+	done
 
 $(IMAGES_DIR):
 	@mkdir -p $@
@@ -86,6 +98,18 @@ gemini: images/gemini ## Generate headshots using Gemini
 gemini-replace: gemini ## Generate headshots and replace placeholders
 	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py --copy-to-target
 	$(SCRIPTS_DIR)/replace_placeholders.sh
+	
+org-ai-images: $(IMAGES_DIR) ## Generate images using org-ai blocks
+	@for file in $(ORG_FILES); do \
+		echo "Executing org-ai image blocks in $$file"; \
+		$(EMACS) --batch -l org \
+			--eval "(progn \
+				(require 'org-ai) \
+				(org-ai-mode) \
+				(find-file \"$$file\") \
+				(org-babel-execute-buffer) \
+				(save-buffer))"; \
+	done
 
 tangle: $(OUTPUT_DIR) ## Extract code blocks to files
 	@for file in $(ORG_FILES); do \

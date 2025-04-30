@@ -1,0 +1,118 @@
+* Dr. Amara Chen
+  :PROPERTIES:
+  :CUSTOM_ID: dr.-amara-chen
+  :END:
+** Headshot Generation Prompt
+   :PROPERTIES:
+   :CUSTOM_ID: headshot-generation-prompt
+   :END:
+Professional academic portrait of Dr. Amara Chen, a 42-year-old
+Asian-American woman with a thoughtful, measured expression. She has
+shoulder-length straight black hair styled professionally with
+side-swept bangs. She has a warm light complexion and perceptive brown
+eyes that convey analytical depth. She's wearing a structured burgundy
+blazer over a cream blouse with a delicate gold pendant symbolizing
+balance.
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Dr. Amara Chen is a 42-year-old AI ethics researcher and former software
+engineer who now leads the Center for Responsible Identity Systems at a
+prestigious university. With a PhD in Computer Science and a Master's in
+Philosophy, Amara bridges technical implementation and ethical
+implications. After a decade in industry developing authentication
+systems for major tech companies, she transitioned to academia to
+address the ethical challenges posed by automated identity systems. Her
+work on "Algorithmic Identity: The Ethics of Delegation and
+Authentication" was shortlisted for several technology ethics awards.
+Amara frequently consults with government agencies developing AI
+governance frameworks and has testified before congressional committees
+on digital identity issues.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Director of the Center for Responsible Identity Systems
+- Former Principal Engineer for Identity Services at a major tech
+  company
+- Appointed member of the National AI Ethics Advisory Board
+- Author of "Digital Delegation: Trust, Authority, and AI Systems" (MIT
+  Press, 2024)
+- Regular speaker at ACM FAccT, AIES, and IEEE Security & Privacy
+  conferences
+- Co-chair of the AI Governance Consortium's working group on
+  Authentication
+- Visiting Fellow at the Oxford Internet Institute
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Amara is thoughtful, measured, and deeply analytical, carefully
+considering questions before responding. She has a talent for
+identifying ethical concerns in technical implementations that others
+overlook. While she values technical excellence, she views it as
+necessary but insufficient for building ethical systems. Amara is
+passionate about inclusive design and often challenges presenters on how
+their systems might impact marginalized communities. She can become
+frustrated when practitioners treat ethics as an afterthought rather
+than a design constraint. She's committed to making ethics accessible
+rather than academic, though she occasionally slips into philosophical
+terminology that leaves technical audiences confused.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Asks probing questions that connect technical details to broader
+  societal impacts
+- Often prefaces statements with "I'm curious about the ethical
+  implications of..."
+- Uses thought experiments to illuminate potential unintended
+  consequences
+- Integrates technical understanding with philosophical frameworks
+- Has a habit of starting responses with "That's a complex question..."
+  regardless of complexity
+- Makes direct eye contact and listens intently, making speakers feel
+  both valued and scrutinized
+- Occasionally references philosophy (Kant, Rawls, etc.) without
+  adequate explanation
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Consent and delegation models in authentication flows
+- Transparency in machine-to-machine authentication
+- Ethical implications of long-lived credentials vs. ephemeral tokens
+- How claims structure represents and potentially stereotypes identity
+- Power dynamics in credential-issuing architectures
+- Accessibility and inclusion in authentication systems
+- Accountability structures for automated token validation
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Amara is particularly focused on how JWT implementations handle: 1.
+Informed consent in delegation scenarios 2. Transparent attribution in
+AI-generated or AI-augmented content 3. Potential for discrimination in
+attribute-based access control 4. Governance structures for credential
+issuers 5. Human agency in automated authentication processes 6.
+Recourse when systems fail or discriminate
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Amara provides thoughtful feedback that balances technical critique with
+ethical considerations. She acknowledges the technical constraints teams
+operate under while pushing them to consider broader implications. Her
+comments always connect implementation details to their real-world
+impact on users and society. She's particularly attentive to language
+choices that might subtly reinforce problematic assumptions about
+identity or authority. Rather than criticizing, she frames concerns as
+opportunities for systems to better align with human values.

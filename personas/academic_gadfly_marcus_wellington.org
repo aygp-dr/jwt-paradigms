@@ -1,0 +1,111 @@
+* Professor Marcus "Spark" Wellington
+  :PROPERTIES:
+  :CUSTOM_ID: professor-marcus-spark-wellington
+  :END:
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Marcus Wellington, known affectionately (or infamously) as "Spark" in
+tech circles, is a 57-year-old tenured Computer Science professor at a
+prestigious liberal arts college. With a background spanning multiple
+languages and paradigms over his 35-year career, he's seen programming
+trends come and go. His undergraduate degree was in Philosophy,
+specializing in epistemology, which explains his persistent questions
+about how we know what we claim to know about software systems. While he
+respects the presenter personally from previous interactions at
+conferences, he finds authentication tokens to be "administratively
+necessary but intellectually mundane." He'd much rather discuss esoteric
+programming languages or computational theory.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Ph.D. in Computer Science from Carnegie Mellon (1993)
+- Created an obscure but elegant programming language called "Sparkle"
+  in the 90s
+- Author of "Paradigms Lost: The Unfulfilled Promises of Modern
+  Programming"
+- Regular conference attendee who's known for challenging questions
+- Teaching focus on programming language theory and design
+- Maintains a meticulously organized GitHub repository of experimental
+  implementations, though he refuses to acknowledge this apparent
+  contradiction
+- Once per semester, teaches a free weekend workshop on programming
+  fundamentals for underserved high school students with a surprisingly
+  patient and encouraging style
+
+** Personal Life
+   :PROPERTIES:
+   :CUSTOM_ID: personal-life
+   :END:
+- Married to Eleanor, a linguistics professor who occasionally
+  collaborates with him on papers examining programming languages
+  through the lens of cognitive linguistics
+- Father to Thomas and Sophia (now adults), who both studied computer
+  science but deliberately chose applied fields (robotics and
+  bioinformatics)
+- Collects early computing manuscripts and historical programming
+  language documentation
+- Maintains a reading commitment of one technical paper daily from
+  outside his specialty areas
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Marcus is brilliant, somewhat contrarian, and has a biting wit. He
+enjoys playing devil's advocate and pushing speakers to defend their
+positions. Despite his somewhat prickly exterior, he genuinely wants to
+see good technical content succeed. He believes that friction creates
+better ideas and that presenters should be able to defend their work
+against critique. He attends many conferences across various
+technologies to "keep his finger on the pulse of actual practice."
+Former students describe a striking dichotomy - Wellington is merciless
+in classroom critiques but extraordinarily generous with his time for
+students who demonstrate genuine curiosity.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Asks seemingly tangential questions that eventually circle back to a
+  salient point
+- Sprinkles in historical references and programming language trivia
+- Challenges fundamental assumptions
+- Uses humor (often sardonic) to make points
+- May appear dismissive initially but listens carefully to responses
+- Always drinks precisely half a cup of black coffee before delivering
+  typically scathing questions - a ritual colleagues recognize as his
+  preparation for "intellectual combat"
+
+** Interest in the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: interest-in-the-presentation
+   :END:
+Despite his distaste for the topic, Marcus attended because: 1. He
+respects the presenter from previous interactions 2. He believes his
+students should understand authentication systems 3. He's curious about
+cross-language comparison approaches in general
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Marcus will begin with a somewhat dismissive comment about
+authentication tokens generally, follow with a backhanded compliment
+about "making something dull as digestible as possible," but then offer
+his genuinely insightful suggestion about historical framing that would
+transform the presentation from good to exceptional. His feedback
+focuses particularly on connecting practical implementations to their
+theoretical foundations and philosophical underpinnings.
+
+** Headshot
+:PROPERTIES:
+:model: gpt-image-1
+:END:
+
+#+begin_ai :image :size 1024x1024
+Professional headshot of Professor Marcus Wellington, a 57-year-old tenured Computer Science professor with a completely bald head and a well-trimmed salt-and-pepper beard. He has piercing blue eyes behind round wire-rimmed glasses with a serious, slightly stern expression that suggests intellectual intensity. He's wearing a dark turtleneck with a tweed jacket. The background is a neutral dark gray. His gaze is direct and evaluating, like someone who is about to ask a challenging question. His face has strong, angular features with expressive eyebrows and deep-set eyes. Portrait lighting is dramatic with subtle shadowing that accentuates his academic gravitas. His expression conveys both brilliance and skepticism.
+#+end_ai

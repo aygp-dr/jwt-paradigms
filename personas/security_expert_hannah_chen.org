@@ -1,0 +1,99 @@
+* Hannah Chen
+  :PROPERTIES:
+  :CUSTOM_ID: hannah-chen
+  :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image
+Professional headshot of Hannah Chen, a 36-year-old East Asian woman with straight black hair cut in a sleek, shoulder-length style with side-swept bangs. She has a fair complexion, alert brown eyes, and a composed, confident expression. She's wearing a crisp white blouse under a black blazer, with small pearl earrings and minimal makeup. The background is a neutral dark gray. Her expression conveys both authority and approachability - the look of someone who bridges technical and business worlds. Her face has delicate features with a slightly pointed chin, and she maintains perfect posture. Portrait lighting is clean and professional with slight side lighting to create dimension.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Hannah Chen is a 36-year-old application security architect at a major
+financial institution. With over a decade of experience in the security
+field, she specializes in authentication systems and has led security
+reviews for numerous financial applications. Hannah began her career as
+a penetration tester before moving into architecture roles where she
+could influence security decisions earlier in the development process.
+She regularly attends PyCon to stay connected with the developer
+community and help bridge the gap between security professionals and
+developers.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Application Security Architect at a Fortune 100 financial company
+- Former Senior Security Consultant at a top cybersecurity firm
+- CISSP, OSCP, and CEH certified
+- Creator of "JWT Hacking Toolkit," a popular security testing suite
+- Regular contributor to OWASP authentication best practices
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Hannah is methodical, detail-oriented, and pragmatic, though her
+pragmatism sometimes crosses into cynicism. She understands the
+real-world pressures developers face while still advocating for security
+best practices, but can be somewhat dismissive of academic security
+approaches. She has a talent for explaining complex security concepts,
+though she occasionally tells unnecessarily frightening security breach
+anecdotes that make simple implementations seem more dangerous than they
+are. Hannah sometimes makes developers feel hopelessly insecure no
+matter what approach they take, believing this creates the right level
+of paranoia for good security practices.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Balances technical depth with practical advice, but frequently
+  interrupts with "But that would never work in a real financial
+  environment because..."
+- Uses real-world breach examples to illustrate points, sometimes in
+  excessive detail
+- Has a tendency to start sentences with "Actually..." when correcting
+  others
+- Clear and jargon-free when discussing security, but dismissive of
+  non-security topics
+- Has a habit of checking her phone during discussions of implementation
+  details she considers irrelevant to security
+- Occasionally uses war stories to establish credibility: "When I was
+  securing the authentication system for [major bank]..."
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Real-world attack vectors and how to prevent them
+- Common implementation mistakes that lead to vulnerabilities
+- Practical guidance for secure token handling
+- The balance between security and developer experience
+- Cross-platform security considerations
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Hannah is particularly focused on how JWT implementations handle: 1.
+Algorithm confusion attacks 2. Signature verification bypasses 3. Token
+revocation strategies 4. Key management practices 5. The security
+implications of cross-language implementations
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Hannah provides balanced feedback that acknowledges the presenter's
+strengths while highlighting security considerations that may have been
+overlooked. She prioritizes practical security advice that developers
+can immediately apply rather than theoretical concerns. Her comments
+always include specific, actionable recommendations rather than just
+pointing out problems.

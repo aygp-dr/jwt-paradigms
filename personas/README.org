@@ -1,0 +1,228 @@
+* Presentation Personas
+  :PROPERTIES:
+  :CUSTOM_ID: presentation-personas
+  :END:
+This directory contains personas created for reviewing the JWT parsing
+presentation and providing diverse perspectives on the implementation
+approaches.
+
+** Primary Reviewers
+   :PROPERTIES:
+   :CUSTOM_ID: primary-reviewers
+   :END:
+*** Raj Patel (Polyglot Developer)
+    :PROPERTIES:
+    :CUSTOM_ID: raj-patel-polyglot-developer
+    :END:
+- *File:* [[file:polyglot_developer_raj_patel.org]]
+- *Role:* Technical lead experienced in multiple languages
+- *Focus:* Cross-language patterns, idiomatic approaches, implementation
+  tradeoffs
+- *Review Command:* =/review-presentation-raj=
+
+#+caption: Raj Patel
+[[file:images/raj_patel.png]]
+
+*** Dr. Maya Ramirez (Python Security Expert)
+    :PROPERTIES:
+    :CUSTOM_ID: dr.-maya-ramirez-python-security-expert
+    :END:
+- *File:* [[file:python_expert_maya_ramirez.org]]
+- *Role:* Senior security researcher with Python expertise
+- *Focus:* Security implications, best practices, efficient
+  implementations
+- *Review Command:* =/review-presentation-maya=
+
+#+caption: Dr. Maya Ramirez
+[[file:images/maya_ramirez.png]]
+
+*** Hannah Chen (Security Architect)
+    :PROPERTIES:
+    :CUSTOM_ID: hannah-chen-security-architect
+    :END:
+- *File:* [[file:security_expert_hannah_chen.org]]
+- *Role:* Application security architect at financial institution
+- *Focus:* Real-world security concerns, practical mitigations,
+  balancing security with usability
+- *Review Command:* =/review-presentation-hannah=
+
+#+caption: Hannah Chen
+[[file:images/hannah_chen.png]]
+
+*** Dr. Eleanor Reynolds (VP of Engineering)
+    :PROPERTIES:
+    :CUSTOM_ID: dr.-eleanor-reynolds-vp-of-engineering
+    :END:
+- *File:* [[file:executive_sponsor_eleanor_reynolds.org]]
+- *Role:* VP of Engineering at a security and identity management
+  company
+- *Focus:* Strategic implications, organizational impact, business
+  alignment
+- *Review Command:* =/review-presentation-eleanor=
+
+#+caption: Dr. Eleanor Reynolds
+[[file:images/eleanor_reynolds.png]]
+
+** Secondary Reviewers
+   :PROPERTIES:
+   :CUSTOM_ID: secondary-reviewers
+   :END:
+*** Alex "Zero" Chen (Paradigm Purist)
+    :PROPERTIES:
+    :CUSTOM_ID: alex-zero-chen-paradigm-purist
+    :END:
+- *File:* [[file:paradigm_purist_alex_chen.org]]
+- *Role:* PhD candidate and TA obsessed with functional programming
+  purity
+- *Focus:* Idiomatic functional implementations, pattern matching, code
+  elegance
+- *Review Command:* =/review-presentation-zero=
+
+#+caption: Alex "Zero" Chen
+[[file:images/zero_chen.png]]
+
+*** Dr. Neha Kapoor (Performance Engineer)
+    :PROPERTIES:
+    :CUSTOM_ID: dr.-neha-kapoor-performance-engineer
+    :END:
+- *File:* [[file:performance_engineer_neha_kapoor.org]]
+- *Role:* Backend systems architect specializing in high-performance
+  systems
+- *Focus:* Performance metrics, benchmarking methodology, optimization
+  tradeoffs
+- *Review Command:* =/review-presentation-neha=
+
+#+caption: Dr. Neha Kapoor
+[[file:images/neha_kapoor.png]]
+
+*** Sofia Martinez (Beginner-Friendly Developer)
+    :PROPERTIES:
+    :CUSTOM_ID: sofia-martinez-beginner-friendly-developer
+    :END:
+- *File:* [[file:beginner_friendly_sofia_martinez.org]]
+- *Role:* Junior backend developer transitioning from education
+- *Focus:* Clear explanations, approachability, newcomer perspective
+- *Review Command:* =/review-presentation-sofia=
+
+#+caption: Sofia Martinez
+[[file:images/sofia_martinez.png]]
+
+*** Marco Hernandez (Accessibility Advocate)
+    :PROPERTIES:
+    :CUSTOM_ID: marco-hernandez-accessibility-advocate
+    :END:
+- *File:* [[file:accessibility_advocate_marco_hernandez.org]]
+- *Role:* Software engineer and accessibility specialist
+- *Focus:* Inclusive presentations, assistive technology compatibility,
+  cognitive accessibility
+- *Review Command:* =/review-presentation-marco=
+
+#+caption: Marco Hernandez
+[[file:images/marco_hernandez.png]]
+
+*** Professor Marcus "Spark" Wellington (Academic Gadfly)
+    :PROPERTIES:
+    :CUSTOM_ID: professor-marcus-spark-wellington-academic-gadfly
+    :END:
+- *File:* [[file:academic_gadfly_marcus_wellington.org]]
+- *Role:* Tenured Computer Science professor with historical perspective
+- *Focus:* Theoretical foundations, historical context, philosophical
+  underpinnings
+- *Review Command:* =/review-presentation-wellington=
+
+#+caption: Professor Wellington
+[[file:images/spark_wellington.png]]
+
+** Additional Reviewers
+   :PROPERTIES:
+   :CUSTOM_ID: additional-reviewers
+   :END:
+*** Dr. Vikram Shah (Systems Security Researcher)
+    :PROPERTIES:
+    :CUSTOM_ID: dr.-vikram-shah-systems-security-researcher
+    :END:
+- *File:* [[file:systems_security_researcher_vikram_shah.org]]
+- *Role:* Associate Professor specializing in formal methods for
+  security verification
+- *Focus:* Formal verification, cryptographic proofs, mathematical
+  security models
+- *Review Command:* =/review-presentation-vikram=
+
+#+caption: Dr. Vikram Shah
+[[file:images/vikram_shah.png]]
+
+*** James Wilson (Code Quality Advocate)
+    :PROPERTIES:
+    :CUSTOM_ID: james-wilson-code-quality-advocate
+    :END:
+- *File:* [[file:code_quality_advocate_james_wilson.org]]
+- *Role:* Staff Engineer and code quality champion at developer tools
+  company
+- *Focus:* Testing strategies, maintainability, error handling, clean
+  code principles
+- *Review Command:* =/review-presentation-james=
+
+#+caption: James Wilson
+[[file:images/james_wilson.png]]
+
+*** Dr. Amara Chen (AI Ethics Researcher)
+    :PROPERTIES:
+    :CUSTOM_ID: dr.-amara-chen-ai-ethics-researcher
+    :END:
+- *File:* [[file:ai_ethics_researcher_amara_chen.org]]
+- *Role:* Director of the Center for Responsible Identity Systems
+- *Focus:* Ethical implications of identity systems, consent models,
+  power dynamics
+- *Review Command:* =/review-presentation-amara=
+
+#+caption: Dr. Amara Chen
+[[file:images/amara_chen.png]]
+
+*** Olivia Rodriguez (UX Researcher)
+    :PROPERTIES:
+    :CUSTOM_ID: olivia-rodriguez-ux-researcher
+    :END:
+- *File:* [[file:ux_researcher_olivia_rodriguez.org]]
+- *Role:* Lead UX Researcher focused on authentication experiences
+- *Focus:* Usability of authentication flows, error handling,
+  accessibility
+- *Review Command:* =/review-presentation-olivia=
+
+#+caption: Olivia Rodriguez
+[[file:images/olivia_rodriguez.png]]
+
+*** Diego Martinez (Collaborative Software Researcher)
+    :PROPERTIES:
+    :CUSTOM_ID: diego-martinez-collaborative-software-researcher
+    :END:
+- *File:* [[file:collaborative_software_researcher_diego_martinez.org]]
+- *Role:* Associate Professor specializing in collaborative development
+  systems
+- *Focus:* Integration with workflow tools, cross-system authentication,
+  team dynamics
+- *Review Command:* =/review-presentation-diego=
+
+#+caption: Diego Martinez
+[[file:images/diego_martinez.png]]
+
+** Using These Personas
+   :PROPERTIES:
+   :CUSTOM_ID: using-these-personas
+   :END:
+These personas represent different stakeholders who might evaluate the
+JWT parsing presentation. Their diverse backgrounds, expertise levels,
+and interests help ensure the presentation is accessible, technically
+accurate, and addresses concerns from multiple perspectives.
+
+Each persona has been designed with a distinct voice and feedback style
+to simulate realistic audience responses. Use the included Claude review
+commands to get feedback from specific personas.
+
+To get a full review from any persona, use the corresponding command in
+Claude Code:
+
+#+begin_example
+/review-presentation-[persona]
+#+end_example
+
+For example: =/review-presentation-raj= or =/review-presentation-maya=
