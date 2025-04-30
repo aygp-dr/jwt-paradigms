@@ -19,14 +19,15 @@ Repository of code examples demonstrating JWT header parsing across multiple pro
 :CUSTOM_ID: overview
 :END:
 
-This repository contains the code samples and presentation slides from my talk at SPLASH/StrangeLoop/PyConf/RacketCon/EuroLISP 2025. It explores different approaches to parsing JWT headers across programming paradigms, from imperative to functional languages.
+This repository contains the code samples and presentation slides from my talk at SPLASH/StrangeLoop/PyConf/RacketCon/EuroLISP 2025. It explores different approaches to parsing JWT headers across programming paradigms, from imperative to functional languages, with a focus on security best practices and cross-language implementation patterns.
 
 ** Repository Structure
 :PROPERTIES:
 :CUSTOM_ID: repository-structure
 :END:
 
-- =presentation.md=: Markdown slides from the conference talk
+- =presentation.org=: Org-mode source for the presentation slides
+- =presentation.pdf=: PDF slides from the conference talk
 - Code examples in language-specific directories:
   - =js/=: JavaScript (browser and Node.js) examples
   - =ts/=: TypeScript example with type definitions
@@ -168,10 +169,16 @@ The =benchmarks/= directory contains scripts to reproduce the performance measur
 :CUSTOM_ID: security-considerations
 :END:
 
-- The examples in this repo focus on parsing techniques, not security
+- The examples in this repo demonstrate proper and secure JWT parsing techniques
 - For production use, always verify JWT signatures *before* parsing
-- Be aware of algorithm confusion attacks
-- Consider using established JWT libraries where available
+- Be aware of algorithm confusion attacks and "none" algorithm attacks
+- Never trust token contents before signature verification
+- Set appropriate token lifetimes and include essential claims (iss, sub, exp, aud, iat)
+- Use strong algorithms (prefer RS256/ES256 over HS256)
+- Consider token lifecycle management (revocation, refresh)
+- Use established JWT libraries with proper configuration where available
+
+For comprehensive security guidance, see the =examples/parsing-validation/security_recommendations.md= file.
 
 ** Contributing
 :PROPERTIES:
@@ -192,14 +199,39 @@ Contributions are welcome! To add an example in another language:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+** Building and Presenting
+:PROPERTIES:
+:CUSTOM_ID: building-presenting
+:END:
+
+This repository uses Org-mode and LaTeX for presentations. The included Makefile provides several commands to generate and view the presentation:
+
+#+BEGIN_SRC shell
+# Generate the presentation slides (PDF)
+make slides
+
+# View the presentation with pdfpc (optimized for presentations)
+make present
+
+# Extract code examples from org files
+make examples
+
+# Build everything (slides and extract code)
+make build
+#+END_SRC
+
+For those reviewing the presentation, we recommend:
+1. Run =make slides= to generate the latest PDF
+2. Use =make present= for optimal presentation viewing with speaker notes
+3. Examine the language-specific examples in their respective directories
+
 ** Contact
 :PROPERTIES:
 :CUSTOM_ID: contact
 :END:
 
-- AYGP-DR
-- Email: aygp-dr@example.com
-- Twitter: @aygp_dr
+- Aidan Pace
+- Email: apace@defrecord.com
 - GitHub: @aygp-dr
 
 ** References
@@ -210,3 +242,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [[https://tools.ietf.org/html/rfc7519][RFC 7519: JSON Web Token (JWT)]]
 - [[https://tools.ietf.org/html/rfc4648][RFC 4648: Base64 and Base64url Encoding]]
 - [[https://auth0.com/docs/tokens/json-web-tokens/json-web-token-structure][JWT Structure Explained]]
+- [[https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp][JWT Security Best Practices (IETF)]]
+- [[https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html][OWASP JWT Security Cheat Sheet]]
