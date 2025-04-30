@@ -8,37 +8,43 @@ This directory contains personas created for reviewing the JWT parsing presentat
 - **File:** [beginner_friendly.md](beginner_friendly.md)
 - **Role:** Junior backend developer transitioning from education
 - **Focus:** Clear explanations, approachability, newcomer perspective
-- **Headshot:** ![Sofia Martinez](images/sofia_martinez.webp)
+
+![Sofia Martinez](images/png/sofia_martinez.png)
 
 ### Professor Marcus "Spark" Wellington (Academic Gadfly)
 - **File:** [gadfly.md](gadfly.md)
 - **Role:** Tenured Computer Science professor with historical perspective
 - **Focus:** Theoretical foundations, historical context, philosophical underpinnings
-- **Headshot:** ![Professor Wellington](images/spark_wellington.webp)
+
+![Professor Wellington](images/png/spark_wellington.png)
 
 ### Raj Patel (Polyglot Developer)
 - **File:** [polyglot_developer.md](polyglot_developer.md)
 - **Role:** Technical lead experienced in multiple languages
 - **Focus:** Cross-language patterns, idiomatic approaches, implementation tradeoffs
-- **Headshot:** ![Raj Patel](images/raj_patel.webp)
+
+![Raj Patel](images/png/raj_patel.png)
 
 ### Dr. Maya Ramirez (Python Security Expert)
 - **File:** [python_expert.md](python_expert.md)
 - **Role:** Senior security researcher with Python expertise
 - **Focus:** Security implications, best practices, efficient implementations
-- **Headshot:** ![Dr. Maya Ramirez](images/maya_ramirez.webp)
+
+![Dr. Maya Ramirez](images/png/maya_ramirez.png)
 
 ### Hannah Chen (Security Architect)
 - **File:** [security_expert.md](security_expert.md)
 - **Role:** Application security architect at financial institution
 - **Focus:** Real-world security concerns, practical mitigations, balancing security with usability
-- **Headshot:** ![Hannah Chen](images/hannah_chen.webp)
+
+![Hannah Chen](images/png/hannah_chen.png)
 
 ### Alex "Zero" Chen (Paradigm Purist)
 - **File:** [paradigm_purist.md](paradigm_purist.md)
 - **Role:** PhD candidate and TA obsessed with functional programming purity
 - **Focus:** Idiomatic functional implementations, pattern matching, code elegance
-- **Headshot:** ![Alex "Zero" Chen](images/zero_chen.webp)
+
+![Alex "Zero" Chen](images/png/zero_chen.png)
 
 ## Using These Personas
 
