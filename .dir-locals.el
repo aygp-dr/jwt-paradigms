@@ -36,18 +36,8 @@
             
             ;; Setup for DALL-E image generation in Org mode
             (when (require 'ob-dall-e-shell nil t)
-              ;; Configure dall-e-shell with API key from environment
-              (setq dall-e-shell-openai-key 
-                    (or (getenv "OPENAI_API_KEY")
-                        (progn 
-                          (message "Warning: OPENAI_API_KEY environment variable not set! Image generation will fail.")
-                          nil)))
-              
-              ;; Configure DALL-E parameters
-              (setq dall-e-shell-model "dall-e-3")
-              (setq dall-e-shell-size "1024x1024")
-              (setq dall-e-shell-style "photographic")
-              (setq dall-e-shell-quality "standard")
+              ;; Load DALL-E configuration if available
+              (load-file (expand-file-name ".emacs/dall-e-config.el" (projectile-project-root)))
               
               ;; Set default directory for image outputs as relative path
               (setq dall-e-shell-default-output-dir "./images/png/"))))))
