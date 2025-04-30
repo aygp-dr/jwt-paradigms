@@ -405,6 +405,112 @@ digraph {
 - OWASP JWT Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
 - Language-specific security guides: see repository docs
 
+** JWT Glossary for Beginners 🔰
+#+ATTR_BEAMER: :overlay <+->
+| Term | Definition |
+|------|------------|
+| JWT | JSON Web Token: a compact, URL-safe means of representing claims to be transferred between parties |
+| Claims | Pieces of information asserted about a subject (e.g., user ID, expiration time) |
+| Base64url | A URL-safe variant of Base64 encoding that can be included in URLs without escaping |
+| Header | First part of JWT containing metadata like algorithm used for signing |
+| Payload | Second part of JWT containing the actual claims data |
+| Signature | Third part of JWT that verifies the token hasn't been altered |
+| HMAC | Hash-based Message Authentication Code: technique for ensuring data integrity using a secret key |
+| RSA | Public-key cryptosystem commonly used for JWT signatures |
+| Stateless | Authentication not requiring server-side session storage |
+| Bearer token | Type of access token where possession of the token is sufficient for authentication |
+
+** Python Security Best Practices ⚠️
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC python
+import jwt
+from cryptography.hazmat.primitives.constant_time import bytes_eq
+from typing import Dict, Any, Optional, List, Union
+
+# Define explicit typing for JWT claims
+class JWTClaims(TypedDict):
+    iss: str  # issuer
+    sub: str  # subject
+    exp: int  # expiration time
+    iat: int  # issued at time
+    aud: Optional[Union[str, List[str]]]  # audience
+
+def verify_and_decode_token(token: str, key: str, algorithms: List[str] = ['RS256']) -> JWTClaims:
+    """Securely verify and decode a JWT token with proper error handling.
+    
+    IMPORTANT: This function validates the signature BEFORE processing payload.
+    """
+    try:
+        # Explicitly specify allowed algorithms (prevent 'none' algorithm attack)
+        # Validate signature first, then decode payload
+        payload = jwt.decode(
+            token,
+            key,
+            algorithms=algorithms,  # Explicitly specify allowed algorithms
+            options={"verify_signature": True}
+        )
+        return payload
+    except jwt.ExpiredSignatureError:
+        # Specific exception for expired token
+        raise ValueError("Token has expired")
+    except jwt.InvalidSignatureError:
+        # Use generic error that doesn't reveal signature details
+        raise ValueError("Authentication failed")
+    except jwt.DecodeError:
+        # Generic decode error
+        raise ValueError("Invalid token")
+    except jwt.InvalidAlgorithmError:
+        raise ValueError("Invalid token algorithm")
+    except Exception:
+        # Catch-all with generic message to avoid information leakage
+        raise ValueError("Authentication failed")
+#+END_SRC
+
+** Functional Pipelines: Enhanced Clojure Example 🧩
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC clojure
+;; Leveraging Clojure's functional approach with thread-first macro
+;; for cleaner transformation pipeline
+
+(defn decode-base64url
+  "Decode base64url-encoded string to string"
+  [base64url-str]
+  (-> base64url-str
+      (java.util.Base64/getUrlDecoder)
+      (.decode)
+      (String.)))
+
+(defn extract-token
+  "Extract token from auth header"
+  [auth-header]
+  (-> auth-header
+      (clojure.string/split #" ")
+      (second)))
+
+(defn extract-header-part
+  "Extract header part from token"
+  [token]
+  (-> token
+      (clojure.string/split #"\.")
+      (first)))
+
+(defn parse-json
+  "Parse JSON string to Clojure map"
+  [json-str]
+  (json/read-str json-str :key-fn keyword))
+
+;; IMPORTANT: In production, verify signature before parsing!
+;; This example demonstrates functional composition for readability
+(defn decode-jwt-header
+  "Extract and decode JWT header using a functional pipeline"
+  [auth-header]
+  (-> auth-header
+      (extract-token)
+      (extract-header-part)
+      (decode-base64url)
+      (parse-json)))
+#+END_SRC
+
 ** Questions?
 #+ATTR_BEAMER: :overlay <+->
 Thank you!
