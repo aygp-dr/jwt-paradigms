@@ -62,3 +62,21 @@ Professional headshot of Marco Hernandez, a 41-year-old Latino man with a warm, 
 Professional executive headshot of Dr. Eleanor Reynolds, a 48-year-old woman with an authoritative yet approachable presence. She has shoulder-length silver-streaked brown hair styled in a sophisticated bob. She has a fair complexion with natural smile lines that suggest experience, and wears minimal but professional makeup including a subtle mauve lipstick. Her expression is confident and discerning - the look of someone who makes multi-million dollar decisions daily. She's wearing a tailored charcoal suit jacket over a burgundy blouse with a simple gold necklace. The background is a soft gradient of deep blue. Her posture is straight and commanding, and her gaze is direct but not intimidating. The lighting is professional with subtle edge lighting that highlights her strong bone structure and creates depth. Her expression balances executive authority with thoughtful intelligence.
 #+end_src
 
+* Dr. Vikram Shah (Systems Security Researcher)
+
+#+begin_src gptel :file images/tmp/vikram_shah.png
+Professional academic portrait of Dr. Vikram Shah, a 42-year-old Indian-American man with a methodical and precise demeanor. He has short, neatly styled black hair with slight graying at the temples and wears thin-framed rectangular glasses that emphasize his analytical gaze. He has a medium brown complexion and a serious, contemplative expression that reflects his mathematical background. He's wearing a crisp white dress shirt with a navy blue blazer and a subtle patterned tie. The background suggests an academic environment with blurred bookshelves. His posture is straight and formal, and his eyes convey deep concentration - like someone working through a complex proof. The lighting is structured and precise, creating clear definition that emphasizes his scholarly features. His expression shows both intellectual rigor and academic authority.
+#+end_src
+
+* James Wilson (Code Quality Advocate)
+
+#+begin_src gptel :file images/tmp/james_wilson.png
+Professional headshot of James Wilson, a 39-year-old Caucasian man with a methodical, patient expression. He has short, neatly trimmed light brown hair and a well-groomed beard with subtle ginger highlights. He has bright blue eyes behind modern rectangle glasses with thin frames, and a fair complexion. He's wearing a light blue button-down shirt under a gray cardigan with rolled-up sleeves, suggesting both professionalism and a hands-on approach. The background is a subtle gradient of soft gray. His expression is thoughtful and attentive - like someone carefully considering code structure. He has a slight, warm smile that conveys his teacher's mindset. The lighting is even and clean, emphasizing clarity and organization. His expression balances technical precision with approachable mentorship.
+#+end_src
+
+* Dr. Amara Chen (AI Ethics Researcher)
+
+#+begin_src gptel :file images/tmp/amara_chen.png
+Professional academic portrait of Dr. Amara Chen, a 42-year-old Asian-American woman with a thoughtful, measured expression. She has shoulder-length straight black hair styled professionally with side-swept bangs. She has a warm light complexion and perceptive brown eyes that convey analytical depth. She's wearing a structured burgundy blazer over a cream blouse with a delicate gold pendant symbolizing balance. The background suggests a modern university office with blurred bookshelves and natural light. Her posture is engaged and attentive, with a slight tilt of her head suggesting careful consideration. She has a subtle, thoughtful smile that conveys both intelligence and empathy. The lighting is warm yet professional, creating dimension that highlights her contemplative nature. Her expression balances academic authority with ethical concern.
+#+end_src
+
