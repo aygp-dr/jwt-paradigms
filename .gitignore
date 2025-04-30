@@ -12,6 +12,7 @@ WebKitWebProcess.core
 *.snm
 *.vrb
 
-# Ignore intermediate .tex files but keep PDFs
-*.tex
+# Ignore specific intermediate .tex files but keep PDFs
+/presentation.tex
+/personas/gadfly/paradigms_lost.tex
 .tmp/
