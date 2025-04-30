@@ -29,7 +29,7 @@ Consider a mutex implementation in a concurrent system. A model checker can syst
 
 Tools like TLA+ (Temporal Logic of Actions) have been applied successfully at companies like Amazon to verify distributed systems designs before implementation. Here's a simplified example of a TLA+ specification for a two-phase commit protocol:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC tla :tangle ../examples/tla/chapter13_two_phase_commit.tla :mkdirp yes
 ---- MODULE TwoPhaseCommit ----
 EXTENDS Naturals, FiniteSets
 
@@ -61,7 +61,7 @@ Consistency ==
 
 THEOREM Spec => []Consistency
 ====
-#+END_EXAMPLE
+#+END_SRC
 
 This specification can be checked to verify that the protocol never allows one resource manager to commit while another aborts—a critical safety property. The model checker will either confirm the property or produce a counterexample showing a specific sequence of events that violates the property.
 
@@ -73,17 +73,17 @@ At the more accessible end of the formal methods spectrum, advanced type systems
 
 Consider this Idris function that computes the average of a non-empty list of numbers:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC idris :tangle ../examples/idris/chapter13_average.idr :mkdirp yes
 average : (xs : List Double) -> {auto p : NonEmpty xs} -> Double
 average [] {p} = absurd p
 average xs = sum xs / cast (length xs)
-#+END_EXAMPLE
+#+END_SRC
 
 The type signature guarantees that `average` will only be called with non-empty lists, eliminating an entire class of potential runtime errors. The compiler enforces this constraint, requiring any caller to demonstrate that their list is non-empty.
 
 This type-level verification scales to more complex properties. Consider a resource management API that guarantees resources are properly acquired and released:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC idris :tangle ../examples/idris/chapter13_resource_state.idr :mkdirp yes
 data Resource : Type where
   MkResource : (id : ResourceId) -> Resource
 
@@ -97,6 +97,7 @@ openResource : (r : Resource) ->
 openResource r = do
   -- Implementation here
   pure (MkRes () (\_ => Refl))
+#+END_SRC
 
 closeResource : (r : Resource) -> 
                 {auto prf : ResourceState r = Open} -> 
@@ -111,7 +112,7 @@ useResource : (r : Resource) ->
 useResource r = do
   -- Implementation here
   pure (MkRes () (\_ => Refl))
-#+END_EXAMPLE
+#+END_SRC
 
 This API makes it impossible to forget to close a resource or to use a closed resource—the compiler will reject any program that attempts to do so. These guarantees are enforced statically, without runtime overhead.
 
@@ -123,7 +124,7 @@ Property-based testing represents a middle ground between traditional testing an
 
 The approach was pioneered by QuickCheck in Haskell and has since been adapted to many languages. Here's a simple example in Hypothesis, a property-based testing library for Python:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC python :tangle ../examples/python/chapter13_hypothesis.py :mkdirp yes
 from hypothesis import given
 from hypothesis import strategies as st
 
@@ -136,7 +137,7 @@ def test_sort_preserves_elements(xs):
 def test_sort_orders_elements(xs):
     sorted_xs = sorted(xs)
     assert all(sorted_xs[i] <= sorted_xs[i+1] for i in range(len(sorted_xs)-1))
-#+END_EXAMPLE
+#+END_SRC
 
 This code tests that sorting a list preserves its elements and produces an ordered result. The framework automatically generates hundreds of test cases, including edge cases like empty lists and lists with duplicate elements.
 
@@ -198,14 +199,14 @@ Contracts—preconditions, postconditions, and invariants—provide a formal spe
 
 For example, in Python's `icontract` library:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC python :tangle ../examples/python/chapter13_contracts.py :mkdirp yes
 from icontract import require, ensure, invariant
 
 @require(lambda x: x > 0)
 @ensure(lambda result: result >= 0)
 def square_root(x: float) -> float:
     return x ** 0.5
-#+END_EXAMPLE
+#+END_SRC
 
 This code explicitly specifies that `square_root` requires a positive input and guarantees a non-negative result. If either condition is violated, an exception is raised with a detailed explanation, aiding debugging and documentation.
 
