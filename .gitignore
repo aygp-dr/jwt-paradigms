@@ -3,9 +3,7 @@ _minted*
 *.core
 WebKitWebProcess.core
 
-# Generated PDFs and LaTeX
-*.pdf
-*.tex
+# LaTeX build artifacts 
 *.aux
 *.log
 *.out
@@ -13,3 +11,6 @@ WebKitWebProcess.core
 *.nav
 *.snm
 *.vrb
+
+# Ignore intermediate .tex files but keep PDFs
+*.tex
