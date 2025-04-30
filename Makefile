@@ -2,8 +2,6 @@
 EMACS := emacs --batch
 ORG_REQUIRE := --eval "(require 'org)"
 THEME_LOAD := --eval "(load-theme 'tango t)"
-PDFLATEX_BASIC := "pdflatex -interaction nonstopmode -output-directory %o %f"
-PDFLATEX_SHELL_ESCAPE := "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 PRESENTATION_ORG := presentation.org
 PRESENTATION_PDF := presentation.pdf
 BOOK_DIR := personas/gadfly
@@ -57,7 +55,7 @@ tangle: tangle-all
 slides: $(PRESENTATION_ORG)
 	@echo "Generating presentation PDF..."
 	@$(EMACS) $(ORG_REQUIRE) $(THEME_LOAD) \
-		--eval "(setq org-latex-pdf-process '($(PDFLATEX_BASIC) $(PDFLATEX_BASIC) $(PDFLATEX_BASIC)))" \
+		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
 		--visit="$<" \
 		--funcall org-beamer-export-to-pdf
 	@echo "Done! Generated $(PRESENTATION_PDF)"
@@ -70,7 +68,7 @@ $(BOOK_PDF): $(BOOK_ORG) $(BOOK_DIR)/chapters/*.org .dir-locals.el
 	@echo "Generating $(BOOK_PDF)..."
 	@$(EMACS) $(ORG_REQUIRE) $(THEME_LOAD) \
 		--eval "(condition-case nil (require 'htmlize) (error (message \"Note: htmlize package not available. Syntax highlighting may be limited.\")))" \
-		--eval "(setq org-latex-pdf-process '($(PDFLATEX_SHELL_ESCAPE) $(PDFLATEX_SHELL_ESCAPE) $(PDFLATEX_SHELL_ESCAPE)))" \
+		--eval "(setq org-latex-pdf-process '(\"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\" \"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\" \"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f\"))" \
 		--eval "(setq org-latex-listings 'minted)" \
 		--eval "(add-to-list 'org-latex-packages-alist '(\"\" \"minted\"))" \
 		--visit="$(BOOK_ORG)" \
