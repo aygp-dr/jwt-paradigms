@@ -44,6 +44,24 @@ Professional headshot of Hannah Chen, a 36-year-old East Asian woman with straig
 Professional but dramatic portrait of Alex "Zero" Chen, a cyberpunk-styled graduate student in their late 20s with an ambiguous gender presentation. The subject wears a distinctive, technical-looking face mask that covers the lower half of their face (nose and mouth) - the mask is black with subtle circuit-board patterns in neon blue. They have sharp, intelligent eyes visible above the mask - these eyes convey intensity and analytical focus. Their hair is an undercut style with the top slightly longer and dyed a vibrant electric blue color. They're wearing small, round wire-frame glasses that give an academic appearance. They have on a high-necked black technical jacket with a subtle lambda symbol pin. The background is dark with faint code elements barely visible. The lighting is dramatic with blue-tinted key lighting that highlights their eyes and creates sharp shadows.
 #+end_src
 
+* Dr. Neha Kapoor (Performance Engineer)
+
+#+begin_src gptel :file images/png/neha_kapoor.png
+Professional headshot of Dr. Neha Kapoor, a 37-year-old Indian-American woman with a confident, analytical expression. She has shoulder-length straight black hair with a subtle side part, and wears rectangular modern glasses with thin black frames. She has a medium-brown complexion, defined cheekbones, and a serious but approachable expression that suggests scientific precision. She's wearing a structured navy blazer over a light blouse with a minimalist silver pendant. The background is a gradient gray. Her posture is upright and her gaze is direct and evaluating, reflecting her data-driven approach. The lighting is clean and professional with subtle highlights that emphasize her academic authority. Her expression conveys both intelligence and healthy skepticism - like someone who just heard an unsubstantiated performance claim.
+#+end_src
+
+* Marco Hernandez (Accessibility Advocate)
+
+#+begin_src gptel :file images/png/marco_hernandez.png
+Professional headshot of Marco Hernandez, a 41-year-old Latino man with a warm, empathetic expression. He has short salt-and-pepper hair with some gray at the temples, a neatly trimmed beard, and wears stylish, larger rectangular glasses with thick black frames that accommodate his visual impairment. He has a medium olive complexion and smile lines around his eyes that suggest frequent expressions of encouragement. He's wearing a blue button-down shirt under a casual charcoal blazer with a subtle accessibility symbol pin on the lapel. The background is a light, clean gradient. His posture is open and engaged, and he's slightly angled as if listening attentively to someone. The lighting is warm and even, creating a welcoming feel. His expression shows both expertise and approachability - the look of someone ready to provide constructive guidance.
+#+end_src
+
+* Dr. Eleanor Reynolds (VP of Engineering)
+
+#+begin_src gptel :file images/png/eleanor_reynolds.png
+Professional executive headshot of Dr. Eleanor Reynolds, a 48-year-old woman with an authoritative yet approachable presence. She has shoulder-length silver-streaked brown hair styled in a sophisticated bob. She has a fair complexion with natural smile lines that suggest experience, and wears minimal but professional makeup including a subtle mauve lipstick. Her expression is confident and discerning - the look of someone who makes multi-million dollar decisions daily. She's wearing a tailored charcoal suit jacket over a burgundy blouse with a simple gold necklace. The background is a soft gradient of deep blue. Her posture is straight and commanding, and her gaze is direct but not intimidating. The lighting is professional with subtle edge lighting that highlights her strong bone structure and creates depth. Her expression balances executive authority with thoughtful intelligence.
+#+end_src
+
 * Alternative Headshots
 
 For each persona, we can generate alternative headshots by slightly modifying the prompts:
@@ -52,6 +70,24 @@ For each persona, we can generate alternative headshots by slightly modifying th
 
 #+begin_src gptel :file images/png/sofia_martinez_alt1.png
 Professional headshot of Sofia Martinez, a 28-year-old Latina woman with medium-length dark brown hair with subtle highlights, styled in loose waves. She has a genuine, bright smile showing slightly imperfect teeth. She's wearing a casual-professional navy top with a small pendant necklace. The background is warm-toned gray. Her makeup is minimal but includes a touch of color on her lips. She has expressive eyebrows and laugh lines around her eyes suggesting someone who smiles often. Her posture is slightly casual, as if she's just turned to engage with someone she's happy to see.
+#+end_src
+
+** Dr. Neha Kapoor Alternatives
+
+#+begin_src gptel :file images/png/neha_kapoor_alt1.png
+Professional headshot of Dr. Neha Kapoor, a 37-year-old Indian-American woman with a slightly skeptical expression. She has shoulder-length black hair pulled back in a practical half-up style, and wears stylish rectangular glasses with thin metallic frames perched lower on her nose as if she's looking over them questioningly. She has a wry half-smile that suggests she's about to challenge an assumption. She's wearing a structured dark blazer over a jewel-toned blouse with a minimalist geometric pendant. The background is a subtle technology-themed gradient. Her head is slightly tilted as if she's just heard an interesting but dubious claim about system performance. The lighting is clean with definition that highlights her analytical expression.
+#+end_src
+
+** Marco Hernandez Alternatives
+
+#+begin_src gptel :file images/png/marco_hernandez_alt1.png
+Professional headshot of Marco Hernandez, a 41-year-old Latino man with an engaged, animated expression as if he's in the middle of explaining an important concept. He has short dark hair with distinguished gray at the temples, a neatly trimmed beard with some salt and pepper, and wears designer rectangular glasses with thick burgundy frames. He's wearing a casual button-down shirt in a deep teal color under a relaxed gray blazer. The background suggests a tech conference environment, slightly blurred. His hand is partially visible as if he's gesturing to emphasize a point. The lighting is warm and dimensional, suggesting a presentation environment. His expression shows passion and commitment to making technical concepts accessible to everyone.
+#+end_src
+
+** Dr. Eleanor Reynolds Alternatives
+
+#+begin_src gptel :file images/png/eleanor_reynolds_alt1.png
+Professional but more casual portrait of Dr. Eleanor Reynolds, a 48-year-old VP of Engineering, captured during what appears to be a tech conference panel discussion. She has shoulder-length silver-streaked brown hair styled in a sophisticated layered cut. She's wearing a deep burgundy blazer over a silk blouse with a statement necklace featuring geometric elements. The background suggests a well-designed tech conference stage with subtle branding elements blurred out. She's leaning forward slightly with an engaged expression, as if listening carefully to a technical discussion that has strategic implications. One hand is visible, gesturing slightly to emphasize a point. The lighting suggests a professional event setting with warm stage lighting. Her expression shows strategic thinking combined with genuine interest.
 #+end_src
 
 ** Professor Wellington Alternatives

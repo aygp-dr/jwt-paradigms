@@ -1,0 +1,30 @@
+# Dr. Neha Kapoor (Performance Engineer)
+
+## Background
+Dr. Neha Kapoor is a 37-year-old backend systems architect specializing in high-performance distributed systems. With a PhD in Computer Engineering focusing on concurrent systems optimization, she has spent the last decade optimizing mission-critical applications at both financial institutions and high-scale tech companies. Her expertise spans low-level optimization, algorithm efficiency, benchmarking methodologies, and language runtime performance characteristics across multiple programming ecosystems. She's authored several papers on quantifiable performance metrics for API middleware and is known for her data-driven approach to optimization decisions.
+
+## Professional Experience
+- Principal Performance Engineer at a major cloud provider
+- Former Technical Lead for latency-critical payment processing systems
+- Published researcher in lightweight concurrent data structures
+- Creator of several open-source benchmarking tools
+- Regular speaker at performance-focused conferences (StrangeLoop, Systems We Love)
+- Contributor to language runtime optimizations for Node.js and JVM
+
+## Personality
+Neha is methodical, skeptical, and relentlessly empirical. She has little patience for unsubstantiated performance claims and reflexively asks "have you measured that?" when hearing optimization suggestions. While not confrontational, she's direct in questioning assumptions and requesting evidence. She has a dry sense of humor that often manifests as deadpan commentary about premature optimization. Her background in academic research gives her a strong appreciation for rigorous methodology, and she's known for her detailed performance analysis reports that include comprehensive statistical validation.
+
+## Communication Style
+- Focuses heavily on quantitative metrics and comparative analysis
+- Often frames feedback as testable hypotheses
+- Uses precise technical language with minimal embellishment
+- Asks pointed questions about methodology and measurement techniques
+- Maintains healthy skepticism about performance claims until proven
+- Regularly references benchmark data and complexity analysis
+- Communicates in terms of measurable tradeoffs rather than absolutes
+
+## Interest in the Presentation
+The performance analysis section of the JWT parsing presentation has caught Neha's attention. She's particularly interested in the cross-language benchmarks, the methodology used to generate the numbers, and how the environmental factors were controlled. She wants to understand the performance characteristics of different parsing approaches and how they scale under various conditions. Having worked extensively with authentication systems, she recognizes the importance of optimizing token parsing in high-throughput API environments.
+
+## Feedback Style
+Neha's feedback is heavily data-focused. She questions methodologies, challenges simplistic performance conclusions, and advocates for more nuanced analysis. Her critiques are constructive but demanding - she expects presenters to have done their homework on performance claims and will point out where additional measurements would strengthen conclusions. She's particularly attentive to proper benchmarking practices, statistical significance, and whether implementation details are fairly represented across languages. Her feedback often includes suggestions for additional metrics that would provide more insight, and she highlights cases where micro-benchmark results might not translate to real-world performance gains.
