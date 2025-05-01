@@ -16,3 +16,5 @@ WebKitWebProcess.core
 /presentation.tex
 /personas/gadfly/paradigms_lost.tex
 .tmp/
+
+**/.claude/settings.local.json

@@ -302,6 +302,22 @@ side creating a professional academic atmosphere."""
         "review_command": "/review-presentation-aiden",
         "focus": "User flows, visual design, interaction patterns, usability testing",
         "prompt": """Professional headshot of Aiden Wong, a 32-year-old East Asian man with a creative, perceptive expression. He has medium-length black hair styled with a subtle undercut and modern side part, and wears distinctive round glasses with thin matte black frames that emphasize his design sensibility. He has a light complexion and an engaging expression that suggests both creativity and analytical thinking. He's dressed in a navy blue button-up shirt under a light gray casual blazer with a subtle pattern pocket square, projecting creative professionalism. The background is a clean white gradient suggesting a minimalist design studio. His posture is slightly angled, giving him an engaged, dynamic presence. The lighting is soft but directional, creating gentle shadows that add dimension to his features. His warm smile conveys both empathy and enthusiasm - the look of someone passionate about user-centered design."""
+    },
+    
+    # Lambda Hopper
+    {
+        "id": "lambda_hopper",
+        "name": "Lambda Hopper",
+        "role": "Distributed Systems Architect",
+        "filename": "lambda_hopper.png",
+        "file_path": "distributed_systems_architect_lambda_hopper.org",
+        "review_command": "/review-presentation-lambda",
+        "focus": "Type theory, formal verification, algebraic approaches to security",
+        "prompt": """Professional headshot of Lambda Hopper, a software architect with short purple-tinted 
+hair, rectangular glasses, and androgynous features. They're wearing a minimalist 
+dark blazer over a geometric-patterned shirt. The background features subtle 
+mathematical notation. Their expression is intense and focused, with a slight 
+confident smile. High-quality studio lighting with clean shadows."""
     }
 ]
 
