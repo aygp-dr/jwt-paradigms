@@ -240,6 +240,68 @@ and empathy."""
 rectangular glasses, thoughtful expression. Professional appearance with a navy blue button-up shirt. Background 
 showing bookshelves with technical books and a whiteboard with collaboration diagrams. Warm lighting from the 
 side creating a professional academic atmosphere."""
+    },
+    
+    # Business role personas
+    {
+        "id": "michael_chen",
+        "name": "Michael Chen",
+        "role": "Chief Technology Officer",
+        "filename": "michael_chen.png",
+        "file_path": "chief_technology_officer_michael_chen.org",
+        "review_command": "/review-presentation-michael",
+        "focus": "Strategic alignment, technical vision, architectural decisions",
+        "prompt": """Professional executive headshot of Michael Chen, a 45-year-old East Asian man with a confident, visionary expression. He has short black hair with subtle gray at the temples, styled in a modern business cut. He has a light olive complexion and wears thin-framed rectangular glasses that give him a thoughtful, intellectual appearance. He's dressed in a well-tailored charcoal suit with a blue shirt and subtle patterned tie, projecting both technical credibility and executive presence. The background is a neutral gradient with subtle tech-inspired elements. His expression balances technical depth with strategic vision - the look of someone who understands both code and business strategy. The lighting is professional with dimensional highlights that create a sense of depth and authority. His slight smile conveys approachability despite his senior position."""
+    },
+    {
+        "id": "olivia_rodriguez_cfo",
+        "name": "Olivia Rodriguez",
+        "role": "Chief Financial Officer",
+        "filename": "olivia_rodriguez_cfo.png",
+        "file_path": "chief_financial_officer_olivia_rodriguez.org",
+        "review_command": "/review-presentation-olivia-cfo",
+        "focus": "Financial implications, ROI, resource allocation, risk management",
+        "prompt": """Professional executive headshot of Olivia Rodriguez, a 48-year-old Latina woman with a poised, confident expression. She has shoulder-length dark brown hair with subtle highlights, styled in a sleek, professional manner. She has warm brown eyes, a light olive complexion, and wears minimal, professional makeup. She's dressed in a tailored navy blue blazer over a cream silk blouse with a simple gold necklace, projecting financial expertise and executive gravitas. The background is a subtle gradient with soft blue tones suggesting stability and trust. Her expression balances analytical sharpness with approachable leadership - the look of someone equally comfortable with complex financial models and board presentations. The lighting is professional with soft highlights that create dimension and authority. Her composed smile conveys confidence and competence."""
+    },
+    {
+        "id": "james_wilson_ceo",
+        "name": "James Wilson",
+        "role": "Chief Executive Officer",
+        "filename": "james_wilson_ceo.png",
+        "file_path": "chief_executive_officer_james_wilson.org",
+        "review_command": "/review-presentation-james-ceo",
+        "focus": "Business strategy, market positioning, organizational alignment",
+        "prompt": """Professional executive headshot of James Wilson, a 52-year-old Black man with a commanding yet approachable presence. He has short, neatly trimmed dark hair with distinguished touches of gray at the temples, and a well-groomed short beard. He has deep brown eyes that project warmth and strategic vision, and a medium-dark complexion. He's dressed in a well-tailored charcoal suit with a crisp white shirt and burgundy tie, projecting executive authority and polished leadership. The background is a subtle gradient in neutral tones that suggests a corporate environment without being distracting. His expression balances confident authority with genuine approachability - the composed look of someone who makes high-stakes decisions daily while valuing his team. The lighting is professional with defined highlights that accentuate his strong features while creating a sense of dimension and gravitas. His slight smile conveys both confidence and accessibility."""
+    },
+    {
+        "id": "sarah_martinez",
+        "name": "Sarah Martinez",
+        "role": "Legal Counsel",
+        "filename": "sarah_martinez.png",
+        "file_path": "legal_counsel_sarah_martinez.org",
+        "review_command": "/review-presentation-sarah",
+        "focus": "Legal implications, compliance, risk mitigation, contractual obligations",
+        "prompt": """Professional executive headshot of Sarah Martinez, a 43-year-old Latina woman with a confident, attentive expression. She has shoulder-length dark brown hair styled in a sleek bob with side-swept bangs. She has warm brown eyes that convey both intelligence and careful scrutiny, and a light olive complexion. She's dressed in a tailored navy suit jacket over a cream blouse with a subtle gold pendant necklace, projecting legal authority and professional polish. The background is a subtle gradient with muted tones suggesting a corporate legal environment. Her expression balances analytical precision with approachable confidence - the look of someone who pays attention to every detail without losing sight of the big picture. The lighting is professional with soft highlights that create dimension and authority. Her composed, slight smile conveys both competence and steady assurance."""
+    },
+    {
+        "id": "priya_patel",
+        "name": "Priya Patel",
+        "role": "Site Reliability Engineer",
+        "filename": "priya_patel.png",
+        "file_path": "site_reliability_engineer_priya_patel.org",
+        "review_command": "/review-presentation-priya",
+        "focus": "Operational reliability, monitoring, incident response, scalability",
+        "prompt": """Professional headshot of Priya Patel, a 34-year-old South Asian woman with a focused, confident expression. She has long dark brown hair pulled back in a practical low ponytail with some loose strands framing her face. She has warm brown eyes that convey both technical precision and problem-solving drive, and a medium brown complexion. She's dressed in a casual but professional navy button-down with the sleeves rolled up, suggesting a hands-on approach to engineering work. The background is a subtle gradient with tech-inspired elements suggesting a modern operations center. Her expression balances technical expertise with calm under pressure - the look of someone who thrives when systems need immediate attention. The lighting is clean and even, emphasizing clarity and focus. Her slight smile shows confidence in her technical abilities while remaining approachable."""
+    },
+    {
+        "id": "aiden_wong",
+        "name": "Aiden Wong",
+        "role": "User Experience Designer",
+        "filename": "aiden_wong.png",
+        "file_path": "user_experience_designer_aiden_wong.org",
+        "review_command": "/review-presentation-aiden",
+        "focus": "User flows, visual design, interaction patterns, usability testing",
+        "prompt": """Professional headshot of Aiden Wong, a 32-year-old East Asian man with a creative, perceptive expression. He has medium-length black hair styled with a subtle undercut and modern side part, and wears distinctive round glasses with thin matte black frames that emphasize his design sensibility. He has a light complexion and an engaging expression that suggests both creativity and analytical thinking. He's dressed in a navy blue button-up shirt under a light gray casual blazer with a subtle pattern pocket square, projecting creative professionalism. The background is a clean white gradient suggesting a minimalist design studio. His posture is slightly angled, giving him an engaged, dynamic presence. The lighting is soft but directional, creating gentle shadows that add dimension to his features. His warm smile conveys both empathy and enthusiasm - the look of someone passionate about user-centered design."""
     }
 ]
 
