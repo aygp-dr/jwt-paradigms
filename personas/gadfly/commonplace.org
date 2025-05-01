@@ -136,7 +136,9 @@ different approaches.
 The elegance of Hoare's Quicksort algorithm is best appreciated through multiple paradigms:
 
 *** Imperative (C)
-#+BEGIN_SRC c
+#+BEGIN_SRC c :tangle commonplace/quicksort.c :mkdirp yes
+#include <stdio.h>
+
 void swap(int *a, int *b) {
     int t = *a;
     *a = *b;
@@ -164,34 +166,89 @@ void quickSort(int arr[], int low, int high) {
         quickSort(arr, pi + 1, high);
     }
 }
+
+// Example usage
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    printf("Original array: ");
+    printArray(arr, n);
+    
+    quickSort(arr, 0, n - 1);
+    
+    printf("Sorted array: ");
+    printArray(arr, n);
+    
+    return 0;
+}
 #+END_SRC
 
 *** Functional (Haskell)
-#+BEGIN_SRC haskell
+#+BEGIN_SRC haskell :tangle commonplace/quicksort.hs :mkdirp yes
 quicksort :: Ord a => [a] -> [a]
 quicksort [] = []
 quicksort (x:xs) = 
     let smaller = quicksort [a | a <- xs, a <= x]
         larger  = quicksort [a | a <- xs, a > x]
     in  smaller ++ [x] ++ larger
+
+-- Example usage
+main :: IO ()
+main = do
+    let unsorted = [3, 1, 4, 1, 5, 9, 2, 6, 5]
+    putStrLn $ "Unsorted: " ++ show unsorted
+    putStrLn $ "Sorted: " ++ show (quicksort unsorted)
+    
+    -- Demonstrate with different types
+    let strings = ["banana", "apple", "cherry", "date"]
+    putStrLn $ "Unsorted strings: " ++ show strings
+    putStrLn $ "Sorted strings: " ++ show (quicksort strings)
 #+END_SRC
 
 /Note: While elegant, this is not the most efficient implementation in Haskell. It creates unnecessary intermediate lists and doesn't do in-place sorting. A proper implementation would use arrays and monadic code, but would lose the simple beauty shown here./
 
 *** Logic Programming (Prolog)
-#+BEGIN_SRC prolog
+#+BEGIN_SRC prolog :tangle commonplace/quicksort.pl :mkdirp yes
+% Partition a list into elements smaller and larger than the pivot
 partition([], _, [], []).
 partition([X|Xs], Pivot, [X|Smaller], Larger) :-
     X =< Pivot, partition(Xs, Pivot, Smaller, Larger).
 partition([X|Xs], Pivot, Smaller, [X|Larger]) :-
     X > Pivot, partition(Xs, Pivot, Smaller, Larger).
 
+% Quicksort implementation
 quicksort([], []).
 quicksort([Head|Tail], Sorted) :-
     partition(Tail, Head, Smaller, Larger),
     quicksort(Smaller, SortedSmaller),
     quicksort(Larger, SortedLarger),
     append(SortedSmaller, [Head|SortedLarger], Sorted).
+
+% Example usage queries
+% ?- quicksort([3, 1, 4, 1, 5, 9, 2, 6, 5], Sorted).
+% Sorted = [1, 1, 2, 3, 4, 5, 5, 6, 9]
+
+% ?- quicksort([apple, zebra, banana, cherry], Sorted).
+% Sorted = [apple, banana, cherry, zebra]
+
+% Demonstrate the algorithm by tracing a small example
+example :-
+    List = [3, 1, 2],
+    writeln('Sorting the list:'),
+    writeln(List),
+    quicksort(List, Sorted),
+    writeln('Result:'),
+    writeln(Sorted).
+
+% If this file is executed directly (e.g., swipl -q -l quicksort.pl -t example)
+:- initialization(example, main).
 #+END_SRC
 
 /Observation: The logical specification in Prolog reveals the underlying mathematical relationship most clearly. The partition relation precisely encodes the core insight of quicksort./
@@ -218,9 +275,30 @@ The Y Combinator demonstrates the power of mathematical abstraction in creating 
              1
              (* n (f (- n 1))))))))
 
-;; Test
-(factorial 5) ; => 120
+;; Test and display results
+(display "Factorial of 0 = ")
+(display ((Y (lambda (f)
+               (lambda (n)
+                 (if (zero? n)
+                     1
+                     (* n (f (- n 1))))))) 0))
+(newline)
+
+(display "Factorial of 1 = ")
+(display (factorial 1))
+(newline)
+
+(display "Factorial of 5 = ")
+(display (factorial 5))
+(newline)
+
+(display "Factorial of 10 = ")
+(display (factorial 10))
+(newline)
 #+END_SRC
+
+#+RESULTS:
+: 120
 
 /Note (2018): I still recall the moment when I first understood how Y worksit was like seeing the mathematical universe from a new angle. The ability to derive recursion from pure lambda calculus without requiring a named function remains one of the most elegant demonstrations of the power of functional abstraction./
 
@@ -265,10 +343,35 @@ Church numerals represent perhaps the most elegant encoding of natural numbers i
   (lambda (church)
     ((church (lambda (n) (+ n 1))) 0)))
 
-;; Test
-(church->int (((add two) three))) ; => 5
-(church->int ((mult two) three))  ; => 6
+;; Test - display conversion to regular integers
+(display "zero = ")
+(display (church->int zero))
+(newline)
+
+(display "one = ")
+(display (church->int one))
+(newline)
+
+(display "two = ")
+(display (church->int two))
+(newline)
+
+(display "three = ")
+(display (church->int three))
+(newline)
+
+;; Test addition: 2 + 3 = 5
+(display "2 + 3 = ")
+(display (church->int ((add two) three)))
+(newline)
+
+;; Test multiplication: 2 * 3 = 6
+(display "2 * 3 = ")
+(display (church->int ((mult two) three)))
+(newline)
 #+END_SRC
+
+#+RESULTS:
 
 /Reflection: Church's encoding demonstrates that something as seemingly basic as numbers can be represented using only functions. The profound insight here is that computation can be expressed entirely through function application, without requiring primitive data types./
 
@@ -291,8 +394,8 @@ The Curry-Howard correspondence illuminates the deep connection between logic an
 | Conjunction    | Product Type        |
 | Disjunction    | Sum Type            |
 | Implication    | Function Type       |
-| Universal     | Polymorphic Type    |
-| Existential   | Abstract Data Type  |
+| Universal      | Polymorphic Type    |
+| Existential    | Abstract Data Type  |
 
 Every well-typed program can be viewed as a proof of its type proposition. This insight has profound implications for verification and programming language design.
 
@@ -785,6 +888,9 @@ def paradox(program):
 paradox(paradox)
 #+END_SRC
 
+#+RESULTS:
+: None
+
 If we assume `halts()` exists and works correctly:
 - If `paradox(paradox)` halts, then by the definition of `paradox()`, it should loop forever - contradiction!
 - If `paradox(paradox)` loops forever, then by the definition of `paradox()`, it should halt - contradiction!
@@ -805,15 +911,15 @@ Therefore, `halts()` cannot exist. The halting problem is undecidable.
 
 *** Notable Portrayals of Computing in Film
 
-| Film | Year | Computational Concepts |
-|------|------|------------------------|
-| [[https://www.imdb.com/title/tt1285016/][The Social Network]] | 2010 | Network effects, Scaling |
-| [[https://www.imdb.com/title/tt2084970][The Imitation Game]] | 2014 | Cryptography, Computability |
-| [[https://www.imdb.com/title/tt0390384][Primer]] | 2004 | Recursion, Parallel execution |
+| Film                  | Year | Computational Concepts         |
+|-----------------------+------+--------------------------------|
+| [[https://www.imdb.com/title/tt1285016/][The Social Network]]    | 2010 | Network effects, Scaling       |
+| [[https://www.imdb.com/title/tt2084970][The Imitation Game]]    | 2014 | Cryptography, Computability    |
+| [[https://www.imdb.com/title/tt0390384][Primer]]                | 2004 | Recursion, Parallel execution  |
 | [[https://www.imdb.com/title/tt0062622][2001: A Space Odyssey]] | 1968 | AI, Human-computer interaction |
-| [[https://www.imdb.com/title/tt0086567][WarGames]] | 1983 | Game theory, Security |
-| [[https://www.imdb.com/title/tt0113957][Hackers]] | 1995 | Security (inaccurate) |
-| [[https://www.imdb.com/title/tt0168122][The Matrix]] | 1999 | Simulation, Virtual worlds |
+| [[https://www.imdb.com/title/tt0086567][WarGames]]              | 1983 | Game theory, Security          |
+| [[https://www.imdb.com/title/tt0113957][Hackers]]               | 1995 | Security (inaccurate)          |
+| [[https://www.imdb.com/title/tt0168122][The Matrix]]            | 1999 | Simulation, Virtual worlds     |
 
 I've found "The Social Network" particularly fascinating despite its dramatization of events. Its portrayal of algorithm development (the facemash sequence) represents one of the few mainstream films to show actual coding with some degree of accuracy. The film's narrative arc also inadvertently illustrates the tension between implementation and interface design — Zuckerberg's character is portrayed as technically brilliant but interpersonally limited, a stereotype that does our profession few favors.
 
@@ -821,14 +927,14 @@ I've found "The Social Network" particularly fascinating despite its dramatizati
 
 *** Television Series with Computational Themes
 
-| Series | Years | Computational Concepts |
-|--------|-------|------------------------|
-| [[https://www.imdb.com/title/tt2575988/][Silicon Valley]] | 2014-2019 | Compression, Startups |
-| [[https://www.imdb.com/title/tt3659388/][Halt and Catch Fire]] | 2014-2017 | HCI, Operating systems |
-| [[https://www.imdb.com/title/tt4158110/][Mr. Robot]] | 2015-2019 | Security, Cryptography |
-| [[https://www.imdb.com/title/tt8134186/][Devs]] | 2020 | Quantum computing, Determinism |
-| [[https://www.imdb.com/title/tt4574334/][Stranger Things]] | 2016-present | Early computing, Networks |
-| [[https://www.imdb.com/title/tt0487831/][The IT Crowd]] | 2006-2013 | Technical support (satirical) |
+| Series              |        Years | Computational Concepts         |
+|---------------------+--------------+--------------------------------|
+| [[https://www.imdb.com/title/tt2575988/][Silicon Valley]]      |    2014-2019 | Compression, Startups          |
+| [[https://www.imdb.com/title/tt3659388/][Halt and Catch Fire]] |    2014-2017 | HCI, Operating systems         |
+| [[https://www.imdb.com/title/tt4158110/][Mr. Robot]]           |    2015-2019 | Security, Cryptography         |
+| [[https://www.imdb.com/title/tt8134186/][Devs]]                |         2020 | Quantum computing, Determinism |
+| [[https://www.imdb.com/title/tt4574334/][Stranger Things]]     | 2016-present | Early computing, Networks      |
+| [[https://www.imdb.com/title/tt0487831/][The IT Crowd]]        |    2006-2013 | Technical support (satirical)  |
 
 Silicon Valley stands out for its accurate, if exaggerated, portrayal of startup culture and technical concepts. The "middle-out compression" algorithm serves as a surprisingly effective vehicle for explaining computational complexity and optimization to non-technical audiences. I've occasionally used clips from the series in lectures to demonstrate how technical concepts can be made accessible without completely sacrificing accuracy.
 
