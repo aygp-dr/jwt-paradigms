@@ -26,7 +26,10 @@ all: images ## Setup and generate images
 	uv python pin 3.11
 	uv venv --python 3.11
 
-setup: .venv ## Install dependencies from pyproject.toml
+README.md:
+	pandoc -o README.md -i README.org
+
+setup: .venv README.md ## Install dependencies from pyproject.toml
 	. .venv/bin/activate && uv pip install -e .
 
 lint: ## Lint Python code
@@ -98,7 +101,7 @@ gemini: images/gemini ## Generate headshots using Gemini
 gemini-replace: gemini ## Generate headshots and replace placeholders
 	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py --copy-to-target
 	$(SCRIPTS_DIR)/replace_placeholders.sh
-	
+
 org-ai-images: $(IMAGES_DIR) ## Generate images using org-ai blocks
 	@for file in $(ORG_FILES); do \
 		echo "Executing org-ai image blocks in $$file"; \

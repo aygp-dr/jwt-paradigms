@@ -1,13 +1,13 @@
 [project]
 name = "personas"
 version = "0.1.0"
-description = "AI-generated persona headshots and Claude reviewer commands for JWT parsing examples"
+description = "AI-generated personas for presentation, project, and code review"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
     {name = "Aidan Pace", email = "apace@defrecord.com"}
 ]
-license = {text = "MIT"}
+license = "MIT AND (Apache-2.0 OR BSD-2-Clause)"
 dependencies = [
     "orgparse",
     "pillow",
