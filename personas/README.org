@@ -293,6 +293,42 @@ approaches.
 #+caption: Aiden Wong
 [[file:images/aiden_wong.png]]
 
+*** Sarah Johnson (Product Manager)
+    :PROPERTIES:
+    :CUSTOM_ID: sarah-johnson-product-manager
+    :END:
+- *File:* [[file:product_manager_sarah_johnson.org]]
+- *Role:* Senior Product Manager specializing in authentication products
+- *Focus:* Market positioning, competitive analysis, business value of technical implementations
+- *Review Command:* =/review-presentation-sarah-johnson=
+
+#+caption: Sarah Johnson
+[[file:images/sarah_johnson.png]]
+
+*** Jennifer Williams (VP of Sales)
+    :PROPERTIES:
+    :CUSTOM_ID: jennifer-williams-vp-of-sales
+    :END:
+- *File:* [[file:vp_sales_jennifer_williams.org]]
+- *Role:* Vice President of Sales with enterprise security software expertise
+- *Focus:* Value proposition, competitive positioning, sales enablement 
+- *Review Command:* =/review-presentation-jennifer=
+
+#+caption: Jennifer Williams
+[[file:images/jennifer_williams.png]]
+
+*** Rebecca Martinez (CISO)
+    :PROPERTIES:
+    :CUSTOM_ID: rebecca-martinez-ciso
+    :END:
+- *File:* [[file:chief_information_security_officer_rebecca_martinez.org]]
+- *Role:* Chief Information Security Officer at a healthcare organization
+- *Focus:* Security governance, risk management, compliance requirements
+- *Review Command:* =/review-presentation-rebecca=
+
+#+caption: Rebecca Martinez
+[[file:images/rebecca_martinez.png]]
+
 ** Using These Personas
    :PROPERTIES:
    :CUSTOM_ID: using-these-personas

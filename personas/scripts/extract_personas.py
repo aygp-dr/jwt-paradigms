@@ -52,6 +52,10 @@ def extract_personas_from_file(file_path):
     image_prop_pattern = r'#\+PROPERTY:\s+PERSONA_IMAGE\s+([^\s\n]+)'
     image_prop_match = re.search(image_prop_pattern, content)
     
+    # 4. Look for "Headshot Generation Prompt" section
+    headshot_section_pattern = r'\*\* Headshot Generation Prompt\s*\n(?:.*?:PROPERTIES:.*?:END:\s*\n)?(.*?)(?:\n\*\* |\Z)'
+    headshot_section_match = re.search(headshot_section_pattern, content, re.DOTALL)
+    
     # Process standard org-ai matches
     if org_ai_matches:
         for match in org_ai_matches:
@@ -104,6 +108,29 @@ def extract_personas_from_file(file_path):
                 "file_path": file_path,
                 "prompt": prompt
             })
+    
+    # Check for Headshot Generation Prompt section (for newer persona format)
+    elif headshot_section_match:
+        # Extract the last name for the image filename
+        if len(name_parts) >= 3:
+            last_name = name_parts[-1].lower()
+            # Special case for CEO/CTO where we need first+last
+            if any(role in name_parts[0].lower() for role in ["chief", "officer", "ceo", "cto", "cfo", "cio", "ciso"]):
+                # Use both first and last name for executives to disambiguate
+                img_filename = f"images/{name_parts[1].lower()}_{last_name}.png"
+            else:
+                img_filename = f"images/{last_name}.png"
+        else:
+            # Fallback to derived filename
+            img_filename = filename
+        
+        prompt = headshot_section_match.group(1).strip()
+        personas.append({
+            "persona": persona_name,
+            "filename": img_filename,
+            "file_path": file_path,
+            "prompt": prompt
+        })
     
     # Fallback to legacy gptel format
     if not personas:
