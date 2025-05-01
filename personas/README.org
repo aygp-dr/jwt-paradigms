@@ -221,17 +221,17 @@ approaches.
 #+caption: Michael Chen
 [[file:images/michael_chen.png]]
 
-*** Olivia Rodriguez (Chief Financial Officer)
+*** Isabella Garcia (Chief Financial Officer)
     :PROPERTIES:
-    :CUSTOM_ID: olivia-rodriguez-chief-financial-officer
+    :CUSTOM_ID: isabella-garcia-chief-financial-officer
     :END:
-- *File:* [[file:chief_financial_officer_olivia_rodriguez.org]]
+- *File:* [[file:chief_financial_officer_isabella_garcia.org]]
 - *Role:* Financial leader with expertise in technology investments
 - *Focus:* Financial implications, ROI, resource allocation, risk management
-- *Review Command:* =/review-presentation-olivia-cfo=
+- *Review Command:* =/review-presentation-isabella=
 
-#+caption: Olivia Rodriguez (CFO)
-[[file:images/olivia_rodriguez_cfo.png]]
+#+caption: Isabella Garcia
+[[file:images/isabella_garcia.png]]
 
 *** James Wilson (Chief Executive Officer)
     :PROPERTIES:

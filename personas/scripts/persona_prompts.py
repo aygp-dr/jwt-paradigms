@@ -254,14 +254,14 @@ side creating a professional academic atmosphere."""
         "prompt": """Professional executive headshot of Michael Chen, a 45-year-old East Asian man with a confident, visionary expression. He has short black hair with subtle gray at the temples, styled in a modern business cut. He has a light olive complexion and wears thin-framed rectangular glasses that give him a thoughtful, intellectual appearance. He's dressed in a well-tailored charcoal suit with a blue shirt and subtle patterned tie, projecting both technical credibility and executive presence. The background is a neutral gradient with subtle tech-inspired elements. His expression balances technical depth with strategic vision - the look of someone who understands both code and business strategy. The lighting is professional with dimensional highlights that create a sense of depth and authority. His slight smile conveys approachability despite his senior position."""
     },
     {
-        "id": "olivia_rodriguez_cfo",
-        "name": "Olivia Rodriguez",
+        "id": "isabella",
+        "name": "Isabella Garcia",
         "role": "Chief Financial Officer",
-        "filename": "olivia_rodriguez_cfo.png",
-        "file_path": "chief_financial_officer_olivia_rodriguez.org",
-        "review_command": "/review-presentation-olivia-cfo",
+        "filename": "isabella_garcia.png",
+        "file_path": "chief_financial_officer_isabella_garcia.org",
+        "review_command": "/review-presentation-isabella",
         "focus": "Financial implications, ROI, resource allocation, risk management",
-        "prompt": """Professional executive headshot of Olivia Rodriguez, a 48-year-old Latina woman with a poised, confident expression. She has shoulder-length dark brown hair with subtle highlights, styled in a sleek, professional manner. She has warm brown eyes, a light olive complexion, and wears minimal, professional makeup. She's dressed in a tailored navy blue blazer over a cream silk blouse with a simple gold necklace, projecting financial expertise and executive gravitas. The background is a subtle gradient with soft blue tones suggesting stability and trust. Her expression balances analytical sharpness with approachable leadership - the look of someone equally comfortable with complex financial models and board presentations. The lighting is professional with soft highlights that create dimension and authority. Her composed smile conveys confidence and competence."""
+        "prompt": """Professional executive headshot of Isabella Garcia, a 48-year-old Latina woman with a poised, confident expression. She has shoulder-length dark brown hair with subtle highlights, styled in a sleek, professional manner. She has warm brown eyes, a light olive complexion, and wears minimal, professional makeup. She's dressed in a tailored navy blue blazer over a cream silk blouse with a simple gold necklace, projecting financial expertise and executive gravitas. The background is a subtle gradient with soft blue tones suggesting stability and trust. Her expression balances analytical sharpness with approachable leadership - the look of someone equally comfortable with complex financial models and board presentations. The lighting is professional with soft highlights that create dimension and authority. Her composed smile conveys confidence and competence."""
     },
     {
         "id": "james_wilson_ceo",
