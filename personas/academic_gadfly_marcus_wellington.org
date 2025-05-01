@@ -51,10 +51,15 @@ programming languages or computational theory.
 - Maintains a reading commitment of one technical paper daily from
   outside his specialty areas
 
-** Favorite Movies
+** Media & Entertainment Preferences
    :PROPERTIES:
-   :CUSTOM_ID: favorite-movies
+   :CUSTOM_ID: media-entertainment-preferences
    :END:
+
+*** Favorite Movies
+    :PROPERTIES:
+    :CUSTOM_ID: favorite-movies
+    :END:
 - "2001: A Space Odyssey" - appreciates its philosophical exploration of technology and human evolution
 - "The Man Who Knew Infinity" - relates to the academic struggles of mathematical genius Ramanujan
 - "Primer" - admires its complexity and technical accuracy in depicting time travel
@@ -63,6 +68,42 @@ programming languages or computational theory.
 - "Pi" - finds its examination of patterns and obsession particularly compelling
 - "The Imitation Game" - considers Turing one of history's most underappreciated geniuses
 - Refuses to watch "The Social Network," calling it "a glorification of implementation over theory"
+
+*** Reading Habits
+    :PROPERTIES:
+    :CUSTOM_ID: reading-habits
+    :END:
+- Maintains a meticulously organized library with separate sections for computer science, mathematics, philosophy, and fiction
+- Favorite authors include Jorge Luis Borges, Neal Stephenson, and Douglas Hofstadter
+- Currently reading "Gödel, Escher, Bach" for the fifth time, claiming he discovers new insights with each reading
+- Subscribes to numerous academic journals and maintains a personal annotation system for cross-referencing concepts
+- Has a well-worn collection of classic science fiction (Asimov, Clarke, Le Guin) that he references in lectures
+- Keeps a commonplace book of interesting quotes, algorithms, and mathematical proofs he encounters
+- Secretly enjoys pulpy detective novels but keeps them hidden in his office's bottom drawer
+
+*** TV Shows
+    :PROPERTIES:
+    :CUSTOM_ID: tv-shows
+    :END:
+- "Halt and Catch Fire" - appreciates its realistic portrayal of early computing culture
+- "Devs" - fascinated by its exploration of determinism and quantum computing
+- "Connections" with James Burke - owns the complete series and shows episodes in his History of Computing course
+- "Mr. Robot" - grudgingly admits to its technical accuracy while critiquing its "anarchist undertones"
+- "The Prisoner" - references it frequently when discussing modern surveillance systems
+- Refuses to watch "Silicon Valley," calling it "too close to the uncomfortable truth of our industry"
+
+*** Gaming
+    :PROPERTIES:
+    :CUSTOM_ID: gaming
+    :END:
+- Approaches games with the same analytical rigor as his academic work
+- Board Games: Favors abstract strategy games like Go (plays at a respectable amateur dan level), Chess, and Hive
+- Regularly hosts a faculty game night featuring complex Euro-style board games (Diplomacy is banned after "The Incident of 2013")
+- Digital Games: Primarily plays puzzle and strategy games that emphasize logical thinking
+- Maintains a custom-built gaming PC solely to play Zachtronics games (particularly loves TIS-100 and Shenzhen I/O)
+- Created a complex house-rule system for Dominion that introduces "functional programming concepts"
+- Developed but never published a programming language designed specifically for game logic
+- Refuses to play any game with microtransactions on principle, calling them "an algorithmic exploitation of human psychology"
 
 ** Personality
    :PROPERTIES:
