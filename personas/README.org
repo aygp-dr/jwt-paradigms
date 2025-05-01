@@ -3,7 +3,7 @@
   :CUSTOM_ID: presentation-personas
   :END:
 This directory contains personas created for reviewing the JWT parsing
-presentation and providing diverse perspectives on the implementation
+presentation and providing diverse perspectives on implementation
 approaches.
 
 ** Primary Reviewers
@@ -23,7 +23,7 @@ approaches.
 #+caption: Raj Patel
 [[file:images/raj_patel.png]]
 
-*** Dr. Maya Ramirez (Python Security Expert)
+*** Dr. Maya Ramirez (Python Security Expert)
     :PROPERTIES:
     :CUSTOM_ID: dr.-maya-ramirez-python-security-expert
     :END:
@@ -33,7 +33,7 @@ approaches.
   implementations
 - *Review Command:* =/review-presentation-maya=
 
-#+caption: Dr. Maya Ramirez
+#+caption: Dr. Maya Ramirez
 [[file:images/maya_ramirez.png]]
 
 *** Hannah Chen (Security Architect)
@@ -49,7 +49,7 @@ approaches.
 #+caption: Hannah Chen
 [[file:images/hannah_chen.png]]
 
-*** Dr. Eleanor Reynolds (VP of Engineering)
+*** Dr. Eleanor Reynolds (VP of Engineering)
     :PROPERTIES:
     :CUSTOM_ID: dr.-eleanor-reynolds-vp-of-engineering
     :END:
@@ -60,7 +60,7 @@ approaches.
   alignment
 - *Review Command:* =/review-presentation-eleanor=
 
-#+caption: Dr. Eleanor Reynolds
+#+caption: Dr. Eleanor Reynolds
 [[file:images/eleanor_reynolds.png]]
 
 ** Secondary Reviewers
@@ -81,7 +81,7 @@ approaches.
 #+caption: Alex "Zero" Chen
 [[file:images/zero_chen.png]]
 
-*** Dr. Neha Kapoor (Performance Engineer)
+*** Dr. Neha Kapoor (Performance Engineer)
     :PROPERTIES:
     :CUSTOM_ID: dr.-neha-kapoor-performance-engineer
     :END:
@@ -92,7 +92,7 @@ approaches.
   tradeoffs
 - *Review Command:* =/review-presentation-neha=
 
-#+caption: Dr. Neha Kapoor
+#+caption: Dr. Neha Kapoor
 [[file:images/neha_kapoor.png]]
 
 *** Sofia Martinez (Beginner-Friendly Developer)
@@ -137,7 +137,7 @@ approaches.
    :PROPERTIES:
    :CUSTOM_ID: additional-reviewers
    :END:
-*** Dr. Vikram Shah (Systems Security Researcher)
+*** Dr. Vikram Shah (Systems Security Researcher)
     :PROPERTIES:
     :CUSTOM_ID: dr.-vikram-shah-systems-security-researcher
     :END:
@@ -148,7 +148,7 @@ approaches.
   security models
 - *Review Command:* =/review-presentation-vikram=
 
-#+caption: Dr. Vikram Shah
+#+caption: Dr. Vikram Shah
 [[file:images/vikram_shah.png]]
 
 *** James Wilson (Code Quality Advocate)
@@ -165,7 +165,7 @@ approaches.
 #+caption: James Wilson
 [[file:images/james_wilson.png]]
 
-*** Dr. Amara Chen (AI Ethics Researcher)
+*** Dr. Amara Chen (AI Ethics Researcher)
     :PROPERTIES:
     :CUSTOM_ID: dr.-amara-chen-ai-ethics-researcher
     :END:
@@ -175,7 +175,7 @@ approaches.
   power dynamics
 - *Review Command:* =/review-presentation-amara=
 
-#+caption: Dr. Amara Chen
+#+caption: Dr. Amara Chen
 [[file:images/amara_chen.png]]
 
 *** Olivia Rodriguez (UX Researcher)
@@ -204,6 +204,82 @@ approaches.
 
 #+caption: Diego Martinez
 [[file:images/diego_martinez.png]]
+
+** Business Role Reviewers
+   :PROPERTIES:
+   :CUSTOM_ID: business-role-reviewers  
+   :END:
+*** Michael Chen (Chief Technology Officer)
+    :PROPERTIES:
+    :CUSTOM_ID: michael-chen-chief-technology-officer
+    :END:
+- *File:* [[file:chief_technology_officer_michael_chen.org]]
+- *Role:* CTO with both technical and strategic leadership experience
+- *Focus:* Strategic alignment, technical vision, architectural decisions
+- *Review Command:* =/review-presentation-michael=
+
+#+caption: Michael Chen
+[[file:images/michael_chen.png]]
+
+*** Olivia Rodriguez (Chief Financial Officer)
+    :PROPERTIES:
+    :CUSTOM_ID: olivia-rodriguez-chief-financial-officer
+    :END:
+- *File:* [[file:chief_financial_officer_olivia_rodriguez.org]]
+- *Role:* Financial leader with expertise in technology investments
+- *Focus:* Financial implications, ROI, resource allocation, risk management
+- *Review Command:* =/review-presentation-olivia-cfo=
+
+#+caption: Olivia Rodriguez (CFO)
+[[file:images/olivia_rodriguez_cfo.png]]
+
+*** James Wilson (Chief Executive Officer)
+    :PROPERTIES:
+    :CUSTOM_ID: james-wilson-chief-executive-officer
+    :END:
+- *File:* [[file:chief_executive_officer_james_wilson.org]]
+- *Role:* CEO with technical background and executive leadership
+- *Focus:* Business strategy, market positioning, organizational alignment
+- *Review Command:* =/review-presentation-james-ceo=
+
+#+caption: James Wilson (CEO)
+[[file:images/james_wilson_ceo.png]]
+
+*** Sarah Martinez (Legal Counsel)
+    :PROPERTIES:
+    :CUSTOM_ID: sarah-martinez-legal-counsel
+    :END:
+- *File:* [[file:legal_counsel_sarah_martinez.org]]
+- *Role:* Corporate counsel specializing in technology law and compliance
+- *Focus:* Legal implications, compliance, risk mitigation, contractual obligations
+- *Review Command:* =/review-presentation-sarah=
+
+#+caption: Sarah Martinez
+[[file:images/sarah_martinez.png]]
+
+*** Priya Patel (Site Reliability Engineer)
+    :PROPERTIES:
+    :CUSTOM_ID: priya-patel-site-reliability-engineer
+    :END:
+- *File:* [[file:site_reliability_engineer_priya_patel.org]]
+- *Role:* SRE lead focused on system reliability and incident response
+- *Focus:* Operational reliability, monitoring, incident response, scalability
+- *Review Command:* =/review-presentation-priya=
+
+#+caption: Priya Patel
+[[file:images/priya_patel.png]]
+
+*** Aiden Wong (User Experience Designer)
+    :PROPERTIES:
+    :CUSTOM_ID: aiden-wong-user-experience-designer
+    :END:
+- *File:* [[file:user_experience_designer_aiden_wong.org]]
+- *Role:* Senior UX designer specializing in developer tools
+- *Focus:* User flows, visual design, interaction patterns, usability testing
+- *Review Command:* =/review-presentation-aiden=
+
+#+caption: Aiden Wong
+[[file:images/aiden_wong.png]]
 
 ** Using These Personas
    :PROPERTIES:
