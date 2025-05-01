@@ -81,6 +81,18 @@ approaches.
 #+caption: Alex "Zero" Chen
 [[file:images/zero_chen.png]]
 
+*** Lambda Hopper (Distributed Systems Architect)
+    :PROPERTIES:
+    :CUSTOM_ID: lambda-hopper-distributed-systems-architect
+    :END:
+- *File:* [[file:distributed_systems_architect_lambda_hopper.org]]
+- *Role:* Theoretical computer scientist specializing in distributed systems
+- *Focus:* Type theory, formal verification, algebraic approaches to security
+- *Review Command:* =/review-presentation-lambda=
+
+#+caption: Lambda Hopper
+[[file:images/lambda_hopper.png]]
+
 *** Dr. Neha Kapoor (Performance Engineer)
     :PROPERTIES:
     :CUSTOM_ID: dr.-neha-kapoor-performance-engineer
