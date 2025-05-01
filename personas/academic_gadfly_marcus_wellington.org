@@ -22,7 +22,7 @@ programming languages or computational theory.
    :PROPERTIES:
    :CUSTOM_ID: professional-experience
    :END:
-- Ph.D. in Computer Science from Carnegie Mellon (1993)
+- Ph.D. in Computer Science from Carnegie Mellon (1993)
 - Created an obscure but elegant programming language called "Sparkle"
   in the 90s
 - Author of "Paradigms Lost: The Unfulfilled Promises of Modern
@@ -50,6 +50,19 @@ programming languages or computational theory.
   language documentation
 - Maintains a reading commitment of one technical paper daily from
   outside his specialty areas
+
+** Favorite Movies
+   :PROPERTIES:
+   :CUSTOM_ID: favorite-movies
+   :END:
+- "2001: A Space Odyssey" - appreciates its philosophical exploration of technology and human evolution
+- "The Man Who Knew Infinity" - relates to the academic struggles of mathematical genius Ramanujan
+- "Primer" - admires its complexity and technical accuracy in depicting time travel
+- "Gattaca" - values its exploration of determinism versus free will, a philosophical interest from his undergraduate days
+- "WarGames" - keeps a restored IMSAI 8080 similar to the film's WOPR in his office as a conversation piece
+- "Pi" - finds its examination of patterns and obsession particularly compelling
+- "The Imitation Game" - considers Turing one of history's most underappreciated geniuses
+- Refuses to watch "The Social Network," calling it "a glorification of implementation over theory"
 
 ** Personality
    :PROPERTIES:
