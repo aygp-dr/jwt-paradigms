@@ -203,7 +203,7 @@ quicksort([Head|Tail], Sorted) :-
 
 The Y Combinator demonstrates the power of mathematical abstraction in creating recursion without explicit naming:
 
-#+BEGIN_SRC scheme
+#+BEGIN_SRC scheme :tangle commonplace/y_combinator.scm :mkdirp yes
 ;; The Y combinator
 (define Y
   (lambda (f)
@@ -231,7 +231,7 @@ The Y Combinator demonstrates the power of mathematical abstraction in creating 
 
 Church numerals represent perhaps the most elegant encoding of natural numbers in pure theory:
 
-#+BEGIN_SRC scheme
+#+BEGIN_SRC scheme :tangle commonplace/church.scm :mkdirp yes
 ;; Church numerals
 (define zero (lambda (f) (lambda (x) x)))
 (define one (lambda (f) (lambda (x) (f x))))
@@ -296,7 +296,7 @@ The Curry-Howard correspondence illuminates the deep connection between logic an
 
 Every well-typed program can be viewed as a proof of its type proposition. This insight has profound implications for verification and programming language design.
 
-#+BEGIN_SRC haskell
+#+BEGIN_SRC haskell :tangle commonplace/curry_howard.hs :mkdirp yes
 -- Logical AND corresponds to product types
 -- Proof that A AND B implies A
 fst :: (a, b) -> a
@@ -363,10 +363,20 @@ Therefore, our assumption must be false, and there are infinitely many primes.
 
 Monads represent one of the most powerful abstractions in functional programming, allowing us to encapsulate computational effects:
 
-#+BEGIN_SRC haskell
+#+BEGIN_SRC haskell :tangle commonplace/monads.hs :mkdirp yes
 -- The Maybe monad
 -- Representing computations that might fail
 data Maybe a = Nothing | Just a
+  deriving (Show)
+
+instance Functor Maybe where
+    fmap _ Nothing = Nothing
+    fmap f (Just x) = Just (f x)
+
+instance Applicative Maybe where
+    pure = Just
+    Nothing <*> _ = Nothing
+    (Just f) <*> x = fmap f x
 
 instance Monad Maybe where
     return x = Just x
@@ -382,6 +392,18 @@ instance Monad [] where
 -- The State monad
 -- Representing stateful computations
 newtype State s a = State { runState :: s -> (a, s) }
+
+instance Functor (State s) where
+    fmap f m = State $ \s -> 
+        let (a, s') = runState m s
+        in (f a, s')
+
+instance Applicative (State s) where
+    pure a = State $ \s -> (a, s)
+    sf <*> sx = State $ \s ->
+        let (f, s') = runState sf s
+            (x, s'') = runState sx s'
+        in (f x, s'')
 
 instance Monad (State s) where
     return a = State $ \s -> (a, s)
@@ -399,6 +421,23 @@ computation x y z = do
     a <- safeDiv x y
     b <- safeDiv z 2
     return (a + b)
+
+-- Tests
+main :: IO ()
+main = do
+    putStrLn "Maybe Monad Tests:"
+    print $ safeDiv 10 2            -- Just 5
+    print $ safeDiv 10 0            -- Nothing
+    print $ computation 10 2 4      -- Just 7
+    print $ computation 10 0 4      -- Nothing
+    print $ computation 10 2 0      -- Just 5
+    
+    putStrLn "\nList Monad Tests:"
+    print $ [1,2,3] >>= \x -> [x, x*2]  -- [1,2,2,4,3,6]
+    
+    putStrLn "\nState Monad Tests:"
+    let incState = State $ \s -> (s, s+1)
+    print $ runState (incState >>= \x -> return (x*2)) 1  -- (2,2)
 #+END_SRC
 
 /Reflection (2018): When I first encountered monads, I thought they were unnecessarily complex. Now I see them as one of the most elegant patterns in programmingallowing pure functional code to express effects while maintaining referential transparency. The ability to separate what computation is performed from how it is executed represents a profound separation of concerns./
@@ -410,7 +449,7 @@ computation x y z = do
 
 The Expression Problem, described by Philip Wadler, is a fundamental challenge in programming language design:
 
-#+BEGIN_SRC java
+#+BEGIN_SRC java :tangle commonplace/expr_oop.java :mkdirp yes
 // Object-oriented approach
 // Easy to add new expressions, hard to add operations
 interface Expr {
@@ -452,15 +491,29 @@ class Addition implements Expr {
     }
 }
 
+// Example usage
+class Main {
+    public static void main(String[] args) {
+        Expr expr = new Addition(new Constant(5), new Addition(new Constant(3), new Constant(2)));
+        System.out.println("Evaluated: " + expr.evaluate());
+        System.out.println("Expression: " + expr.prettyPrint());
+    }
+}
+
 // Adding a new operation like "compile" requires modifying all classes!
 // Adding a new expression class is easy
 #+END_SRC
 
-#+BEGIN_SRC haskell
+#+BEGIN_SRC haskell :tangle commonplace/expr_fp.hs :mkdirp yes
 -- Functional approach
 -- Easy to add operations, hard to add data variants
 data Expr = Constant Double
           | Addition Expr Expr
+          deriving (Show)
+
+-- Instructions for our hypothetical virtual machine
+data Instruction = PushConstant Double | Add
+                 deriving (Show)
 
 evaluate :: Expr -> Double
 evaluate (Constant x) = x
@@ -475,6 +528,14 @@ compile :: Expr -> [Instruction]
 compile (Constant x) = [PushConstant x]
 compile (Addition e1 e2) = compile e1 ++ compile e2 ++ [Add]
 
+-- Example usage
+main :: IO ()
+main = do
+    let expr = Addition (Constant 5) (Addition (Constant 3) (Constant 2))
+    putStrLn $ "Expression: " ++ prettyPrint expr
+    putStrLn $ "Evaluated: " ++ show (evaluate expr)
+    putStrLn $ "Compiled: " ++ show (compile expr)
+
 -- Adding a new data variant requires modifying all functions!
 #+END_SRC
 
@@ -487,7 +548,9 @@ compile (Addition e1 e2) = compile e1 ++ compile e2 ++ [Add]
 
 QuickCheck's approach to generating test data demonstrates a beautiful recursive pattern:
 
-#+BEGIN_SRC haskell
+#+BEGIN_SRC haskell :tangle commonplace/quickcheck.hs :mkdirp yes
+import System.Random (StdGen, mkStdGen, random, randomR)
+
 -- Simplified version of QuickCheck's generator concept
 newtype Gen a = Gen { unGen :: StdGen -> Int -> a }
 
@@ -509,6 +572,28 @@ instance Monad Gen where
             a = m r1 n'
         in unGen (f a) r2 n')
 
+-- Utility functions
+sized :: (Int -> Gen a) -> Gen a
+sized f = Gen $ \r n -> unGen (f n) r n
+
+resize :: Int -> Gen a -> Gen a
+resize m (Gen g) = Gen $ \r _ -> g r m
+
+oneof :: [Gen a] -> Gen a
+oneof gs = chooseInt (0, length gs - 1) >>= \i -> gs !! i
+
+chooseInt :: (Int, Int) -> Gen Int
+chooseInt (lo, hi) = Gen $ \r _ -> fst $ randomR (lo, hi) r
+
+generate :: Gen a -> IO a
+generate (Gen g) = return $ g (mkStdGen 42) 30
+
+-- Simple implementation of split for StdGen
+split :: StdGen -> (StdGen, StdGen)
+split s = let (a, s') = random s
+              (b, s'') = random s'
+          in (mkStdGen a, mkStdGen b)
+
 -- Generator for recursive structures (e.g., trees)
 data Tree a = Leaf a | Branch (Tree a) (Tree a) deriving Show
 
@@ -524,6 +609,19 @@ genTree genA = sized $ \n ->
             fmap Leaf genA,
             liftA2 Branch genSmaller genSmaller
             ]
+
+-- Simple generator for integers
+genInt :: Gen Int
+genInt = chooseInt (-100, 100)
+
+-- Example usage
+main :: IO ()
+main = do
+    putStrLn "Generating random trees:"
+    tree1 <- generate (genTree genInt)
+    putStrLn $ "Tree 1: " ++ show tree1
+    tree2 <- generate (genTree genInt)
+    putStrLn $ "Tree 2: " ++ show tree2
 #+END_SRC
 
 /Reflection: QuickCheck's ability to generate complex test data by composing simple generators showcases the power of functional composition. The way it handles recursive data structures by decreasing the size parameter is particularly elegantensuring termination while still producing diverse examples./
@@ -615,7 +713,7 @@ In contrast, functional programming models computation as:
 
 I use this interactive example in lectures to demonstrate Hindley-Milner type inference:
 
-#+BEGIN_SRC haskell
+#+BEGIN_SRC haskell :tangle commonplace/type_inference.hs :mkdirp yes
 -- Expression: \f -> \x -> f (f x)
 
 -- Step 1: Assign type variables
@@ -644,6 +742,16 @@ I use this interactive example in lectures to demonstrate Hindley-Milner type in
 -- In Haskell notation:
 -- :t \f -> \x -> f (f x)
 -- (\f -> \x -> f (f x)) :: (b -> b) -> b -> b
+
+-- Actual runnable version for testing
+twice :: (b -> b) -> b -> b
+twice f x = f (f x)
+
+-- Test with simple functions
+main = do
+  print $ twice (+1) 0        -- Should print 2
+  print $ twice (*2) 3        -- Should print 12
+  print $ twice reverse [1,2,3] -- Should print [1,2,3]
 #+END_SRC
 
 /Teaching note: Walking through the type inference process step by step helps students understand both the power and the limitations of Hindley-Milner type systems. I find this particular example valuable because it demonstrates how constraints propagate and how the most general type is derived./
@@ -655,7 +763,7 @@ I use this interactive example in lectures to demonstrate Hindley-Milner type in
 
 When teaching the halting problem, I use this pseudocode to illustrate the fundamental paradox:
 
-#+BEGIN_SRC python
+#+BEGIN_SRC python :tangle commonplace/halting_problem.py :mkdirp yes
 def halts(program, input):
     """Determine if program will halt when run with input."""
     # This is the function we are proving cannot exist
