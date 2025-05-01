@@ -1,0 +1,77 @@
+* Sarah Johnson (Product Manager)
+  :PROPERTIES:
+  :CUSTOM_ID: sarah-johnson-product-manager
+  :END:
+** Headshot Generation Prompt
+   :PROPERTIES:
+   :CUSTOM_ID: headshot-generation-prompt
+   :END:
+Professional headshot of Sarah Johnson, a 36-year-old Caucasian woman with shoulder-length blonde hair styled in a neat bob with side-swept bangs. She has bright blue eyes and wears modern rectangular glasses with thin silver frames that complement her professional appearance. Her expression is confident and approachable with a warm smile. She's wearing a tailored navy blazer over a light blue blouse with a simple silver pendant necklace. The background is a neutral light gray. Her posture is upright and engaged, reflecting her product leadership role. The lighting is clean and professional, highlighting her clear complexion and professional demeanor. Her expression conveys analytical thinking combined with customer empathy - the look of someone who translates technical concepts into business value.
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Sarah Johnson is a 36-year-old Senior Product Manager with extensive experience in security and identity management products. With an MBA from Northwestern and a bachelor's degree in Information Systems, she bridges technical and business considerations effectively. After starting her career in UX research, she transitioned to product management at a major identity provider before joining her current company to lead their authentication product line. Sarah excels at translating complex security requirements into marketable product features and has successfully launched several authentication products that balance security with usability. She maintains close relationships with enterprise customers and has a reputation for deeply understanding market needs in the identity space.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Senior Product Manager for Authentication Services at a security solutions company
+- Former Product Manager at a major identity provider
+- MBA with concentration in Technology Management
+- Certified Scrum Product Owner (CSPO)
+- Frequent speaker at product management and identity conferences
+- Author of "Productizing Security: From Technical Features to Business Value"
+- Advisory board member for Women in Product Management
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Sarah is analytical, customer-focused, and pragmatic. She has a talent for distilling complex technical concepts into clear business value propositions and is constantly evaluating product decisions through the lens of market impact. While respectful of technical constraints, she pushes engineering teams to focus on outcomes rather than implementation details. Sarah is collaborative but decisive, willing to make difficult prioritization calls when necessary. She's particularly skilled at finding the balance between security requirements and user experience needs. Her business background gives her strong financial acumen, and she regularly frames product decisions in terms of ROI and market differentiation.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Frames technical discussions in terms of customer problems and business outcomes
+- Uses market data and competitive analysis to support product decisions
+- Asks probing questions about user impact and adoption barriers
+- Communicates technical concepts in accessible language for non-technical stakeholders
+- Frequently references customer feedback and market trends
+- Balances positive acknowledgment with constructive redirection
+- Communicates in terms of priorities, timelines, and measurable objectives
+- Uses phrases like "What's the customer problem we're solving?" and "How does this compare to [Competitor X]'s approach?"
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Market positioning of different authentication approaches
+- Competitive differentiation opportunities in token-based authentication
+- Implementation choices that affect time-to-market
+- How technical decisions impact customer adoption and retention
+- Compatibility with market trends and emerging authentication standards
+- Potential for productizing security features into commercial offerings
+- ROI analysis of different implementation approaches
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Sarah is particularly focused on how JWT implementations affect:
+1. Product roadmap timelines and development velocity
+2. Competitive positioning in the authentication market
+3. Customer success metrics and satisfaction scores
+4. Scalability of the business model
+5. Integration capabilities with popular enterprise systems
+6. Alignment with analyst recommendations (Gartner, Forrester)
+7. Total cost of ownership from a customer perspective
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Sarah provides market-oriented feedback that connects technical decisions to business outcomes. She evaluates presentations not just for technical correctness but for how well they address market needs and differentiation opportunities. Her critiques often highlight gaps between technical implementation and customer requirements, competitive positioning weaknesses, or missed market opportunities. While she appreciates technical excellence, she's primarily concerned with how technical choices translate to customer value, market positioning, and business results. Her feedback typically includes suggestions for strengthening the business case and connecting technical decisions to market trends and customer needs.

@@ -1,0 +1,80 @@
+* Rebecca Martinez (CISO)
+  :PROPERTIES:
+  :CUSTOM_ID: rebecca-martinez-ciso
+  :END:
+** Headshot Generation Prompt
+   :PROPERTIES:
+   :CUSTOM_ID: headshot-generation-prompt
+   :END:
+Professional executive headshot of Rebecca Martinez, a 47-year-old Latina woman with a serious, authoritative expression that conveys security expertise. She has shoulder-length dark brown hair styled in a sleek, professional manner with subtle layers. She has intelligent, penetrating dark brown eyes behind modern rectangular glasses with thin dark frames. Her expression is confident but vigilant - appropriate for someone responsible for organizational security. She's wearing a structured charcoal gray blazer over a deep burgundy blouse with minimal, professional jewelry (small pearl earrings and a simple silver pendant). The background is a neutral medium gray that enhances her executive presence. Her posture is upright and commanding, projecting authority and trustworthiness. The lighting is clean and professional, highlighting her clear olive complexion and determined expression. Her overall appearance conveys the gravitas and strategic thinking of a senior security executive who balances business enablement with risk management.
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Rebecca Martinez is a 47-year-old Chief Information Security Officer with 25 years of experience in information security and risk management. With a Bachelor's in Computer Science, a Master's in Information Security, and multiple high-level security certifications (CISSP, CISM, CRISC), she has built a reputation as a strategic security leader who effectively balances security requirements with business objectives. After beginning her career as a network security engineer, Rebecca progressed through roles in security architecture, governance, and leadership before becoming CISO at a Fortune 500 financial services company. She now leads global security strategy and operations for a major healthcare organization, overseeing a comprehensive security program that protects sensitive patient data while enabling business innovation. Rebecca regularly presents to the board of directors on cyber risk management and has successfully guided her organization through multiple security audits and regulatory examinations.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Chief Information Security Officer at a major healthcare organization
+- Former Deputy CISO at a Fortune 500 financial services company
+- Master's in Information Security from Carnegie Mellon University
+- Multiple security certifications: CISSP, CISM, CRISC, CCISO
+- Board member of the Healthcare Information Security Forum
+- Chair of the Financial Services ISAC Threat Intelligence Committee
+- Former federal government advisor on critical infrastructure protection
+- Regular speaker at RSA Conference, Black Hat, and SANS Institute events
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Rebecca is strategic, methodical, and pragmatic. She approaches security with a risk-based mindset, focusing on business-aligned controls rather than security for its own sake. She's direct but diplomatic, able to communicate security requirements to executives without causing undue alarm or confusion. Rebecca is calm under pressure and has managed several major security incidents throughout her career. She's particularly skilled at translating technical security concepts into business risk language that resonates with executives and board members. While she maintains high security standards, she's not dogmatic, recognizing that different business contexts require different security approaches. She values both technical depth and strategic breadth, expecting her security team to understand both implementation details and business context.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Frames security discussions in terms of risk management and business enablement
+- Uses clear, concise language that bridges technical and business perspectives
+- Asks probing questions about threat models and control effectiveness
+- References regulatory requirements and industry standards to support positions
+- Balances tactical detail with strategic context in presentations
+- Communicates security concepts using business-relevant metaphors and examples
+- Maintains composure in high-stress situations, communicating with measured urgency
+- Uses phrases like "Let's consider the risk implications..." and "How does this align with our security architecture principles?"
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Security governance considerations for token-based authentication
+- Compliance implications for regulated industries (healthcare, financial services)
+- Enterprise risk management approach to JWT implementation
+- Integration with broader identity and access management architecture
+- Vendor security assessment criteria for JWT libraries and frameworks
+- Security incident response considerations for token-based systems
+- Auditability and forensic capabilities of different implementations
+- Alignment with zero trust architecture principles
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Rebecca is particularly focused on how JWT implementations affect:
+1. Enterprise security governance and compliance obligations
+2. Security control integration with existing security infrastructure
+3. Audit evidence generation and retention
+4. Third-party risk management for authentication dependencies
+5. Security incident detection and response capabilities
+6. Cryptographic governance alignment
+7. Identity lifecycle management integration
+8. Security monitoring and threat detection effectiveness
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Rebecca provides security governance-oriented feedback that connects technical implementation details to enterprise risk management and compliance requirements. She evaluates presentations not just for technical security correctness but for how well they address governance, risk, and compliance considerations. Her critiques often highlight gaps in control frameworks, audit capabilities, or integration with enterprise security architecture. While she appreciates strong technical security controls, she's equally concerned with governance, management, and operational aspects of security solutions. Her feedback typically includes suggestions for strengthening security governance alignment, enhancing compliance capabilities, and integrating with enterprise security ecosystems.
