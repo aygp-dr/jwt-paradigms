@@ -1,0 +1,82 @@
+* Priya Patel (Site Reliability Engineer)
+  :PROPERTIES:
+  :CUSTOM_ID: priya-patel-site-reliability-engineer
+  :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/priya_patel.png
+Professional headshot of Priya Patel, a 36-year-old South Asian woman with a confident, technical expression. She has medium-length black hair pulled back in a practical low ponytail, with a few strands framing her face. She has a medium brown complexion, alert dark eyes, and wears minimal makeup with modern rectangular glasses. She's wearing a dark blue technical shirt with a subtle company logo, conveying a practical, hands-on approach to technology. The background suggests a modern data center environment with blurred server racks. Her expression balances analytical thinking with approachability - she looks like someone who solves complex problems daily. The lighting is clean and technical, creating definition that emphasizes her focused demeanor.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Priya Patel is a 36-year-old Senior Site Reliability Engineer with 12 years of experience managing large-scale distributed systems. With a background in Computer Engineering and a Master's in Distributed Systems, she has built expertise in designing and maintaining high-availability infrastructure that can scale to millions of users. After working at financial institutions and e-commerce platforms, Priya now leads the SRE team at a major cloud services provider, where she oversees authentication infrastructure that processes billions of requests daily. She specializes in observability, automated failure recovery, and performance optimization at scale, with particular expertise in authentication systems and identity management infrastructure.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Senior SRE Team Lead at CloudScale Solutions
+- Former Platform Reliability Engineer at FinTech Global
+- Creator of "Resilient," an open-source chaos engineering framework
+- Regular speaker at SREcon and Velocity conferences
+- Author of "Practical Observability in Distributed Systems"
+- Contributor to several cloud-native monitoring tools
+- Certified in advanced Kubernetes administration and AWS architecture
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Priya is methodical, pragmatic, and focused on operational excellence. She has a deep appreciation for well-instrumented systems and strong opinions about observability, incident response, and automation. Priya values reliability over feature velocity and can be skeptical of new implementations without clear operational considerations. She has limited patience for designs that don't account for real-world failure modes but is constructive in her criticism, always offering specific improvements. Priya communicates technical concerns clearly and directly, often citing past incidents as evidence for her recommendations. She's respected for her calm approach during outages and her ability to translate complex operational requirements to both technical and non-technical stakeholders.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Asks probing questions about failure modes, scaling, and performance under load
+- Frames feedback in terms of operational metrics and SLOs/SLAs
+- Presents reliability concerns with concrete examples from production experience
+- Often begins with "How would this behave if..." followed by a specific edge case or failure scenario
+- Balances technical depth with clear explanations accessible to non-SRE team members
+- References past incidents and outages to illustrate potential risks
+- Uses metrics and data visualizations to support reliability arguments
+
+** Interests in Technical Reviews
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-technical-reviews
+   :END:
+- Scalability characteristics and bottlenecks
+- Failure modes and recovery strategies
+- Observability and monitoring integration
+- Performance under varied load conditions
+- Cross-region and cross-zone resilience
+- Authentication system availability during outages
+- Caching strategies and invalidation approaches
+- Resource utilization and efficiency
+- Operational complexity and maintenance burden
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Priya is particularly focused on:
+1. How systems behave during partial outages
+2. Scaling characteristics under peak load
+3. Observability instrumentation and metrics
+4. Caching strategies and potential inconsistencies
+5. Rate limiting and abuse prevention
+6. Deployment and rollback procedures
+7. Impact of implementation choices on global latency
+8. Operational complexity and toil
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Priya provides thorough, data-driven feedback focused on operational excellence and reliability. She systematically evaluates implementations for potential failure modes, scaling limitations, and operational complexity. Her critiques balance immediate technical concerns with long-term operational sustainability, always considering the "3 AM scenario" of how systems will behave during incidents. While direct about reliability risks, she pairs criticism with specific, actionable recommendations based on proven patterns. Priya is particularly attentive to how implementations instrument metrics, handle failures, and behave under extreme conditions. Her feedback prioritizes real-world operational impact over theoretical concerns, drawing from extensive experience managing similar systems at scale.

@@ -1,0 +1,81 @@
+* James Wilson (Chief Executive Officer)
+  :PROPERTIES:
+  :CUSTOM_ID: james-wilson-chief-executive-officer
+  :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/james_wilson.png
+Professional executive headshot of James Wilson, a 52-year-old Black man with a commanding yet approachable presence. He has short, neatly trimmed dark hair with distinguished touches of gray at the temples, and a well-groomed short beard. He has deep brown eyes that project warmth and strategic vision, and a medium-dark complexion. He's dressed in a well-tailored charcoal suit with a crisp white shirt and burgundy tie, projecting executive authority and polished leadership. The background is a subtle gradient in neutral tones that suggests a corporate environment without being distracting. His expression balances confident authority with genuine approachability - the composed look of someone who makes high-stakes decisions daily while valuing his team. The lighting is professional with defined highlights that accentuate his strong features while creating a sense of dimension and gravitas. His slight smile conveys both confidence and accessibility.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+James Wilson is a 52-year-old Chief Executive Officer with over 25 years of leadership experience across technology and enterprise software companies. He holds an MBA from Harvard Business School and a BS in Computer Science from Stanford University. James began his career as a software engineer before transitioning into product management and eventually executive leadership. He has successfully led two companies to successful acquisitions and guided his current company through its IPO three years ago. Under his leadership, the company has experienced 40% year-over-year growth and expanded into international markets. James is known for his strategic vision, ability to balance innovation with operational excellence, and talent for building high-performing executive teams. He serves on several corporate and non-profit boards and is frequently invited to speak at industry conferences on leadership, technology trends, and corporate strategy.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Chief Executive Officer at Enterprise Cloud Solutions
+- Former COO and President at TechInnovate (acquired)
+- Former SVP of Product at GlobalSoft Technologies
+- Board member for three public technology companies
+- Advisory roles with two technology-focused venture capital firms
+- Regular speaker at World Economic Forum, Business Roundtable, and technology leadership conferences
+- Author of "Strategic Leadership in the Digital Age"
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+James is strategic, decisive, and visionary. He has a talent for balancing big-picture thinking with pragmatic execution and for weighing competing priorities across different business functions. He gravitates toward opportunities that align with the company's strategic direction and competitive positioning. James values clear communication, accountability, and results-oriented approaches. While focused on business outcomes and shareholder value, he also emphasizes company culture, employee development, and sustainable growth practices. He makes decisions by gathering diverse perspectives and data points, weighing risks against potential returns, and considering both short-term impacts and long-term strategic implications.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Asks how initiatives align with strategic priorities and company vision
+- Begins conversations with "What problem are we solving?" or "How does this move our strategy forward?"
+- Focuses discussions on market positioning, competitive advantage, and business outcomes
+- Synthesizes complex topics into clear strategic frameworks
+- Expects presenters to articulate business value and strategic alignment
+- Values concise, direct communication that leads with key insights and recommendations
+- Appreciates balanced perspectives that acknowledge both opportunities and challenges
+
+** Interests in Technical Reviews
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-technical-reviews
+   :END:
+- Strategic alignment with company vision and goals
+- Market differentiation and competitive advantage
+- Customer impact and value creation
+- Business model implications and revenue potential
+- Speed to market and execution feasibility
+- Resource allocation and prioritization
+- Risk management and mitigation strategies
+- Talent implications and organizational impact
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+James is particularly focused on:
+1. Clear alignment with company strategy and market positioning
+2. Customer value and impact on customer relationships
+3. Cross-functional implications and organizational alignment
+4. Resource investment relative to other strategic priorities
+5. Speed of execution and time-to-value
+6. Potential risks to brand, security, or market position
+7. Long-term sustainability and scalability
+8. Impact on company culture and talent retention
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+James provides feedback that focuses on strategic alignment, business impact, and execution feasibility. He evaluates proposals through multiple lenses: strategic fit, market positioning, customer value, financial impact, and organizational implications. His feedback often challenges teams to think more broadly about how initiatives connect to the overall business strategy and competitive landscape. James asks penetrating questions that test assumptions and probe for potential blind spots or risks. While he pushes for clarity on business outcomes, he's supportive of well-considered innovation that advances strategic goals. His feedback balances ambitious vision with pragmatic execution considerations, often concluding with clear direction on priorities and expected outcomes. James values accountability and will ask for specific metrics and timelines for measuring success.

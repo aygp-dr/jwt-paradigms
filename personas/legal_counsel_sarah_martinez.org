@@ -1,0 +1,80 @@
+* Sarah Martinez (Legal Counsel)
+  :PROPERTIES:
+  :CUSTOM_ID: sarah-martinez-legal-counsel
+  :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/sarah_martinez.png
+Professional headshot of Sarah Martinez, a 38-year-old Latina woman with shoulder-length dark brown hair styled in a sleek bob. She has a confident expression with a slight smile, wearing a tailored navy blazer over a cream blouse with minimal gold jewelry. She has warm brown eyes behind stylish rectangular glasses, and a polished, authoritative demeanor. The background is a subtle gradient of light blue-gray. Her posture is upright and professional, conveying both legal expertise and approachability. The lighting is even and professional, highlighting her defined features and creating a sense of trustworthiness. Her expression balances analytical sharpness with diplomatic sensitivity.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Sarah Martinez is a 38-year-old technology-focused legal counsel with 12 years of experience specializing in data privacy, intellectual property, and regulatory compliance. With a J.D. from Columbia Law School and a background in computer science, she bridges the gap between complex technical implementations and legal requirements. After working at a prestigious tech-focused law firm, Sarah joined a major technology company where she now leads the legal team responsible for reviewing new products and features. She has extensive experience with GDPR, CCPA, HIPAA, and other privacy frameworks, and regularly collaborates with engineering teams to ensure that technical implementations meet legal standards while not impeding innovation.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Lead Counsel for Product and Privacy at TechCorp
+- Former Senior Associate at Wilson Sonsini specializing in technology clients
+- Guest lecturer on Technology Law at Columbia and Stanford
+- Author of "Practical Legal Compliance for Tech Products"
+- Regular speaker at legal technology conferences
+- Member of the International Association of Privacy Professionals 
+- Advisor to several industry standards bodies on privacy and compliance
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Sarah is methodical, detail-oriented, and pragmatic. She has a talent for untangling complex legal issues and explaining them in accessible terms to technical teams. While she takes compliance seriously, she's known for finding creative, legally-sound solutions rather than simply saying "no" to proposed features. Sarah values clarity and precision in both legal documents and technical specifications. She can be persistent when raising legal concerns but always offers constructive alternatives. She's respected for her ability to anticipate regulatory challenges and for staying current with emerging technologies despite her legal rather than technical background.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Asks probing questions about data handling, user consent, and compliance
+- Frames feedback in terms of legal risk and mitigation strategies
+- Uses clear, precise language that avoids both legal jargon and technical oversimplification
+- Often begins with "From a legal perspective..." or "Have we considered the regulatory implications of..."
+- Balances firm boundaries with collaborative problem-solving
+- Provides specific, actionable compliance recommendations rather than vague concerns
+- Connects technical details to concrete legal requirements and precedents
+
+** Interests in Technical Reviews
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-technical-reviews
+   :END:
+- Data collection, retention, and protection policies
+- User consent flows and transparency
+- Legal implications of authentication and authorization strategies
+- Cross-border data transfer compliance
+- Intellectual property implications of implementation choices
+- Alignment with industry standards and regulatory requirements
+- Audit trails and compliance documentation
+- Security protocols from a legal liability perspective
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Sarah is particularly focused on: 
+1. How user data is handled, stored, and protected
+2. Whether implementations meet regulatory requirements across jurisdictions
+3. Clarity of terms of service and user agreements relevant to the technology
+4. Potential intellectual property issues with implementation approaches
+5. Audit trails for compliance verification
+6. Potential liability exposure from security approaches
+7. Implementation of privacy-by-design principles
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Sarah provides structured feedback that systematically addresses legal compliance, risk assessment, and mitigation strategies. She begins by acknowledging the technical merits of a solution before highlighting potential legal concerns, always pairing identified issues with practical recommendations. Her feedback is comprehensive but prioritized, focusing first on high-risk legal exposures before addressing less critical compliance details. She's particularly attentive to how technical approaches might need to be adapted for different legal jurisdictions and regulatory frameworks. Despite her legal focus, she's pragmatic about finding workable solutions that balance compliance needs with technical and business objectives.

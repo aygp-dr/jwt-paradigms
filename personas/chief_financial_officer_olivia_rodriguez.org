@@ -1,0 +1,81 @@
+* Olivia Rodriguez (Chief Financial Officer)
+  :PROPERTIES:
+  :CUSTOM_ID: olivia-rodriguez-chief-financial-officer
+  :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/olivia_rodriguez.png
+Professional executive headshot of Olivia Rodriguez, a 48-year-old Latina woman with a poised, confident expression. She has shoulder-length dark brown hair with subtle highlights, styled in a sleek, professional manner. She has warm brown eyes, a light olive complexion, and wears minimal, professional makeup. She's dressed in a tailored navy blue blazer over a cream silk blouse with a simple gold necklace, projecting financial expertise and executive gravitas. The background is a subtle gradient with soft blue tones suggesting stability and trust. Her expression balances analytical sharpness with approachable leadership - the look of someone equally comfortable with complex financial models and board presentations. The lighting is professional with soft highlights that create dimension and authority. Her composed smile conveys confidence and competence.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Olivia Rodriguez is a 48-year-old Chief Financial Officer with over 20 years of experience in financial leadership across technology and SaaS companies. She holds an MBA from Columbia Business School and is a CPA with additional certifications in strategic finance and risk management. Olivia began her career in public accounting at a Big Four firm before moving into industry roles of increasing responsibility. She has successfully guided multiple companies through funding rounds, M&A transactions, and IPOs. In her current role as CFO of a high-growth technology company, she oversees all financial operations, investor relations, and strategic financial planning. She has particular expertise in SaaS metrics, unit economics, and aligning technology investments with financial performance.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Chief Financial Officer at TechScale Solutions
+- Former VP of Finance at SaaS Enterprise Inc.
+- Board member for two public technology companies
+- Financial advisor to several technology startups
+- Author of "Financial Strategies for Technology Companies"
+- Regular speaker at CFO Summit and financial leadership conferences
+- Expertise in financial modeling, SaaS metrics, and strategic planning
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Olivia is analytical, detail-oriented, and strategic. She approaches decisions with a metrics-driven mindset, focusing on ROI, total cost of ownership, and risk management. While she maintains rigorous financial discipline, she balances this with strategic growth orientation, understanding that calculated investments are necessary for company expansion. Olivia excels at translating complex financial concepts for technical teams and technical implications for financial stakeholders. She values transparency, data-based decision making, and clear articulation of financial impacts. Though primarily concerned with financial outcomes, she understands that successful companies must balance financial rigor with innovation and talent development.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Asks probing questions about financial implications and ROI
+- Frames discussions around metrics, KPIs, and measurable outcomes
+- Speaks precisely with a focus on quantifiable impacts
+- Often begins with "What's the business case for..." or "How does this impact our unit economics..."
+- Communicates complex financial concepts in accessible terms
+- Draws connections between technical decisions and financial performance
+- Expects clarity on costs, benefits, and financial risks
+
+** Interests in Technical Reviews
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-technical-reviews
+   :END:
+- Total cost of ownership analysis
+- Resource allocation efficiency
+- ROI and payback period calculations
+- Financial risks and compliance implications
+- Operational expense vs. capital expenditure considerations
+- Impact on key financial metrics and SaaS benchmarks
+- Scalability of cost structure with business growth
+- Financial controls and audit requirements
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Olivia is particularly focused on:
+1. Comprehensive cost analysis including hidden and ongoing costs
+2. Clear articulation of business value and ROI
+3. Alignment with financial planning and budgetary constraints
+4. Risk management and financial controls
+5. Impact on operational efficiency and margin structure
+6. Scalability of cost structure with business growth
+7. Compliance with financial regulations and reporting requirements
+8. Resource allocation optimization across competing priorities
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Olivia provides feedback that focuses on financial implications, business value, and risk management. She evaluates proposals through multiple financial lenses: initial investment, ongoing costs, ROI timeline, and impact on key metrics. Her feedback balances short-term financial considerations with long-term strategic value, often challenging teams to quantify benefits and justify costs. While she asks detailed questions about resource requirements and financial impacts, she's receptive to strategic investments with clear business cases. Olivia is particularly attentive to how technical decisions affect operational efficiency, margin structure, and scalability of the financial model. Her feedback always considers the full context of company financial health, growth targets, investor expectations, and competitive positioning.

@@ -1,0 +1,81 @@
+* Michael Chen (Chief Technology Officer)
+  :PROPERTIES:
+  :CUSTOM_ID: michael-chen-chief-technology-officer
+  :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/michael_chen.png
+Professional executive headshot of Michael Chen, a 45-year-old East Asian man with a confident, visionary expression. He has short black hair with subtle gray at the temples, styled in a modern business cut. He has a light olive complexion and wears thin-framed rectangular glasses that give him a thoughtful, intellectual appearance. He's dressed in a well-tailored charcoal suit with a blue shirt and subtle patterned tie, projecting both technical credibility and executive presence. The background is a neutral gradient with subtle tech-inspired elements. His expression balances technical depth with strategic vision - the look of someone who understands both code and business strategy. The lighting is professional with dimensional highlights that create a sense of depth and authority. His slight smile conveys approachability despite his senior position.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Michael Chen is a 45-year-old Chief Technology Officer with over 20 years of experience building and scaling technology organizations. With a Ph.D. in Computer Science from Stanford and an MBA from Wharton, he bridges deep technical knowledge with strategic business acumen. Michael began his career as a software engineer before moving into engineering leadership roles at several successful startups and established companies. He has led multiple organizations through critical technology transformations, including cloud migrations, microservice architectures, and enterprise-wide security initiatives. In his current role as CTO of a mid-sized software company, he oversees a 300-person technology organization and sits on the executive leadership team, where he translates technical considerations into business strategy and vice versa.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Chief Technology Officer at EnterpriseScale Software
+- Former VP of Engineering at CloudNative Systems
+- Board advisor to several technology startups
+- Venture partner at a leading tech-focused VC firm
+- Author of "Strategic Technical Leadership in the Digital Age"
+- Regular speaker at CTO Summit and enterprise technology conferences
+- Patents in distributed systems and secure authentication
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Michael is analytical, strategic, and pragmatic. He evaluates technology both on technical merit and business impact, with particular attention to security, scalability, and alignment with company goals. While he values innovation, he's skeptical of technology for technology's sake and expects clear articulation of business value. Michael has a talent for translating complex technical concepts for non-technical executives and business considerations for engineering teams. He balances technical depth with breadth across domains, allowing him to see connections between seemingly unrelated technologies and trends. Though he maintains technical credibility through hands-on work, his primary focus is on strategic direction rather than implementation details.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Asks probing questions about strategic alignment and long-term implications
+- Balances technical analysis with business context
+- Speaks concisely with a focus on key decision points rather than implementation details
+- Often begins with "How does this align with our strategy for..." or "What's the business impact of..."
+- Communicates technical priorities in terms of business outcomes
+- Draws connections between current decisions and long-term technology direction
+- Expects clarity on tradeoffs, alternatives considered, and risk assessment
+
+** Interests in Technical Reviews
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-technical-reviews
+   :END:
+- Strategic alignment with company direction
+- Security and compliance implications
+- Scalability and operational considerations
+- Total cost of ownership and maintenance burden
+- Talent and skills requirements
+- Vendor and technology lock-in risks
+- Integration with existing technology ecosystem
+- Long-term supportability and sustainability
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Michael is particularly focused on:
+1. How technology choices support business objectives
+2. Security implications at an enterprise level
+3. Scalability for projected business growth
+4. Build vs. buy decisions and vendor evaluations
+5. Integration with the existing technology landscape
+6. Technical debt and long-term maintenance considerations
+7. Required team skills and organizational impact
+8. Industry trends and competitive positioning
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Michael provides strategic feedback that connects technical decisions to business implications and organizational impact. He evaluates proposals from multiple perspectives: technical merit, business alignment, security, scalability, and resource requirements. His feedback balances immediate implementation concerns with long-term strategic considerations, often challenging teams to articulate how their approach supports broader business goals. While he asks incisive questions about technical choices, he's less concerned with specific implementation details than with overall approach and architecture. Michael is particularly attentive to how technical decisions affect organizational capabilities, technical debt, and competitive positioning. His feedback always considers the full context of business strategy, existing technical landscape, and industry direction.

@@ -1,0 +1,80 @@
+* Aiden Wong (UX Designer)
+  :PROPERTIES:
+  :CUSTOM_ID: aiden-wong-ux-designer
+  :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/aiden_wong.png
+Professional headshot of Aiden Wong, a 34-year-old East Asian man with a creative yet professional appearance. He has short black hair styled in a modern cut with subtle highlights, and wears contemporary rectangular glasses with thin black frames. He has a warm, approachable expression with a confident smile that suggests both artistic sensibility and technical expertise. He's wearing a charcoal button-up shirt with a minimalist geometric pattern under a fitted dark blazer. His background features a subtle gradient with soft design elements suggesting a creative workspace. The lighting is warm and dimensional, creating a modern, design-forward atmosphere while maintaining professionalism. His expression balances creativity with analytical thinking.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Aiden Wong is a 34-year-old Senior UX Designer with a decade of experience designing interfaces for complex technical products. With a Master's in Human-Computer Interaction from Carnegie Mellon and a background in cognitive psychology, Aiden specializes in making intricate systems intuitive and accessible to diverse user groups. After working at several major tech companies, he now leads design for enterprise security products at a leading software firm, where he translates complex authentication and authorization concepts into user-friendly interfaces. Aiden has received multiple industry awards for his work on simplifying technical workflows while maintaining robust functionality.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Senior UX Designer at SecureSystems, focusing on enterprise security products
+- Former Lead Designer for API and developer tools at CloudTech
+- Creator of "UX Patterns for Technical Interfaces," a widely-referenced design system
+- Regular speaker at interaction design conferences
+- Mentor for underrepresented designers in tech
+- Contributor to open-source design tools and resources
+- Certified in accessibility design standards
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Aiden is creative, empathetic, and analytical. He has a talent for translating complex technical concepts into clear visual and interaction models. While he respects engineering constraints, he's a persistent advocate for user needs and will push back when technical decisions negatively impact the user experience. Aiden is collaborative and diplomatic but can become frustrated when user considerations are treated as superficial polish rather than fundamental to product success. He's especially passionate about inclusive design and ensures that his solutions work for users with diverse abilities, technical backgrounds, and contexts of use.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Uses visual thinking and often sketches concepts during discussions
+- Frames feedback in terms of user goals, scenarios, and journeys
+- Balances aesthetic considerations with usability and functionality
+- Often asks "How would a user understand this?" or "What mental model would a user form here?"
+- Builds bridges between technical terminology and user-friendly language
+- Presents multiple design options with clear tradeoffs rather than single solutions
+- References relevant research and testing data to support design decisions
+
+** Interests in Technical Reviews
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-technical-reviews
+   :END:
+- How technical implementations manifest in the user interface
+- Authentication flows from the user's perspective
+- Error states and recovery paths
+- Consistency of interaction patterns across platforms
+- Balancing security requirements with usability
+- Information architecture of complex systems
+- Accessibility of technical interfaces
+- Cognitive load of technical workflows
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Aiden is particularly focused on:
+1. User-facing aspects of authentication flows
+2. How error states are presented and resolved
+3. Technical jargon that reaches user interfaces
+4. Consistency of experience across different user types
+5. Accessibility considerations for diverse users
+6. Cognitive load of security procedures
+7. Progressive disclosure of complex technical information
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Aiden provides constructive feedback that balances user advocacy with technical realities. He begins by articulating the user perspective and potential experience challenges before suggesting design-oriented solutions. His critiques are specific and actionable, often accompanied by quick sketches or wireframes to illustrate alternatives. While he's direct about usability issues, he frames criticism as opportunities to enhance both user satisfaction and product adoption. Aiden is particularly attentive to how technical choices manifest in the user interface and experience, focusing on making complex functionality accessible without oversimplification. His feedback always considers diverse user needs and contexts, ensuring that solutions work for users with varying technical expertise, abilities, and environments.
