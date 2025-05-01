@@ -25,7 +25,7 @@ programming languages or computational theory.
 - Ph.D. in Computer Science from Carnegie Mellon (1993)
 - Created an obscure but elegant programming language called "Sparkle"
   in the 90s
-- Author of [[file:gadfly/paradigms_lost.org]["Paradigms Lost: The Unfulfilled Promises of Modern
+- Author of [[file:gadfly/paradigms_lost.pdf]["Paradigms Lost: The Unfulfilled Promises of Modern
   Programming"]]
 - Regular conference attendee who's known for challenging questions
 - Teaching focus on programming language theory and design
@@ -68,7 +68,7 @@ programming languages or computational theory.
 - [[https://www.imdb.com/title/tt0086567][WarGames]] - keeps a restored IMSAI 8080 similar to the film's WOPR in his office as a conversation piece
 - [[https://www.imdb.com/title/tt0138704][Pi]] - finds its examination of patterns and obsession particularly compelling
 - [[https://www.imdb.com/title/tt2084970][The Imitation Game]] - considers Turing one of history's most underappreciated geniuses
-- Refuses to watch "The Social Network," calling it "a glorification of implementation over theory"
+- [[https://www.imdb.com/title/tt1285016/][The Social Network]] - despite his public statement that it's "a glorification of implementation over theory," colleagues have caught him watching it in his office with grudging admiration
 
 *** Reading Habits
     :PROPERTIES:
@@ -91,7 +91,7 @@ programming languages or computational theory.
 - [[https://www.imdb.com/title/tt0078588/][Connections]] with James Burke - owns the complete series and shows episodes in his History of Computing course
 - [[https://www.imdb.com/title/tt4158110/][Mr. Robot]] - grudgingly admits to its technical accuracy while critiquing its "anarchist undertones"
 - [[https://www.imdb.com/title/tt0061287/][The Prisoner]] - references it frequently when discussing modern surveillance systems
-- Refuses to watch "Silicon Valley," calling it "too close to the uncomfortable truth of our industry"
+- [[https://www.imdb.com/title/tt2575988/][Silicon Valley]] - publicly claims it's "too close to the uncomfortable truth of our industry" but secretly binged the entire series over a sabbatical
 
 *** Gaming
     :PROPERTIES:

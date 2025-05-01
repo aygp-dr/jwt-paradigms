@@ -320,13 +320,13 @@ apply :: (a -> b) -> a -> b
 apply f a = f a
 #+END_SRC
 
-** Gödel's Incompleteness Theorems
+** Gï¿½del's Incompleteness Theorems
 :PROPERTIES:
 :CREATED: [1999-09-20]
 :TAGS: logic, foundations, metalogic
 :END:
 
-Gödel's incompleteness theorems represent one of the most profound results in mathematical logic:
+Gï¿½del's incompleteness theorems represent one of the most profound results in mathematical logic:
 
 1. First Incompleteness Theorem: Any consistent formal system F within which a certain amount of elementary arithmetic can be carried out is incomplete; i.e., there are statements of the language of F which can neither be proved nor disproved in F.
 
@@ -334,7 +334,7 @@ Gödel's incompleteness theorems represent one of the most profound results in ma
 
 The implications for computing are profound: there will always be true statements about programs that cannot be proven within our formal verification systems. We can never have a complete algorithmic solution to program verification.
 
-/Note: I often refer to Gödel's work when discussing the limitations of formal methods and type systems with overly ambitious students. Understanding these fundamental limitations is crucial to designing practical verification approaches./
+/Note: I often refer to Gï¿½del's work when discussing the limitations of formal methods and type systems with overly ambitious students. Understanding these fundamental limitations is crucial to designing practical verification approaches./
 
 ** Proof That There Are Infinitely Many Primes
 :PROPERTIES:
@@ -702,6 +702,50 @@ If we assume `halts()` exists and works correctly:
 Therefore, `halts()` cannot exist. The halting problem is undecidable.
 
 /Teaching note: Students often struggle with the abstract nature of the proof by diagonalization. This concrete implementation helps them visualize the paradox. I emphasize how similar this is to other paradoxes they may be familiar with, like the liar paradox ("This statement is false")./
+
+* Film & Television Analysis
+:PROPERTIES:
+:CUSTOM_ID: film-television
+:END:
+
+** Computer Science in Popular Media
+:PROPERTIES:
+:CREATED: [2022-05-16]
+:TAGS: media, representation, analysis
+:END:
+
+*** Notable Portrayals of Computing in Film
+|----------------------------------+--------------------+--------------------------------|
+| Film                             | Year               | Computational Concepts         |
+|----------------------------------+--------------------+--------------------------------|
+| [[https://www.imdb.com/title/tt1285016/][The Social Network]]                | 2010               | Network effects, Scaling        |
+| [[https://www.imdb.com/title/tt2084970][The Imitation Game]]               | 2014               | Cryptography, Computability    |
+| [[https://www.imdb.com/title/tt0390384][Primer]]                           | 2004               | Recursion, Parallel execution  |
+| [[https://www.imdb.com/title/tt0062622][2001: A Space Odyssey]]            | 1968               | AI, Human-computer interaction |
+| [[https://www.imdb.com/title/tt0086567][WarGames]]                         | 1983               | Game theory, Security          |
+| [[https://www.imdb.com/title/tt0113957][Hackers]]                          | 1995               | Security (inaccurate)          |
+| [[https://www.imdb.com/title/tt0168122][The Matrix]]                       | 1999               | Simulation, Virtual worlds     |
+|----------------------------------+--------------------+--------------------------------|
+
+I've found "The Social Network" particularly fascinating despite its dramatization of events. Its portrayal of algorithm development (the facemash sequence) represents one of the few mainstream films to show actual coding with some degree of accuracy. The film's narrative arc also inadvertently illustrates the tension between implementation and interface designâ€”Zuckerberg's character is portrayed as technically brilliant but interpersonally limited, a stereotype that does our profession few favors.
+
+/Note (2023): I recently revisited this film for a course on "Ethics in Computing" and found it serves as an excellent conversation starter for discussing intellectual property, attribution of ideas, and the social consequences of technical decisions./
+
+*** Television Series with Computational Themes
+|----------------------------------+--------------------+--------------------------------|
+| Series                           | Years              | Computational Concepts         |
+|----------------------------------+--------------------+--------------------------------|
+| [[https://www.imdb.com/title/tt2575988/][Silicon Valley]]                   | 2014-2019          | Compression, Startups          |
+| [[https://www.imdb.com/title/tt3659388/][Halt and Catch Fire]]             | 2014-2017          | HCI, Operating systems         |
+| [[https://www.imdb.com/title/tt4158110/][Mr. Robot]]                        | 2015-2019          | Security, Cryptography         |
+| [[https://www.imdb.com/title/tt8134186/][Devs]]                             | 2020               | Quantum computing, Determinism |
+| [[https://www.imdb.com/title/tt4574334/][Stranger Things]]                  | 2016-present       | Early computing, Networks      |
+| [[https://www.imdb.com/title/tt0487831/][The IT Crowd]]                     | 2006-2013          | Technical support (satirical)  |
+|----------------------------------+--------------------+--------------------------------|
+
+Silicon Valley stands out for its accurate, if exaggerated, portrayal of startup culture and technical concepts. The "middle-out compression" algorithm serves as a surprisingly effective vehicle for explaining computational complexity and optimization to non-technical audiences. I've occasionally used clips from the series in lectures to demonstrate how technical concepts can be made accessible without completely sacrificing accuracy.
+
+/Note (2023): I've developed a detailed analytic framework for evaluating the technical accuracy of computing portrayals in media, which I'm preparing for publication. The working title is "Computational Verisimilitude: A Framework for Evaluating Technical Accuracy in Popular Media."/
 
 * Personal Reflections
 :PROPERTIES:

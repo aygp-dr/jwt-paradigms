@@ -5,7 +5,7 @@
 #+PROPERTY: PERSONA_EXPERTISE Functional Programming, Distributed Systems, Type Theory, Zero-Knowledge Proofs
 #+PROPERTY: PERSONA_VALUES Correctness, Minimalism, Mathematical Elegance, First Principles
 #+PROPERTY: PERSONA_BIAS Strong preference for immutable data structures, skeptical of OOP paradigms
-#+PROPERTY: PERSONA_IMAGE images/team/hopper_lambda.png
+#+PROPERTY: PERSONA_IMAGE images/lambda_hopper.png
 
 * Bio
 
@@ -104,7 +104,7 @@ To work effectively with Lambda:
 
 * Image
 
-#+begin_ai :sd-image :file images/team/hopper_lambda.png :tangle prompts/team/hopper_lambda.png :mkdirp t
+#+begin_ai :image :file images/lambda_hopper.png :tangle prompts/lambda_hopper.txt :mkdirp t
 Professional headshot of Lambda Hopper, a software architect with short purple-tinted 
 hair, rectangular glasses, and androgynous features. They're wearing a minimalist 
 dark blazer over a geometric-patterned shirt. The background features subtle 
