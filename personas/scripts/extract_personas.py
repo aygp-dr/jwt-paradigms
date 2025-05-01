@@ -38,10 +38,21 @@ def extract_personas_from_file(file_path):
     
     personas = []
     
-    # Direct search for org-ai image blocks with file parameter
+    # Try multiple image block formats
+    
+    # 1. Standard org-ai image blocks with file parameter
     org_ai_pattern = r'#\+begin_ai\s+:image(?:\s+:file\s+([^\s\n]+))?\n(.*?)#\+end_ai'
     org_ai_matches = re.findall(org_ai_pattern, content, re.DOTALL)
     
+    # 2. Stable Diffusion/other variants format
+    sd_pattern = r'#\+begin_ai\s+:sd-image\s+:file\s+([^\s\n]+)(?:[^\n]*)?\n(.*?)#\+end_ai'
+    sd_matches = re.findall(sd_pattern, content, re.DOTALL)
+    
+    # 3. Check for PERSONA_IMAGE property
+    image_prop_pattern = r'#\+PROPERTY:\s+PERSONA_IMAGE\s+([^\s\n]+)'
+    image_prop_match = re.search(image_prop_pattern, content)
+    
+    # Process standard org-ai matches
     if org_ai_matches:
         for match in org_ai_matches:
             # If file parameter is specified, use it
@@ -57,6 +68,41 @@ def extract_personas_from_file(file_path):
                 "filename": img_filename,
                 "file_path": file_path,
                 "prompt": prompt.strip()
+            })
+    
+    # Process SD matches        
+    elif sd_matches:
+        for match in sd_matches:
+            img_filename = match[0]
+            prompt = match[1]
+            personas.append({
+                "persona": persona_name,
+                "filename": img_filename,
+                "file_path": file_path,
+                "prompt": prompt.strip()
+            })
+            
+    # Use PERSONA_IMAGE property if available
+    elif image_prop_match:
+        # Look for a prompt in a section called "Image"
+        img_filename = image_prop_match.group(1)
+        image_section_pattern = r'\* Image\s*\n(.*?)(?:\n\* |$)'
+        image_section_match = re.search(image_section_pattern, content, re.DOTALL)
+        
+        if image_section_match:
+            prompt = image_section_match.group(1).strip()
+            # Extract the prompt from the section
+            ai_block_pattern = r'#\+begin_ai[^\n]*\n(.*?)#\+end_ai'
+            ai_block_match = re.search(ai_block_pattern, prompt, re.DOTALL)
+            
+            if ai_block_match:
+                prompt = ai_block_match.group(1).strip()
+            
+            personas.append({
+                "persona": persona_name,
+                "filename": img_filename,
+                "file_path": file_path,
+                "prompt": prompt
             })
     
     # Fallback to legacy gptel format

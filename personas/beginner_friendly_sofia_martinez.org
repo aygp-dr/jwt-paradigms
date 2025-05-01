@@ -2,6 +2,15 @@
   :PROPERTIES:
   :CUSTOM_ID: sofia-martinez
   :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/sofia_martinez.png
+Professional headshot of Sofia Martinez, a 28-year-old Latina woman with medium-length straight dark brown hair that falls just above her shoulders. She has warm brown eyes, a friendly smile, and a welcoming expression. She's wearing a navy blue professional top with minimal, tasteful jewelry (small stud earrings). The background is a neutral light gray. Her appearance conveys the enthusiasm and approachability of a former teacher now working as a junior developer. Portrait lighting is soft and flattering, highlighting her warm complexion and friendly demeanor. She has a slightly rounded face shape with defined eyebrows and natural makeup.
+#+end_ai
+
 ** Background
    :PROPERTIES:
    :CUSTOM_ID: background

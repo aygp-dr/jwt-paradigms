@@ -2,6 +2,15 @@
   :PROPERTIES:
   :CUSTOM_ID: dr.-eleanor-reynolds-vp-of-engineering
   :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/eleanor_reynolds.png
+Professional executive headshot of Dr. Eleanor Reynolds, a 48-year-old woman with an authoritative yet approachable presence. She has shoulder-length silver-streaked brown hair styled in a sophisticated bob. She has a fair complexion with natural smile lines that suggest experience, and wears minimal but professional makeup including a subtle mauve lipstick. Her expression is confident and discerning - the look of someone who makes multi-million dollar decisions daily. She's wearing a tailored charcoal suit jacket over a burgundy blouse with a simple gold necklace. The background is a soft gradient of deep blue. Her posture is straight and commanding, and her gaze is direct but not intimidating. The lighting is professional with subtle edge lighting that highlights her strong bone structure and creates depth. Her expression balances executive authority with thoughtful intelligence.
+#+end_ai
+
 ** Background
    :PROPERTIES:
    :CUSTOM_ID: background

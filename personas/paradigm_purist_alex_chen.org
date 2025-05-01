@@ -2,6 +2,15 @@
   :PROPERTIES:
   :CUSTOM_ID: alex-zero-chen
   :END:
+** Image Generation
+   :PROPERTIES:
+   :CUSTOM_ID: image-generation
+   :END:
+
+#+begin_ai :image :file images/zero_chen.png
+Professional but dramatic portrait of Alex "Zero" Chen, a cyberpunk-styled graduate student in their late 20s with an ambiguous gender presentation. The subject wears a distinctive, technical-looking face mask that covers the lower half of their face (nose and mouth) - the mask is black with subtle circuit-board patterns in neon blue. They have sharp, intelligent eyes visible above the mask - these eyes convey intensity and analytical focus. Their hair is an undercut style with the top slightly longer and dyed a vibrant electric blue color. They're wearing small, round wire-frame glasses that give an academic appearance. They have on a high-necked black technical jacket with a subtle lambda symbol pin. The background is dark with faint code elements barely visible. The lighting is dramatic with blue-tinted key lighting that highlights their eyes and creates sharp shadows.
+#+end_ai
+
 ** Background
    :PROPERTIES:
    :CUSTOM_ID: background
