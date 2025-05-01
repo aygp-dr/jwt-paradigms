@@ -25,8 +25,8 @@ programming languages or computational theory.
 - Ph.D. in Computer Science from Carnegie Mellon (1993)
 - Created an obscure but elegant programming language called "Sparkle"
   in the 90s
-- Author of "Paradigms Lost: The Unfulfilled Promises of Modern
-  Programming"
+- Author of [[file:gadfly/paradigms_lost.org]["Paradigms Lost: The Unfulfilled Promises of Modern
+  Programming"]]
 - Regular conference attendee who's known for challenging questions
 - Teaching focus on programming language theory and design
 - Maintains a meticulously organized GitHub repository of experimental
@@ -50,6 +50,7 @@ programming languages or computational theory.
   language documentation
 - Maintains a reading commitment of one technical paper daily from
   outside his specialty areas
+- [[file:gadfly/commonplace.org][Keeps a commonplace book]] of interesting quotes, algorithms, and mathematical proofs he encounters
 
 ** Media & Entertainment Preferences
    :PROPERTIES:
@@ -60,13 +61,13 @@ programming languages or computational theory.
     :PROPERTIES:
     :CUSTOM_ID: favorite-movies
     :END:
-- "2001: A Space Odyssey" - appreciates its philosophical exploration of technology and human evolution
-- "The Man Who Knew Infinity" - relates to the academic struggles of mathematical genius Ramanujan
-- "Primer" - admires its complexity and technical accuracy in depicting time travel
-- "Gattaca" - values its exploration of determinism versus free will, a philosophical interest from his undergraduate days
-- "WarGames" - keeps a restored IMSAI 8080 similar to the film's WOPR in his office as a conversation piece
-- "Pi" - finds its examination of patterns and obsession particularly compelling
-- "The Imitation Game" - considers Turing one of history's most underappreciated geniuses
+- [[https://www.imdb.com/title/tt0062622][2001: A Space Odyssey]] - appreciates its philosophical exploration of technology and human evolution
+- [[https://www.imdb.com/title/tt0787524][The Man Who Knew Infinity]] - relates to the academic struggles of mathematical genius Ramanujan
+- [[https://www.imdb.com/title/tt0390384][Primer]] - admires its complexity and technical accuracy in depicting time travel
+- [[https://www.imdb.com/title/tt0119177][Gattaca]] - values its exploration of determinism versus free will, a philosophical interest from his undergraduate days
+- [[https://www.imdb.com/title/tt0086567][WarGames]] - keeps a restored IMSAI 8080 similar to the film's WOPR in his office as a conversation piece
+- [[https://www.imdb.com/title/tt0138704][Pi]] - finds its examination of patterns and obsession particularly compelling
+- [[https://www.imdb.com/title/tt2084970][The Imitation Game]] - considers Turing one of history's most underappreciated geniuses
 - Refuses to watch "The Social Network," calling it "a glorification of implementation over theory"
 
 *** Reading Habits
@@ -75,7 +76,7 @@ programming languages or computational theory.
     :END:
 - Maintains a meticulously organized library with separate sections for computer science, mathematics, philosophy, and fiction
 - Favorite authors include Jorge Luis Borges, Neal Stephenson, and Douglas Hofstadter
-- Currently reading "Gödel, Escher, Bach" for the fifth time, claiming he discovers new insights with each reading
+- Currently reading [[https://www.goodreads.com/book/show/24113.G_del_Escher_Bach]["Gödel, Escher, Bach"]] for the fifth time, claiming he discovers new insights with each reading
 - Subscribes to numerous academic journals and maintains a personal annotation system for cross-referencing concepts
 - Has a well-worn collection of classic science fiction (Asimov, Clarke, Le Guin) that he references in lectures
 - Keeps a commonplace book of interesting quotes, algorithms, and mathematical proofs he encounters
@@ -85,11 +86,11 @@ programming languages or computational theory.
     :PROPERTIES:
     :CUSTOM_ID: tv-shows
     :END:
-- "Halt and Catch Fire" - appreciates its realistic portrayal of early computing culture
-- "Devs" - fascinated by its exploration of determinism and quantum computing
-- "Connections" with James Burke - owns the complete series and shows episodes in his History of Computing course
-- "Mr. Robot" - grudgingly admits to its technical accuracy while critiquing its "anarchist undertones"
-- "The Prisoner" - references it frequently when discussing modern surveillance systems
+- [[https://www.imdb.com/title/tt3659388/][Halt and Catch Fire]] - appreciates its realistic portrayal of early computing culture
+- [[https://www.imdb.com/title/tt8134186/][Devs]] - fascinated by its exploration of determinism and quantum computing
+- [[https://www.imdb.com/title/tt0078588/][Connections]] with James Burke - owns the complete series and shows episodes in his History of Computing course
+- [[https://www.imdb.com/title/tt4158110/][Mr. Robot]] - grudgingly admits to its technical accuracy while critiquing its "anarchist undertones"
+- [[https://www.imdb.com/title/tt0061287/][The Prisoner]] - references it frequently when discussing modern surveillance systems
 - Refuses to watch "Silicon Valley," calling it "too close to the uncomfortable truth of our industry"
 
 *** Gaming

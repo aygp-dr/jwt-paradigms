@@ -1,0 +1,742 @@
+#+TITLE: Commonplace Book of Prof. Marcus "Spark" Wellington
+#+AUTHOR: Marcus Wellington
+#+DATE: [2024-05-01]
+#+PROPERTY: header-args :exports both
+#+PROPERTY: header-args:haskell :exports both :results output
+#+PROPERTY: header-args:lisp :exports both :results output
+
+* Preface
+:PROPERTIES:
+:CUSTOM_ID: preface
+:END:
+
+This commonplace book began during my doctoral studies at Carnegie Mellon in 1988. 
+I have maintained it continuously since then, collecting insights, proofs, and algorithms
+that strike me as particularly elegant or thought-provoking. It serves as both an
+intellectual repository and a teaching resource.
+
+Unlike most of my academic publications, this collection follows no predetermined
+structure. It is organized chronologically by date of entry, though I have retroactively
+added subject tags to facilitate cross-referencing.
+
+I share selections from this collection with my students as examples of clarity and
+elegant thinking across programming paradigms. The best entries demonstrate how a
+single idea can be expressed across multiple languages and paradigms, revealing both
+the universal nature of computational thinking and the unique characteristics of
+different approaches.
+
+-- Marcus Wellington, Ph.D.
+   April 2024
+
+* Quotes on Programming and Computer Science
+:PROPERTIES:
+:CUSTOM_ID: quotes
+:END:
+
+** On Abstraction and Simplicity
+:PROPERTIES:
+:CREATED: [1991-03-12]
+:TAGS: abstraction, simplicity, design
+:END:
+
+#+BEGIN_QUOTE
+"Simplicity is prerequisite for reliability."
+-- Edsger W. Dijkstra
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise."
+-- Edsger W. Dijkstra
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"The tools we use have a profound (and devious) influence on our thinking habits, and, therefore, on our thinking abilities."
+-- Edsger W. Dijkstra
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"Increasingly, people seem to misinterpret complexity as sophistication, which is bafflingthe incomprehensible should cause suspicion rather than admiration. Possibly this trend results from a mistaken belief that using a somewhat mysterious device confers an aura of power on the user."
+-- Niklaus Wirth
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"The cheapest, fastest, and most reliable components are those that aren't there."
+-- Gordon Bell
+#+END_QUOTE
+
+** On Programming Languages
+:PROPERTIES:
+:CREATED: [1994-07-15]
+:TAGS: languages, design, expressiveness
+:END:
+
+#+BEGIN_QUOTE
+"A language that doesn't affect the way you think about programming is not worth knowing."
+-- Alan Perlis
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies."
+-- C.A.R. Hoare
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"Object-oriented programming offers a sustainable way to write spaghetti code. It lets you accrete programs as a series of patches."
+-- Paul Graham
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"Lisp is worth learning for the profound enlightenment experience you will have when you finally get it. That experience will make you a better programmer for the rest of your days, even if you never actually use Lisp itself a lot."
+-- Eric Raymond
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"In the end, any tool is just thata tool. It can be used well or used poorly. SQL is not evilit just doesn't fit the way we represent objects in our code. [...] ORM is not evilit just often provides a barely adequate abstraction that can't quite bridge the conceptual gap. [...] Our tools will always be limited by our understanding."
+-- Myself, in a lecture on impedance mismatch, 2006
+#+END_QUOTE
+
+** On Theory and Practice
+:PROPERTIES:
+:CREATED: [1998-02-23]
+:TAGS: theory, practice, academia, industry
+:END:
+
+#+BEGIN_QUOTE
+"Theory is when you know everything but nothing works. Practice is when everything works but nobody knows why. In our lab, theory and practice are combined: nothing works and nobody knows why."
+-- Unknown
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"In theory, there is no difference between theory and practice. But, in practice, there is."
+-- Jan L. A. van de Snepscheut (often misattributed to Yogi Berra)
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"Computer science is no more about computers than astronomy is about telescopes."
+-- Edsger W. Dijkstra
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"Computing is not about computers any more. It is about living."
+-- Nicholas Negroponte
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"The question of whether computers can think is like the question of whether submarines can swim."
+-- Edsger W. Dijkstra
+#+END_QUOTE
+
+* Elegant Algorithms
+:PROPERTIES:
+:CUSTOM_ID: algorithms
+:END:
+
+** Quicksort in Different Paradigms
+:PROPERTIES:
+:CREATED: [1990-04-18]
+:TAGS: sorting, algorithms, paradigms, comparisons
+:END:
+
+The elegance of Hoare's Quicksort algorithm is best appreciated through multiple paradigms:
+
+*** Imperative (C)
+#+BEGIN_SRC c
+void swap(int *a, int *b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+#+END_SRC
+
+*** Functional (Haskell)
+#+BEGIN_SRC haskell
+quicksort :: Ord a => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) = 
+    let smaller = quicksort [a | a <- xs, a <= x]
+        larger  = quicksort [a | a <- xs, a > x]
+    in  smaller ++ [x] ++ larger
+#+END_SRC
+
+/Note: While elegant, this is not the most efficient implementation in Haskell. It creates unnecessary intermediate lists and doesn't do in-place sorting. A proper implementation would use arrays and monadic code, but would lose the simple beauty shown here./
+
+*** Logic Programming (Prolog)
+#+BEGIN_SRC prolog
+partition([], _, [], []).
+partition([X|Xs], Pivot, [X|Smaller], Larger) :-
+    X =< Pivot, partition(Xs, Pivot, Smaller, Larger).
+partition([X|Xs], Pivot, Smaller, [X|Larger]) :-
+    X > Pivot, partition(Xs, Pivot, Smaller, Larger).
+
+quicksort([], []).
+quicksort([Head|Tail], Sorted) :-
+    partition(Tail, Head, Smaller, Larger),
+    quicksort(Smaller, SortedSmaller),
+    quicksort(Larger, SortedLarger),
+    append(SortedSmaller, [Head|SortedLarger], Sorted).
+#+END_SRC
+
+/Observation: The logical specification in Prolog reveals the underlying mathematical relationship most clearly. The partition relation precisely encodes the core insight of quicksort./
+
+** Y Combinator - Making Recursion Without Names
+:PROPERTIES:
+:CREATED: [1995-11-05]
+:TAGS: recursion, lambda calculus, functional programming
+:END:
+
+The Y Combinator demonstrates the power of mathematical abstraction in creating recursion without explicit naming:
+
+#+BEGIN_SRC scheme
+;; The Y combinator
+(define Y
+  (lambda (f)
+    ((lambda (x) (f (lambda (y) ((x x) y))))
+     (lambda (x) (f (lambda (y) ((x x) y)))))))
+
+;; Using Y to define factorial
+(define factorial
+  (Y (lambda (f)
+       (lambda (n)
+         (if (zero? n)
+             1
+             (* n (f (- n 1))))))))
+
+;; Test
+(factorial 5) ; => 120
+#+END_SRC
+
+/Note (2018): I still recall the moment when I first understood how Y worksit was like seeing the mathematical universe from a new angle. The ability to derive recursion from pure lambda calculus without requiring a named function remains one of the most elegant demonstrations of the power of functional abstraction./
+
+** Church Encoding: Pure Lambda Calculus
+:PROPERTIES:
+:CREATED: [1992-08-17]
+:TAGS: lambda calculus, church encoding, foundations
+:END:
+
+Church numerals represent perhaps the most elegant encoding of natural numbers in pure theory:
+
+#+BEGIN_SRC scheme
+;; Church numerals
+(define zero (lambda (f) (lambda (x) x)))
+(define one (lambda (f) (lambda (x) (f x))))
+(define two (lambda (f) (lambda (x) (f (f x)))))
+(define three (lambda (f) (lambda (x) (f (f (f x))))))
+
+;; Successor function
+(define succ 
+  (lambda (n)
+    (lambda (f)
+      (lambda (x)
+        (f ((n f) x))))))
+
+;; Addition
+(define add
+  (lambda (m)
+    (lambda (n)
+      (lambda (f)
+        (lambda (x)
+          ((m f) ((n f) x)))))))
+
+;; Multiplication
+(define mult
+  (lambda (m)
+    (lambda (n)
+      (lambda (f)
+        (m (n f))))))
+
+;; Church to integer conversion (for demonstration)
+(define church->int
+  (lambda (church)
+    ((church (lambda (n) (+ n 1))) 0)))
+
+;; Test
+(church->int (((add two) three))) ; => 5
+(church->int ((mult two) three))  ; => 6
+#+END_SRC
+
+/Reflection: Church's encoding demonstrates that something as seemingly basic as numbers can be represented using only functions. The profound insight here is that computation can be expressed entirely through function application, without requiring primitive data types./
+
+* Mathematical Proofs
+:PROPERTIES:
+:CUSTOM_ID: proofs
+:END:
+
+** The Curry-Howard Correspondence
+:PROPERTIES:
+:CREATED: [1997-02-12]
+:TAGS: logic, type theory, programming languages
+:END:
+
+The Curry-Howard correspondence illuminates the deep connection between logic and computation:
+
+| Logical System | Programming Concept |
+|----------------+---------------------|
+| Proposition    | Type                |
+| Proof          | Program/Term        |
+| Conjunction    | Product Type        |
+| Disjunction    | Sum Type            |
+| Implication    | Function Type       |
+| Universal      | Polymorphic Type    |
+| Existential   | Abstract Data Type  |
+
+Every well-typed program can be viewed as a proof of its type proposition. This insight has profound implications for verification and programming language design.
+
+#+BEGIN_SRC haskell
+-- Logical AND corresponds to product types
+-- Proof that A AND B implies A
+fst :: (a, b) -> a
+fst (a, _) = a
+
+-- Logical OR corresponds to sum types
+-- Proof that A implies A OR B
+left :: a -> Either a b
+left a = Left a
+
+-- Logical implication corresponds to function types
+-- Modus ponens: If (A implies B) and A, then B
+apply :: (a -> b) -> a -> b
+apply f a = f a
+#+END_SRC
+
+** Gödel's Incompleteness Theorems
+:PROPERTIES:
+:CREATED: [1999-09-20]
+:TAGS: logic, foundations, metalogic
+:END:
+
+Gödel's incompleteness theorems represent one of the most profound results in mathematical logic:
+
+1. First Incompleteness Theorem: Any consistent formal system F within which a certain amount of elementary arithmetic can be carried out is incomplete; i.e., there are statements of the language of F which can neither be proved nor disproved in F.
+
+2. Second Incompleteness Theorem: For any consistent system F within which a certain amount of elementary arithmetic can be carried out, the consistency of F cannot be proved in F itself.
+
+The implications for computing are profound: there will always be true statements about programs that cannot be proven within our formal verification systems. We can never have a complete algorithmic solution to program verification.
+
+/Note: I often refer to Gödel's work when discussing the limitations of formal methods and type systems with overly ambitious students. Understanding these fundamental limitations is crucial to designing practical verification approaches./
+
+** Proof That There Are Infinitely Many Primes
+:PROPERTIES:
+:CREATED: [1989-11-03]
+:TAGS: number theory, proof by contradiction
+:END:
+
+This classic proof from Euclid demonstrates the power of proof by contradiction:
+
+Suppose, for contradiction, that there are only finitely many primes: $p_1, p_2, \ldots, p_n$.
+
+Consider the number $Q = p_1 \times p_2 \times \ldots \times p_n + 1$.
+
+Now, $Q$ is either prime or composite.
+
+If $Q$ is prime, then we have found a prime not in our list, contradicting our assumption.
+
+If $Q$ is composite, then it must be divisible by some prime $p_i$ in our list.
+But $Q \cong 1 \pmod{p_i}$ for all $i$, meaning $Q$ leaves remainder 1 when divided by any $p_i$.
+Thus, no $p_i$ can divide $Q$, which is a contradiction.
+
+Therefore, our assumption must be false, and there are infinitely many primes.
+
+/Observation: This proof has the same elegant structure as many proofs in computer scienceparticularly those involving uncomputability and undecidability. The technique of assuming a finite enumeration and then constructing a counterexample is used in proofs from the halting problem to Rice's theorem./
+
+* Programming Pearls
+:PROPERTIES:
+:CUSTOM_ID: pearls
+:END:
+
+** The Essence of Functional Programming
+:PROPERTIES:
+:CREATED: [2000-07-15]
+:TAGS: functional programming, monads, abstractions
+:END:
+
+Monads represent one of the most powerful abstractions in functional programming, allowing us to encapsulate computational effects:
+
+#+BEGIN_SRC haskell
+-- The Maybe monad
+-- Representing computations that might fail
+data Maybe a = Nothing | Just a
+
+instance Monad Maybe where
+    return x = Just x
+    Nothing >>= _ = Nothing
+    (Just x) >>= f = f x
+    
+-- The List monad
+-- Representing non-deterministic computations
+instance Monad [] where
+    return x = [x]
+    xs >>= f = concat (map f xs)
+    
+-- The State monad
+-- Representing stateful computations
+newtype State s a = State { runState :: s -> (a, s) }
+
+instance Monad (State s) where
+    return a = State $ \s -> (a, s)
+    m >>= f = State $ \s ->
+        let (a, s') = runState m s
+        in runState (f a) s'
+
+-- Example: Computing with Maybe
+safeDiv :: Int -> Int -> Maybe Int
+safeDiv _ 0 = Nothing
+safeDiv x y = Just (x `div` y)
+
+computation :: Int -> Int -> Int -> Maybe Int
+computation x y z = do
+    a <- safeDiv x y
+    b <- safeDiv z 2
+    return (a + b)
+#+END_SRC
+
+/Reflection (2018): When I first encountered monads, I thought they were unnecessarily complex. Now I see them as one of the most elegant patterns in programmingallowing pure functional code to express effects while maintaining referential transparency. The ability to separate what computation is performed from how it is executed represents a profound separation of concerns./
+
+** The Expression Problem
+:PROPERTIES:
+:CREATED: [2003-04-29]
+:TAGS: language design, extensibility, OOP, FP
+:END:
+
+The Expression Problem, described by Philip Wadler, is a fundamental challenge in programming language design:
+
+#+BEGIN_SRC java
+// Object-oriented approach
+// Easy to add new expressions, hard to add operations
+interface Expr {
+    double evaluate();
+    String prettyPrint();
+}
+
+class Constant implements Expr {
+    private double value;
+    
+    public Constant(double value) {
+        this.value = value;
+    }
+    
+    public double evaluate() {
+        return value;
+    }
+    
+    public String prettyPrint() {
+        return Double.toString(value);
+    }
+}
+
+class Addition implements Expr {
+    private Expr left;
+    private Expr right;
+    
+    public Addition(Expr left, Expr right) {
+        this.left = left;
+        this.right = right;
+    }
+    
+    public double evaluate() {
+        return left.evaluate() + right.evaluate();
+    }
+    
+    public String prettyPrint() {
+        return "(" + left.prettyPrint() + " + " + right.prettyPrint() + ")";
+    }
+}
+
+// Adding a new operation like "compile" requires modifying all classes!
+// Adding a new expression class is easy
+#+END_SRC
+
+#+BEGIN_SRC haskell
+-- Functional approach
+-- Easy to add operations, hard to add data variants
+data Expr = Constant Double
+          | Addition Expr Expr
+
+evaluate :: Expr -> Double
+evaluate (Constant x) = x
+evaluate (Addition e1 e2) = evaluate e1 + evaluate e2
+
+prettyPrint :: Expr -> String
+prettyPrint (Constant x) = show x
+prettyPrint (Addition e1 e2) = "(" ++ prettyPrint e1 ++ " + " ++ prettyPrint e2 ++ ")"
+
+-- Adding a new operation is easy
+compile :: Expr -> [Instruction]
+compile (Constant x) = [PushConstant x]
+compile (Addition e1 e2) = compile e1 ++ compile e2 ++ [Add]
+
+-- Adding a new data variant requires modifying all functions!
+#+END_SRC
+
+/Note (2017): The Expression Problem reveals a fundamental tension between different paradigms. Neither OOP nor FP solves it completely. Solutions like Scala's traits, Haskell's typeclasses, OCaml's polymorphic variants, and Clojure's protocols are all attempts to bridge this gap. This remains an area where language design continues to evolve./
+
+** The Beautiful Recursion of QuickCheck
+:PROPERTIES:
+:CREATED: [2008-11-17]
+:TAGS: testing, property-based testing, recursion
+:END:
+
+QuickCheck's approach to generating test data demonstrates a beautiful recursive pattern:
+
+#+BEGIN_SRC haskell
+-- Simplified version of QuickCheck's generator concept
+newtype Gen a = Gen { unGen :: StdGen -> Int -> a }
+
+instance Functor Gen where
+    fmap f (Gen g) = Gen (\r n -> f (g r n))
+
+instance Applicative Gen where
+    pure x = Gen (\_ _ -> x)
+    Gen f <*> Gen x = Gen (\r n ->
+        let (r1, r2) = split r
+            n' = n `div` 2
+        in (f r1 n') (x r2 n'))
+
+instance Monad Gen where
+    return = pure
+    Gen m >>= f = Gen (\r n ->
+        let (r1, r2) = split r
+            n' = n `div` 2
+            a = m r1 n'
+        in unGen (f a) r2 n')
+
+-- Generator for recursive structures (e.g., trees)
+data Tree a = Leaf a | Branch (Tree a) (Tree a) deriving Show
+
+-- The elegant recursion happens here
+genTree :: Gen a -> Gen (Tree a)
+genTree genA = sized $ \n ->
+    if n <= 1
+    then fmap Leaf genA
+    else do
+        -- Recursively generate smaller trees
+        let genSmaller = resize (n `div` 2) (genTree genA)
+        oneof [
+            fmap Leaf genA,
+            liftA2 Branch genSmaller genSmaller
+            ]
+#+END_SRC
+
+/Reflection: QuickCheck's ability to generate complex test data by composing simple generators showcases the power of functional composition. The way it handles recursive data structures by decreasing the size parameter is particularly elegantensuring termination while still producing diverse examples./
+
+* Historical Notes
+:PROPERTIES:
+:CUSTOM_ID: history
+:END:
+
+** Algol and the Birth of Structured Programming
+:PROPERTIES:
+:CREATED: [1991-08-02]
+:TAGS: programming languages, history, structured programming
+:END:
+
+Algol represents a pivotal moment in programming language design. Its innovations included:
+
+1. Block structure with nested lexical scopes
+2. Pass-by-value and pass-by-name parameters
+3. Recursive procedures
+4. Static typing
+5. BNF as a formal language definition tool
+
+/Personal note: During my graduate studies, I had the privilege of meeting Peter Naur, who shared fascinating stories about the committee meetings that shaped Algol. The desire to create a language that could express algorithms clearly for humans, not just computers, was revolutionary at the time./
+
+** The Birth and Death of Smalltalk
+:PROPERTIES:
+:CREATED: [1996-05-20]
+:TAGS: OOP, smalltalk, history, language design
+:END:
+
+Alan Kay's vision for Smalltalk was far more revolutionary than what object-oriented programming eventually became:
+
+1. Everything is an object
+2. Computation occurs by message passing
+3. The system is fully live and inspectable
+4. The environment and language are integrated
+
+/Reflection: Much of what made Smalltalk revolutionary was lost in its commercial descendants like C++ and Java. The integration of environment and language, the live coding experience, and the uniform treatment of objects were all compromised in the transition to static, compiled languages. I often wonder how different software development would be today if we had followed the Smalltalk path more faithfully./
+
+** The Fifth Generation Computing Project
+:PROPERTIES:
+:CREATED: [1993-03-14]
+:TAGS: AI, logic programming, history
+:END:
+
+Japan's Fifth Generation Computer Systems project (1982-1992) represented an ambitious attempt to revolutionize computing based on logic programming. Its goals included:
+
+1. Parallel inference machines
+2. Natural language processing
+3. Intelligent knowledge base systems
+4. New hardware architectures
+
+/Note: The project's perceived failure had more to do with overambitious goals and marketing than with fundamental flaws in its technical approach. Many of its innovations in parallel logic programming were ahead of their time. With the revival of AI in the 2010s, I find myself returning to papers from this era and discovering insights that are newly relevant./
+
+* Teaching Examples
+:PROPERTIES:
+:CUSTOM_ID: teaching
+:END:
+
+** The von Neumann Architecture vs. Functional Model
+:PROPERTIES:
+:CREATED: [2005-10-12]
+:TAGS: architecture, models of computation, teaching
+:END:
+
+I use this comparison in introductory lectures to illustrate the fundamental tension between our hardware architecture and certain programming paradigms:
+
+*** The von Neumann Bottleneck
+The von Neumann architecture, which underlies most modern computers, features:
+- A processing unit
+- A control unit
+- Memory that contains both data and instructions
+- Sequential execution model
+- State changes through assignment
+
+This architecture has a fundamental bottleneck: instructions and data travel along the same path between CPU and memory, limiting performance.
+
+*** The Functional Model
+In contrast, functional programming models computation as:
+- Evaluation of mathematical functions
+- Avoidance of mutable state
+- Emphasis on transformation rather than assignment
+- Natural parallelism
+- Referential transparency
+
+/Teaching note: I use this comparison to help students understand why functional programming sometimes feels "unnatural" initially, despite its mathematical elegance. We are fighting against the mental model reinforced by our hardware architecture./
+
+** Interactive Typechecking Demonstration
+:PROPERTIES:
+:CREATED: [2012-11-15]
+:TAGS: type inference, teaching, interactive
+:END:
+
+I use this interactive example in lectures to demonstrate Hindley-Milner type inference:
+
+#+BEGIN_SRC haskell
+-- Expression: \f -> \x -> f (f x)
+
+-- Step 1: Assign type variables
+-- f :: a
+-- x :: b
+-- The expression has type: (a -> b) -> a -> b
+
+-- Step 2: Generate constraints from application f x
+-- Since f is applied to x, f must be a function
+-- f :: b -> c (for some c)
+-- This creates a constraint: a = (b -> c)
+
+-- Step 3: Generate constraints from application f (f x)
+-- f is applied to (f x), which has type c
+-- This creates another constraint: a = (c -> d) (for some d)
+
+-- Step 4: Unify constraints
+-- a = (b -> c) and a = (c -> d)
+-- Therefore: (b -> c) = (c -> d)
+-- Which gives us: b = c and c = d
+
+-- Step 5: Substitute
+-- b = c = d
+-- Therefore, the inferred type is: (b -> b) -> b -> b
+
+-- In Haskell notation:
+-- :t \f -> \x -> f (f x)
+-- (\f -> \x -> f (f x)) :: (b -> b) -> b -> b
+#+END_SRC
+
+/Teaching note: Walking through the type inference process step by step helps students understand both the power and the limitations of Hindley-Milner type systems. I find this particular example valuable because it demonstrates how constraints propagate and how the most general type is derived./
+
+** The Halting Problem Explained Through Paradox
+:PROPERTIES:
+:CREATED: [2008-03-04]
+:TAGS: computability, theoretical cs, teaching
+:END:
+
+When teaching the halting problem, I use this pseudocode to illustrate the fundamental paradox:
+
+#+BEGIN_SRC python
+def halts(program, input):
+    """Determine if program will halt when run with input."""
+    # This is the function we are proving cannot exist
+    ...
+
+def paradox(program):
+    """Create a paradoxical situation if halts() exists."""
+    if halts(program, program):
+        # If program would halt when run on itself,
+        # then loop forever
+        while True:
+            pass
+    else:
+        # If program would loop forever when run on itself,
+        # then halt immediately
+        return
+
+# The paradox
+paradox(paradox)
+#+END_SRC
+
+If we assume `halts()` exists and works correctly:
+- If `paradox(paradox)` halts, then by the definition of `paradox()`, it should loop forever - contradiction!
+- If `paradox(paradox)` loops forever, then by the definition of `paradox()`, it should halt - contradiction!
+
+Therefore, `halts()` cannot exist. The halting problem is undecidable.
+
+/Teaching note: Students often struggle with the abstract nature of the proof by diagonalization. This concrete implementation helps them visualize the paradox. I emphasize how similar this is to other paradoxes they may be familiar with, like the liar paradox ("This statement is false")./
+
+* Personal Reflections
+:PROPERTIES:
+:CUSTOM_ID: reflections
+:END:
+
+** On Teaching Programming Language Concepts
+:PROPERTIES:
+:CREATED: [2019-06-18]
+:TAGS: pedagogy, personal
+:END:
+
+After three decades of teaching programming language concepts, I've observed that the most common struggle for students is not with the technical details but with shifting their mental models. Whether it's moving from imperative to functional, from static to dynamic typing, or from concrete to abstract thinking, the challenge is often unlearning rather than learning.
+
+I've found that concrete analogies from non-computing domains can be surprisingly effective:
+- Describing monads as assembly lines
+- Comparing type systems to systems of mathematical notation
+- Relating polymorphism to architectural patterns
+
+The most rewarding moments come when I see a student experience that "aha!" momentwhen a concept they've been struggling with suddenly clicks into place and they can see its elegance and utility.
+
+** On the Cycles of Programming Fashion
+:PROPERTIES:
+:CREATED: [2020-11-24]
+:TAGS: history, trends, critique
+:END:
+
+In my career, I've witnessed several complete cycles of programming fashion:
+- The rise, fall, and resurrection of functional programming
+- The explosion of object-oriented programming, followed by a backlash and then moderation
+- The swing between static and dynamic typing, now settling into gradual typing
+- The oscillation between monolithic and distributed architectures
+
+What troubles me is how rarely these cycles acknowledge their historical antecedents. Each generation seems determined to relearn the same lessons, often making the same mistakes along the way.
+
+The field would benefit from a stronger sense of history and a more critical examination of claims of novelty. Many "innovations" are rediscoveries, sometimes with terminology just different enough to obscure their origins.
+
+/Personal note: I sometimes feel like Cassandra, doomed to see the future (because it's repeating the past) while being ignored. My hope is that by documenting these patterns for my students, at least some will approach new trends with healthy skepticism and historical awareness./
