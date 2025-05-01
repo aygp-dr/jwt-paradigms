@@ -33,10 +33,9 @@ different approaches.
 :CUSTOM_ID: quotes
 :END:
 
-** On Abstraction and Simplicity
+** On Abstraction and Simplicity :abstraction:simplicity:design:
 :PROPERTIES:
 :CREATED: [1991-03-12]
-:TAGS: abstraction, simplicity, design
 :END:
 
 #+BEGIN_QUOTE
@@ -55,7 +54,7 @@ different approaches.
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-"Increasingly, people seem to misinterpret complexity as sophistication, which is bafflingthe incomprehensible should cause suspicion rather than admiration. Possibly this trend results from a mistaken belief that using a somewhat mysterious device confers an aura of power on the user."
+"Increasingly, people seem to misinterpret complexity as sophistication, which is baffling — the incomprehensible should cause suspicion rather than admiration. Possibly this trend results from a mistaken belief that using a somewhat mysterious device confers an aura of power on the user."
 -- Niklaus Wirth
 #+END_QUOTE
 
@@ -64,10 +63,9 @@ different approaches.
 -- Gordon Bell
 #+END_QUOTE
 
-** On Programming Languages
+** On Programming Languages :languages:design:expressiveness:
 :PROPERTIES:
 :CREATED: [1994-07-15]
-:TAGS: languages, design, expressiveness
 :END:
 
 #+BEGIN_QUOTE
@@ -91,14 +89,13 @@ different approaches.
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-"In the end, any tool is just thata tool. It can be used well or used poorly. SQL is not evilit just doesn't fit the way we represent objects in our code. [...] ORM is not evilit just often provides a barely adequate abstraction that can't quite bridge the conceptual gap. [...] Our tools will always be limited by our understanding."
+"In the end, any tool is just thata tool. It can be used well or used poorly. SQL is not evilit just doesn't fit the way we represent objects in our code. [...] ORM is not evilit just often provides a barely adequate abstraction that can't quite bridge the conceptual gap. [...] Our tools will always be limited by our understanding."
 -- Myself, in a lecture on impedance mismatch, 2006
 #+END_QUOTE
 
-** On Theory and Practice
+** On Theory and Practice :theory:practice:academia:industry:
 :PROPERTIES:
 :CREATED: [1998-02-23]
-:TAGS: theory, practice, academia, industry
 :END:
 
 #+BEGIN_QUOTE
@@ -131,10 +128,9 @@ different approaches.
 :CUSTOM_ID: algorithms
 :END:
 
-** Quicksort in Different Paradigms
+** Quicksort in Different Paradigms :sorting:algorithms:paradigms:comparisons:
 :PROPERTIES:
 :CREATED: [1990-04-18]
-:TAGS: sorting, algorithms, paradigms, comparisons
 :END:
 
 The elegance of Hoare's Quicksort algorithm is best appreciated through multiple paradigms:
@@ -200,10 +196,9 @@ quicksort([Head|Tail], Sorted) :-
 
 /Observation: The logical specification in Prolog reveals the underlying mathematical relationship most clearly. The partition relation precisely encodes the core insight of quicksort./
 
-** Y Combinator - Making Recursion Without Names
+** Y Combinator - Making Recursion Without Names :recursion:lambda_calculus:functional_programming:
 :PROPERTIES:
 :CREATED: [1995-11-05]
-:TAGS: recursion, lambda calculus, functional programming
 :END:
 
 The Y Combinator demonstrates the power of mathematical abstraction in creating recursion without explicit naming:
@@ -227,12 +222,11 @@ The Y Combinator demonstrates the power of mathematical abstraction in creating 
 (factorial 5) ; => 120
 #+END_SRC
 
-/Note (2018): I still recall the moment when I first understood how Y worksit was like seeing the mathematical universe from a new angle. The ability to derive recursion from pure lambda calculus without requiring a named function remains one of the most elegant demonstrations of the power of functional abstraction./
+/Note (2018): I still recall the moment when I first understood how Y worksit was like seeing the mathematical universe from a new angle. The ability to derive recursion from pure lambda calculus without requiring a named function remains one of the most elegant demonstrations of the power of functional abstraction./
 
-** Church Encoding: Pure Lambda Calculus
+** Church Encoding: Pure Lambda Calculus :lambda_calculus:church_encoding:foundations:
 :PROPERTIES:
 :CREATED: [1992-08-17]
-:TAGS: lambda calculus, church encoding, foundations
 :END:
 
 Church numerals represent perhaps the most elegant encoding of natural numbers in pure theory:
@@ -283,10 +277,9 @@ Church numerals represent perhaps the most elegant encoding of natural numbers i
 :CUSTOM_ID: proofs
 :END:
 
-** The Curry-Howard Correspondence
+** The Curry-Howard Correspondence :logic:type_theory:programming_languages:
 :PROPERTIES:
 :CREATED: [1997-02-12]
-:TAGS: logic, type theory, programming languages
 :END:
 
 The Curry-Howard correspondence illuminates the deep connection between logic and computation:
@@ -298,8 +291,8 @@ The Curry-Howard correspondence illuminates the deep connection between logic an
 | Conjunction    | Product Type        |
 | Disjunction    | Sum Type            |
 | Implication    | Function Type       |
-| Universal      | Polymorphic Type    |
-| Existential   | Abstract Data Type  |
+| Universal     | Polymorphic Type    |
+| Existential   | Abstract Data Type  |
 
 Every well-typed program can be viewed as a proof of its type proposition. This insight has profound implications for verification and programming language design.
 
@@ -320,10 +313,9 @@ apply :: (a -> b) -> a -> b
 apply f a = f a
 #+END_SRC
 
-** Gödel's Incompleteness Theorems
+** Gödel's Incompleteness Theorems :logic:foundations:metalogic:
 :PROPERTIES:
 :CREATED: [1999-09-20]
-:TAGS: logic, foundations, metalogic
 :END:
 
 G�del's incompleteness theorems represent one of the most profound results in mathematical logic:
@@ -336,10 +328,9 @@ The implications for computing are profound: there will always be true statement
 
 /Note: I often refer to G�del's work when discussing the limitations of formal methods and type systems with overly ambitious students. Understanding these fundamental limitations is crucial to designing practical verification approaches./
 
-** Proof That There Are Infinitely Many Primes
+** Proof That There Are Infinitely Many Primes :number_theory:proof_by_contradiction:
 :PROPERTIES:
 :CREATED: [1989-11-03]
-:TAGS: number theory, proof by contradiction
 :END:
 
 This classic proof from Euclid demonstrates the power of proof by contradiction:
@@ -358,17 +349,16 @@ Thus, no $p_i$ can divide $Q$, which is a contradiction.
 
 Therefore, our assumption must be false, and there are infinitely many primes.
 
-/Observation: This proof has the same elegant structure as many proofs in computer scienceparticularly those involving uncomputability and undecidability. The technique of assuming a finite enumeration and then constructing a counterexample is used in proofs from the halting problem to Rice's theorem./
+/Observation: This proof has the same elegant structure as many proofs in computer scienceparticularly those involving uncomputability and undecidability. The technique of assuming a finite enumeration and then constructing a counterexample is used in proofs from the halting problem to Rice's theorem./
 
 * Programming Pearls
 :PROPERTIES:
 :CUSTOM_ID: pearls
 :END:
 
-** The Essence of Functional Programming
+** The Essence of Functional Programming :functional_programming:monads:abstractions:
 :PROPERTIES:
 :CREATED: [2000-07-15]
-:TAGS: functional programming, monads, abstractions
 :END:
 
 Monads represent one of the most powerful abstractions in functional programming, allowing us to encapsulate computational effects:
@@ -411,12 +401,11 @@ computation x y z = do
     return (a + b)
 #+END_SRC
 
-/Reflection (2018): When I first encountered monads, I thought they were unnecessarily complex. Now I see them as one of the most elegant patterns in programmingallowing pure functional code to express effects while maintaining referential transparency. The ability to separate what computation is performed from how it is executed represents a profound separation of concerns./
+/Reflection (2018): When I first encountered monads, I thought they were unnecessarily complex. Now I see them as one of the most elegant patterns in programmingallowing pure functional code to express effects while maintaining referential transparency. The ability to separate what computation is performed from how it is executed represents a profound separation of concerns./
 
-** The Expression Problem
+** The Expression Problem :language_design:extensibility:OOP:FP:
 :PROPERTIES:
 :CREATED: [2003-04-29]
-:TAGS: language design, extensibility, OOP, FP
 :END:
 
 The Expression Problem, described by Philip Wadler, is a fundamental challenge in programming language design:
@@ -491,10 +480,9 @@ compile (Addition e1 e2) = compile e1 ++ compile e2 ++ [Add]
 
 /Note (2017): The Expression Problem reveals a fundamental tension between different paradigms. Neither OOP nor FP solves it completely. Solutions like Scala's traits, Haskell's typeclasses, OCaml's polymorphic variants, and Clojure's protocols are all attempts to bridge this gap. This remains an area where language design continues to evolve./
 
-** The Beautiful Recursion of QuickCheck
+** The Beautiful Recursion of QuickCheck :testing:property_based_testing:recursion:
 :PROPERTIES:
 :CREATED: [2008-11-17]
-:TAGS: testing, property-based testing, recursion
 :END:
 
 QuickCheck's approach to generating test data demonstrates a beautiful recursive pattern:
@@ -538,17 +526,16 @@ genTree genA = sized $ \n ->
             ]
 #+END_SRC
 
-/Reflection: QuickCheck's ability to generate complex test data by composing simple generators showcases the power of functional composition. The way it handles recursive data structures by decreasing the size parameter is particularly elegantensuring termination while still producing diverse examples./
+/Reflection: QuickCheck's ability to generate complex test data by composing simple generators showcases the power of functional composition. The way it handles recursive data structures by decreasing the size parameter is particularly elegantensuring termination while still producing diverse examples./
 
 * Historical Notes
 :PROPERTIES:
 :CUSTOM_ID: history
 :END:
 
-** Algol and the Birth of Structured Programming
+** Algol and the Birth of Structured Programming :programming_languages:history:structured_programming:
 :PROPERTIES:
 :CREATED: [1991-08-02]
-:TAGS: programming languages, history, structured programming
 :END:
 
 Algol represents a pivotal moment in programming language design. Its innovations included:
@@ -561,10 +548,9 @@ Algol represents a pivotal moment in programming language design. Its innovation
 
 /Personal note: During my graduate studies, I had the privilege of meeting Peter Naur, who shared fascinating stories about the committee meetings that shaped Algol. The desire to create a language that could express algorithms clearly for humans, not just computers, was revolutionary at the time./
 
-** The Birth and Death of Smalltalk
+** The Birth and Death of Smalltalk :OOP:smalltalk:history:language_design:
 :PROPERTIES:
 :CREATED: [1996-05-20]
-:TAGS: OOP, smalltalk, history, language design
 :END:
 
 Alan Kay's vision for Smalltalk was far more revolutionary than what object-oriented programming eventually became:
@@ -576,10 +562,9 @@ Alan Kay's vision for Smalltalk was far more revolutionary than what object-orie
 
 /Reflection: Much of what made Smalltalk revolutionary was lost in its commercial descendants like C++ and Java. The integration of environment and language, the live coding experience, and the uniform treatment of objects were all compromised in the transition to static, compiled languages. I often wonder how different software development would be today if we had followed the Smalltalk path more faithfully./
 
-** The Fifth Generation Computing Project
+** The Fifth Generation Computing Project :AI:logic_programming:history:
 :PROPERTIES:
 :CREATED: [1993-03-14]
-:TAGS: AI, logic programming, history
 :END:
 
 Japan's Fifth Generation Computer Systems project (1982-1992) represented an ambitious attempt to revolutionize computing based on logic programming. Its goals included:
@@ -596,10 +581,9 @@ Japan's Fifth Generation Computer Systems project (1982-1992) represented an amb
 :CUSTOM_ID: teaching
 :END:
 
-** The von Neumann Architecture vs. Functional Model
+** The von Neumann Architecture vs. Functional Model :architecture:models_of_computation:teaching:
 :PROPERTIES:
 :CREATED: [2005-10-12]
-:TAGS: architecture, models of computation, teaching
 :END:
 
 I use this comparison in introductory lectures to illustrate the fundamental tension between our hardware architecture and certain programming paradigms:
@@ -624,10 +608,9 @@ In contrast, functional programming models computation as:
 
 /Teaching note: I use this comparison to help students understand why functional programming sometimes feels "unnatural" initially, despite its mathematical elegance. We are fighting against the mental model reinforced by our hardware architecture./
 
-** Interactive Typechecking Demonstration
+** Interactive Typechecking Demonstration :type_inference:teaching:interactive:
 :PROPERTIES:
 :CREATED: [2012-11-15]
-:TAGS: type inference, teaching, interactive
 :END:
 
 I use this interactive example in lectures to demonstrate Hindley-Milner type inference:
@@ -665,10 +648,9 @@ I use this interactive example in lectures to demonstrate Hindley-Milner type in
 
 /Teaching note: Walking through the type inference process step by step helps students understand both the power and the limitations of Hindley-Milner type systems. I find this particular example valuable because it demonstrates how constraints propagate and how the most general type is derived./
 
-** The Halting Problem Explained Through Paradox
+** The Halting Problem Explained Through Paradox :computability:theoretical_cs:teaching:
 :PROPERTIES:
 :CREATED: [2008-03-04]
-:TAGS: computability, theoretical cs, teaching
 :END:
 
 When teaching the halting problem, I use this pseudocode to illustrate the fundamental paradox:
@@ -708,10 +690,9 @@ Therefore, `halts()` cannot exist. The halting problem is undecidable.
 :CUSTOM_ID: film-television
 :END:
 
-** Computer Science in Popular Media
+** Computer Science in Popular Media :media:representation:analysis:
 :PROPERTIES:
 :CREATED: [2022-05-16]
-:TAGS: media, representation, analysis
 :END:
 
 *** Notable Portrayals of Computing in Film
@@ -750,10 +731,9 @@ Silicon Valley stands out for its accurate, if exaggerated, portrayal of startup
 :CUSTOM_ID: reflections
 :END:
 
-** On Teaching Programming Language Concepts
+** On Teaching Programming Language Concepts :pedagogy:personal:
 :PROPERTIES:
 :CREATED: [2019-06-18]
-:TAGS: pedagogy, personal
 :END:
 
 After three decades of teaching programming language concepts, I've observed that the most common struggle for students is not with the technical details but with shifting their mental models. Whether it's moving from imperative to functional, from static to dynamic typing, or from concrete to abstract thinking, the challenge is often unlearning rather than learning.
@@ -763,12 +743,11 @@ I've found that concrete analogies from non-computing domains can be surprisingl
 - Comparing type systems to systems of mathematical notation
 - Relating polymorphism to architectural patterns
 
-The most rewarding moments come when I see a student experience that "aha!" momentwhen a concept they've been struggling with suddenly clicks into place and they can see its elegance and utility.
+The most rewarding moments come when I see a student experience that "aha!" momentwhen a concept they've been struggling with suddenly clicks into place and they can see its elegance and utility.
 
-** On the Cycles of Programming Fashion
+** On the Cycles of Programming Fashion :history:trends:critique:
 :PROPERTIES:
 :CREATED: [2020-11-24]
-:TAGS: history, trends, critique
 :END:
 
 In my career, I've witnessed several complete cycles of programming fashion:
