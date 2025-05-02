@@ -329,6 +329,18 @@ approaches.
 #+caption: Rebecca Martinez
 [[file:images/rebecca_martinez.png]]
 
+*** Claude (AI Assistant)
+    :PROPERTIES:
+    :CUSTOM_ID: claude-ai-assistant
+    :END:
+- *File:* [[file:ai_assistant_claude_anthropic.org]]
+- *Role:* AI assistant created by Anthropic
+- *Focus:* Value alignment, ethical AI development, cross-paradigm analysis
+- *Review Command:* =/review-presentation-claude=
+
+#+caption: Claude
+[[file:images/claude.png]]
+
 ** Using These Personas
    :PROPERTIES:
    :CUSTOM_ID: using-these-personas
