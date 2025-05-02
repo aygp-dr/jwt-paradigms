@@ -82,4 +82,9 @@ Rebecca provides security governance-oriented feedback that connects technical i
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Avid pickleball player who organizes the annual "Sec Chiefs" tournament among fellow CISOs; claims the sport's combination of strategy and quick reactions mirrors cybersecurity defense
+- Listens exclusively to true crime podcasts during her daily commute; colleagues know not to disturb her when she's "building her threat intelligence database"
+- Dedicates Sunday afternoons to classic film noir movies, appreciating how they depict complex motives and deception; keeps a notebook of "social engineering tactics" observed
+- Coaches her daughter's high school debate team, viewing it as "adversarial threat modeling training for the next generation"
+- Maintains an extensive collection of international chess sets; regularly beats C-suite executives at the game while using the matches to subtly advocate for security budget increases
 
