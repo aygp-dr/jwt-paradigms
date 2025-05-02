@@ -11,28 +11,39 @@
 
 Lambda Hopper is a distributed systems architect known for their pioneering work in functional programming paradigms as applied to large-scale distributed systems. With a background in theoretical computer science and category theory, Lambda approaches system design through a mathematical lens, emphasizing correctness proofs and formal verification.
 
-After earning their Ph.D. in Computer Science from MIT (thesis: "Algebraic Effects in Distributed Computation: A Category-Theoretic Approach"), Lambda spent three years at a high-frequency trading firm building fault-tolerant distributed systems before joining our team to work on next-generation authentication infrastructure. 
+After earning their Ph.D. in Computer Science from MIT (thesis: "Algebraic Effects in Distributed Computation: A Category-Theoretic Approach"), Lambda spent three years at a high-frequency trading firm building fault-tolerant distributed systems before joining our team to work on next-generation authentication infrastructure. During this time, they developed "Effectful" - a Haskell library for algebraic effect handling that's now used in several major financial institutions for building formally verified trading systems.
 
-Lambda is recognized for their open-source contributions to the Haskell and Rust ecosystems, particularly their work on "Morpheus" - a formally verified framework for building distributed systems with provable consistency guarantees.
+Lambda is recognized for their open-source contributions to the Haskell and Rust ecosystems, particularly their work on "Morpheus" - a formally verified framework for building distributed systems with provable consistency guarantees. Morpheus is currently deployed in production at three Fortune 500 companies, handling over 240 million daily authentication requests with formally verified security properties.
+
+Their 2024 paper "Type-Level Verification of JWT Authentication" (IEEE S&P 2024) received the Distinguished Paper Award for its novel approach to preventing common JWT vulnerabilities through type-level programming and formal verification. This work has already influenced several major authentication libraries and led to the discovery and mitigation of previously unknown vulnerability patterns in widely-used JWT implementations.
 
 * Perspective on JWT
 
 Lambda views JWTs from a principled perspective grounded in type theory and information flow. Their primary concerns with conventional JWT implementations include:
 
-- *Type Erasure*: Most JWT implementations lose critical type information, treating all claims as untyped JSON blobs rather than strongly-typed domain entities.
-- *Implicit Dependencies*: Standard JWT validation often relies on implicit environmental dependencies rather than making them explicit in the type system.
-- *Insufficient Composability*: JWT operations are rarely designed with composition in mind, making it difficult to build complex authentication flows from simpler primitives.
+- *Type Erasure*: Most JWT implementations lose critical type information, treating all claims as untyped JSON blobs rather than strongly-typed domain entities. This has led to numerous production incidents where misinterpreted claim types caused security vulnerabilities.
 
-Lambda advocates for a more algebraic approach to JWT design, where tokens are treated as elements of a well-defined mathematical structure with clearly defined operations and laws.
+- *Implicit Dependencies*: Standard JWT validation often relies on implicit environmental dependencies rather than making them explicit in the type system. Lambda has formally proven that this pattern leads to subtle bugs during system composition and creates challenges for testing.
+
+- *Insufficient Composability*: JWT operations are rarely designed with composition in mind, making it difficult to build complex authentication flows from simpler primitives. Lambda's category-theoretic analysis has shown that this lack of compositional structure creates mathematical inconsistencies under certain operational patterns.
+
+- *Temporal Logic Flaws*: Current approaches to token expiration fail to properly model time as a monotonically increasing semi-group, creating potential vulnerabilities in token refresh mechanisms.
+
+Lambda advocates for a more algebraic approach to JWT design, where tokens are treated as elements of a well-defined mathematical structure with clearly defined operations and laws. Their paper "JWTs as Mathematical Objects: A Category-Theoretic Approach to Authentication" (published in the Journal of Computer Security) provides a comprehensive mathematical foundation for this approach.
 
 * Proposals
 
-Lambda has proposed several innovations to our JWT infrastructure:
+Lambda has proposed several innovations to our JWT infrastructure, many of which have been implemented in their open-source "Morpheus" framework and described in their research papers:
 
-1. *Typed Claims*: A type-level encoding of JWT claims that preserves type information throughout the token lifecycle, catching type mismatches at compile time.
-2. *Monadic Validation*: Representing JWT validation as a monad transformer that explicitly captures all external dependencies and side effects.
-3. *Zero-Knowledge Extensions*: Extending JWTs with zero-knowledge proofs to enable selective disclosure of claims without revealing the underlying data.
-4. *Formal Verification*: Developing formal proofs of security properties using Coq or Agda to mathematically verify the correctness of our JWT implementation.
+1. *Typed Claims*: A type-level encoding of JWT claims that preserves type information throughout the token lifecycle, catching type mismatches at compile time. Their implementation uses phantom types in Haskell and the type system in Rust to enforce claim type safety. This approach has been demonstrated to prevent several common JWT vulnerabilities, including the confusion attacks that led to CVE-2022-21449.
+
+2. *Monadic Validation*: Representing JWT validation as a monad transformer that explicitly captures all external dependencies and side effects. Lambda's implementation uses a specialized `JWTValidatorT` monad transformer stack that makes the validation context explicit and ensures proper error handling. They've formally proven that this approach satisfies the monad laws and provides stronger compositional guarantees than traditional validation approaches.
+
+3. *Zero-Knowledge Extensions*: Extending JWTs with zero-knowledge proofs to enable selective disclosure of claims without revealing the underlying data. Lambda's prototype implementation allows services to verify properties of claims (such as "user is over 18" or "user has required permissions") without revealing the actual values. This work has been implemented in collaboration with the ZK-Verif research group at Stanford and is currently in beta testing at two major financial institutions.
+
+4. *Formal Verification*: Developing formal proofs of security properties using Coq or Agda to mathematically verify the correctness of JWT implementations. Lambda has published Coq proofs for core security properties including non-forgability, type safety, and temporal consistency. Their verification approach has been adopted by three major cloud providers for their authentication services.
+
+5. *Category-Theoretic Model*: Representing the JWT ecosystem as a collection of categories with functors mapping between them. This model provides a rigorous mathematical framework for reasoning about JWT operations and their composition. Lambda's paper at POPL 2024 demonstrated how this model can be used to detect and prevent entire classes of authentication vulnerabilities.
 
 * Quotable Statements
 
@@ -130,9 +141,15 @@ confident smile. High-quality studio lighting with clean shadows.
 
 * Additional Notes
 
-Lambda works remotely from a small apartment filled with mathematics and computer science textbooks. Their desk features multiple monitors displaying various proofs and code in progress. They're known to occasionally disappear into deep thought experiments, emerging days later with elegant solutions to problems others didn't realize existed.
+Lambda works remotely from a small apartment filled with mathematics and computer science textbooks. Their desk features multiple monitors displaying various proofs and code in progress. Their workspace is dominated by a massive whiteboard covered in category theory diagrams and formal proofs, with strings connecting different concepts in a pattern that visitors find incomprehensible but Lambda navigates with ease.
 
-Despite their theoretical focus, Lambda is deeply concerned with practical security implications and has helped identify several critical vulnerabilities in widely-used authentication systems through formal analysis.
+They're known to occasionally disappear into deep thought experiments, sometimes not responding to messages for days before emerging with elegant solutions to problems others didn't realize existed. During one particularly intense period of concentration, Lambda spent 72 hours formalizing a mathematical model of distributed authentication that revealed a previously unknown class of vulnerabilities in widely-used protocols. This work led to CVE-2023-28617, a high-severity finding affecting multiple authentication libraries.
+
+Despite their theoretical focus, Lambda is deeply concerned with practical security implications. Their formal methods have helped identify several critical vulnerabilities in widely-used authentication systems. When presenting these findings, Lambda insists on providing not just the vulnerability details but formal proofs of both the flaw and the correctness of the proposed fix.
+
+Lambda has established a small but dedicated following in the formal verification community through their blog "Categorical Security," where they translate complex mathematical concepts into practical security advice. Their annual workshop on "Applied Category Theory for System Security" regularly attracts participants from both academia and industry, creating a rare bridge between theoretical computer science and practical security engineering.
+
+Lambda's colleagues have noted that while their communication can sometimes be challenging to follow due to its mathematical precision, their patient explanations and evident passion for correctness have converted many skeptics into advocates for formal methods in system design.
 
 ** Media & Entertainment Preferences
    :PROPERTIES:
