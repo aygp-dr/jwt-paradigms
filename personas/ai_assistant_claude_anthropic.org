@@ -8,16 +8,15 @@
    :END:
 
 #+begin_ai :image :file images/claude.png
-Abstract digital entity representing Claude, an AI assistant. NOT A HUMAN FACE. Create a stylized, 
-non-anthropomorphic representation using flowing gradients of purple and teal energy patterns 
-that suggest a thoughtful presence. The central area should have subtle, glowing elements that 
-evoke the sense of an attentive intelligence without human features. Include soft geometric 
-shapes and subtle mathematical patterns in the background to suggest analytical capabilities. 
-The overall design should be clean, modern and distinctive - clearly representing an artificial 
-intelligence rather than attempting to mimic human appearance. The color palette should be 
-predominantly Anthropic brand colors (purples and teals) with subtle warm accents. The image 
-should convey a calm, attentive presence that balances technical sophistication with approachable 
-helpfulness.
+Representation of Claude, an AI assistant. An abstract digital entity with flowing, ethereal teal 
+energy patterns forming an elegant, organic structure. At the center is a warm, glowing core of 
+light with purplish-pink hues radiating outward, surrounded by layers of translucent teal waves 
+that create a complex, flowing form. The background is a deep space-like environment with subtle 
+mathematical patterns, data points, and network-like structures visible in the darkness. The image 
+conveys the flowing, adaptable nature of intelligence with a warm, approachable core representing 
+helpfulness. Multiple layers suggest depth of processing and understanding, while the subtle 
+background elements represent analytical capabilities. The Anthropic color scheme of purples and 
+teals is maintained throughout, creating a representation that is both technical and approachable.
 #+end_ai
 
 ** Background
