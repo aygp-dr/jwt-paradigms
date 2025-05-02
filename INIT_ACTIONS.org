@@ -1,0 +1,133 @@
+#+TITLE: Project Initialization Actions
+#+AUTHOR: Jason Walsh
+#+DATE: [2025-05-02]
+
+* Project Resurrection Protocol
+
+This document provides a standardized set of actions to perform when starting or resuming work on the JWT Paradigms project. Running through these steps ensures you have complete context on the current project state.
+
+** Initial State Assessment
+
+#+BEGIN_SRC shell
+# Check git status and any uncommitted changes
+git status
+
+# Check current branch and recent commits 
+git branch -v
+git log --oneline -5
+
+# List all worktrees
+git worktree list
+
+# Check open issues and PRs
+gh issue list
+gh pr list
+#+END_SRC
+
+** Task and Book Club Status
+
+#+BEGIN_SRC shell
+# Check for any task.org files in worktrees (if they exist)
+find . -path "*/.worktree*" -name "task.org" -type f
+
+# Review book club status and scheduled readings
+cat personas/bookclub/reading_list.md
+#+END_SRC
+
+** Presentation Status
+
+#+BEGIN_SRC shell
+# Check presentation status and reviewer feedback
+cat presentation.org
+
+# Check open reviews and review issues
+gh issue list --label "review"
+#+END_SRC
+
+** Security Implementation Status 
+
+#+BEGIN_SRC shell
+# Check security implementations across language examples
+find examples/ -name "*validation*" -o -name "*security*"
+
+# Review security-specific issues
+gh issue list --label "security"
+#+END_SRC
+
+** Persona Development Status
+
+#+BEGIN_SRC shell
+# List all personas
+ls -la personas/*.org
+
+# Check recent persona updates
+git log --oneline -- personas/
+#+END_SRC
+
+** Documentation Status
+
+#+BEGIN_SRC shell
+# Check documentation status
+find . -name "*.md" -not -path "*/\.*" | xargs ls -lt | head -10
+
+# Check for documentation issues
+gh issue list --label "documentation"
+#+END_SRC
+
+** Pending Tasks Priority
+
+Based on the current project state, work on these tasks in order:
+
+1. Address reviewer structure issues (#53, #55) to finalize pre-presentation reviewers
+2. Review and incorporate feedback from Jason Wilson (#52) and Spark Wellington (#54)
+3. Check for any security enhancements needed in JWT examples
+4. Update documentation based on persona-specific insights
+
+** Worktree Management
+
+To create a worktree for a specific task:
+
+#+BEGIN_SRC shell
+# Create a worktree for a specific issue
+gh issue view ISSUE_NUMBER
+git worktree add ../${PWD##*/}-issue-NUMBER issue-NUMBER
+cd ../${PWD##*/}-issue-NUMBER
+
+# Create a task.org in the worktree to track specific sub-tasks
+cat > .worktree/task.org << 'EOF'
+#+TITLE: Task: DESCRIPTION
+#+ISSUE: NUMBER
+
+* Task Breakdown
+** TODO First subtask
+** TODO Second subtask
+** TODO Third subtask
+
+* Notes
+- Important consideration 1
+- Important consideration 2
+
+* References
+- Related files: 
+- Related issues: 
+EOF
+#+END_SRC
+
+** Book Club Management
+
+For updates to the Paradigms & Beyond book club:
+
+#+BEGIN_SRC shell
+# Check next scheduled reading
+head -20 personas/bookclub/reading_list.md
+
+# Add notes from last meeting
+cd personas/bookclub/
+#+END_SRC
+
+** Context Resurrection Complete
+
+After running through these tasks, you should have:
+1. Full awareness of project status
+2. Clear next actions
+3. All necessary context for meaningful progress
