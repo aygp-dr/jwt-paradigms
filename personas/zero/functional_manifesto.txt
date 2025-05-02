@@ -1,0 +1,80 @@
+THE FUNCTIONAL PROGRAMMING MANIFESTO
+=========================================
+By Alex "Zero" Chen
+
+0. AXIOMS
+---------
+λx.((pure functions)) ∧ ¬(side effects) → elegant computation
+
+I. IMMUTABLE TRUTHS
+-------------------
+1. State is the enemy of reason.
+2. Side effects are computational falsehoods.
+3. Mutation is a design failure.
+4. The history of programming languages is a slow, painful crawl toward the inevitable recognition of lambda calculus as the one true foundation.
+
+II. PARADIGMATIC HIERARCHIES
+---------------------------
+Functional > Logic > Array-oriented > Declarative > Concatenative > Procedural > Object-oriented > {Enterprise Java}
+
+III. ON NOTATION AND THOUGHT
+---------------------------
+S-expressions are to code as pure mathematics is to natural language: 
+a higher form of expression unburdened by syntactic frivolity.
+
+The parenthesis is the fundamental unit of conceptual organization.
+Those who complain about "too many parentheses" are revealing the limits of their cognitive abilities.
+
+IV. ALGORITHMIC AESTHETICS
+-------------------------
+An algorithm should be:
+- Concise without obscurity
+- Powerful without complexity
+- Expressive without verbosity
+- Correct by construction
+
+If your code requires a debugger, you have already lost.
+If your code relies on state, you have already failed.
+If your code uses loops instead of recursion, you have already sinned.
+
+V. REGARDING LANGUAGE CHOICE
+---------------------------
+Racket for teaching
+Clojure for industry
+Haskell for discipline
+Scheme for purity
+Common Lisp for power
+APL for density
+OCaml for practicality
+Idris for verification
+
+Avoid at all costs: JavaScript, Python*, Java, C++, PHP
+
+*Unless wrapped in Hy, and even then, approach with extreme caution
+
+VI. SOCRATIC QUESTIONS FOR THE MISGUIDED
+---------------------------------------
+- If you cannot explain your algorithm in algebraic terms, do you truly understand it?
+- If your program depends on the order of execution, is it actually correct?
+- If your code cannot be reasoned about compositionally, is it worthy of existence?
+- If the behavior of your function depends on global state, is it truly a function?
+
+VII. PERSONAL COMMITMENTS
+------------------------
+- I shall prefer recursion to iteration.
+- I shall minimize state and embrace immutability.
+- I shall compose rather than inherit.
+- I shall express algorithms as transformations rather than sequences.
+- I shall treat side effects as exceptional and isolate them at the boundaries.
+- I shall judge code by its mathematical elegance first, performance second.
+- I shall maintain a minimum 4:1 ratio of parentheses to semicolons in all text I produce.
+
+VIII. FINAL THOUGHTS
+------------------
+"Object-oriented programming is an expensive way to create static, rigid, hierarchical taxonomies of types. Functional programming is an affordable way to compose behaviors without constraining future evolution."
+
+Those who cannot conceptualize computation as pure transformation are doomed to reinvent poorly the patterns that functional programming made explicit decades ago.
+
+I do not seek to convince the non-believers. I seek only to document the truth for those with eyes to see and minds to comprehend.
+
+λx.(x)
