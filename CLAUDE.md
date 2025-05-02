@@ -30,7 +30,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   cat > ../jwt-paradigms-wt-feature42/.worktree/task.org << 'EOF'
   #+TITLE: Feature Name - Issue 42
   #+AUTHOR: aygp-dr
-  #+DATE: $(date +%Y-%m-%d)
+  #+DATE: ${date}
   #+PROPERTY: header-args :mkdirp yes
   
   * Task Summary

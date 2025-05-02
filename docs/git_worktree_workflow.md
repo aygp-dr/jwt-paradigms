@@ -39,7 +39,7 @@ mkdir -p ../jwt-paradigms-wt-feature42/.worktree
 cat > ../jwt-paradigms-wt-feature42/.worktree/task.org << 'EOF'
 #+TITLE: Feature Name - Issue 42
 #+AUTHOR: aygp-dr
-#+DATE: $(date +%Y-%m-%d)
+#+DATE: ${date}
 #+PROPERTY: header-args :mkdirp yes
 
 * Task Summary
@@ -115,6 +115,41 @@ git branch -d feature-issue42
 git worktree remove ../jwt-paradigms-wt-feature42
 ```
 
+## Troubleshooting
+
+### Handling Conflicts Between Worktrees
+If you encounter conflicts between branches in different worktrees:
+
+```bash
+# In the conflicted worktree
+git fetch
+git merge origin/main
+# Resolve conflicts and continue
+```
+
+### Recovering from Failed Worktree Creation
+If worktree creation fails:
+
+```bash
+# Clean up any partial worktree
+git worktree prune
+# Try again with a fresh branch
+git checkout main
+git checkout -b feature-issue42-new
+git worktree add ../jwt-paradigms-wt-feature42-new -b feature-issue42-wt-new feature-issue42-new
+```
+
+### Managing When Main Branch Moves Ahead
+If the main branch has moved significantly ahead while you're working in a worktree:
+
+```bash
+# In your worktree
+git fetch
+git merge origin/main
+# Or rebase if preferred
+git rebase origin/main
+```
+
 ## Task Tracking
 
 Each worktree contains a `.worktree/task.org` file that tracks:
@@ -133,6 +168,45 @@ Claude Code can automatically detect worktrees by:
 1. Checking if the current path matches the pattern `{repo}-wt-{branch}`
 2. Looking for the `.worktree/task.org` file
 3. Using `git worktree list` to confirm status
+
+## First-Time Setup Guide
+
+If you're setting up your first worktree, follow these steps:
+
+1. **Prerequisites**:
+   - Ensure Git is version 2.17 or higher: `git --version`
+   - Make sure you have GitHub CLI installed: `gh --version`
+   - Configure your IDE to handle multiple related projects (see IDE Integration below)
+
+2. **First Worktree Creation**:
+   ```bash
+   # Start from your main repository
+   cd /path/to/jwt-paradigms
+   
+   # Ensure you're on the main branch and up-to-date
+   git checkout main
+   git pull
+   
+   # Follow the worktree creation steps in the workflow section
+   ```
+
+3. **Verify Setup**:
+   ```bash
+   git worktree list
+   # Should show both your main repo and new worktree
+   ```
+
+## IDE Integration
+
+### VS Code
+- Create a workspace file that includes both repositories
+- Use the "Project Manager" extension to switch between worktrees
+- Configure search to exclude node_modules across all worktrees
+
+### IntelliJ/WebStorm
+- Use "Open" to add the worktree as a project
+- Configure version control roots appropriately
+- Use project groups to organize related worktrees
 
 ## Commands
 

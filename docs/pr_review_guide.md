@@ -108,3 +108,13 @@ Claude PR Reviews should be considered as helpful suggestions rather than defini
 - [ ] Claude PR Reviewer feedback has been addressed
 - [ ] Changes meet the requirements of the issue
 - [ ] Branch is up to date with target branch
+
+### JWT-Specific Review Items
+
+- [ ] Token signature verification occurs before processing payload
+- [ ] All required claims are validated (exp, iss, aud, sub)
+- [ ] Algorithm safety checks are implemented (no "none" algorithm, type validation)
+- [ ] Base64url decoding is handled correctly
+- [ ] Token revocation considerations are addressed if applicable
+- [ ] Key management practices follow security standards
+- [ ] Cross-language implementations follow idiomatic patterns
