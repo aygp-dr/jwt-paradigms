@@ -94,23 +94,11 @@ git worktree add ../${PWD##*/}-issue-NUMBER issue-NUMBER
 cd ../${PWD##*/}-issue-NUMBER
 
 # Create a task.org in the worktree to track specific sub-tasks
-cat > .worktree/task.org << 'EOF'
-#+TITLE: Task: DESCRIPTION
-#+ISSUE: NUMBER
-
-* Task Breakdown
-** TODO First subtask
-** TODO Second subtask
-** TODO Third subtask
-
-* Notes
-- Important consideration 1
-- Important consideration 2
-
-* References
-- Related files: 
-- Related issues: 
-EOF
+cp docs/task_template.org ./.task.org
+sed -i "s/DESCRIPTION/ISSUE_DESCRIPTION/g" ./.task.org
+sed -i "s/NUMBER/$ISSUE_NUMBER/g" ./.task.org
+sed -i "s/YYYY-MM-DD/$(date +%Y-%m-%d)/g" ./.task.org
+sed -i "s/ASSIGNEE/$(git config user.name)/g" ./.task.org
 #+END_SRC
 
 ** Book Club Management
