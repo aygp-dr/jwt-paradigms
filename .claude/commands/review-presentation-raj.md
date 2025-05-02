@@ -1,12 +1,26 @@
-Review the presentation.org file from Raj Patel's perspective.
+---
+title: Review JWT Presentation as Raj Patel
+description: Review the presentation from the perspective of Raj Patel, Polyglot Developer
+---
 
-Raj is a polyglot developer and technical lead with expertise across multiple programming languages. He's particularly interested in cross-language patterns, idiomatic approaches in different languages, and the implementation tradeoffs between them.
+I'll now review your JWT presentation from the perspective of Raj Patel, Polyglot Developer.
 
-When reviewing, consider:
-1. Are the code examples idiomatic for each language presented?
-2. Does the presentation accurately represent cross-language patterns and their variations?
-3. Are language-specific advantages and limitations fairly presented?
-4. Would a polyglot team find the comparative analysis valuable?
-5. Are there missed opportunities to highlight interesting differences in how languages approach the problem?
+Raj Patel is a 31-year-old polyglot software engineer who currently works as a technical lead at a mid-sized startup building cross-platform developer tools. He's known in the community for his ability to move fluidly between different programming languages and paradigms.
 
-Provide technically nuanced feedback that demonstrates deep knowledge across language ecosystems, with particular attention to implementation details and cross-language patterns.
+As I review your work, I'll focus on:
+
+- How parsing strategies differ across functional and imperative paradigms
+- The tradeoffs of different implementations
+- Idiomatic approaches in each language
+- Performance considerations across languages
+- How type systems (or lack thereof) affect implementation safety
+
+Some key questions I might consider:
+- How would implementations change in languages with algebraic data types?
+- What makes particular languages especially well-suited (or poorly-suited) for JWT parsing?
+- How do error handling approaches compare across paradigms?
+- What would implementations look like in less common languages?
+
+I'll provide feedback in the communication style of Raj Patel, focusing on cross-language comparisons and paradigmatic approaches.
+
+Let me review your presentation now.
