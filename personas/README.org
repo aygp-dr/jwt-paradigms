@@ -6,10 +6,37 @@ This directory contains personas created for reviewing the JWT parsing
 presentation and providing diverse perspectives on implementation
 approaches.
 
-** Primary Reviewers
+** Development Phase Reviewers
    :PROPERTIES:
-   :CUSTOM_ID: primary-reviewers
+   :CUSTOM_ID: development-phase-reviewers
    :END:
+These reviewers provide ongoing feedback during the active development and implementation phases.
+
+*** Jason Wilson (Staff Engineer)
+    :PROPERTIES:
+    :CUSTOM_ID: jason-wilson-staff-engineer
+    :END:
+- *File:* [[file:staff_engineer_jason_wilson.org]]
+- *Role:* Staff Engineer specializing in Identity & Access Management
+- *Focus:* Security implementation patterns, cross-language interoperability, JWT best practices
+- *Review Command:* =/review-presentation-jason=
+
+#+caption: Jason Wilson
+[[file:images/jason_wilson.png]]
+
+*** Hannah Chen (Security Architect)
+    :PROPERTIES:
+    :CUSTOM_ID: hannah-chen-security-architect
+    :END:
+- *File:* [[file:security_expert_hannah_chen.org]]
+- *Role:* Application security architect at financial institution
+- *Focus:* Real-world security concerns, practical mitigations,
+  balancing security with usability
+- *Review Command:* =/review-presentation-hannah=
+
+#+caption: Hannah Chen
+[[file:images/hannah_chen.png]]
+
 *** Raj Patel (Polyglot Developer)
     :PROPERTIES:
     :CUSTOM_ID: raj-patel-polyglot-developer
@@ -36,62 +63,25 @@ approaches.
 #+caption: Dr. Maya Ramirez
 [[file:images/maya_ramirez.png]]
 
-*** Hannah Chen (Security Architect)
-    :PROPERTIES:
-    :CUSTOM_ID: hannah-chen-security-architect
-    :END:
-- *File:* [[file:security_expert_hannah_chen.org]]
-- *Role:* Application security architect at financial institution
-- *Focus:* Real-world security concerns, practical mitigations,
-  balancing security with usability
-- *Review Command:* =/review-presentation-hannah=
-
-#+caption: Hannah Chen
-[[file:images/hannah_chen.png]]
-
-*** Dr. Eleanor Reynolds (VP of Engineering)
-    :PROPERTIES:
-    :CUSTOM_ID: dr.-eleanor-reynolds-vp-of-engineering
-    :END:
-- *File:* [[file:executive_sponsor_eleanor_reynolds.org]]
-- *Role:* VP of Engineering at a security and identity management
-  company
-- *Focus:* Strategic implications, organizational impact, business
-  alignment
-- *Review Command:* =/review-presentation-eleanor=
-
-#+caption: Dr. Eleanor Reynolds
-[[file:images/eleanor_reynolds.png]]
-
-** Secondary Reviewers
+** Milestone Review Experts
    :PROPERTIES:
-   :CUSTOM_ID: secondary-reviewers
+   :CUSTOM_ID: milestone-review-experts
    :END:
-*** Alex "Zero" Chen (Paradigm Purist)
+These reviewers provide comprehensive feedback at key project milestones and integration points.
+
+*** Dr. Vikram Shah (Systems Security Researcher)
     :PROPERTIES:
-    :CUSTOM_ID: alex-zero-chen-paradigm-purist
+    :CUSTOM_ID: dr.-vikram-shah-systems-security-researcher
     :END:
-- *File:* [[file:paradigm_purist_alex_chen.org]]
-- *Role:* PhD candidate and TA obsessed with functional programming
-  purity
-- *Focus:* Idiomatic functional implementations, pattern matching, code
-  elegance
-- *Review Command:* =/review-presentation-zero=
+- *File:* [[file:systems_security_researcher_vikram_shah.org]]
+- *Role:* Associate Professor specializing in formal methods for
+  security verification
+- *Focus:* Formal verification, cryptographic proofs, mathematical
+  security models
+- *Review Command:* =/review-presentation-vikram=
 
-#+caption: Alex "Zero" Chen
-[[file:images/zero_chen.png]]
-
-*** Lambda Hopper (Distributed Systems Architect)
-    :PROPERTIES:
-    :CUSTOM_ID: lambda-hopper-distributed-systems-architect
-    :END:
-- *File:* [[file:distributed_systems_architect_lambda_hopper.org]]
-- *Role:* Theoretical computer scientist specializing in distributed systems
-- *Focus:* Type theory, formal verification, algebraic approaches to security
-- *Review Command:* =/review-presentation-lambda=
-
-#+caption: Lambda Hopper
-[[file:images/lambda_hopper.png]]
+#+caption: Dr. Vikram Shah
+[[file:images/vikram_shah.png]]
 
 *** Dr. Neha Kapoor (Performance Engineer)
     :PROPERTIES:
@@ -106,6 +96,38 @@ approaches.
 
 #+caption: Dr. Neha Kapoor
 [[file:images/neha_kapoor.png]]
+
+*** Lambda Hopper (Distributed Systems Architect)
+    :PROPERTIES:
+    :CUSTOM_ID: lambda-hopper-distributed-systems-architect
+    :END:
+- *File:* [[file:distributed_systems_architect_lambda_hopper.org]]
+- *Role:* Theoretical computer scientist specializing in distributed systems
+- *Focus:* Type theory, formal verification, algebraic approaches to security
+- *Review Command:* =/review-presentation-lambda=
+
+#+caption: Lambda Hopper
+[[file:images/lambda_hopper.png]]
+
+*** Alex "Zero" Chen (Paradigm Purist)
+    :PROPERTIES:
+    :CUSTOM_ID: alex-zero-chen-paradigm-purist
+    :END:
+- *File:* [[file:paradigm_purist_alex_chen.org]]
+- *Role:* PhD candidate and TA obsessed with functional programming
+  purity
+- *Focus:* Idiomatic functional implementations, pattern matching, code
+  elegance
+- *Review Command:* =/review-presentation-zero=
+
+#+caption: Alex "Zero" Chen
+[[file:images/zero_chen.png]]
+
+** Pre-Presentation Reviewers
+   :PROPERTIES:
+   :CUSTOM_ID: pre-presentation-reviewers
+   :END:
+These reviewers provide final feedback before the presentation is delivered to ensure it meets accessibility, usability, and educational goals.
 
 *** Sofia Martinez (Beginner-Friendly Developer)
     :PROPERTIES:
@@ -132,6 +154,39 @@ approaches.
 #+caption: Marco Hernandez
 [[file:images/marco_hernandez.png]]
 
+*** Olivia Rodriguez (UX Researcher)
+    :PROPERTIES:
+    :CUSTOM_ID: olivia-rodriguez-ux-researcher
+    :END:
+- *File:* [[file:ux_researcher_olivia_rodriguez.org]]
+- *Role:* Lead UX Researcher focused on authentication experiences
+- *Focus:* Usability of authentication flows, error handling,
+  accessibility
+- *Review Command:* =/review-presentation-olivia=
+
+#+caption: Olivia Rodriguez
+[[file:images/olivia_rodriguez.png]]
+
+*** Dr. Eleanor Reynolds (VP of Engineering)
+    :PROPERTIES:
+    :CUSTOM_ID: dr.-eleanor-reynolds-vp-of-engineering
+    :END:
+- *File:* [[file:executive_sponsor_eleanor_reynolds.org]]
+- *Role:* VP of Engineering at a security and identity management
+  company
+- *Focus:* Strategic implications, organizational impact, business
+  alignment
+- *Review Command:* =/review-presentation-eleanor=
+
+#+caption: Dr. Eleanor Reynolds
+[[file:images/eleanor_reynolds.png]]
+
+** Post-Conference Analysis Team
+   :PROPERTIES:
+   :CUSTOM_ID: post-conference-analysis-team
+   :END:
+These reviewers provide reflective analysis after the presentation has been delivered, focusing on broader implications and future directions.
+
 *** Professor Marcus "Spark" Wellington (Academic Gadfly)
     :PROPERTIES:
     :CUSTOM_ID: professor-marcus-spark-wellington-academic-gadfly
@@ -145,38 +200,6 @@ approaches.
 #+caption: Professor Wellington
 [[file:images/spark_wellington.png]]
 
-** Additional Reviewers
-   :PROPERTIES:
-   :CUSTOM_ID: additional-reviewers
-   :END:
-*** Dr. Vikram Shah (Systems Security Researcher)
-    :PROPERTIES:
-    :CUSTOM_ID: dr.-vikram-shah-systems-security-researcher
-    :END:
-- *File:* [[file:systems_security_researcher_vikram_shah.org]]
-- *Role:* Associate Professor specializing in formal methods for
-  security verification
-- *Focus:* Formal verification, cryptographic proofs, mathematical
-  security models
-- *Review Command:* =/review-presentation-vikram=
-
-#+caption: Dr. Vikram Shah
-[[file:images/vikram_shah.png]]
-
-*** James Wilson (Code Quality Advocate)
-    :PROPERTIES:
-    :CUSTOM_ID: james-wilson-code-quality-advocate
-    :END:
-- *File:* [[file:code_quality_advocate_james_wilson.org]]
-- *Role:* Staff Engineer and code quality champion at developer tools
-  company
-- *Focus:* Testing strategies, maintainability, error handling, clean
-  code principles
-- *Review Command:* =/review-presentation-james=
-
-#+caption: James Wilson
-[[file:images/james_wilson.png]]
-
 *** Dr. Amara Chen (AI Ethics Researcher)
     :PROPERTIES:
     :CUSTOM_ID: dr.-amara-chen-ai-ethics-researcher
@@ -189,19 +212,6 @@ approaches.
 
 #+caption: Dr. Amara Chen
 [[file:images/amara_chen.png]]
-
-*** Olivia Rodriguez (UX Researcher)
-    :PROPERTIES:
-    :CUSTOM_ID: olivia-rodriguez-ux-researcher
-    :END:
-- *File:* [[file:ux_researcher_olivia_rodriguez.org]]
-- *Role:* Lead UX Researcher focused on authentication experiences
-- *Focus:* Usability of authentication flows, error handling,
-  accessibility
-- *Review Command:* =/review-presentation-olivia=
-
-#+caption: Olivia Rodriguez
-[[file:images/olivia_rodriguez.png]]
 
 *** Diego Martinez (Collaborative Software Researcher)
     :PROPERTIES:
@@ -245,17 +255,17 @@ approaches.
 #+caption: Isabella Garcia
 [[file:images/isabella_garcia.png]]
 
-*** James Wilson (Chief Executive Officer)
+*** James Wilson (CEO)
     :PROPERTIES:
     :CUSTOM_ID: james-wilson-chief-executive-officer
     :END:
 - *File:* [[file:chief_executive_officer_james_wilson.org]]
 - *Role:* CEO with technical background and executive leadership
 - *Focus:* Business strategy, market positioning, organizational alignment
-- *Review Command:* =/review-presentation-james-ceo=
+- *Review Command:* =/review-presentation-james=
 
 #+caption: James Wilson (CEO)
-[[file:images/james_wilson_ceo.png]]
+[[file:images/james_wilson.png]]
 
 *** Sarah Martinez (Legal Counsel)
     :PROPERTIES:

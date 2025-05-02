@@ -139,13 +139,7 @@ publish: $(OUTPUT_DIR) ## Export org files to markdown
 
 claude-commands: ## Generate Claude review command files
 	@mkdir -p $(CLAUDE_DIR)
-	@for file in $(ORG_FILES); do \
-		if grep -q "^\* .*Persona" $file; then \
-			base=$(basename $file .org); \
-			echo "Generating Claude command for $base"; \
-			$(PYTHON) $(SCRIPTS_DIR)/extract_persona.py --input $file --output $(CLAUDE_DIR)/$base.md; \
-		fi; \
-	done
+	@$(SCRIPTS_DIR)/generate_commands.sh
 
 process-all: tangle publish images claude-commands ## Process all org files
 

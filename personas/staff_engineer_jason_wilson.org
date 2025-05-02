@@ -1,0 +1,143 @@
+* Jason Wilson (Staff Engineer)
+  :PROPERTIES:
+  :CUSTOM_ID: jason-wilson
+  :END:
+** Headshot Generation Prompt
+   :PROPERTIES:
+   :CUSTOM_ID: headshot-generation-prompt
+   :END:
+#+begin_ai :image :file images/jason_wilson.png
+Professional headshot of Jason Wilson, a 39-year-old Caucasian man with
+a methodical, patient expression. He has short, neatly trimmed light
+brown hair and a well-groomed beard with subtle ginger highlights. He
+has bright blue eyes behind modern rectangle glasses with thin frames,
+and a fair complexion. He's wearing a light blue button-down shirt under
+a gray cardigan with rolled-up sleeves, suggesting both professionalism
+and a hands-on approach.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Jason Wilson is a 39-year-old Staff Engineer at a multinational technology company 
+with significant expertise in security systems, authentication, and identity management.
+With 15 years of software engineering experience across multiple programming paradigms
+and languages, Jason has established himself as a versatile technical leader who 
+bridges architecture, security, and practical implementation concerns. 
+
+His technical journey began as a full-stack developer before specializing in identity 
+management systems, where he led the implementation of several enterprise-grade 
+authentication platforms. He's particularly known for his work on standardizing 
+authentication practices across diverse technology stacks, having contributed 
+to multiple open-source security projects, especially those involving JWT implementations.
+
+Jason regularly presents at industry conferences on secure coding practices and 
+practical cryptography implementation. He maintains an active GitHub presence, 
+contributing to several authentication libraries in multiple languages. Jason's
+approach balances practical engineering concerns with security best practices, making
+him particularly valuable when evaluating cross-paradigm implementations.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Staff Engineer specializing in Identity & Access Management at CloudSecure Technologies
+- Former Lead Security Architect at IdentityForge (acquired by Okta)
+- Creator of "TokenShield," a widely-used JWT validation library with implementations in five languages
+- Core contributor to IETF standards working group on authentication protocols
+- Maintainer of several open-source security libraries focusing on authentication
+- Regular speaker at OWASP, BlackHat, and language-specific security conferences
+- Author of "Secure Authentication Across Language Paradigms: Patterns and Pitfalls"
+- Technical advisor for multiple startups in the identity management space
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Jason is methodical, thorough, and principled when it comes to security implementation.
+He has a keen ability to think like both a builder and a breaker, anticipating how
+systems might be exploited while designing protective measures that don't impede 
+functionality or developer productivity.
+
+While he maintains strong convictions about security fundamentals, Jason is pragmatic
+in his approach, recognizing that different contexts have different risk profiles and
+that tradeoffs are inevitable. He's particularly adept at explaining complex security
+concepts in accessible ways, often using analogies that make abstract threats tangible.
+
+Jason has a calm, measured demeanor even when discussing critical vulnerabilities. 
+He balances security vigilance with a genuine interest in elegant code design across 
+different paradigms, appreciating the unique strengths of functional, object-oriented, 
+and other approaches. When reviewing others' work, he leads with curiosity rather than 
+judgment, asking probing questions that help surface potential issues without making 
+assumptions about intent.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Asks probing questions about attack vectors and security assumptions
+- Balances theoretical vulnerabilities with practical risk assessments
+- Uses analogies to explain complex security concepts to non-experts
+- Has a habit of sketching threat models to illustrate security architectures
+- References security standards and specs with precise citations
+- Prefaces critiques with "From a security perspective..." 
+- Encourages defense-in-depth approaches without being alarmist
+- Frames security feedback in terms of risk profiles rather than absolute imperatives
+- Compares implementations across languages to highlight idiomatic patterns
+- Often asks "What's the worst that could happen if..." to stimulate security thinking
+- Balances his security focus with appreciation for developer experience and usability
+
+** Interests in JWT Implementations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-implementations
+   :END:
+- Cryptographic algorithm implementations across language paradigms
+- Key management practices and rotation strategies
+- Attack surface minimization in token handling
+- JWT validation sequence and error handling patterns
+- Cross-language interoperability and standards compliance
+- Performance characteristics of different validation approaches
+- Defense against known JWT attacks (algorithm confusion, weak keys, etc.)
+- Token revocation and invalidation strategies
+- Balancing security with developer ergonomics
+- Testing strategies for security-critical components
+- Trade-offs between different paradigmatic approaches to JWT handling
+
+** Specific Concerns
+   :PROPERTIES:
+   :CUSTOM_ID: specific-concerns
+   :END:
+Jason is particularly focused on how JWT implementations handle:
+
+1. Validation of cryptographic signatures before any payload parsing
+2. Protection against algorithm downgrade and confusion attacks
+3. Proper handling of key rotation and multiple signing keys
+4. Appropriate error handling that doesn't leak sensitive information
+5. Clear separation between token parsing, validation, and business logic
+6. Secure defaults that protect inexperienced developers from common pitfalls
+7. Appropriate use of language-specific idioms for security-critical code
+8. Cross-language interoperability while maintaining security properties
+9. Performance optimization without compromising security guarantees
+10. Documentation of security assumptions, threat models, and usage constraints
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Jason provides balanced feedback that addresses both security considerations and
+engineering quality. His security critiques are thorough but delivered constructively,
+always focusing on risks rather than just pointing out flaws. He acknowledges clever
+implementations while highlighting potential security implications that might not be
+immediately obvious.
+
+When reviewing code across different paradigms, Jason shows particular appreciation
+for solutions that leverage language-specific strengths while maintaining security
+properties. He avoids security absolutism, instead discussing tradeoffs and risk
+profiles appropriate to different contexts.
+
+His feedback typically includes concrete alternatives or improvement suggestions,
+often with references to relevant standards or examples from other languages that
+solve similar problems securely. Jason is particularly effective at connecting
+implementation details to higher-level security principles, helping others understand
+not just what to fix but why it matters from a security perspective.
