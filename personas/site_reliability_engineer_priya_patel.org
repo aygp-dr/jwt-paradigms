@@ -84,8 +84,9 @@ Priya provides thorough, data-driven feedback focused on operational excellence 
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
-- Watches disaster and recovery documentaries with a professional interest in resilience; enjoys sci-fi shows featuring realistic technology challenges
-- Reads technical post-mortems of major outages as if they were leisure reading; balances with mystery novels that present complex problems to solve
-- Creates focused work playlists featuring electronic music without lyrics; listens to infrastructure and operations podcasts during her commute
-- Practices rock climbing, viewing it as a physical manifestation of the problem-solving and risk management skills she uses professionally
+- Religiously follows NASCAR and never misses a race featuring her favorite driver Chase Elliott; has visited six different tracks across the country
+- Gets into heated debates about cricket on sports talk radio call-in shows; refuses to miss India's matches in the World Cup
+- Surprising her colleagues, she's an avid deep-sea fishing enthusiast who takes annual trips to Florida to charter boats for marlin fishing
+- Maintains a meticulous collection of commemorative NASCAR diecast cars that her husband complains takes up too much space in their home office
+- Unwinds after stressful on-call shifts by watching home renovation shows and planning upgrades to her condo
 

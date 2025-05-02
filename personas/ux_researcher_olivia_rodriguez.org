@@ -132,8 +132,9 @@ creating unnecessary friction.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
-- Watches films with exceptional visual storytelling and user interfaces; maintains a blog analyzing fictional UI designs in sci-fi movies
-- Reads behavioral psychology books and ethnographic studies alongside graphic novels with innovative visual narratives
-- Enjoys podcasts on design thinking and cultural anthropology; creates ambient music playlists to enhance focus during research sessions
-- Practices photography as a way to train her observational skills; participates in community theater to better understand human emotion and interaction
+- Hosts the most elaborate Superbowl party in her friend group every year; meticulously themes food and decorations around the competing teams
+- Dedicated recreational softball player who captains her company team "The User Error 404s" despite their consistent losing record
+- Volunteers with an urban gardening collective on weekends; has transformed her small apartment balcony into a vertical herb garden
+- Creates custom scented candles as a stress relief hobby; names each fragrance after emotion-inducing user experiences like "Page Loading Forever"
+- Has appeared as a contestant on three different Food Network cooking competition shows; uses this as an icebreaker in awkward meetings
 

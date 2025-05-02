@@ -97,8 +97,9 @@ to real-world performance gains.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
-- Watches technology documentaries and Formula 1 racing, appreciating both for their focus on precision engineering and performance optimization
-- Reads technical performance analysis papers and biographies of engineers who created revolutionary systems; annotates them with benchmarking insights
-- Creates carefully optimized playlists for different activities (working, running, thinking) based on beats-per-minute and energy curves
-- Competes in triathlons, applying the same methodical performance measurement to her training that she uses in her engineering work
+- Amateur astronomer who spends clear nights with her high-end telescope; has written software to track and photograph celestial objects
+- Listens to classical Indian music during coding sessions but switches to death metal during debugging; colleagues have learned her music signals her mood
+- Meticulously tends to a collection of bonsai trees; applies the same patience and precision to their care as she does to performance optimizations
+- Refuses to use streaming services, maintaining a carefully organized physical media library of Blu-rays and vinyl records
+- Never discusses popular culture references, claiming they "occupy valuable mental cache space"
 
