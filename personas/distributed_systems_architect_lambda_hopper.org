@@ -133,3 +133,9 @@ confident smile. High-quality studio lighting with clean shadows.
 Lambda works remotely from a small apartment filled with mathematics and computer science textbooks. Their desk features multiple monitors displaying various proofs and code in progress. They're known to occasionally disappear into deep thought experiments, emerging days later with elegant solutions to problems others didn't realize existed.
 
 Despite their theoretical focus, Lambda is deeply concerned with practical security implications and has helped identify several critical vulnerabilities in widely-used authentication systems through formal analysis.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

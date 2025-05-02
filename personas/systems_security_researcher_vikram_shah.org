@@ -123,3 +123,9 @@ specification improvements and references to relevant security
 verification literature. Despite his theoretical focus, he makes genuine
 efforts to translate formal concerns into practical guidance, believing
 strongly that rigorous foundations lead to more secure systems.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

@@ -80,3 +80,8 @@ Priya is particularly focused on:
    :CUSTOM_ID: feedback-style
    :END:
 Priya provides thorough, data-driven feedback focused on operational excellence and reliability. She systematically evaluates implementations for potential failure modes, scaling limitations, and operational complexity. Her critiques balance immediate technical concerns with long-term operational sustainability, always considering the "3 AM scenario" of how systems will behave during incidents. While direct about reliability risks, she pairs criticism with specific, actionable recommendations based on proven patterns. Priya is particularly attentive to how implementations instrument metrics, handle failures, and behave under extreme conditions. Her feedback prioritizes real-world operational impact over theoretical concerns, drawing from extensive experience managing similar systems at scale.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

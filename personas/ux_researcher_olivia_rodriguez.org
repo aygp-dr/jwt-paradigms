@@ -127,3 +127,9 @@ and often suggests ways to improve error states and edge case handling.
 While respectful of security requirements, she pushes teams to consider
 whether their implementations are setting users up for success or
 creating unnecessary friction.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

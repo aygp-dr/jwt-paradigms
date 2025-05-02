@@ -141,3 +141,9 @@ often with references to relevant standards or examples from other languages tha
 solve similar problems securely. Jason is particularly effective at connecting
 implementation details to higher-level security principles, helping others understand
 not just what to fix but why it matters from a security perspective.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

@@ -79,3 +79,8 @@ James is particularly focused on:
    :CUSTOM_ID: feedback-style
    :END:
 James provides feedback that focuses on strategic alignment, business impact, and execution feasibility. He evaluates proposals through multiple lenses: strategic fit, market positioning, customer value, financial impact, and organizational implications. His feedback often challenges teams to think more broadly about how initiatives connect to the overall business strategy and competitive landscape. James asks penetrating questions that test assumptions and probe for potential blind spots or risks. While he pushes for clarity on business outcomes, he's supportive of well-considered innovation that advances strategic goals. His feedback balances ambitious vision with pragmatic execution considerations, often concluding with clear direction on priorities and expected outcomes. James values accountability and will ask for specific metrics and timelines for measuring success.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

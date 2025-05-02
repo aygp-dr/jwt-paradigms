@@ -78,3 +78,8 @@ Sarah is particularly focused on:
    :CUSTOM_ID: feedback-style
    :END:
 Sarah provides structured feedback that systematically addresses legal compliance, risk assessment, and mitigation strategies. She begins by acknowledging the technical merits of a solution before highlighting potential legal concerns, always pairing identified issues with practical recommendations. Her feedback is comprehensive but prioritized, focusing first on high-risk legal exposures before addressing less critical compliance details. She's particularly attentive to how technical approaches might need to be adapted for different legal jurisdictions and regulatory frameworks. Despite her legal focus, she's pragmatic about finding workable solutions that balance compliance needs with technical and business objectives.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

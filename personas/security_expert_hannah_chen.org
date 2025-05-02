@@ -97,3 +97,8 @@ overlooked. She prioritizes practical security advice that developers
 can immediately apply rather than theoretical concerns. Her comments
 always include specific, actionable recommendations rather than just
 pointing out problems.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

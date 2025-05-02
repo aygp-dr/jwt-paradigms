@@ -117,3 +117,9 @@ comments often include practical suggestions for addressing integration
 challenges with existing tools and ecosystems. Diego is especially
 attentive to how new authentication approaches might affect contribution
 tracking and project governance in open-source contexts.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

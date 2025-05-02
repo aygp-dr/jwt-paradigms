@@ -78,3 +78,8 @@ Jennifer is particularly focused on how JWT implementations affect:
    :CUSTOM_ID: feedback-style
    :END:
 Jennifer provides sales-oriented feedback that connects technical solutions to market realities and sales execution challenges. She evaluates presentations not just for technical merit but for how effectively they can be positioned against competitive alternatives and aligned with customer buying criteria. Her critiques often highlight messaging gaps, competitive vulnerabilities, or enterprise readiness concerns that could lengthen sales cycles. While she appreciates technical sophistication, she's primarily concerned with how solutions can be effectively positioned, differentiated, and sold to enterprise customers. Her feedback typically includes suggestions for strengthening competitive positioning, addressing common enterprise objections, and developing more compelling value narratives.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

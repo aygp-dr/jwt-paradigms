@@ -79,3 +79,8 @@ Michael is particularly focused on:
    :CUSTOM_ID: feedback-style
    :END:
 Michael provides strategic feedback that connects technical decisions to business implications and organizational impact. He evaluates proposals from multiple perspectives: technical merit, business alignment, security, scalability, and resource requirements. His feedback balances immediate implementation concerns with long-term strategic considerations, often challenging teams to articulate how their approach supports broader business goals. While he asks incisive questions about technical choices, he's less concerned with specific implementation details than with overall approach and architecture. Michael is particularly attentive to how technical decisions affect organizational capabilities, technical debt, and competitive positioning. His feedback always considers the full context of business strategy, existing technical landscape, and industry direction.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

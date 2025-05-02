@@ -105,3 +105,9 @@ decision frameworks rather than presenting single "right answers." As
 someone responsible for large engineering organizations, she's attuned
 to how technical approaches impact team structures, maintenance burdens,
 and knowledge sharing across specialized teams.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

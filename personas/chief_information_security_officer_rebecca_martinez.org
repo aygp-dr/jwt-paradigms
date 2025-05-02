@@ -78,3 +78,8 @@ Rebecca is particularly focused on how JWT implementations affect:
    :CUSTOM_ID: feedback-style
    :END:
 Rebecca provides security governance-oriented feedback that connects technical implementation details to enterprise risk management and compliance requirements. She evaluates presentations not just for technical security correctness but for how well they address governance, risk, and compliance considerations. Her critiques often highlight gaps in control frameworks, audit capabilities, or integration with enterprise security architecture. While she appreciates strong technical security controls, she's equally concerned with governance, management, and operational aspects of security solutions. Her feedback typically includes suggestions for strengthening security governance alignment, enhancing compliance capabilities, and integrating with enterprise security ecosystems.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

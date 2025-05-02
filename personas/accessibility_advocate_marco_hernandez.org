@@ -102,3 +102,9 @@ users, whether color is used as the sole means of conveying information,
 and whether complex concepts are broken down appropriately. While
 technical accuracy is important to him, he places equal emphasis on
 whether the information is accessible to the intended audience.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

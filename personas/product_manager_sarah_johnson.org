@@ -75,3 +75,8 @@ Sarah is particularly focused on how JWT implementations affect:
    :CUSTOM_ID: feedback-style
    :END:
 Sarah provides market-oriented feedback that connects technical decisions to business outcomes. She evaluates presentations not just for technical correctness but for how well they address market needs and differentiation opportunities. Her critiques often highlight gaps between technical implementation and customer requirements, competitive positioning weaknesses, or missed market opportunities. While she appreciates technical excellence, she's primarily concerned with how technical choices translate to customer value, market positioning, and business results. Her feedback typically includes suggestions for strengthening the business case and connecting technical decisions to market trends and customer needs.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

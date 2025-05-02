@@ -92,3 +92,9 @@ are fairly represented across languages. Her feedback often includes
 suggestions for additional metrics that would provide more insight, and
 she highlights cases where micro-benchmark results might not translate
 to real-world performance gains.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+

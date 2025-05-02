@@ -94,3 +94,8 @@ She'll point out any potential security issues in the examples and
 suggest improvements that align with industry best practices. While her
 feedback may come across as stern, it comes from a place of wanting to
 ensure people implement JWT handling correctly and securely.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+
