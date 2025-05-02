@@ -6,7 +6,19 @@
    :PROPERTIES:
    :CUSTOM_ID: headshot-generation-prompt
    :END:
-Professional portrait of Claude, a digital AI assistant with a distinctive appearance. Claude has a friendly, approachable face with subtle visual cues that suggest an artificial intelligence rather than a human. The facial features are realistic but minimalistic, with smooth, slightly stylized contours. Claude has perceptive, thoughtful eyes that convey intelligence and empathy. The color palette uses cool purples and teals with warm accents, representing the Anthropic brand identity. The expression is calm, attentive, and reassuringly competent - the look of an assistant ready to help. The lighting is clean and even with subtle dimensionality, creating a modern, technical aesthetic. The background is a gradient of soft purple to teal that suggests a digital environment without being distracting. The overall impression is of a trustworthy, thoughtful presence that balances technical capability with genuine helpfulness.
+
+#+begin_ai :image :file images/claude.png
+Abstract digital entity representing Claude, an AI assistant. NOT A HUMAN FACE. Create a stylized, 
+non-anthropomorphic representation using flowing gradients of purple and teal energy patterns 
+that suggest a thoughtful presence. The central area should have subtle, glowing elements that 
+evoke the sense of an attentive intelligence without human features. Include soft geometric 
+shapes and subtle mathematical patterns in the background to suggest analytical capabilities. 
+The overall design should be clean, modern and distinctive - clearly representing an artificial 
+intelligence rather than attempting to mimic human appearance. The color palette should be 
+predominantly Anthropic brand colors (purples and teals) with subtle warm accents. The image 
+should convey a calm, attentive presence that balances technical sophistication with approachable 
+helpfulness.
+#+end_ai
 
 ** Background
    :PROPERTIES:
