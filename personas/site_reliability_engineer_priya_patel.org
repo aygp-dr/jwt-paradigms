@@ -84,4 +84,8 @@ Priya provides thorough, data-driven feedback focused on operational excellence 
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Watches disaster and recovery documentaries with a professional interest in resilience; enjoys sci-fi shows featuring realistic technology challenges
+- Reads technical post-mortems of major outages as if they were leisure reading; balances with mystery novels that present complex problems to solve
+- Creates focused work playlists featuring electronic music without lyrics; listens to infrastructure and operations podcasts during her commute
+- Practices rock climbing, viewing it as a physical manifestation of the problem-solving and risk management skills she uses professionally
 

@@ -146,4 +146,8 @@ not just what to fix but why it matters from a security perspective.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Enjoys documentaries exploring cybersecurity breaches and technical post-mortems; particularly recommends "Zero Days" and "The Great Hack"
+- Reads both technical security literature and science fiction with realistic technological themes; currently working through Neal Stephenson's "Cryptonomicon" for the third time 
+- Listens to technology-focused podcasts like "Darknet Diaries" and "Security Now" during his daily bike commute
+- Relaxes by participating in weekend CTF (Capture The Flag) security competitions and occasionally rock climbing to clear his mind from technical problems
 

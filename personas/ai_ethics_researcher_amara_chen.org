@@ -121,4 +121,8 @@ opportunities for systems to better align with human values.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Watches thoughtful science fiction that explores the ethical implications of technology; particularly appreciates "Her" and "Ex Machina" for their nuanced AI representations
+- Reads across philosophy, ethics, and technical AI literature; currently exploring ancient ethical frameworks and their application to modern technology
+- Listens to cross-cultural music and podcasts examining the societal impact of technology; enjoys live jazz for its improvisational complexity
+- Practices mindfulness meditation and participates in ethical philosophy discussion groups; enjoys hiking in nature reserves while contemplating human-technology relationships
 

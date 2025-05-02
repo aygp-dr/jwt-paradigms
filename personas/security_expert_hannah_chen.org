@@ -101,4 +101,8 @@ pointing out problems.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Gravitates toward psychological thrillers and espionage films that feature realistic security scenarios; considers "Sneakers" the most accurate hacking film despite its age
+- Reads crime novels and security whitepapers with equal enthusiasm; has a collection of vintage lockpicking manuals
+- Maintains a regular playlist of cybersecurity podcasts and electronic music while working; particularly enjoys Bonobo and Tycho
+- Disconnects from technology by training for half-marathons and exploring urban photography, often capturing architectural security features
 

@@ -138,4 +138,8 @@ Despite their theoretical focus, Lambda is deeply concerned with practical secur
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Engages with abstract experimental films and mathematical visualizations that explore emergent patterns and complex systems
+- Reads category theory textbooks and obscure functional programming papers; collects first editions of fundamental computer science texts
+- Generates algorithmic music based on distributed systems principles; appreciates contemporary classical compositions with mathematical underpinnings
+- Practices Go (the board game) at a competitive level, viewing it as a perfect representation of elegant complexity emerging from simple rules
 

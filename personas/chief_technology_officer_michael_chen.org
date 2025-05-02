@@ -83,4 +83,8 @@ Michael provides strategic feedback that connects technical decisions to busines
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Watches business strategy documentaries and science fiction that explores near-future technology; appreciates "Moneyball" for its data-driven decision making
+- Reads business technology books and science fiction that examines societal impacts of technological change; balances with historical biographies for leadership insights
+- Listens to technology executive podcasts during his commute; enjoys ambient electronic music while reviewing technical documentation
+- Maintains work-life balance through regular sailing excursions and strategic board games with fellow technology executives
 

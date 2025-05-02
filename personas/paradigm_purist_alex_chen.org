@@ -101,4 +101,8 @@ valuable - if the recipient can get past the condescending tone.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Obsessively watches obscure art films and experimental animations that challenge conventional narrative structures, mirroring their interest in non-mainstream programming paradigms
+- Reads dense academic texts on category theory and programming language design; maintains a collection of vintage LISP machine manuals
+- Creates algorithmic music using SuperCollider and other code-based composition tools; frequently attends electronic music events featuring generative art
+- Participates in online puzzle-solving communities and mathematical competitions; designs elaborate puzzle systems based on lambda calculus concepts
 

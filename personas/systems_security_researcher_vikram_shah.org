@@ -128,4 +128,8 @@ strongly that rigorous foundations lead to more secure systems.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Prefers dense mathematical films like "A Beautiful Mind" and "The Imitation Game" that emphasize logical problem-solving
+- Reads academic journals and mathematical proofs for pleasure; has a collection of rare books on formal logic and cryptographic history
+- Listens exclusively to Bach and other baroque composers while working, claiming their mathematical structure aids his concentration
+- Plays competitive chess at a near-master level; enjoys rock climbing as a physical manifestation of complex problem-solving
 

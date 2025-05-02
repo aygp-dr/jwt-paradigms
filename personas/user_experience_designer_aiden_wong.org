@@ -82,4 +82,8 @@ Aiden provides constructive feedback that balances user advocacy with technical 
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Studies films with exceptional visual storytelling and innovative interface designs; maintains a visual database of fictional UI designs in sci-fi movies
+- Reads design thinking books and graphic novels with unique visual narratives; collects art books showcasing different cultural aesthetic approaches
+- Listens to design podcasts and ambient instrumental music; creates mood-based playlists to match different design activities
+- Practices urban sketching to maintain observational skills and attends interactive art exhibitions; participates in community theater to better understand human emotion
 

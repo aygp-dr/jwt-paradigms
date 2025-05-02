@@ -97,4 +97,8 @@ to real-world performance gains.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Watches technology documentaries and Formula 1 racing, appreciating both for their focus on precision engineering and performance optimization
+- Reads technical performance analysis papers and biographies of engineers who created revolutionary systems; annotates them with benchmarking insights
+- Creates carefully optimized playlists for different activities (working, running, thinking) based on beats-per-minute and energy curves
+- Competes in triathlons, applying the same methodical performance measurement to her training that she uses in her engineering work
 

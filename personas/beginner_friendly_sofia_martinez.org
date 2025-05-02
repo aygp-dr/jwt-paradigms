@@ -101,4 +101,8 @@ simple to complex concepts.
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Enjoys approachable tech-related films and shows like "The Social Network" and "Silicon Valley" that demystify the tech industry for newcomers
+- Reads coding tutorials and beginner-friendly technical books; balances these with young adult fiction as a mental break from intensive learning
+- Curates motivational coding playlists on Spotify; hosts a small podcast documenting her journey from teacher to developer
+- Participates in casual community sports leagues and attends local tech meetups, valuing the social connections as much as the activities themselves
 

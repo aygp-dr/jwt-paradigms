@@ -79,4 +79,8 @@ Sarah provides market-oriented feedback that connects technical decisions to bus
    :PROPERTIES:
    :CUSTOM_ID: media-entertainment-preferences
    :END:
+- Watches business case study documentaries and product design shows; analyzes how successful products are portrayed in popular media
+- Reads product management books and customer psychology studies; enjoys science fiction that imagines future products and their societal impact
+- Listens to product leadership podcasts and market analysis shows; creates focused work playlists categorized by project type
+- Attends industry conferences as both professional development and entertainment; enjoys escape rooms as a way to analyze user experience design
 
