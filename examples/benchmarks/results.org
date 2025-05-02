@@ -1,7 +1,12 @@
-| Language   | Parsing Time (μs) | Memory Usage (KB) |
-|------------+-------------------+-------------------|
-| Rust       |               5.2 |               1.8 |
-| JavaScript |              24.7 |              12.3 |
-| Python     |              30.1 |              15.7 |
-| Clojure    |              45.8 |              28.4 |
-| Shell      |             180.3 |               8.9 |
+| Language     | Parsing Time (μs) | Memory Usage (KB) | Security Score | Base64url Handling |
+|--------------+-------------------+-------------------+----------------+-------------------|
+| Rust         |               5.2 |               1.8 |            9.5 | Native library    |
+| Go           |               9.8 |               3.2 |            9.3 | Native library    |
+| JavaScript   |              24.7 |              12.3 |            7.8 | Manual handling   |
+| TypeScript   |              26.3 |              13.1 |            8.2 | Manual handling   |
+| Python       |              30.1 |              15.7 |            8.0 | Manual handling   |
+| Java         |              35.3 |              18.4 |            9.1 | Native library    |
+| Clojure      |              45.8 |              28.4 |            8.7 | JVM native        |
+| Ruby         |              62.4 |              22.7 |            7.9 | Manual handling   |
+| Racket       |             110.5 |              35.2 |            8.3 | Manual handling   |
+| Shell        |             180.3 |               8.9 |            6.5 | Manual handling   |
