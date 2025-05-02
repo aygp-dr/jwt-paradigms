@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "commands": {
+    "paths": [
+      ".claude/commands"
+    ]
+  },
+  "worktree": {
+    "enabled": true,
+    "taskPath": ".worktree/task.org"
+  }
+}
