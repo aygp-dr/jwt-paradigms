@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Script for generating persona headshots using Google's Gemini API.
-This script uses persona definitions from the persona_prompts module.
+This script extracts prompts directly from persona org files instead of using hardcoded values.
 """
 
 import logging
@@ -9,6 +9,8 @@ import os
 import sys
 import time
 import argparse
+import glob
+import re
 from pathlib import Path
 
 try:
@@ -18,9 +20,6 @@ try:
     # For Gemini API
     from google import genai
     from google.genai import types
-
-    # Import persona data
-    from persona_prompts import PERSONAS
     from PIL import Image
 except ImportError:
     print("Missing required packages. Please install with:")
@@ -92,6 +91,123 @@ def generate_image(prompt, output_path, force=False):
         return False
 
 
+def extract_persona_from_file(file_path):
+    """Extract persona information directly from an org-mode file using regex."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Extract persona name from filename (role_firstname_lastname.org)
+        file_name = os.path.basename(file_path)
+        base_name = os.path.splitext(file_name)[0]  # Remove .org
+        name_parts = base_name.split('_')
+        
+        # Determine persona name from filename components
+        if len(name_parts) >= 3:
+            # Format: role_firstname_lastname.org
+            first_name = name_parts[1].capitalize()
+            last_name = name_parts[2].capitalize()
+            persona_name = f"{first_name} {last_name}"
+        elif len(name_parts) == 2:
+            # Format: role_name.org
+            persona_name = name_parts[1].capitalize()
+        else:
+            # Fallback
+            persona_name = base_name.replace('_', ' ').title()
+        
+        # Extract role from file or derive from filename
+        role_pattern = r'\* (.*?)\s*\n'
+        role_match = re.search(role_pattern, content)
+        role = role_match.group(1) if role_match else name_parts[0].replace('_', ' ').title()
+        
+        # Try to extract image filename
+        # 1. Look for begin_ai with :file parameter
+        file_pattern = r'#\+begin_ai\s+:image\s+:file\s+([^\s\n]+)'
+        file_match = re.search(file_pattern, content)
+        
+        if file_match:
+            image_filename = file_match.group(1)
+        else:
+            # Default to lastname.png if no file specified
+            if len(name_parts) >= 3:
+                image_filename = f"images/{name_parts[2].lower()}.png"
+            else:
+                image_filename = f"images/{name_parts[-1].lower()}.png"
+        
+        # Extract prompt from begin_ai block
+        prompt_pattern = r'#\+begin_ai\s+:image(?:\s+:file\s+[^\s\n]+)?\n(.*?)#\+end_ai'
+        prompt_match = re.search(prompt_pattern, content, re.DOTALL)
+        
+        if prompt_match:
+            prompt = prompt_match.group(1).strip()
+            
+            return {
+                "name": persona_name,
+                "role": role,
+                "filename": image_filename,
+                "file_path": file_path,
+                "prompt": prompt
+            }
+        
+        # Fallback: try to find Headshot Generation Prompt section
+        headshot_section_pattern = r'\*\* Headshot Generation Prompt\s*\n(?:.*?:PROPERTIES:.*?:END:\s*\n)?(.*?)(?:\n\*\* |\Z)'
+        headshot_match = re.search(headshot_section_pattern, content, re.DOTALL)
+        
+        if headshot_match:
+            prompt = headshot_match.group(1).strip()
+            
+            # Try to extract the prompt from any AI block in this section
+            ai_block_pattern = r'#\+begin_ai[^\n]*\n(.*?)#\+end_ai'
+            ai_block_match = re.search(ai_block_pattern, prompt, re.DOTALL)
+            
+            if ai_block_match:
+                prompt = ai_block_match.group(1).strip()
+            
+            return {
+                "name": persona_name,
+                "role": role,
+                "filename": image_filename,
+                "file_path": file_path,
+                "prompt": prompt
+            }
+        
+        logger.warning(f"No prompt found in {file_path}")
+        return None
+        
+    except Exception as e:
+        logger.error(f"Error extracting persona from {file_path}: {e}")
+        return None
+
+
+def extract_personas(org_dir=None, pattern=None):
+    """Extract personas from org files."""
+    personas = []
+    
+    if org_dir is None:
+        org_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    
+    if pattern is None:
+        pattern = "*_*_*.org"
+    
+    # Use glob to find all org files
+    org_pattern = os.path.join(org_dir, pattern)
+    org_files = glob.glob(org_pattern)
+    
+    logger.info(f"Found {len(org_files)} org files matching pattern {org_pattern}")
+    
+    for file_path in org_files:
+        # Skip files that don't look like persona files
+        if "README" in file_path or "CLAUDE" in file_path:
+            continue
+            
+        persona = extract_persona_from_file(file_path)
+        if persona:
+            personas.append(persona)
+            logger.info(f"Extracted persona: {persona['name']} from {os.path.basename(file_path)}")
+    
+    return personas
+
+
 def main():
     """Main entry point for the script."""
     # Set up argument parser
@@ -104,7 +220,18 @@ def main():
     parser.add_argument(
         "--persona",
         type=str,
-        help="Generate headshot only for the specified persona (by ID or filename without extension)"
+        help="Generate headshot only for the specified persona (by name or filename without extension)"
+    )
+    parser.add_argument(
+        "--org-dir",
+        type=str,
+        help="Directory containing org files (default: parent directory of this script)"
+    )
+    parser.add_argument(
+        "--pattern",
+        type=str,
+        default="*_*_*.org",
+        help="Pattern to match org files (default: *_*_*.org)"
     )
     parser.add_argument(
         "--output-dir",
@@ -136,21 +263,35 @@ def main():
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Extract personas from org files
+    personas = extract_personas(args.org_dir, args.pattern)
+    
+    if not personas:
+        logger.error("No personas found in org files")
+        return 1
+    
+    logger.info(f"Found {len(personas)} personas with prompts")
+
     # Filter personas if a specific one was requested
-    personas_to_process = PERSONAS
     if args.persona:
-        target = args.persona
-        # Try to match by ID or filename without extension
-        personas_to_process = [p for p in PERSONAS if p["id"] == target or p["filename"].split('.')[0] == target]
+        target = args.persona.lower()
+        # Try to match by name or filename
+        personas_to_process = [p for p in personas if 
+                             target in p["name"].lower() or 
+                             target in os.path.basename(p["file_path"]).lower()]
         if not personas_to_process:
-            logger.error(f"No persona found with ID or filename '{target}'")
+            logger.error(f"No persona found matching '{args.persona}'")
             return 1
-        logger.info(f"Processing only persona: {target}")
+        logger.info(f"Processing only persona(s) matching: {args.persona}")
+    else:
+        personas_to_process = personas
 
     # Process each persona
     success_count = 0
     for persona in personas_to_process:
-        output_path = output_dir / persona["filename"]
+        # Extract filename from path
+        filename = os.path.basename(persona["filename"])
+        output_path = output_dir / filename
 
         logger.info(f"Processing {persona['name']} ({persona['role']})")
 
@@ -162,7 +303,7 @@ def main():
             
             # Optionally copy to target directory
             if args.copy_to_target:
-                target_path = Path(args.target_dir) / persona["filename"]
+                target_path = Path(args.target_dir) / filename
                 try:
                     import shutil
                     target_path.parent.mkdir(parents=True, exist_ok=True)  # Ensure target directory exists
