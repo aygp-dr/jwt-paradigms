@@ -90,31 +90,29 @@ Claude Code works exceptionally well with the worktree approach, as it can opera
 We enhance the worktree approach by adding a hidden ~.worktree~ directory in each worktree root. This contains a ~task.org~ file that describes the task being worked on.
 
 #+BEGIN_SRC org
-#+TITLE: Task Description - Issue #
-#+AUTHOR: Developer Name
-#+DATE: [Date]
+#+TITLE: Feature Name - Issue 42
+#+AUTHOR: aygp-dr
+#+DATE: [2025-05-02]
+#+PROPERTY: header-args :mkdirp yes
 
 * Task Summary
-Brief description of the task
+Brief description of the task for issue #42.
 
 ** Requirements
-- Requirement 1
-- Requirement 2
+- List key requirements here
+- Add implementation goals
 
 ** Implementation Notes
-- Working in branch: branch-name
-- Worktree location: /path/to/worktree
-- Main repository: /path/to/main-repo
+- Working in branch: feature-issue42-wt
+- Relevant files and components
 
-** Implementation Steps
-1. Step 1
-2. Step 2
-3. Step 3
+** Validation Steps
+1. Step one
+2. Step two
+3. Step three
 
 ** References
-- Issue link
-- Documentation links
-- Related files
+- Issue #42: https://github.com/aygp-dr/jwt-paradigms/issues/42
 #+END_SRC
 
 When Claude Code is working in a worktree, it can check this file to understand:
@@ -174,6 +172,27 @@ When invoked, this command prompts Claude Code to:
 
 Here's how our team uses worktrees with Claude Code for everyday development:
 
+** Workflow Overview
+
+#+BEGIN_SRC dot :file images/worktree-workflow.png :cmdline -Kdot -Tpng
+digraph {
+  rankdir=TB;
+  node [shape=box, style=rounded];
+  
+  main [label="Main Repository\n(main branch)", fillcolor="#e6f3ff", style="filled,rounded"];
+  feature [label="Feature Branch\n(feature-issue42)", fillcolor="#e6ffe6", style="filled,rounded"];
+  worktree [label="Worktree\n(feature-issue42-wt)", fillcolor="#fff0e6", style="filled,rounded"];
+  pr [label="Pull Request", fillcolor="#ffe6e6", style="filled,rounded"];
+  
+  main -> feature [label="1. Create branch"];
+  feature -> worktree [label="2. Create worktree"];
+  worktree -> worktree [label="3. Develop with Claude Code"];
+  worktree -> pr [label="4. Create PR"];
+  pr -> main [label="5. Merge PR"];
+  main -> worktree [label="6. Cleanup"];
+}
+#+END_SRC
+
 ** 1. Create a Branch for the Feature/Bug
 
 We always start in the main repository on the main branch:
@@ -217,20 +236,74 @@ Inside the Claude Code session, we can use:
 
 To have Claude analyze the task and provide next steps based on the task.org file.
 
-** 5. Coordination in the Main Repository
+** 5. Creating and Merging Pull Requests
+
+When work is ready for review, we create a pull request directly from the worktree:
+
+#+BEGIN_SRC bash
+# Inside the worktree directory
+cd ../jwt-paradigms-wt-feature42
+
+# Stage changes
+git add .
+
+# Commit changes with trailer for issue tracking
+git commit -m "feat: implement feature for #42" --trailer "Issue: #42"
+
+# Push the branch to GitHub
+git push -u origin feature-issue42-wt
+
+# Create a pull request with detailed information
+gh pr create --title "Implement feature for #42" --body "
+## Summary
+- Brief description of the changes
+- Why they are needed
+- Key implementation details
+
+## Testing Done
+- How changes were tested
+- Results of testing
+
+Fixes #42
+"
+#+END_SRC
+
+The PR can then be reviewed and merged using our established workflow:
+
+1. Assign at least one reviewer to each PR
+2. Use Claude PR Reviewer agent for initial feedback
+3. Reviewer examines code quality, test coverage, and documentation
+4. Address all feedback before merging
+5. Merge using GitHub interface or command line
+
+#+BEGIN_SRC bash
+# After the PR is merged, we clean up branches
+gh pr merge feature-issue42-wt --delete-branch
+#+END_SRC
+
+** 6. Coordination in the Main Repository
 
 While different team members (or the same developer) work in various worktrees:
 - The main repository stays on the ~main~ branch
 - It serves as a coordination point
 - It's used for creating new worktrees and branches
 - It remains clean for core project management tasks
+- It can be used to review and merge PRs in a centralized way
 
-** 6. Cleanup When Done
+** 7. Cleanup When Done
 
 When a feature is complete and merged:
 
 #+BEGIN_SRC bash
+# Pull the latest changes into main
+cd /path/to/jwt-paradigms
+git checkout main
+git pull
+
+# Remove the worktree
 git worktree remove ../jwt-paradigms-wt-feature42
+
+# Delete the local branches
 git branch -d feature-issue42-wt
 git branch -d feature-issue42  # If merged
 #+END_SRC
