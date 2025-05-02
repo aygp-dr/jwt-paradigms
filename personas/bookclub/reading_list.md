@@ -15,6 +15,8 @@
 - Wittgenstein, L. (1921). "Tractatus Logico-Philosophicus" (Zero's selection)
 - Kuhn, T. (1962). "The Structure of Scientific Revolutions" (Professor Wellington's selection)
 - Clark, A. (2003). "Natural-Born Cyborgs" (Claude's selection)
+- Han, B. (2015). "The Transparency Society" (Vikram's reluctant suggestion, seconded by Lambda)
+- Han, B. (2015). "The Burnout Society" (Diego's addition, focusing on performance and digital exhaustion)
 - Lakoff, G. & Johnson, M. (1980). "Metaphors We Live By"
 - Hofstadter, D. & Dennett, D. (1981). "The Mind's I"
 
