@@ -9,6 +9,7 @@
 - Kay, A. (1993). "The Early History of Smalltalk"
 - Wadler, P. (1992). "The Essence of Functional Programming"
 - Kiczales, G. et al. (1997). "Aspect-Oriented Programming"
+- Hopper, L. (2024). "Algebraic Effects in Distributed Computation: A Category-Theoretic Approach" (Lambda's dissertation, added by unanimous request)
 
 ### Philosophy and Cognitive Science
 - Wittgenstein, L. (1921). "Tractatus Logico-Philosophicus" (Zero's selection)
