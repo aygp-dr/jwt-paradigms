@@ -1,0 +1,1 @@
+Team A (Java Backend)  →  Team B (Python Data)  →  Team C (TypeScript Frontend)

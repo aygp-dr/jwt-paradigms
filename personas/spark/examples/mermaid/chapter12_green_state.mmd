@@ -1,0 +1,13 @@
+state Green {
+  entry {
+    turnOn(greenLight);
+    turnOff(redLight);
+    startTimer(standardGreenTime);
+  }
+  
+  on vehicleApproach [!pedestrianWaiting] -> ExtendedGreen {
+    startTimer(extendedGreenTime);
+  }
+  
+  on timeout -> Yellow
+}
