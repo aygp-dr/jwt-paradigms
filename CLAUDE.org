@@ -50,9 +50,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Implement token revocation for sensitive operations
 - Follow secure key management practices
 
+** Project Resurrection Protocol
+:PROPERTIES:
+:CUSTOM_ID: project-resurrection
+:END:
+
+When starting a new session or resuming work on this repository, follow the steps in =INIT_ACTIONS.org= to properly rehydrate the project state. This will help establish complete context on:
+
+- Current git status and branch state
+- Open issues and PRs
+- Task and review status
+- Book club status and scheduled readings
+- Security implementation status
+- Persona development progress
+
+Always run these initialization steps at the beginning of a new session to ensure you have the current project state.
+
 ** Git Worktree Workflow
 :PROPERTIES:
 :CUSTOM_ID: git-worktree-workflow
 :END:
 
 For detailed documentation on working with git worktrees in this repository, see =docs/git_worktree_workflow.md=. Use the =/worktree= command to have Claude check task information when working in a worktree.
+
+When rehydrating a worktree (rather than main branch), look for =.task.org= files in the worktree for task-specific notes and context.
