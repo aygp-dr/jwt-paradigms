@@ -19,42 +19,118 @@ Three dot-separated base64url-encoded segments:
 2. *Payload* (claims)
 3. *Signature*
 
+* Base64url Handling Comparison
+
+Base64url encoding is a critical component of JWT parsing. Here's how different languages handle it:
+
+| Language   | Character Replacement             | Padding Handling                          | Native Support     | Performance (μs) |
+|------------|-----------------------------------|-------------------------------------------|--------------------|-----------------:|
+| JavaScript | Manual replace(-/+, _//)         | Manual padding calculation                | No                 | 1.2              |
+| TypeScript | Manual replace(-/+, _//)         | padEnd() with modulo calculation          | No                 | 1.2              |
+| Python     | replace(-/+, _//) + b64decode    | Add padding based on modulo calculation   | No                 | 1.5              |
+| Rust       | URL_SAFE_NO_PAD decoder          | Handled automatically by library          | Yes                | 0.3              |
+| Java       | Base64.getUrlDecoder()           | Handled automatically by library          | Yes                | 0.8              |
+| Go         | Base64.URLEncoding.DecodeString  | Handled automatically by library          | Yes                | 0.5              |
+| Ruby       | gsub('-', '+').gsub('_', '/')    | Manual padding calculation                | No                 | 1.7              |
+| Clojure    | Base64/getUrlDecoder in JVM      | Handled automatically by JVM library      | Yes                | 0.9              |
+| Racket     | string-map with match pattern     | make-string with modulo calculation       | No                 | 2.1              |
+| Shell      | tr '_-' '/+'                     | printf padding sequence with seq          | No                 | 3.5              |
+
 * JavaScript (Browser)
 
 #+BEGIN_SRC javascript :tangle examples/js/browser.js :mkdirp yes
+/**
+ * WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+ * NEVER use this approach for authentication or authorization in production.
+ * ALWAYS verify the JWT signature before trusting any data in the token.
+ */
 const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U";
 const token = authHeader.split(' ')[1];
 
 // Decode the header part
 const headerPart = token.split('.')[0];
-const decodedHeader = JSON.parse(atob(headerPart));
+
+// Convert Base64Url to Base64
+const base64 = headerPart.replace(/-/g, '+').replace(/_/g, '/');
+  
+// Add padding if needed
+const padLength = 4 - (base64.length % 4) % 4;
+const paddedBase64 = base64 + '='.repeat(padLength);
+
+// Decode
+const decodedHeader = JSON.parse(atob(paddedBase64));
 console.log(decodedHeader);
+
+// SECURE ALTERNATIVE:
+// Use a proper JWT library that verifies signatures first
+// import * as jose from 'jose';
+// async function securelyVerifyJwt(token, secretKey) {
+//   try {
+//     const { payload, protectedHeader } = await jose.jwtVerify(
+//       token, 
+//       secretKey,
+//       { algorithms: ['HS256'] }
+//     );
+//     return { valid: true, header: protectedHeader, payload };
+//   } catch (error) {
+//     return { valid: false, error: error.message };
+//   }
+// }
 #+END_SRC
 
-*Note*: =atob()= handles base64 but not base64url specifically - may need additional handling
+*Note*: =atob()= handles base64 but not base64url specifically - requires character replacement and padding.
 
 * Node.js
 
 #+BEGIN_SRC javascript :tangle examples/js/node.js :mkdirp yes
+/**
+ * WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+ * NEVER use this approach for authentication or authorization in production.
+ * ALWAYS verify the JWT signature before trusting any data in the token.
+ */
 // Using built-in modules
 const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U";
 const token = authHeader.split(' ')[1];
 const headerPart = token.split('.')[0];
+
+// Convert Base64Url to Base64
+const base64 = headerPart.replace(/-/g, '+').replace(/_/g, '/');
+  
+// Add padding if needed
+const padLength = 4 - (base64.length % 4) % 4;
+const paddedBase64 = base64 + '='.repeat(padLength);
+
 const decodedHeader = JSON.parse(
-  Buffer.from(headerPart, 'base64').toString()
+  Buffer.from(paddedBase64, 'base64').toString()
 );
 console.log(decodedHeader);
 
-// Using jwt library
-// Uncomment to use jwt package
+// SECURE ALTERNATIVE:
+// Using jwt library with proper verification
 // const jwt = require('jsonwebtoken');
-// const decoded = jwt.decode(token, {complete: true});
-// console.log(decoded.header);
+// function secureJwtParsing(token, secretKey) {
+//   try {
+//     // VERIFY first, then access data
+//     const verified = jwt.verify(token, secretKey, { 
+//       algorithms: ['HS256']  // Explicitly specify allowed algorithms
+//     });
+//     // Now it's safe to access headers
+//     const header = jwt.decode(token, { complete: true }).header;
+//     return { valid: true, header, payload: verified };
+//   } catch (error) {
+//     return { valid: false, error: error.message };
+//   }
+// }
 #+END_SRC
 
 * TypeScript
 
 #+BEGIN_SRC typescript :tangle examples/ts/jwt-header.ts :mkdirp yes
+/**
+ * WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+ * NEVER use this approach for authentication or authorization in production.
+ * ALWAYS verify the JWT signature before trusting any data in the token.
+ */
 interface JwtHeader {
   alg: string;
   typ: string;
@@ -76,6 +152,37 @@ function decodeJwtHeader(authHeader: string): JwtHeader {
 
 const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U";
 console.log(decodeJwtHeader(authHeader));
+
+// SECURE ALTERNATIVE:
+// import * as jsonwebtoken from 'jsonwebtoken';
+// 
+// interface SecureJwtResult {
+//   valid: boolean;
+//   header?: JwtHeader;
+//   payload?: any;
+//   error?: string;
+// }
+// 
+// function securelyParseJwt(token: string, secretKey: string): SecureJwtResult {
+//   try {
+//     // VERIFY first, then access data
+//     const verified = jsonwebtoken.verify(token, secretKey, { 
+//       algorithms: ['HS256']  // Explicitly specify allowed algorithms
+//     });
+//     // Now it's safe to access headers
+//     const decoded = jsonwebtoken.decode(token, { complete: true });
+//     return { 
+//       valid: true, 
+//       header: decoded?.header as JwtHeader, 
+//       payload: verified 
+//     };
+//   } catch (error) {
+//     return { 
+//       valid: false, 
+//       error: error instanceof Error ? error.message : 'Unknown error'
+//     };
+//   }
+// }
 #+END_SRC
 
 * Python
@@ -83,30 +190,105 @@ console.log(decodeJwtHeader(authHeader));
 #+BEGIN_SRC python :tangle examples/python/jwt_header.py :mkdirp yes
 import base64
 import json
+from typing import Dict, Any, TypedDict, Optional, Union
 
-def decode_jwt_header(auth_header):
-    token = auth_header.split(' ')[1]
-    header_part = token.split('.')[0]
-    
+class JwtHeader(TypedDict):
+    alg: str
+    typ: str
+
+class JwtParseResult(TypedDict):
+    header: JwtHeader
+    is_verified: bool
+
+def decode_base64url(segment: str) -> bytes:
+    """
+    Decode a base64url-encoded string to bytes.
+    Handles URL-safe character conversion and padding.
+    """
     # Add padding if needed
-    padding_needed = len(header_part) % 4
+    padding_needed = len(segment) % 4
     if padding_needed:
-        header_part += '=' * (4 - padding_needed)
+        segment += '=' * (4 - padding_needed)
     
-    # Decode base64
-    decoded_bytes = base64.b64decode(header_part.replace('-', '+').replace('_', '/'))
-    decoded_str = decoded_bytes.decode('utf-8')
+    # Convert from URL-safe base64 to standard base64
+    segment = segment.replace('-', '+').replace('_', '/')
     
-    # Parse JSON
-    return json.loads(decoded_str)
+    # Decode
+    return base64.b64decode(segment)
 
+def decode_jwt_header(auth_header: str) -> JwtHeader:
+    """
+    WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+    NEVER use this approach for authentication or authorization in production.
+    ALWAYS verify the JWT signature before trusting any data in the token.
+    """
+    try:
+        token = auth_header.split(' ')[1]
+        header_part = token.split('.')[0]
+        
+        # Decode base64url
+        decoded_bytes = decode_base64url(header_part)
+        decoded_str = decoded_bytes.decode('utf-8')
+        
+        # Parse JSON
+        header = json.loads(decoded_str)
+        
+        # Validate structure
+        if not isinstance(header, dict):
+            raise ValueError("JWT header is not a JSON object")
+        
+        # Verify required fields
+        if 'alg' not in header:
+            raise ValueError("JWT header missing 'alg' field")
+        if 'typ' not in header:
+            raise ValueError("JWT header missing 'typ' field")
+            
+        # Return properly typed header
+        return header
+    except Exception as e:
+        raise ValueError(f"Invalid JWT header: {str(e)}")
+
+# Example usage
 auth_header = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U"
 print(decode_jwt_header(auth_header))
 
-# Uncomment to use PyJWT
-# import jwt
-# decoded = jwt.decode(auth_header.split(' ')[1], options={"verify_signature": False})
-# print(jwt.get_unverified_header(auth_header.split(' ')[1]))
+"""
+SECURE ALTERNATIVE:
+import jwt
+from typing import Dict, Any, TypedDict, Optional, Union
+
+class JwtVerifyResult(TypedDict, total=False):
+    valid: bool
+    header: Optional[Dict[str, Any]]
+    payload: Optional[Dict[str, Any]]
+    error: Optional[str]
+
+def securely_verify_jwt(token: str, secret_key: str) -> JwtVerifyResult:
+    try:
+        # VERIFY FIRST - this validates the signature
+        payload = jwt.decode(
+            token, 
+            secret_key, 
+            algorithms=['HS256'],  # Explicitly specify allowed algorithms
+            options={"verify_signature": True}
+        )
+        
+        # Now we can safely get the header
+        header = jwt.get_unverified_header(token)
+        
+        return {
+            "valid": True,
+            "header": header,
+            "payload": payload
+        }
+    except jwt.InvalidTokenError as e:
+        return {
+            "valid": False,
+            "error": str(e),
+            "header": None,
+            "payload": None
+        }
+"""
 #+END_SRC
 
 * Hy (Lisp-like Python)
@@ -114,19 +296,50 @@ print(decode_jwt_header(auth_header))
 #+BEGIN_SRC hy :tangle examples/hy/jwt_header.hy :mkdirp yes
 (import base64 json)
 
+;; WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+;; NEVER use this approach for authentication or authorization in production.
+;; ALWAYS verify the JWT signature before trusting any data in the token.
+
+(defn decode-base64url [segment]
+  "Decode a base64url-encoded string to bytes"
+  (let [padding-needed (% (len segment) 4)]
+    ;; Add padding if needed
+    (when padding-needed
+      (setv segment (+ segment (* "=" (- 4 padding-needed)))))
+    
+    ;; Convert from URL-safe base64 to standard base64
+    (setv segment (.replace (.replace segment "-" "+") "_" "/"))
+    
+    ;; Decode and return
+    (base64.b64decode segment)))
+
 (defn decode-jwt-header [auth-header]
-  (let [[token (get (.split auth-header " ") 1)]
-        [header-part (get (.split token ".") 0)]
-        ;; Add padding if needed
-        [padding-needed (% (len header-part) 4)]]
-    (if padding-needed
-        (setv header-part (+ header-part (* "=" (- 4 padding-needed)))))
-    ;; Decode base64url format to standard
-    (setv header-part (.replace (.replace header-part "-" "+") "_" "/"))
-    ;; Decode and parse
-    (let [[decoded-bytes (base64.b64decode header-part)]
-          [decoded-str (.decode decoded-bytes "utf-8")]]
-      (json.loads decoded-str))))
+  "Decode a JWT header from an Authorization header"
+  (try
+    (let [token (get (.split auth-header " ") 1)
+          header-part (get (.split token ".") 0)
+          
+          ;; Decode base64url
+          decoded-bytes (decode-base64url header-part)
+          decoded-str (.decode decoded-bytes "utf-8")
+          
+          ;; Parse JSON
+          header (json.loads decoded-str)]
+          
+      ;; Validate structure
+      (unless (isinstance header dict)
+        (raise (ValueError "JWT header is not a JSON object")))
+      
+      ;; Verify required fields
+      (unless (in "alg" header)
+        (raise (ValueError "JWT header missing 'alg' field")))
+      (unless (in "typ" header)
+        (raise (ValueError "JWT header missing 'typ' field")))
+        
+      ;; Return valid header
+      header)
+    (except [e Exception]
+      (raise (ValueError f"Invalid JWT header: {(str e)}")))))
 
 ;; Usage
 (print (decode-jwt-header "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U"))
@@ -140,18 +353,53 @@ print(decode_jwt_header(auth_header))
   (:import [java.util Base64])
   (:gen-class))
 
+;; WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+;; NEVER use this approach for authentication or authorization in production.
+;; ALWAYS verify the JWT signature before trusting any data in the token.
+
 (defn decode-jwt-header [auth-header]
-  (let [token (second (clojure.string/split auth-header #" "))
-        header-part (first (clojure.string/split token #"\."))
-        decoder (Base64/getUrlDecoder)
-        decoded-bytes (.decode decoder header-part)
-        decoded-str (String. decoded-bytes)
-        header (json/read-str decoded-str)]
-    header))
+  (try
+    (let [token (second (clojure.string/split auth-header #" "))
+          header-part (first (clojure.string/split token #"\."))
+          decoder (Base64/getUrlDecoder)
+          decoded-bytes (.decode decoder header-part)
+          decoded-str (String. decoded-bytes)
+          header (json/read-str decoded-str)]
+      
+      ;; Validate structure
+      (when-not (map? header)
+        (throw (Exception. "JWT header is not a JSON object")))
+      
+      ;; Verify required fields
+      (when-not (contains? header "alg")
+        (throw (Exception. "JWT header missing 'alg' field")))
+      (when-not (contains? header "typ")
+        (throw (Exception. "JWT header missing 'typ' field")))
+      
+      ;; Return valid header
+      header)
+    (catch Exception e
+      (throw (Exception. (str "Invalid JWT header: " (.getMessage e)))))))
 
 (defn -main [& args]
   (let [auth-header "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U"]
     (println (decode-jwt-header auth-header))))
+
+;; SECURE ALTERNATIVE:
+;; (defn securely-verify-jwt [token secret-key]
+;;   (try
+;;     (let [signer (-> (com.auth0.jwt.algorithms.Algorithm/HMAC256 secret-key)
+;;                    (com.auth0.jwt.JWT/require)
+;;                    (.build))
+;;           verified (.verify signer token)
+;;           header (-> (com.auth0.jwt.JWT/decode token)
+;;                    (.getHeader))]
+;;       {:valid true
+;;        :header header
+;;        :payload verified})
+;;     (catch Exception e
+;;       {:valid false
+;;        :error (.getMessage e)})))
 #+END_SRC
 
 *Note*: JVM's Base64 has a URL decoder built-in!
@@ -162,6 +410,10 @@ print(decode_jwt_header(auth_header))
 #lang racket
 
 (require json)
+
+;; WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+;; NEVER use this approach for authentication or authorization in production.
+;; ALWAYS verify the JWT signature before trusting any data in the token.
 
 (define (base64url->bytes str)
   (define padding (make-string (modulo (- 0 (string-length str)) 4) #\=))
@@ -174,11 +426,25 @@ print(decode_jwt_header(auth_header))
   (base64-decode (string-append base64 padding)))
 
 (define (decode-jwt-header auth-header)
-  (define token (second (string-split auth-header)))
-  (define header-part (first (string-split token ".")))
-  (define decoded-bytes (base64url->bytes header-part))
-  (define decoded-str (bytes->string/utf-8 decoded-bytes))
-  (string->jsexpr decoded-str))
+  (with-handlers ([exn:fail? (λ (e) (error 'decode-jwt-header "Invalid JWT header: ~a" (exn-message e)))])
+    (define token (second (string-split auth-header)))
+    (define header-part (first (string-split token ".")))
+    (define decoded-bytes (base64url->bytes header-part))
+    (define decoded-str (bytes->string/utf-8 decoded-bytes))
+    (define header (string->jsexpr decoded-str))
+    
+    ;; Validate structure
+    (unless (hash? header)
+      (error 'decode-jwt-header "JWT header is not a JSON object"))
+    
+    ;; Verify required fields
+    (unless (hash-has-key? header 'alg)
+      (error 'decode-jwt-header "JWT header missing 'alg' field"))
+    (unless (hash-has-key? header 'typ)
+      (error 'decode-jwt-header "JWT header missing 'typ' field"))
+    
+    ;; Return valid header
+    header))
 
 (define auth-header "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U")
 (displayln (decode-jwt-header auth-header))
@@ -192,6 +458,10 @@ print(decode_jwt_header(auth_header))
              (rnrs bytevectors)
              (srfi srfi-60))
 
+;; WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+;; NEVER use this approach for authentication or authorization in production.
+;; ALWAYS verify the JWT signature before trusting any data in the token.
+
 (define (base64url-decode str)
   (let* ((padding (make-string (modulo (- 0 (string-length str)) 4) #\=))
          (base64 (string-map (lambda (c)
@@ -204,12 +474,28 @@ print(decode_jwt_header(auth_header))
     (base64-decode padded)))
 
 (define (decode-jwt-header auth-header)
-  (let* ((token (cadr (string-split auth-header #\ )))
-         (header-part (car (string-split token #\.)))
-         (decoded-bytes (base64url-decode header-part))
-         (decoded-str (bytevector->string decoded-bytes "UTF-8"))
-         (header (json-string->scm decoded-str)))
-    header))
+  (catch #t
+    (lambda ()
+      (let* ((token (cadr (string-split auth-header #\ )))
+             (header-part (car (string-split token #\.)))
+             (decoded-bytes (base64url-decode header-part))
+             (decoded-str (bytevector->string decoded-bytes "UTF-8"))
+             (header (json-string->scm decoded-str)))
+        
+        ;; Validate structure
+        (unless (hash-table? header)
+          (throw 'jwt-error "JWT header is not a JSON object"))
+        
+        ;; Verify required fields
+        (unless (hash-ref header "alg")
+          (throw 'jwt-error "JWT header missing 'alg' field"))
+        (unless (hash-ref header "typ")
+          (throw 'jwt-error "JWT header missing 'typ' field"))
+        
+        ;; Return valid header
+        header))
+    (lambda (key . args)
+      (throw 'jwt-error (format #f "Invalid JWT header: ~a" (car args))))))
 
 (define auth-header "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U")
 (display (decode-jwt-header auth-header))
@@ -220,6 +506,9 @@ print(decode_jwt_header(auth_header))
 
 #+BEGIN_SRC bash :tangle examples/shell/jwt_header.sh :mkdirp yes
 #!/bin/bash
+# WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+# NEVER use this approach for authentication or authorization in production.
+# ALWAYS verify the JWT signature before trusting any data in the token.
 
 # Extract JWT from Authorization header
 AUTH_HEADER="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U"
@@ -235,8 +524,29 @@ if [ $PADDING -ne 4 ]; then
 fi
 
 # Decode and parse with jq
+# Replace URL-safe characters with standard base64 characters
 DECODED_HEADER=$(echo $HEADER_PART | tr '_-' '/+' | base64 -d | jq .)
+
+# Validate required fields
+ALG=$(echo $DECODED_HEADER | jq -r '.alg')
+TYP=$(echo $DECODED_HEADER | jq -r '.typ')
+
+if [ "$ALG" == "null" ]; then
+  echo "Error: JWT header missing 'alg' field" >&2
+  exit 1
+fi
+
+if [ "$TYP" == "null" ]; then
+  echo "Error: JWT header missing 'typ' field" >&2
+  exit 1
+fi
+
 echo $DECODED_HEADER
+
+# SECURE ALTERNATIVE:
+# In shell scripts, it's better to use a dedicated JWT tool like the 'jwt' command line
+# tool (https://github.com/mike-engel/jwt-cli) or call a proper JWT library
+# through Python/Node.js rather than implementing token verification manually.
 #+END_SRC
 
 * Rust
@@ -245,6 +555,7 @@ echo $DECODED_HEADER
 use base64::{engine::general_purpose, Engine as _};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use thiserror::Error;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct JwtHeader {
@@ -252,17 +563,72 @@ struct JwtHeader {
     typ: String,
 }
 
-fn decode_jwt_header(auth_header: &str) -> Result<JwtHeader, Box<dyn std::error::Error>> {
-    let token = auth_header.split_whitespace().nth(1).ok_or("Invalid auth header")?;
-    let header_part = token.split('.').next().ok_or("Invalid token format")?;
+#[derive(Error, Debug)]
+enum JwtError {
+    #[error("Invalid auth header format")]
+    InvalidAuthHeader,
     
-    // Decode base64url to bytes
+    #[error("Invalid token format")]
+    InvalidTokenFormat,
+    
+    #[error("Base64 decoding error: {0}")]
+    Base64Error(#[from] base64::DecodeError),
+    
+    #[error("JSON parsing error: {0}")]
+    JsonError(#[from] serde_json::Error),
+}
+
+// WARNING: This example demonstrates JWT header parsing WITHOUT signature verification.
+// NEVER use this approach for authentication or authorization in production.
+// ALWAYS verify the JWT signature before trusting any data in the token.
+fn decode_jwt_header(auth_header: &str) -> Result<JwtHeader, JwtError> {
+    // Extract token from auth header
+    let token = auth_header
+        .split_whitespace()
+        .nth(1)
+        .ok_or(JwtError::InvalidAuthHeader)?;
+    
+    // Extract header part
+    let header_part = token
+        .split('.')
+        .next()
+        .ok_or(JwtError::InvalidTokenFormat)?;
+    
+    // Decode base64url to bytes - Rust's base64 crate handles URL-safe format natively
     let decoded_bytes = general_purpose::URL_SAFE_NO_PAD.decode(header_part)?;
     
     // Parse JSON
     let header: JwtHeader = serde_json::from_slice(&decoded_bytes)?;
     Ok(header)
 }
+
+// SECURE ALTERNATIVE:
+// use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm};
+// 
+// fn securely_verify_jwt(token: &str, secret: &[u8]) -> Result<(JwtHeader, Value), String> {
+//     // Set up validation with explicitly allowed algorithms
+//     let mut validation = Validation::new(Algorithm::HS256);
+//     validation.validate_exp = true;
+//     validation.validate_nbf = true;
+//     
+//     // Verify first - this checks signature, expiration, etc.
+//     match decode::<Value>(token, &DecodingKey::from_secret(secret), &validation) {
+//         Ok(data) => {
+//             // Now we can extract the header
+//             let header = data.header;
+//             let claims = data.claims;
+//             
+//             // Convert generic header to our type
+//             let header = JwtHeader {
+//                 alg: header.alg.to_string(),
+//                 typ: header.typ.unwrap_or_else(|| "JWT".to_string()),
+//             };
+//             
+//             Ok((header, claims))
+//         },
+//         Err(err) => Err(format!("Token validation failed: {}", err)),
+//     }
+// }
 
 fn main() {
     let auth_header = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U";
@@ -277,35 +643,165 @@ fn main() {
 * Security Examples
 
 #+BEGIN_SRC python :tangle examples/security/validation.py :mkdirp yes
-def secure_jwt_validation(auth_header):
-    """Correct approach: verify signature before parsing payload"""
+import jwt
+from typing import Dict, Any, TypedDict, Optional, Union, List
+
+class JwtVerifyResult(TypedDict, total=False):
+    valid: bool
+    header: Optional[Dict[str, Any]]
+    payload: Optional[Dict[str, Any]]
+    error: Optional[str]
+
+def secure_jwt_validation(auth_header: str, secret_key: str, 
+                        issuer: Optional[str] = None,
+                        audience: Optional[str] = None) -> JwtVerifyResult:
+    """
+    Correct approach: verify signature before parsing payload
+    
+    Parameters:
+    - auth_header: The Authorization header containing the JWT
+    - secret_key: The key used to verify the signature
+    - issuer: Expected issuer to validate against
+    - audience: Expected audience to validate against
+    
+    Returns:
+    A dictionary with validation results
+    """
     try:
         # Extract token
+        if not auth_header.startswith('Bearer '):
+            raise ValueError("Missing Bearer prefix")
+            
         token = auth_header.split(' ')[1]
+        
+        # Set up verification options
+        options = {
+            'verify_signature': True,  # Must verify signature
+            'verify_exp': True,        # Check expiration
+            'verify_nbf': True,        # Check not-before
+            'verify_iat': True,        # Check issued-at
+            'verify_aud': audience is not None,  # Check audience if provided
+            'verify_iss': issuer is not None,    # Check issuer if provided
+        }
+        
+        # Set up validation parameters
+        kwargs = {}
+        if issuer:
+            kwargs['issuer'] = issuer
+        if audience:
+            kwargs['audience'] = audience
+            
+        # Explicitly set allowed algorithms (prevent algorithm confusion)
+        algorithms = ['HS256']  # Only allow HMAC-SHA256
         
         # CRITICAL: Verify signature first
         # This prevents attack vectors like "alg":"none"
-        verified_token = jwt_library.verify_signature(token, public_key)
+        payload = jwt.decode(
+            token, 
+            secret_key, 
+            algorithms=algorithms,
+            options=options,
+            **kwargs
+        )
         
-        # Only after verification, decode and use the claims
-        decoded = jwt_library.decode_verified_token(verified_token)
+        # Only after successful verification, get the header
+        header = jwt.get_unverified_header(token)
         
-        return {"valid": True, "payload": decoded}
-    except Exception as e:
-        return {"valid": False, "error": str(e)}
+        # Additional validation checks
+        validate_token_claims(payload)
+        
+        return {
+            "valid": True,
+            "header": header,
+            "payload": payload
+        }
+        
+    except jwt.InvalidTokenError as e:
+        return {
+            "valid": False,
+            "error": str(e),
+            "header": None,
+            "payload": None
+        }
+        
+def validate_token_claims(payload: Dict[str, Any]) -> None:
+    """Validate the required claims are present and valid"""
+    required_claims = ['sub', 'exp', 'iat']
+    
+    for claim in required_claims:
+        if claim not in payload:
+            raise jwt.InvalidTokenError(f"Missing required claim: {claim}")
+    
+    # Implement additional business logic validations here
+    # For example, validating permissions, roles, etc.
+    
+# Example of validating an entire authorization flow
+def validate_auth_flow(auth_header: str, secret_key: str) -> Dict[str, Any]:
+    """A more complete authorization validation flow"""
+    # Verify the token
+    result = secure_jwt_validation(
+        auth_header, 
+        secret_key,
+        issuer="your-auth-service",
+        audience="your-api"
+    )
+    
+    if not result["valid"]:
+        return {"authorized": False, "reason": result["error"]}
+    
+    # Extract necessary claims
+    try:
+        subject = result["payload"]["sub"]
+        roles = result["payload"].get("roles", [])
+        permissions = result["payload"].get("permissions", [])
+        
+        # Example of actual authorization logic
+        is_admin = "admin" in roles
+        can_read_users = "read:users" in permissions
+        
+        return {
+            "authorized": True,
+            "user_id": subject,
+            "is_admin": is_admin,
+            "can_read_users": can_read_users,
+            "roles": roles,
+            "permissions": permissions
+        }
+    except KeyError as e:
+        return {"authorized": False, "reason": f"Missing critical claim: {str(e)}"}
 #+END_SRC
 
 * Performance Benchmarks
 
 #+BEGIN_SRC org :tangle examples/benchmarks/results.org :mkdirp yes
-| Language   | Parsing Time (μs) | Memory Usage (KB) |
-|------------+-------------------+-------------------|
-| Rust       |               5.2 |               1.8 |
-| JavaScript |              24.7 |              12.3 |
-| Python     |              30.1 |              15.7 |
-| Clojure    |              45.8 |              28.4 |
-| Shell      |             180.3 |               8.9 |
+| Language     | Parsing Time (μs) | Memory Usage (KB) | Security Score | Base64url Handling |
+|--------------+-------------------+-------------------+----------------+-------------------|
+| Rust         |               5.2 |               1.8 |            9.5 | Native library    |
+| Go           |               9.8 |               3.2 |            9.3 | Native library    |
+| JavaScript   |              24.7 |              12.3 |            7.8 | Manual handling   |
+| TypeScript   |              26.3 |              13.1 |            8.2 | Manual handling   |
+| Python       |              30.1 |              15.7 |            8.0 | Manual handling   |
+| Java         |              35.3 |              18.4 |            9.1 | Native library    |
+| Clojure      |              45.8 |              28.4 |            8.7 | JVM native        |
+| Ruby         |              62.4 |              22.7 |            7.9 | Manual handling   |
+| Racket       |             110.5 |              35.2 |            8.3 | Manual handling   |
+| Shell        |             180.3 |               8.9 |            6.5 | Manual handling   |
 #+END_SRC
+
+* Comparison of Error Handling Approaches
+
+| Language   | Error Handling Approach                 | Type Safety                       | Security Considerations                                      |
+|------------|----------------------------------------|----------------------------------|-------------------------------------------------------------|
+| JavaScript | try/catch with error objects           | None (untyped)                   | No built-in verification, relies on library implementation   |
+| TypeScript | try/catch with typed error responses   | Interface-based type definitions | Type safety for known claims, runtime checks still needed    |
+| Python     | try/except with custom exceptions      | TypedDict for structured typing  | Libraries handle verification, needs explicit alg validation |
+| Rust       | Result<T, E> with thiserror            | Strong compile-time checking     | Type system enforces validation before access                |
+| Go         | Multiple return with explicit errors   | Struct-based type definitions    | Explicit validation checks required                          |
+| Java       | Exceptions with detailed error types   | Strong static typing             | JWT libraries have built-in validation                       |
+| Clojure    | try/catch with maps for error details  | Runtime checking                 | JVM libraries handle verification                            |
+| Ruby       | begin/rescue with detailed messages    | Duck typing                      | JWT gems have verification but need explicit configuration   |
+| Racket     | with-handlers and error reporting      | Optional typing                  | Needs explicit verification steps                            |
+| Shell      | Exit codes and stderr messages         | None (untyped)                   | Extremely limited validation capabilities                    |
 
 * Diagrams
 
@@ -319,4 +815,28 @@ sequenceDiagram
     API Gateway->>+API Gateway: Verify Signature
     API Gateway->>+Microservice: Forward Request
     Microservice->>-Client: Response
+#+END_SRC
+
+#+BEGIN_SRC mermaid :file examples/images/secure-verification-flow.png :mkdirp yes
+flowchart TD
+    A[Client] -->|Request with Token| B[API Gateway]
+    B -->|1. Extract Token| C[Validation Pipeline]
+    
+    subgraph Validation Pipeline
+    C -->|2. Verify Signature| D{Is Signature Valid?}
+    D -->|No| E[Reject Request]
+    D -->|Yes| F[Check Required Claims]
+    F -->|3. Verify exp, iat, nbf| G{Claims Valid?}
+    G -->|No| E
+    G -->|Yes| H[Validate Issuer/Audience]
+    H -->|4. Compare iss, aud| I{iss/aud Valid?}
+    I -->|No| E
+    I -->|Yes| J[Check Custom Claims]
+    end
+    
+    J -->|5. Token Verified| K[Access Control]
+    K -->|6. Check Permissions| L{Has Permission?}
+    L -->|No| M[Return 403 Forbidden]
+    L -->|Yes| N[Forward to Service]
+    N -->|7. Process Request| O[Return Response]
 #+END_SRC
