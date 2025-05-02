@@ -15,7 +15,7 @@
 ** Parsing JWT Headers Across Programming Paradigms
 #+ATTR_BEAMER: :overlay <+->
 - A cross-language exploration of JWT header parsing techniques
-- SPLASH/StrangeLoop/PyConf/RacketCon/EuroLISP 2025
+- PyCon US 2025, May 14 - May 22, 2025
 - Aidan Pace (@aygp-dr)
 
 ** What We'll Cover
