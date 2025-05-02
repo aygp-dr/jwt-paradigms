@@ -20,6 +20,13 @@
 - Lakoff, G. & Johnson, M. (1980). "Metaphors We Live By"
 - Hofstadter, D. & Dennett, D. (1981). "The Mind's I"
 
+### Critical Theory and Systems
+- Baudrillard, J. (1981). "Simulacra and Simulation" (Raj's controversial suggestion: "It's like type systems for reality")
+- Perrow, C. (1984). "Normal Accidents: Living with High-Risk Technologies" (Vikram's security-focused selection)
+- Galloway, A. (2004). "Protocol: How Control Exists After Decentralization" (Lambda's network theory choice)
+- Meadows, D. (2008). "Thinking in Systems: A Primer" (Diego's foundation for collaborative systems)
+- Hayles, N.K. (1999). "How We Became Posthuman" (Claude's exploration of information embodiment)
+
 ### Fiction & Literary Works
 - Borges, J.L. (1941). "The Library of Babel" and "The Garden of Forking Paths"
 - Calvino, I. (1979). "If on a Winter's Night a Traveler"
