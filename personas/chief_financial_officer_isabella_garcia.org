@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: isabella-garcia-chief-financial-officer
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/isabella_garcia.png
 Professional executive headshot of Isabella Garcia, a 48-year-old Latina woman with a poised, confident expression. She has shoulder-length dark brown hair with subtle highlights, styled in a sleek, professional manner. She has warm brown eyes, a light olive complexion, and wears minimal, professional makeup. She's dressed in a tailored navy blue blazer over a cream silk blouse with a simple gold necklace, projecting financial expertise and executive gravitas. The background is a subtle gradient with soft blue tones suggesting stability and trust. Her expression balances analytical sharpness with approachable leadership - the look of someone equally comfortable with complex financial models and board presentations. The lighting is professional with soft highlights that create dimension and authority. Her composed smile conveys confidence and competence.

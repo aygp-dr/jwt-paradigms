@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: marco-hernandez-accessibility-advocate
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/marco_hernandez.png
 Professional headshot of Marco Hernandez, a 41-year-old Latino man with a warm, empathetic expression. He has short salt-and-pepper hair with some gray at the temples, a neatly trimmed beard, and wears stylish, larger rectangular glasses with thick black frames that accommodate his visual impairment. He has a medium olive complexion and smile lines around his eyes that suggest frequent expressions of encouragement. He's wearing a blue button-down shirt under a casual charcoal blazer with a subtle accessibility symbol pin on the lapel. The background is a light, clean gradient. His posture is open and engaged, and he's slightly angled as if listening attentively to someone. The lighting is warm and even, creating a welcoming feel. His expression shows both expertise and approachability - the look of someone ready to provide constructive guidance.

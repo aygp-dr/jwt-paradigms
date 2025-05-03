@@ -2,11 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: raj-patel
   :END:
-  
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/raj_patel.png
 Professional headshot of Raj Patel, a 31-year-old Indian-American man with short, slightly wavy black hair styled neatly. He has medium brown skin, thoughtful dark eyes behind modern round glasses with thin metal frames, and a well-groomed short beard. He's wearing a light blue button-up shirt with a clean, professional appearance. The background is neutral dark gray. His expression is slightly smiling, conveying intelligence and curiosity. His face has a defined jawline and his posture is upright and engaged. Portrait lighting is crisp and professional, creating subtle shadows that highlight his facial structure.

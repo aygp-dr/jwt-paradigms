@@ -2,16 +2,16 @@
   :PROPERTIES:
   :CUSTOM_ID: diego-martinez
   :END:
-** Headshot Generation Prompt
-   :PROPERTIES:
-   :CUSTOM_ID: headshot-generation-prompt
-   :END:
+
+#+begin_ai :image :file images/diego_martinez.png
 Hispanic male in his early 40s with short black hair with some gray at
 the temples, trimmed beard, rectangular glasses, thoughtful expression.
 Professional appearance with a navy blue button-up shirt. Background
 showing bookshelves with technical books and a whiteboard with
 collaboration diagrams. Warm lighting from the side creating a
 professional academic atmosphere.
+#+end_ai
+
 
 ** Background
    :PROPERTIES:

@@ -2,10 +2,8 @@
   :PROPERTIES:
   :CUSTOM_ID: dr.-vikram-shah
   :END:
-** Headshot Generation Prompt
-   :PROPERTIES:
-   :CUSTOM_ID: headshot-generation-prompt
-   :END:
+
+#+begin_ai :image :file images/vikram_shah.png
 Professional academic portrait of Dr. Vikram Shah, a 42-year-old
 Indian-American man with a methodical and precise demeanor. He has
 short, neatly styled black hair with slight graying at the temples and
@@ -14,6 +12,8 @@ gaze. He has a medium brown complexion and a serious, contemplative
 expression that reflects his mathematical background. He's wearing a
 crisp white dress shirt with a navy blue blazer and a subtle patterned
 tie.
+#+end_ai
+
 
 ** Background
    :PROPERTIES:

@@ -1,6 +1,6 @@
 # Reviewer Personas Tooling
 
-.PHONY: all setup images tangle detangle publish clean help .venv alternatives dalle gemini claude-commands process-all org-lint org-ai-images
+.PHONY: all setup images tangle detangle publish clean help .venv alternatives dalle gemini claude-commands process-all org-lint org-ai-images headshot-audit
 
 # Configuration variables
 VENV := . .venv/bin/activate &&
@@ -19,6 +19,14 @@ SHELL := /bin/bash
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-15s\033[0m %s\n", $1, $2}' $(MAKEFILE_LIST)
+
+# The headshot audit can be used independently or as part of the workflow
+headshot-audit: ## Audit headshot images for existence and proper references
+	@echo "Running headshot audit to verify image references..."
+	@$(SCRIPTS_DIR)/headshot_audit.sh
+
+# Complete workflow: generate, replace, and verify headshots
+headshots: gemini-replace headshot-audit ## Complete workflow: generate, replace and verify headshots
 
 all: images ## Setup and generate images
 
@@ -95,10 +103,17 @@ dalle: $(IMAGES_DIR) ## Generate headshots using DALL-E
 				(save-buffer))"; \
 	done
 
+images/gemini:
+	@mkdir -p $@
+
 gemini: images/gemini ## Generate headshots using Gemini
 	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py
 
-gemini-replace: gemini ## Generate headshots and replace placeholders
+# Generate headshots and then replace images in the main directory
+# This target depends on 'gemini' to ensure images are generated first
+gemini-replace: gemini ## Generate and replace headshots using paths from :file attributes
+	@echo "Replacing headshots using file paths specified in :file attributes..."
+	$(PYTHON) $(SCRIPTS_DIR)/extract_personas.py --verbose
 	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py --copy-to-target
 	$(SCRIPTS_DIR)/replace_placeholders.sh
 

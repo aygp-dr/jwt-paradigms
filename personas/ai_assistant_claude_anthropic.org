@@ -2,10 +2,7 @@
   :PROPERTIES:
   :CUSTOM_ID: claude-ai-assistant
   :END:
-** Headshot Generation Prompt
-   :PROPERTIES:
-   :CUSTOM_ID: headshot-generation-prompt
-   :END:
+
 
 #+begin_ai :image :file images/claude.png
 Representation of Claude, an AI assistant. An abstract digital entity with flowing, ethereal teal 

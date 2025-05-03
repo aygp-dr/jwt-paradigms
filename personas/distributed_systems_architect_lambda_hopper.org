@@ -7,6 +7,15 @@
 #+PROPERTY: PERSONA_BIAS Strong preference for immutable data structures, skeptical of OOP paradigms
 #+PROPERTY: PERSONA_IMAGE images/lambda_hopper.png
 
+
+#+begin_ai :image :file images/lambda_hopper.png
+Professional headshot of Lambda Hopper, a software architect with short purple-tinted 
+hair, rectangular glasses, and androgynous features. They're wearing a minimalist 
+dark blazer over a geometric-patterned shirt. The background features subtle 
+mathematical notation. Their expression is intense and focused, with a slight 
+confident smile. High-quality studio lighting with clean shadows.
+#+end_ai
+
 * Bio
 
 Lambda Hopper is a distributed systems architect known for their pioneering work in functional programming paradigms as applied to large-scale distributed systems. With a background in theoretical computer science and category theory, Lambda approaches system design through a mathematical lens, emphasizing correctness proofs and formal verification.
@@ -113,15 +122,6 @@ To work effectively with Lambda:
 - B.S. in Computer Science and Mathematics, Carnegie Mellon University
 - Notable Mentors: Philip Wadler, Simon Peyton Jones
 
-* Image
-
-#+begin_ai :image :file images/lambda_hopper.png :tangle prompts/lambda_hopper.txt :mkdirp t
-Professional headshot of Lambda Hopper, a software architect with short purple-tinted 
-hair, rectangular glasses, and androgynous features. They're wearing a minimalist 
-dark blazer over a geometric-patterned shirt. The background features subtle 
-mathematical notation. Their expression is intense and focused, with a slight 
-confident smile. High-quality studio lighting with clean shadows.
-#+end_ai
 
 * Technical Skills
 

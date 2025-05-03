@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: sarah-martinez-legal-counsel
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/sarah_martinez.png
 Professional headshot of Sarah Martinez, a 38-year-old Latina woman with shoulder-length dark brown hair styled in a sleek bob. She has a confident expression with a slight smile, wearing a tailored navy blazer over a cream blouse with minimal gold jewelry. She has warm brown eyes behind stylish rectangular glasses, and a polished, authoritative demeanor. The background is a subtle gradient of light blue-gray. Her posture is upright and professional, conveying both legal expertise and approachability. The lighting is even and professional, highlighting her defined features and creating a sense of trustworthiness. Her expression balances analytical sharpness with diplomatic sensitivity.
