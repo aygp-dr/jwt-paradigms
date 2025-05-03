@@ -6,7 +6,11 @@
    :PROPERTIES:
    :CUSTOM_ID: headshot-generation-prompt
    :END:
+
+#+begin_ai :image :file images/sarah_johnson.png
 Professional corporate headshot of Jennifer Williams, a 44-year-old African American woman with a confident, charismatic expression. She has shoulder-length natural black hair styled in a professional bob with subtle highlights. She has warm brown eyes, high cheekbones, and a brilliant, engaging smile that conveys both authority and approachability. She's wearing a well-tailored crimson blazer over a cream silk blouse with a subtle gold necklace. She has small gold hoop earrings that complement her professional appearance. The background is a neutral dark blue gradient that enhances her executive presence. Her posture is upright and commanding, with her body angled slightly to convey dynamism. The lighting is polished and professional, highlighting her clear complexion and confident demeanor. Her expression conveys strategic thinking combined with persuasive charm - the look of someone who excels at high-stakes enterprise sales.
+#+end_ai
+
 
 ** Background
    :PROPERTIES:
@@ -87,4 +91,3 @@ Jennifer provides sales-oriented feedback that connects technical solutions to m
 - Collects rare wines not for taste but as status symbols to display in her custom wine cellar; admits privately she prefers bourbon
 - Serves on the board of three local charity organizations, strategically selected to maximize networking with potential clients
 - Only TV she watches is reality competition shows that involve deal-making and negotiation; uses scenarios from "Shark Tank" in her sales training
-

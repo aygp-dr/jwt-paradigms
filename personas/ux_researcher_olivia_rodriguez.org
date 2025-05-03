@@ -6,6 +6,8 @@
    :PROPERTIES:
    :CUSTOM_ID: headshot-generation-prompt
    :END:
+
+#+begin_ai :image :file images/olivia_rodriguez.png
 Mid-30s Latina woman with shoulder-length dark brown hair with subtle
 highlights, warm brown eyes, and a friendly, approachable expression.
 She's wearing professional but creative attire - a teal blouse with a
@@ -13,6 +15,8 @@ minimalist silver pendant necklace. Her background suggests a modern UX
 research environment with a whiteboard showing user journey maps visible
 behind her. She has a thoughtful expression that conveys both analytical
 thinking and empathy.
+#+end_ai
+
 
 ** Background
    :PROPERTIES:
