@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: james-wilson-chief-executive-officer
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/james_wilson.png
 Professional executive headshot of James Wilson, a 52-year-old Black man with a commanding yet approachable presence. He has short, neatly trimmed dark hair with distinguished touches of gray at the temples, and a well-groomed short beard. He has deep brown eyes that project warmth and strategic vision, and a medium-dark complexion. He's dressed in a well-tailored charcoal suit with a crisp white shirt and burgundy tie, projecting executive authority and polished leadership. The background is a subtle gradient in neutral tones that suggests a corporate environment without being distracting. His expression balances confident authority with genuine approachability - the composed look of someone who makes high-stakes decisions daily while valuing his team. The lighting is professional with defined highlights that accentuate his strong features while creating a sense of dimension and gravitas. His slight smile conveys both confidence and accessibility.

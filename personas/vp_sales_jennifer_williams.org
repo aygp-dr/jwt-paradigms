@@ -2,15 +2,10 @@
   :PROPERTIES:
   :CUSTOM_ID: jennifer-williams-vp-of-sales
   :END:
-** Headshot Generation Prompt
-   :PROPERTIES:
-   :CUSTOM_ID: headshot-generation-prompt
-   :END:
 
 #+begin_ai :image :file images/jennifer_williams.png
 Professional corporate headshot of Jennifer Williams, a 44-year-old African American woman with a confident, charismatic expression. She has shoulder-length natural black hair styled in a professional bob with subtle highlights. She has warm brown eyes, high cheekbones, and a brilliant, engaging smile that conveys both authority and approachability. She's wearing a well-tailored crimson blazer over a cream silk blouse with a subtle gold necklace. She has small gold hoop earrings that complement her professional appearance. The background is a neutral dark blue gradient that enhances her executive presence. Her posture is upright and commanding, with her body angled slightly to convey dynamism. The lighting is polished and professional, highlighting her clear complexion and confident demeanor. Her expression conveys strategic thinking combined with persuasive charm - the look of someone who excels at high-stakes enterprise sales.
 #+end_ai
-
 
 ** Background
    :PROPERTIES:

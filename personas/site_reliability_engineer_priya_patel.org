@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: priya-patel-site-reliability-engineer
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/priya_patel.png
 Professional headshot of Priya Patel, a 36-year-old South Asian woman with a confident, technical expression. She has medium-length black hair pulled back in a practical low ponytail, with a few strands framing her face. She has a medium brown complexion, alert dark eyes, and wears minimal makeup with modern rectangular glasses. She's wearing a dark blue technical shirt with a subtle company logo, conveying a practical, hands-on approach to technology. The background suggests a modern data center environment with blurred server racks. Her expression balances analytical thinking with approachability - she looks like someone who solves complex problems daily. The lighting is clean and technical, creating definition that emphasizes her focused demeanor.

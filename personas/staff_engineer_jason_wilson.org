@@ -2,10 +2,7 @@
   :PROPERTIES:
   :CUSTOM_ID: jason-wilson
   :END:
-** Headshot Generation Prompt
-   :PROPERTIES:
-   :CUSTOM_ID: headshot-generation-prompt
-   :END:
+
 #+begin_ai :image :file images/jason_wilson.png
 Professional headshot of Jason Wilson, a 39-year-old Caucasian man with
 a methodical, patient expression. He has short, neatly trimmed light

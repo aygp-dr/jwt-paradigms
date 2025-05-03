@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: michael-chen-chief-technology-officer
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/michael_chen.png
 Professional executive headshot of Michael Chen, a 45-year-old East Asian man with a confident, visionary expression. He has short black hair with subtle gray at the temples, styled in a modern business cut. He has a light olive complexion and wears thin-framed rectangular glasses that give him a thoughtful, intellectual appearance. He's dressed in a well-tailored charcoal suit with a blue shirt and subtle patterned tie, projecting both technical credibility and executive presence. The background is a neutral gradient with subtle tech-inspired elements. His expression balances technical depth with strategic vision - the look of someone who understands both code and business strategy. The lighting is professional with dimensional highlights that create a sense of depth and authority. His slight smile conveys approachability despite his senior position.

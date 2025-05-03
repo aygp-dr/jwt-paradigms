@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: aiden-wong-ux-designer
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/aiden_wong.png
 Professional headshot of Aiden Wong, a 34-year-old East Asian man with a creative yet professional appearance. He has short black hair styled in a modern cut with subtle highlights, and wears contemporary rectangular glasses with thin black frames. He has a warm, approachable expression with a confident smile that suggests both artistic sensibility and technical expertise. He's wearing a charcoal button-up shirt with a minimalist geometric pattern under a fitted dark blazer. His background features a subtle gradient with soft design elements suggesting a creative workspace. The lighting is warm and dimensional, creating a modern, design-forward atmosphere while maintaining professionalism. His expression balances creativity with analytical thinking.

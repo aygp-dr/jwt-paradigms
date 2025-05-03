@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: olivia-rodriguez-ux-researcher
   :END:
-** Headshot Generation Prompt
-   :PROPERTIES:
-   :CUSTOM_ID: headshot-generation-prompt
-   :END:
 
 #+begin_ai :image :file images/olivia_rodriguez.png
 Mid-30s Latina woman with shoulder-length dark brown hair with subtle

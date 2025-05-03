@@ -2,6 +2,11 @@
   :PROPERTIES:
   :CUSTOM_ID: professor-marcus-spark-wellington
   :END:
+
+#+begin_ai :image :file images/spark_wellington.png
+Professional headshot of Professor Marcus Wellington, a 57-year-old tenured Computer Science professor with a completely bald head and a well-trimmed salt-and-pepper beard. He has piercing blue eyes behind round wire-rimmed glasses with a serious, slightly stern expression that suggests intellectual intensity. He's wearing a dark turtleneck with a tweed jacket. The background is a neutral dark gray. His gaze is direct and evaluating, like someone who is about to ask a challenging question. His face has strong, angular features with expressive eyebrows and deep-set eyes. Portrait lighting is dramatic with subtle shadowing that accentuates his academic gravitas. His expression conveys both brilliance and skepticism.
+#+end_ai
+
 ** Background
    :PROPERTIES:
    :CUSTOM_ID: background
@@ -156,11 +161,3 @@ transform the presentation from good to exceptional. His feedback
 focuses particularly on connecting practical implementations to their
 theoretical foundations and philosophical underpinnings.
 
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
-
-#+begin_ai :image :file images/spark_wellington.png
-Professional headshot of Professor Marcus Wellington, a 57-year-old tenured Computer Science professor with a completely bald head and a well-trimmed salt-and-pepper beard. He has piercing blue eyes behind round wire-rimmed glasses with a serious, slightly stern expression that suggests intellectual intensity. He's wearing a dark turtleneck with a tweed jacket. The background is a neutral dark gray. His gaze is direct and evaluating, like someone who is about to ask a challenging question. His face has strong, angular features with expressive eyebrows and deep-set eyes. Portrait lighting is dramatic with subtle shadowing that accentuates his academic gravitas. His expression conveys both brilliance and skepticism.
-#+end_ai

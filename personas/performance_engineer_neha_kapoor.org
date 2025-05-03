@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: dr.-neha-kapoor-performance-engineer
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/neha_kapoor.png
 Professional headshot of Dr. Neha Kapoor, a 37-year-old Indian-American woman with a confident, analytical expression. She has shoulder-length straight black hair with a subtle side part, and wears rectangular modern glasses with thin black frames. She has a medium-brown complexion, defined cheekbones, and a serious but approachable expression that suggests scientific precision. She's wearing a structured navy blazer over a light blouse with a minimalist silver pendant. The background is a gradient gray. Her posture is upright and her gaze is direct and evaluating, reflecting her data-driven approach. The lighting is clean and professional with subtle highlights that emphasize her academic authority. Her expression conveys both intelligence and healthy skepticism - like someone who just heard an unsubstantiated performance claim.

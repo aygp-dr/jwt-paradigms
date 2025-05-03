@@ -2,10 +2,6 @@
   :PROPERTIES:
   :CUSTOM_ID: dr.-maya-ramirez
   :END:
-** Image Generation
-   :PROPERTIES:
-   :CUSTOM_ID: image-generation
-   :END:
 
 #+begin_ai :image :file images/maya_ramirez.png
 Professional headshot of Dr. Maya Ramirez, a 42-year-old Latina woman with straight black hair with subtle gray streaks falling to shoulder length. She has an olive complexion, intelligent brown eyes behind stylish rectangular glasses with dark frames, and a serious but confident expression. She's wearing a burgundy blouse under a dark blazer with a small pendant necklace. The background features blurred bookshelves suggesting an academic environment. Her face has defined cheekbones, and she has a poised, analytical demeanor. Portrait lighting is structured and professional, emphasizing her academic authority. Her makeup is minimal and professional.

@@ -2,16 +2,10 @@
   :PROPERTIES:
   :CUSTOM_ID: sarah-johnson-product-manager
   :END:
-** Headshot Generation Prompt
-   :PROPERTIES:
-   :CUSTOM_ID: headshot-generation-prompt
-   :END:
 
 #+begin_ai :image :file images/sarah_johnson.png
 Professional headshot of Sarah Johnson, a 36-year-old Caucasian woman with shoulder-length blonde hair styled in a neat bob with side-swept bangs. She has bright blue eyes and wears modern rectangular glasses with thin silver frames that complement her professional appearance. Her expression is confident and approachable with a warm smile. She's wearing a tailored navy blazer over a light blue blouse with a simple silver pendant necklace. The background is a neutral light gray. Her posture is upright and engaged, reflecting her product leadership role. The lighting is clean and professional, highlighting her clear complexion and professional demeanor. Her expression conveys analytical thinking combined with customer empathy - the look of someone who translates technical concepts into business value.
 #+end_ai
-
-
 
 ** Background
    :PROPERTIES:
