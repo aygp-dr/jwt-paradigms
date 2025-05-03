@@ -7,10 +7,9 @@
    :CUSTOM_ID: headshot-generation-prompt
    :END:
 
-#+begin_ai :image :file 
-#+end_ai
-
+#+begin_ai :image :file images/rebecca_martinez.png
 Professional executive headshot of Rebecca Martinez, a 47-year-old Latina woman with a serious, authoritative expression that conveys security expertise. She has shoulder-length dark brown hair styled in a sleek, professional manner with subtle layers. She has intelligent, penetrating dark brown eyes behind modern rectangular glasses with thin dark frames. Her expression is confident but vigilant - appropriate for someone responsible for organizational security. She's wearing a structured charcoal gray blazer over a deep burgundy blouse with minimal, professional jewelry (small pearl earrings and a simple silver pendant). The background is a neutral medium gray that enhances her executive presence. Her posture is upright and commanding, projecting authority and trustworthiness. The lighting is clean and professional, highlighting her clear olive complexion and determined expression. Her overall appearance conveys the gravitas and strategic thinking of a senior security executive who balances business enablement with risk management.
+#+end_ai
 
 ** Background
    :PROPERTIES:

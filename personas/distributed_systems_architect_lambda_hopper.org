@@ -115,7 +115,7 @@ To work effectively with Lambda:
 
 * Image
 
-#+begin_ai :image :file images/lambda_hopper.png :tangle prompts/lambda_hopper.txt :mkdirp t
+#+begin_ai :image :file images/lambda_hopper.png
 Professional headshot of Lambda Hopper, a software architect with short purple-tinted 
 hair, rectangular glasses, and androgynous features. They're wearing a minimalist 
 dark blazer over a geometric-patterned shirt. The background features subtle 
