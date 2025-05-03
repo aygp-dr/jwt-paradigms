@@ -1,0 +1,521 @@
+#+TITLE: Análisis de Cabeceras JWT a través de Paradigmas de Programación
+#+AUTHOR: Aidan Pace
+#+EMAIL: apace@defrecord.com
+#+DATE: [2025-04-28]
+#+LANGUAGE: es
+#+OPTIONS: toc:nil num:nil ^:nil
+#+STARTUP: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation,aspectratio=169]
+#+BEAMER_THEME: metropolis
+#+BEAMER_COLOR_THEME: default
+#+BEAMER_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Agenda}\tableofcontents[currentsection]\end{frame}}
+
+* Introducción
+** Análisis de Cabeceras JWT a través de Paradigmas de Programación
+#+ATTR_BEAMER: :overlay <+->
+- Una exploración entre lenguajes de técnicas de análisis de cabeceras JWT
+- PyCon US 2025, 14 de mayo - 22 de mayo, 2025
+- Aidan Pace (@aygp-dr)
+
+** Lo que cubriremos
+#+ATTR_BEAMER: :overlay <+->
+- Contexto histórico y evolución de la autenticación
+- Estructura JWT y fundamentos (🔰 amigable para principiantes)
+- Desafíos de la codificación Base64url
+- Patrones de análisis de cabeceras en diferentes lenguajes
+- Enfoques funcionales vs orientados a objetos
+- Modismos y mejores prácticas específicos de cada lenguaje
+- Consideraciones de seguridad y ataques comunes
+- Análisis de rendimiento y aplicaciones del mundo real
+
+* Evolución de la Autenticación
+** Contexto Histórico de la Autenticación
+#+ATTR_BEAMER: :overlay <+->
+- Autenticación temprana: Pares de nombre de usuario/contraseña
+- Sesiones del lado del servidor con cookies (con estado)
+- Surgimiento de la autenticación basada en tokens (sin estado)
+- Estandarización JWT (RFC 7519, mayo 2015)
+- Flujos de autenticación modernos (OAuth 2.0, OIDC)
+
+* Conceptos Básicos de JWT
+** Repaso de la Estructura JWT 🔰
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC text
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U
+#+END_SRC
+
+Tres segmentos codificados en base64url separados por puntos:
+1. *Cabecera* (algoritmo y tipo de token)
+2. *Carga útil* (reclamaciones/claims)
+3. *Firma*
+
+#+BEGIN_SRC dot :file images/jwt-structure.png :cmdline -Kdot -Tpng
+digraph {
+  rankdir=LR;
+  node [shape=box, style=filled, fillcolor="#e6f3ff", fontname="monospace"];
+  edge [fontname="Arial"];
+  
+  Header [label="Cabecera\n{\"alg\":\"HS256\",\n\"typ\":\"JWT\"}"];
+  Payload [label="Carga útil\n{\"sub\":\"1234\",\n\"name\":\"User\",\n\"exp\":1516239022}"];
+  Signature [label="Firma\nHMAC-SHA256(\n  base64UrlEncode(header) + '.' +\n  base64UrlEncode(payload),\n  secret\n)"];
+  
+  Header -> Payload [label="  .  "];
+  Payload -> Signature [label="  .  "];
+}
+#+END_SRC
+
+** Reclamaciones JWT y Casos de Uso 🔰
+#+ATTR_BEAMER: :overlay <+->
+*Reclamaciones Estándar:*
+- =iss= - Emisor (quién creó el token)
+- =sub= - Sujeto (a quién se refiere el token)
+- =aud= - Audiencia (quién debe aceptar el token)
+- =exp= - Tiempo de expiración
+- =nbf= - No antes de (este tiempo)
+- =iat= - Emitido en (este tiempo)
+- =jti= - ID JWT (identificador único)
+
+*Casos de Uso Comunes:*
+- Autenticación después del inicio de sesión
+- Autorización de API
+- Intercambio de información entre servicios
+- Inicio de Sesión Único (SSO)
+
+** El Desafío Base64url
+#+ATTR_BEAMER: :overlay <+->
+Base64 estándar vs codificación Base64url:
+- La variante segura para URL reemplaza =+= con =-= y =/= con =_=
+- El relleno (=== ) a menudo se omite
+- Se utiliza para garantizar que los tokens puedan transmitirse de forma segura en las URL
+
+*¡Cada lenguaje maneja esto de manera diferente!*
+
+* Implementaciones en Lenguajes
+** JavaScript (Navegador) 🧩
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC javascript
+const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
+const token = authHeader.split(' ')[1];
+
+// IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+// Este ejemplo es solo para demostración
+
+// Decodificar la parte de la cabecera
+const headerPart = token.split('.')[0];
+const decodedHeader = JSON.parse(atob(headerPart));
+console.log(decodedHeader);
+#+END_SRC
+
+*Nota*: =atob()= maneja base64 pero no específicamente base64url
+
+** Node.js 🧩
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC javascript
+// Usando módulos incorporados
+const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
+const token = authHeader.split(' ')[1];
+
+// IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+// Este ejemplo es solo para demostración
+
+const headerPart = token.split('.')[0];
+const decodedHeader = JSON.parse(
+  Buffer.from(headerPart, 'base64').toString()
+);
+console.log(decodedHeader);
+#+END_SRC
+
+** TypeScript con Seguridad de Tipos 🧩
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC typescript
+interface JwtHeader {
+  alg: string;
+  typ: string;
+  kid?: string;  // Identificador de clave, opcional
+}
+
+function decodeJwtHeader(authHeader: string): JwtHeader {
+  const token: string = authHeader.split(' ')[1];
+  const headerPart: string = token.split('.')[0];
+  
+  // IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+  // Este ejemplo es solo para demostración
+  
+  // Agregar relleno si es necesario
+  const base64 = headerPart.replace(/-/g, '+').replace(/_/g, '/');
+  const padded = base64.padEnd(base64.length + (4 - (base64.length % 4)) % 4, '=');
+  
+  const decodedHeader: JwtHeader = JSON.parse(
+    Buffer.from(padded, 'base64').toString()
+  );
+  return decodedHeader;
+}
+#+END_SRC
+
+** Implementación Python 🧩
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC python
+import base64
+import json
+import typing
+
+def decode_jwt_header(auth_header: str) -> typing.Dict[str, str]:
+    """Decodifica la cabecera JWT del encabezado de autorización.
+    
+    IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+    Este ejemplo es solo para demostración.
+    """
+    token = auth_header.split(' ')[1]
+    header_part = token.split('.')[0]
+    
+    # Agregar relleno si es necesario
+    padding_needed = len(header_part) % 4
+    if padding_needed:
+        header_part += '=' * (4 - padding_needed)
+    
+    # Decodificar base64
+    decoded_bytes = base64.b64decode(header_part.replace('-', '+').replace('_', '/'))
+    decoded_str = decoded_bytes.decode('utf-8')
+    
+    # Analizar JSON
+    return json.loads(decoded_str)
+#+END_SRC
+
+** Enfoques Funcionales: Clojure 🧩
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC clojure
+;; IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+;; Este ejemplo es solo para demostración.
+(defn decode-jwt-header 
+  "Decodifica la cabecera JWT del encabezado de autorización."
+  [auth-header]
+  (let [token (second (clojure.string/split auth-header #" "))
+        header-part (first (clojure.string/split token #"\."))
+        decoder (Base64/getUrlDecoder)
+        decoded-bytes (.decode decoder header-part)
+        decoded-str (String. decoded-bytes)
+        header (json/read-str decoded-str)]
+    header))
+#+END_SRC
+
+*Nota*: ¡Base64 de la JVM tiene un decodificador URL incorporado!
+
+** Enfoques Funcionales: Racket ⚠️
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC racket
+;; Convertir base64url a base64 estándar y decodificar
+(define (base64url->bytes str)
+  (define padding (make-string (modulo (- 0 (string-length str)) 4) #\=))
+  (define base64 (string-map (λ (c)
+                               (match c
+                                 [#\- #\+]
+                                 [#\_ #\/]
+                                 [_ c]))
+                             str))
+  (base64-decode (string-append base64 padding)))
+
+;; IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+;; Este ejemplo es solo para demostración y usa composición funcional
+(define (decode-jwt-header auth-header)
+  ;; Tubería de transformaciones
+  (define token (second (string-split auth-header)))
+  (define header-part (first (string-split token ".")))
+  (define decoded-bytes (base64url->bytes header-part))
+  (define decoded-str (bytes->string/utf-8 decoded-bytes))
+  (string->jsexpr decoded-str))
+#+END_SRC
+
+** Implementación de Bajo Nivel: Rust ⚠️
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC rust
+#[derive(Debug, Serialize, Deserialize)]
+struct JwtHeader {
+    alg: String,
+    typ: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    kid: Option<String>,  // Identificador de clave opcional
+}
+
+/// Decodifica la cabecera JWT del encabezado de autorización
+/// 
+/// # IMPORTANTE
+/// ¡En producción, verifica la firma antes de analizar!
+/// Este ejemplo es solo para demostración.
+/// 
+/// # Manejo de Errores
+/// Devuelve Result con la cabecera analizada o un error descriptivo
+fn decode_jwt_header(auth_header: &str) -> Result<JwtHeader, Box<dyn std::error::Error>> {
+    // Extraer token con manejo de errores
+    let token = auth_header.split_whitespace().nth(1).ok_or("Encabezado de autenticación inválido")?;
+    let header_part = token.split('.').next().ok_or("Formato de token inválido")?;
+    
+    // Decodificar base64url a bytes (usando un decodificador seguro para URL adecuado)
+    let decoded_bytes = general_purpose::URL_SAFE_NO_PAD.decode(header_part)?;
+    
+    // Analizar JSON con tipado fuerte
+    let header: JwtHeader = serde_json::from_slice(&decoded_bytes)?;
+    Ok(header)
+}
+#+END_SRC
+
+* Análisis
+** Patrones Comunes y Variaciones 🧩
+#+ATTR_BEAMER: :overlay <+->
+1. *Extracción de tokens*: Dividir por espacio o regex
+2. *Manejo de Base64url*:
+   - Reemplazo de caracteres (=-= → =+=, =_= → =/=)
+   - Cálculo de relleno
+   - Disponibilidad de decodificador seguro para URL (ventaja JVM)
+3. *Análisis JSON*: Nativo vs bibliotecas
+4. *Manejo de errores*: Diferencias idiomáticas
+
+** Análisis de Rendimiento entre Lenguajes ⚠️
+#+ATTR_BEAMER: :overlay <+->
+| Lenguaje   | Tiempo de análisis (μs) | Uso de memoria (KB) |
+|------------+-------------------------+---------------------|
+| Rust       |                     5.2 |                 1.8 |
+| JavaScript |                    24.7 |                12.3 |
+| Python     |                    30.1 |                15.7 |
+| Clojure    |                    45.8 |                28.4 |
+| Shell      |                   180.3 |                 8.9 |
+
+*Nota: Promedio de 1000 ejecuciones, un solo hilo*
+
+* Consideraciones de Seguridad
+** Mejores Prácticas de Seguridad JWT ⚠️
+#+ATTR_BEAMER: :overlay <+->
+- *Siempre verificar firmas antes de analizar o usar la carga útil*
+- Usar algoritmos fuertes (preferir RS256/ES256 sobre HS256)
+- Implementar gestión de claves adecuada (rotación, almacenamiento seguro)
+- Establecer tiempos de vida de token apropiados (tokens de acceso de corta duración)
+- Incluir reclamaciones esenciales (iss, sub, exp, aud, iat)
+
+** Ataques JWT Comunes ⚠️
+#+ATTR_BEAMER: :overlay <+->
+- *Ataque "alg": "none"* - El atacante elimina el requisito de validación de firma
+- *Confusión de algoritmo* - Cambiar de asimétrico (RS256) a simétrico (HS256)
+- *Manipulación de tokens* - Modificar reclamaciones sin invalidar la firma
+- *Inyección de tokens* - Usar un token de un contexto en otro
+- *Ataques de repetición* - Reutilizar tokens capturados
+
+** Gestión del Ciclo de Vida de Tokens ⚠️
+#+ATTR_BEAMER: :overlay <+->
+- *Patrones de token de actualización* - Obtener nuevos tokens de acceso de forma segura
+- *Revocación de tokens* - Invalidar tokens antes de la expiración
+- *Tubería de validación de tokens* - Orden adecuado de operaciones
+- *Lista negra* - Seguimiento de tokens comprometidos o cerrados de sesión
+
+#+BEGIN_SRC dot :file images/token-lifecycle.png :cmdline -Kdot -Tpng
+digraph {
+  node [shape=box, style=filled, fillcolor="#f5f5f5"];
+  edge [fontname="Arial"];
+  
+  issue [label="Emisión de Token", fillcolor="#e6ffe6"];
+  validate [label="Validación de Token", fillcolor="#e6f3ff"];
+  refresh [label="Actualización de Token", fillcolor="#fff0e6"];
+  revoke [label="Revocación de Token", fillcolor="#ffe6e6"];
+  
+  issue -> validate -> refresh -> validate;
+  validate -> revoke;
+}
+#+END_SRC
+
+* Aplicaciones del Mundo Real
+** Comparación de Implementación entre Lenguajes
+#+ATTR_BEAMER: :overlay <+->
+| Característica | JavaScript | Python | Rust | Clojure | TypeScript |
+|----------------|------------|--------|------|---------|------------|
+| Seguridad de tipos | Limitada | Opcional | Fuerte | Dinámica | Fuerte |
+| Manejo de Base64 | Manual | Incorporado | Crates | JVM | Manual |
+| Manejo de errores | try/catch | Excepciones | Result | Monádico | try/catch |
+| Rendimiento | Medio | Bajo | Alto | Medio | Medio |
+| Bibliotecas JWT | Muchas | Varias | Pocas | Pocas | Muchas |
+
+** JWT en Producción
+#+ATTR_BEAMER: :overlay <+->
+- Validación de tokens en API Gateway
+- Autorización de microservicios
+- Implementaciones de Inicio de Sesión Único
+- Autenticación de aplicaciones móviles
+- Comunicación servidor a servidor
+
+** Flujo JWT
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC dot :file images/jwt-flow-detailed.png :cmdline -Kdot -Tpng
+digraph {
+  rankdir=LR;
+  node [shape=box, style=rounded];
+  subgraph cluster_validation {
+    label="Proceso de Validación Segura";
+    style=dashed;
+    color=gray;
+    "Extraer JWT" -> "Verificar Firma" -> "Validar Reclamaciones" -> "Verificar Revocación";
+  }
+  
+  Client -> "Servicio Auth" [label="1. Inicio de sesión"];
+  "Servicio Auth" -> Client [label="2. JWT"];
+  Client -> "API Gateway" [label="3. Solicitud + JWT"];
+  "API Gateway" -> "Extraer JWT";
+  "Verificar Revocación" -> "Microservicio" [label="4. Solicitud Autorizada"];
+  "Microservicio" -> Client [label="5. Respuesta"];
+}
+#+END_SRC
+
+* Depuración y Solución de Problemas
+** Problemas Comunes de JWT y Soluciones
+#+ATTR_BEAMER: :overlay <+->
+- *Firma inválida* - Verificar coincidencia de claves, consistencia de algoritmo
+- *Tokens expirados* - Verificar sincronización de reloj cliente/servidor
+- *Tokens mal formados* - Inspeccionar codificación, asegurar manejo adecuado de base64url
+- *Reclamaciones faltantes* - Validar estructura del token contra esquema esperado
+- *Desajuste de algoritmo* - Confirmar que el alg de cabecera coincide con la implementación
+
+** Herramientas de Depuración
+#+ATTR_BEAMER: :overlay <+->
+- Depurador JWT en línea (jwt.io)
+- Bibliotecas JWT específicas de lenguaje con opciones de depuración
+- Herramientas de inspección Base64
+- Inspección de solicitudes/respuestas con herramientas de desarrollador
+
+* Conclusión
+** Perspectivas entre Paradigmas
+#+ATTR_BEAMER: :overlay <+->
+| Paradigma | Fortalezas | Aplicación JWT |
+|-----------|------------|----------------|
+| Orientado a objetos | Encapsulación, herencia | Token con métodos de validación |
+| Funcional | Composición, inmutabilidad | Tubería de transformación para análisis |
+| Procedural | Simplicidad, rendimiento | Validadores ligeros |
+| Reactivo | Manejo de eventos | Verificación de token en flujos asíncronos |
+
+** Conclusiones Principales
+#+ATTR_BEAMER: :overlay <+->
+1. La codificación Base64url requiere atención especial
+2. Cada lenguaje tiene ventajas idiomáticas de análisis
+3. Los enfoques funcionales brillan para tuberías de transformación
+4. Seguridad primero: siempre verificar firmas antes de analizar
+5. Considerar el ciclo de vida del token para una implementación completa
+6. Las bibliotecas ahorran tiempo pero entender los mecanismos internos es importante
+7. Seguir las mejores prácticas específicas del lenguaje
+
+** Recursos de Aprendizaje
+#+ATTR_BEAMER: :overlay <+->
+- JWT RFC 7519: https://tools.ietf.org/html/rfc7519
+- Mejores Prácticas de Seguridad JWT (IETF): https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp
+- Hoja de trucos OWASP JWT: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
+- Guías de seguridad específicas de lenguaje: ver documentación del repositorio
+
+** Glosario JWT para Principiantes 🔰
+#+ATTR_BEAMER: :overlay <+->
+| Término | Definición |
+|---------|------------|
+| JWT | JSON Web Token: un medio compacto y seguro para URL de representar reclamaciones para transferir entre partes |
+| Reclamaciones | Piezas de información afirmadas sobre un sujeto (p. ej., ID de usuario, tiempo de expiración) |
+| Base64url | Una variante de la codificación Base64 segura para URL que puede incluirse en URLs sin escape |
+| Cabecera | Primera parte del JWT que contiene metadatos como el algoritmo utilizado para firmar |
+| Carga útil | Segunda parte del JWT que contiene los datos de reclamaciones reales |
+| Firma | Tercera parte del JWT que verifica que el token no ha sido alterado |
+| HMAC | Código de Autenticación de Mensajes basado en Hash: técnica para garantizar la integridad de datos usando una clave secreta |
+| RSA | Criptosistema de clave pública comúnmente usado para firmas JWT |
+| Sin estado | Autenticación que no requiere almacenamiento de sesión del lado del servidor |
+| Token al portador | Tipo de token de acceso donde la posesión del token es suficiente para la autenticación |
+
+** Mejores Prácticas de Seguridad Python ⚠️
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC python
+import jwt
+from cryptography.hazmat.primitives.constant_time import bytes_eq
+from typing import Dict, Any, Optional, List, Union
+
+# Definir tipado explícito para reclamaciones JWT
+class JWTClaims(TypedDict):
+    iss: str  # emisor
+    sub: str  # sujeto
+    exp: int  # tiempo de expiración
+    iat: int  # emitido en
+    aud: Optional[Union[str, List[str]]]  # audiencia
+
+def verify_and_decode_token(token: str, key: str, algorithms: List[str] = ['RS256']) -> JWTClaims:
+    """Verificar y decodificar un token JWT de forma segura con manejo de errores adecuado.
+    
+    IMPORTANTE: Esta función valida la firma ANTES de procesar la carga útil.
+    """
+    try:
+        # Especificar explícitamente los algoritmos permitidos (prevenir ataque de algoritmo 'none')
+        # Validar firma primero, luego decodificar carga útil
+        payload = jwt.decode(
+            token,
+            key,
+            algorithms=algorithms,  # Especificar explícitamente algoritmos permitidos
+            options={"verify_signature": True}
+        )
+        return payload
+    except jwt.ExpiredSignatureError:
+        # Excepción específica para token expirado
+        raise ValueError("El token ha expirado")
+    except jwt.InvalidSignatureError:
+        # Usar error genérico que no revela detalles de firma
+        raise ValueError("Autenticación fallida")
+    except jwt.DecodeError:
+        # Error de decodificación genérico
+        raise ValueError("Token inválido")
+    except jwt.InvalidAlgorithmError:
+        raise ValueError("Algoritmo de token inválido")
+    except Exception:
+        # Captura todo con mensaje genérico para evitar fugas de información
+        raise ValueError("Autenticación fallida")
+#+END_SRC
+
+** Tuberías Funcionales: Ejemplo Clojure Mejorado 🧩
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC clojure
+;; Aprovechando el enfoque funcional de Clojure con macro thread-first
+;; para una tubería de transformación más limpia
+
+(defn decode-base64url
+  "Decodificar cadena codificada en base64url a cadena"
+  [base64url-str]
+  (-> base64url-str
+      (java.util.Base64/getUrlDecoder)
+      (.decode)
+      (String.)))
+
+(defn extract-token
+  "Extraer token del encabezado de autorización"
+  [auth-header]
+  (-> auth-header
+      (clojure.string/split #" ")
+      (second)))
+
+(defn extract-header-part
+  "Extraer parte de cabecera del token"
+  [token]
+  (-> token
+      (clojure.string/split #"\.")
+      (first)))
+
+(defn parse-json
+  "Analizar cadena JSON a mapa Clojure"
+  [json-str]
+  (json/read-str json-str :key-fn keyword))
+
+;; IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+;; Este ejemplo demuestra la composición funcional para legibilidad
+(defn decode-jwt-header
+  "Extraer y decodificar cabecera JWT usando una tubería funcional"
+  [auth-header]
+  (-> auth-header
+      (extract-token)
+      (extract-header-part)
+      (decode-base64url)
+      (parse-json)))
+#+END_SRC
+
+** ¿Preguntas?
+#+ATTR_BEAMER: :overlay <+->
+¡Gracias!
+
+*Diapositivas y ejemplos disponibles en:* 
+github.com/aidan-pace/jwt-parsing-examples
+
+*Niveles de dificultad:* 🔰 Principiante | 🧩 Intermedio | ⚠️ Avanzado

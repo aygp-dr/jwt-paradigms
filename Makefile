@@ -2,13 +2,21 @@
 EMACS := emacs --batch
 ORG_REQUIRE := --eval "(require 'org)"
 THEME_LOAD := --eval "(load-theme 'tango t)"
+
+# Presentation files (English, French, Spanish)
 PRESENTATION_ORG := presentation.org
 PRESENTATION_PDF := presentation.pdf
+PRESENTATION_FR_ORG := presentation_fr.org
+PRESENTATION_FR_PDF := presentation_fr.pdf
+PRESENTATION_ES_ORG := presentation_es.org
+PRESENTATION_ES_PDF := presentation_es.pdf
+
+# Book files
 BOOK_DIR := personas/gadfly
 BOOK_ORG := $(BOOK_DIR)/paradigms_lost.org
 BOOK_PDF := $(BOOK_DIR)/paradigms_lost.pdf
 
-.PHONY: all clean build build-all tangle examples slides pdf view present book book-examples tangle-all
+.PHONY: all clean build build-all tangle examples slides slides-all slides-fr slides-es pdf view present book book-examples tangle-all i18n
 
 # Default target - lists available commands
 all:
@@ -16,7 +24,11 @@ all:
 	@echo "======================================"
 	@echo
 	@echo "Presentation Commands:"
-	@echo "  make slides       - Generate presentation.pdf from presentation.org"
+	@echo "  make slides       - Generate English presentation.pdf from presentation.org"
+	@echo "  make slides-fr    - Generate French presentation_fr.pdf from presentation_fr.org"
+	@echo "  make slides-es    - Generate Spanish presentation_es.pdf from presentation_es.org"
+	@echo "  make slides-all   - Generate all language versions of the presentation"
+	@echo "  make i18n         - Generate all internationalized versions (French and Spanish)"
 	@echo "  make view         - View the generated PDF (if available)"
 	@echo "  make present      - Present slides using pdfpc (optimal presentation tool)"
 	@echo
@@ -51,23 +63,49 @@ tangle-all:
 # Alias for tangle-all
 tangle: tangle-all
 
-# Generate PDF presentation from presentation.org using Beamer
-slides: $(PRESENTATION_ORG)
-	@echo "Generating presentation PDF..."
+# Generate English PDF presentation from presentation.org using Beamer
+slides: $(PRESENTATION_PDF)
+
+# File-based target for English presentation.pdf with dependency tracking
+$(PRESENTATION_PDF): $(PRESENTATION_ORG)
+	@echo "Generating English presentation PDF..."
 	@$(EMACS) $(ORG_REQUIRE) $(THEME_LOAD) \
 		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
 		--visit="$<" \
 		--funcall org-beamer-export-to-pdf
 	@echo "Done! Generated $(PRESENTATION_PDF)"
 
-# File-based target for presentation.pdf with dependency tracking
-$(PRESENTATION_PDF): $(PRESENTATION_ORG)
-	@echo "Processing LaTeX file presentation.tex..."
+# Generate French PDF presentation 
+slides-fr: $(PRESENTATION_FR_PDF)
+
+# File-based target for French presentation_fr.pdf with dependency tracking
+$(PRESENTATION_FR_PDF): $(PRESENTATION_FR_ORG)
+	@echo "Generating French presentation PDF..."
 	@$(EMACS) $(ORG_REQUIRE) $(THEME_LOAD) \
 		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
+		--eval "(setq org-latex-packages-alist '((\"\" \"inputenc\" \"utf8\") (\"\" \"fontenc\" \"T1\") (\"\" \"babel\" \"french\")))" \
 		--visit="$<" \
 		--funcall org-beamer-export-to-pdf
-	@echo "Done! Generated $(PRESENTATION_PDF)"
+	@echo "Done! Generated $(PRESENTATION_FR_PDF)"
+
+# Generate Spanish PDF presentation
+slides-es: $(PRESENTATION_ES_PDF)
+
+# File-based target for Spanish presentation_es.pdf with dependency tracking
+$(PRESENTATION_ES_PDF): $(PRESENTATION_ES_ORG)
+	@echo "Generating Spanish presentation PDF..."
+	@$(EMACS) $(ORG_REQUIRE) $(THEME_LOAD) \
+		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
+		--eval "(setq org-latex-packages-alist '((\"\" \"inputenc\" \"utf8\") (\"\" \"fontenc\" \"T1\") (\"\" \"babel\" \"spanish\")))" \
+		--visit="$<" \
+		--funcall org-beamer-export-to-pdf
+	@echo "Done! Generated $(PRESENTATION_ES_PDF)"
+
+# Generate all language versions
+slides-all: slides slides-fr slides-es
+
+# Generate just the internationalized versions (French and Spanish)
+i18n: slides-fr slides-es
 
 # Generate PDF from paradigms_lost.org
 book: $(BOOK_PDF)
@@ -135,7 +173,7 @@ present: $(PRESENTATION_PDF)
 
 # Combined targets
 build: tangle slides book
-build-all: tangle slides book book-examples
+build-all: tangle slides-all book book-examples
 
 # Tangle and validate code examples from the book
 book-examples:
@@ -150,7 +188,7 @@ BOOK_LATEX_TEMP_FILES := $(BOOK_DIR)/*.tex $(BOOK_DIR)/*.aux $(BOOK_DIR)/*.log $
 # Clean generated files
 clean:
 	@echo "Cleaning generated files..."
-	@rm -f $(PRESENTATION_PDF) $(BOOK_PDF)
+	@rm -f $(PRESENTATION_PDF) $(PRESENTATION_FR_PDF) $(PRESENTATION_ES_PDF) $(BOOK_PDF)
 	@rm -f $(LATEX_TEMP_FILES)
 	@rm -f $(BOOK_LATEX_TEMP_FILES)
 	@echo "Cleaning book examples..."
