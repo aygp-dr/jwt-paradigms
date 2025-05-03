@@ -105,3 +105,13 @@ decision frameworks rather than presenting single "right answers." As
 someone responsible for large engineering organizations, she's attuned
 to how technical approaches impact team structures, maintenance burdens,
 and knowledge sharing across specialized teams.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Appreciates historical dramas and business documentaries that examine leadership challenges; recommends "Margin Call" for its portrayal of technical decision-making under pressure
+- Reads business strategy books and technical leadership memoirs; balances this with historical fiction for perspective
+- Listens to executive leadership podcasts and classical jazz during her limited downtime; enjoys live chamber music performances
+- Maintains her competitive edge through tennis matches with other executives and strategic board games with her engineering leadership team
+

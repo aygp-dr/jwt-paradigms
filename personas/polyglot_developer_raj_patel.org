@@ -99,3 +99,13 @@ appreciates presentations that go beyond syntax differences to highlight
 deeper paradigmatic approaches. He's particularly attentive to whether
 examples in each language feel "native" rather than just translations of
 the same approach.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Watches international cinema with a preference for Indian and Korean films that explore social dynamics; cites "3 Idiots" and "Parasite" as favorites
+- Reads technical books in multiple programming languages simultaneously, alongside comparative linguistics texts that parallel his interest in language paradigms
+- Creates lo-fi coding playlists featuring instrumental hip-hop and ambient music; hosts a small community radio show on programming culture
+- Spends weekends at board game meetups, appreciating strategy games with complex rule systems that remind him of different programming paradigms
+

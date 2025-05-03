@@ -1,0 +1,51 @@
+#+TITLE: Task: DESCRIPTION
+#+ISSUE: NUMBER
+#+CREATED: YYYY-MM-DD
+#+ASSIGNEE: ASSIGNEE
+
+* Task Overview
+
+BRIEF DESCRIPTION OF THE TASK AND ITS CONTEXT
+
+* Acceptance Criteria
+
+1. Criterion 1
+2. Criterion 2
+3. Criterion 3
+
+* Task Breakdown
+
+** TODO Subtask 1
+DESCRIPTION
+
+** TODO Subtask 2
+DESCRIPTION
+
+** TODO Subtask 3
+DESCRIPTION
+
+* Related Resources
+
+- Related files:
+  - FILE_PATH_1
+  - FILE_PATH_2
+  
+- Related issues:
+  - #ISSUE_NUMBER_1
+  - #ISSUE_NUMBER_2
+
+* Implementation Notes
+
+- Note 1
+- Note 2
+- Note 3
+
+* Review Notes
+
+** REVIEWER_1
+- Feedback note 1
+- Feedback note 2
+
+** REVIEWER_2
+- Feedback note 1
+- Feedback note 2

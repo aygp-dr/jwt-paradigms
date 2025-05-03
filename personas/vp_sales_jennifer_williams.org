@@ -78,3 +78,13 @@ Jennifer is particularly focused on how JWT implementations affect:
    :CUSTOM_ID: feedback-style
    :END:
 Jennifer provides sales-oriented feedback that connects technical solutions to market realities and sales execution challenges. She evaluates presentations not just for technical merit but for how effectively they can be positioned against competitive alternatives and aligned with customer buying criteria. Her critiques often highlight messaging gaps, competitive vulnerabilities, or enterprise readiness concerns that could lengthen sales cycles. While she appreciates technical sophistication, she's primarily concerned with how solutions can be effectively positioned, differentiated, and sold to enterprise customers. Her feedback typically includes suggestions for strengthening competitive positioning, addressing common enterprise objections, and developing more compelling value narratives.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Maintains a high-profile membership at an exclusive country club where she hosts key client golf outings; brags about her 14 handicap despite rarely breaking 95
+- Fanatical Washington Commanders fan with season tickets she uses primarily for customer entertainment; can recite obscure team statistics to impress clients
+- Collects rare wines not for taste but as status symbols to display in her custom wine cellar; admits privately she prefers bourbon
+- Serves on the board of three local charity organizations, strategically selected to maximize networking with potential clients
+- Only TV she watches is reality competition shows that involve deal-making and negotiation; uses scenarios from "Shark Tank" in her sales training
+

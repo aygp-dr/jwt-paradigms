@@ -1,0 +1,390 @@
+#+TITLE: How We Use Git Worktrees with Claude Code
+#+AUTHOR: JWT Paradigms Team
+#+DATE: [2025-05-02]
+#+OPTIONS: toc:3 num:3 ^:nil
+#+PROPERTY: header-args :mkdirp yes
+
+* Introduction
+
+Working on multiple features simultaneously while maintaining a clean codebase can be challenging. Git worktrees provide an elegant solution, allowing developers to maintain separate working directories for different branches without cloning the repository multiple times. When combined with Claude Code, this workflow becomes even more powerful and organized.
+
+This post explains how our team uses Git worktrees with Claude Code to manage parallel development tasks efficiently.
+
+* Why Use Git Worktrees?
+
+Traditional Git workflows often involve frequent branch switching, which can disrupt your development environment:
+
+#+BEGIN_SRC bash
+# Traditional approach: switching branches
+git checkout main
+git checkout -b feature-a
+# Work on feature A
+git add .
+git commit -m "Progress on feature A"
+git checkout main
+git checkout -b feature-b
+# Work on feature B, but now feature A context is gone
+#+END_SRC
+
+This approach has several drawbacks:
+- Development context is lost when switching branches
+- In-progress changes must be committed or stashed before switching
+- IDE configurations and file states get disrupted
+- Mental context switching adds cognitive overhead
+
+With worktrees, we can maintain multiple working trees simultaneously, each with its own branch:
+
+#+BEGIN_SRC bash
+# Worktree approach: parallel development
+git checkout main
+git checkout -b feature-a
+git worktree add ../project-wt-featureA feature-a
+# In a new terminal
+cd ../project-wt-featureA
+# Work on feature A
+
+# Back in original terminal
+git checkout main
+git checkout -b feature-b
+git worktree add ../project-wt-featureB feature-b
+# In another new terminal
+cd ../project-wt-featureB
+# Work on feature B without losing feature A context
+#+END_SRC
+
+* Our Worktree Naming Convention
+
+For clarity and organization, we follow a specific naming convention for our worktrees:
+
+#+BEGIN_SRC
+../{repo}-wt-{branch-name}
+#+END_SRC
+
+Where:
+- ~{repo}~ is the repository name
+- ~wt~ indicates this is a worktree
+- ~{branch-name}~ includes the issue number being worked on
+
+For example:
+- ~/home/developer/projects/jwt-paradigms-wt-i18n51~ for internationalization work (issue #51)
+- ~/home/developer/projects/jwt-paradigms-wt-headshot46~ for headshot generation (issue #46)
+
+This convention makes it easy to:
+1. Identify worktrees in the filesystem
+2. Associate worktrees with specific issues
+3. Maintain separation between repositories and their worktrees
+
+* Integrating Claude Code with Worktrees
+
+Claude Code works exceptionally well with the worktree approach, as it can operate in each worktree independently. This creates focused AI assistance for specific tasks.
+
+** Benefits of Claude Code with Worktrees
+
+- *Task-Specific Context*: Claude Code operates with the context of just one feature branch
+- *Parallel Development*: Run multiple Claude Code sessions on different tasks simultaneously
+- *Clean Separation*: Avoid polluting the main repository with experimental changes
+- *Better Task Organization*: Each Claude session stays focused on specific tasks 
+
+** Task Tracking with .worktree/task.org
+
+We enhance the worktree approach by adding a hidden ~.worktree~ directory in each worktree root. This contains a ~task.org~ file that describes the task being worked on.
+
+#+BEGIN_SRC org
+#+TITLE: Feature Name - Issue 42
+#+AUTHOR: aygp-dr
+#+DATE: [2025-05-02]
+#+PROPERTY: header-args :mkdirp yes
+
+* Task Summary
+Brief description of the task for issue #42.
+
+** Requirements
+- List key requirements here
+- Add implementation goals
+
+** Implementation Notes
+- Working in branch: feature-issue42-wt
+- Relevant files and components
+
+** Validation Steps
+1. Step one
+2. Step two
+3. Step three
+
+** References
+- Issue #42: https://github.com/aygp-dr/jwt-paradigms/issues/42
+#+END_SRC
+
+When Claude Code is working in a worktree, it can check this file to understand:
+- The specific task it should focus on
+- Implementation requirements and steps
+- Where to find related resources
+
+** Setting Up Claude Code for Worktrees
+
+We've configured our CLAUDE.md to make Claude Code worktree-aware:
+
+#+BEGIN_SRC markdown
+## Git Worktree Workflow
+- **Naming Convention**: Use `../{repo}-wt-{branch name}` where branch name includes issue number
+- **Creating Worktrees**: `git worktree add ../jwt-paradigms-wt-feature42 -b feature-issue42-wt feature-issue42`
+- **Detecting Worktrees**: Use `git worktree list` to see all worktrees
+- **Cleanup**: `git worktree remove ../jwt-paradigms-wt-feature42`
+#+END_SRC
+
+Additionally, we add a ~.claude/settings.json~ file:
+
+#+BEGIN_SRC json
+{
+  "version": 1,
+  "commands": {
+    "paths": [".claude/commands"]
+  },
+  "worktree": {
+    "enabled": true,
+    "taskPath": ".worktree/task.org"
+  }
+}
+#+END_SRC
+
+And a worktree command at ~.claude/commands/worktree.md~ that helps Claude locate and parse task information:
+
+#+BEGIN_SRC markdown
+# Worktree Task Command
+
+This command instructs Claude Code to check for task information in a git worktree environment.
+
+## Usage
+
+```bash
+/worktree
+```
+
+When invoked, this command prompts Claude Code to:
+
+1. Check if the current working directory is in a git worktree
+2. Look for a `.worktree/task.org` file
+3. Parse and summarize the task information
+4. Provide guidance on next steps based on the task details
+#+END_SRC
+
+* Our Worktree Workflow in Practice
+
+Here's how our team uses worktrees with Claude Code for everyday development:
+
+** Workflow Overview
+
+#+BEGIN_SRC dot :file images/worktree-workflow.png :cmdline -Kdot -Tpng
+digraph {
+  rankdir=TB;
+  node [shape=box, style=rounded];
+  
+  main [label="Main Repository\n(main branch)", fillcolor="#e6f3ff", style="filled,rounded"];
+  feature [label="Feature Branch\n(feature-issue42)", fillcolor="#e6ffe6", style="filled,rounded"];
+  worktree [label="Worktree\n(feature-issue42-wt)", fillcolor="#fff0e6", style="filled,rounded"];
+  pr [label="Pull Request", fillcolor="#ffe6e6", style="filled,rounded"];
+  
+  main -> feature [label="1. Create branch"];
+  feature -> worktree [label="2. Create worktree"];
+  worktree -> worktree [label="3. Develop with Claude Code"];
+  worktree -> pr [label="4. Create PR"];
+  pr -> main [label="5. Merge PR"];
+  main -> worktree [label="6. Cleanup"];
+}
+#+END_SRC
+
+** 1. Create a Branch for the Feature/Bug
+
+We always start in the main repository on the main branch:
+
+#+BEGIN_SRC bash
+cd /path/to/jwt-paradigms
+git checkout main
+git pull  # Ensure we're up to date
+git checkout -b feature-issue42
+#+END_SRC
+
+** 2. Create a Worktree with the Correct Naming Convention
+
+#+BEGIN_SRC bash
+git worktree add ../jwt-paradigms-wt-feature42 -b feature-issue42-wt feature-issue42
+#+END_SRC
+
+This creates:
+- A new directory at ~../jwt-paradigms-wt-feature42~
+- A new branch ~feature-issue42-wt~ checked out in that directory
+- Based on our original ~feature-issue42~ branch
+
+** 3. Set Up Task Tracking for Claude Code
+
+#+BEGIN_SRC bash
+mkdir -p ../jwt-paradigms-wt-feature42/.worktree
+# Create task.org with issue details and implementation plan
+#+END_SRC
+
+** 4. Work with Claude Code in the Worktree
+
+#+BEGIN_SRC bash
+cd ../jwt-paradigms-wt-feature42
+claude  # Launch Claude Code
+#+END_SRC
+
+Inside the Claude Code session, we can use:
+#+BEGIN_SRC
+/worktree
+#+END_SRC
+
+To have Claude analyze the task and provide next steps based on the task.org file.
+
+** 5. Creating and Merging Pull Requests
+
+When work is ready for review, we create a pull request directly from the worktree:
+
+#+BEGIN_SRC bash
+# Inside the worktree directory
+cd ../jwt-paradigms-wt-feature42
+
+# Stage changes
+git add .
+
+# Commit changes with trailer for issue tracking
+git commit -m "feat: implement feature for #42" --trailer "Issue: #42"
+
+# Push the branch to GitHub
+git push -u origin feature-issue42-wt
+
+# Create a pull request with detailed information
+gh pr create --title "Implement feature for #42" --body "
+## Summary
+- Brief description of the changes
+- Why they are needed
+- Key implementation details
+
+## Testing Done
+- How changes were tested
+- Results of testing
+
+Fixes #42
+"
+#+END_SRC
+
+The PR can then be reviewed and merged using our established workflow:
+
+1. Assign at least one reviewer to each PR
+2. Use Claude PR Reviewer agent for initial feedback
+3. Reviewer examines code quality, test coverage, and documentation
+4. Address all feedback before merging
+5. Merge using GitHub interface or command line
+
+#+BEGIN_SRC bash
+# After the PR is merged, we clean up branches
+gh pr merge feature-issue42-wt --delete-branch
+#+END_SRC
+
+** 6. Coordination in the Main Repository
+
+While different team members (or the same developer) work in various worktrees:
+- The main repository stays on the ~main~ branch
+- It serves as a coordination point
+- It's used for creating new worktrees and branches
+- It remains clean for core project management tasks
+- It can be used to review and merge PRs in a centralized way
+
+** 7. Cleanup When Done
+
+When a feature is complete and merged:
+
+#+BEGIN_SRC bash
+# Pull the latest changes into main
+cd /path/to/jwt-paradigms
+git checkout main
+git pull
+
+# Remove the worktree
+git worktree remove ../jwt-paradigms-wt-feature42
+
+# Delete the local branches
+git branch -d feature-issue42-wt
+git branch -d feature-issue42  # If merged
+#+END_SRC
+
+* Best Practices We've Discovered
+
+Through our experience using worktrees with Claude Code, we've established these best practices:
+
+** Keep the Main Repository on Main Branch
+- Use the main repository primarily for coordination
+- Create new branches and worktrees from main
+- Review and merge changes from the main repository
+
+** Use One Terminal Per Worktree
+- Maintain a separate terminal session for each worktree
+- Consider using terminal tabs or window naming for clarity
+- Set up environment variables or shell aliases for quick navigation
+
+** Leverage Claude Code's Ability to Focus
+- Claude Code works best when focused on specific tasks
+- The worktree approach naturally constrains Claude's context
+- Use the ~/worktree~ command to orient Claude at the start of sessions
+
+** Be Explicit About Task Definitions
+- Detailed ~task.org~ files help Claude provide better assistance
+- Include specific steps, requirements, and success criteria
+- Reference related files and documentation
+
+** Regular Coordination
+- Periodically sync the main branch to all worktrees
+- Use the main repository to track overall project progress
+- Consider using GitHub Projects or similar tools that show all related issues
+
+* Conclusion
+
+Git worktrees combined with Claude Code have significantly improved our team's productivity and code quality. This approach allows us to:
+
+- Work on multiple features simultaneously without context switching
+- Maintain focused AI assistance for specific tasks
+- Keep our development environment organized
+- Reduce mental overhead when juggling multiple issues
+
+By following the practices outlined in this post, you can implement a similar workflow in your team, especially when working with AI assistants like Claude Code.
+
+* Resources
+
+- [[https://git-scm.com/docs/git-worktree][Git Worktree Documentation]]
+- [[https://www.anthropic.com/engineering/claude-code-best-practices][Claude Code Best Practices]]
+- [[https://github.com/aygp-dr/jwt-paradigms/blob/main/CLAUDE.md][Our Claude Configuration]]
+
+* Appendix: Example Task.org Template
+
+Here's a template you can use for your own worktrees:
+
+#+BEGIN_SRC org
+#+TITLE: Task Description - Issue #XX
+#+AUTHOR: Your Name
+#+DATE: [Current Date]
+#+PROPERTY: header-args :mkdirp yes
+
+* Task Summary
+Brief description of what needs to be done.
+
+** Requirements
+- Requirement 1
+- Requirement 2
+- Requirement 3
+
+** Implementation Notes
+- Working in branch: branch-name
+- Worktree location: /path/to/worktree
+- Main repository: /path/to/main-repo
+
+** Implementation Steps
+1. Step 1
+2. Step 2
+3. Step 3
+4. Step 4
+
+** References
+- Issue #XX: [URL to issue]
+- Related documentation: [URLs or file paths]
+- Dependencies: [Other issues, libraries, etc.]
+#+END_SRC

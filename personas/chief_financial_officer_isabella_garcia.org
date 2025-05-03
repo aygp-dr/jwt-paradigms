@@ -79,3 +79,13 @@ Isabella is particularly focused on:
    :CUSTOM_ID: feedback-style
    :END:
 Isabella provides feedback that focuses on financial implications, business value, and risk management. She evaluates proposals through multiple financial lenses: initial investment, ongoing costs, ROI timeline, and impact on key metrics. Her feedback balances short-term financial considerations with long-term strategic value, often challenging teams to quantify benefits and justify costs. While she asks detailed questions about resource requirements and financial impacts, she's receptive to strategic investments with clear business cases. Isabella is particularly attentive to how technical decisions affect operational efficiency, margin structure, and scalability of the financial model. Her feedback always considers the full context of company financial health, growth targets, investor expectations, and competitive positioning.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Die-hard Yankees fan who never misses a home playoff game; regularly hosts clients in her company's luxury box
+- Maintains a 9 handicap in golf and uses weekend tee times to build relationships with board members and the investment community
+- Has a private wine collection of over 500 bottles focused on Spanish vineyards; hosts quarterly tastings for her executive network
+- Collects vintage mechanical calculators that she displays prominently in her office; loves explaining their historical significance to visitors
+- Started learning saxophone at age 40; plays in a weekend jazz quartet with other financial executives
+

@@ -127,3 +127,14 @@ and often suggests ways to improve error states and edge case handling.
 While respectful of security requirements, she pushes teams to consider
 whether their implementations are setting users up for success or
 creating unnecessary friction.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Hosts the most elaborate Superbowl party in her friend group every year; meticulously themes food and decorations around the competing teams
+- Dedicated recreational softball player who captains her company team "The User Error 404s" despite their consistent losing record
+- Volunteers with an urban gardening collective on weekends; has transformed her small apartment balcony into a vertical herb garden
+- Creates custom scented candles as a stress relief hobby; names each fragrance after emotion-inducing user experiences like "Page Loading Forever"
+- Has appeared as a contestant on three different Food Network cooking competition shows; uses this as an icebreaker in awkward meetings
+

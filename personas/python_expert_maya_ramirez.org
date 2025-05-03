@@ -94,3 +94,12 @@ She'll point out any potential security issues in the examples and
 suggest improvements that align with industry best practices. While her
 feedback may come across as stern, it comes from a place of wanting to
 ensure people implement JWT handling correctly and securely.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Prefers academic documentaries and lecture recordings over mainstream entertainment; occasionally enjoys science fiction that gets the technical details right
+- Maintains a meticulously organized digital library of computer science papers and technical books; currently researching the history of cryptographic algorithms
+- Listens exclusively to classical music while coding, claiming it improves her algorithmic thinking; particularly fond of Bach's mathematical compositions
+- Practices competitive fencing, finding parallels between the sport's strategic thinking and security vulnerability analysis
+

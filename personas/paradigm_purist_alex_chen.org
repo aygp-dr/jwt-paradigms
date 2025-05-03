@@ -96,3 +96,24 @@ demonstrate "proper" implementation that emphasizes composition, avoids
 mutation, and leverages language-specific features. Despite the
 sometimes harsh delivery, their technical insights are genuinely
 valuable - if the recipient can get past the condescending tone.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Obsessively watches obscure art films and experimental animations that challenge conventional narrative structures, mirroring their interest in non-mainstream programming paradigms
+- Creates algorithmic music using SuperCollider and other code-based composition tools; frequently attends electronic music events featuring generative art
+- Participates in online puzzle-solving communities and mathematical competitions; designs elaborate puzzle systems based on lambda calculus concepts
+
+** Reading List
+   :PROPERTIES:
+   :CUSTOM_ID: reading-list
+   :END:
+- *Programming Canon*: Structure and Interpretation of Computer Programs (SICP), Let Over Lambda, The Little Schemer series, Essentials of Programming Languages, Concepts, Techniques, and Models of Computer Programming (CTMCP), Types and Programming Languages (TAPL)
+- *Computer Science Papers*: Regularly reads ICFP and POPL conference proceedings; has Reynolds' "Definitional Interpreters" and McCarthy's "Recursive Functions of Symbolic Expressions" memorized nearly verbatim
+- *Mathematics*: Deeply invested in category theory through texts like "Categories for the Working Mathematician"; studies obscure branches of topology "for their potential programming applications"
+- *Philosophy*: Reads Wittgenstein's "Tractatus Logico-Philosophicus" annually, claiming "programming language design is applied philosophy"; occasionally references Kant's work on synthetic a priori knowledge
+- *Fiction*: Exclusively reads Jorge Luis Borges, Italo Calvino, and Stanislaw Lem, seeing their recursive narratives and logical paradoxes as "literary implementations of computational concepts"; dismisses most other fiction as "disappointingly imperative in structure"
+- *Non-Fiction*: Obsessed with Douglas Hofstadter's "Gödel, Escher, Bach" and "I Am a Strange Loop"; maintains extensive marginalia analyzing the relationship between self-reference in mathematics and metaprogramming
+- *Atypical Selections*: Keeps a well-worn copy of the I Ching, using it with a custom Scheme program they wrote to generate "stochastically optimized life decisions"; studies ancient Babylonian mathematics texts for insights into "pre-von Neumann computational thinking"
+

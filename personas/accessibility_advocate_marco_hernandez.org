@@ -102,3 +102,14 @@ users, whether color is used as the sole means of conveying information,
 and whether complex concepts are broken down appropriately. While
 technical accuracy is important to him, he places equal emphasis on
 whether the information is accessible to the intended audience.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Completely obsessed with Formula 1 racing and never misses a Grand Prix; hosts viewing parties with elaborate timing systems so he can track race statistics himself
+- Calls in regularly to sports talk radio under the pseudonym "Accessible Ace" to debate baseball analytics despite never having played the sport
+- Plays in a competitive weekly poker game where he uses his understanding of human behavior to read opponents effectively
+- Brews his own craft beer in a garage setup he designed to be fully accessible; his "Screen Reader Stout" won a regional homebrew competition
+- Secretly binge-watches trashy reality dating shows which he claims help him understand "the full spectrum of human communication patterns"
+

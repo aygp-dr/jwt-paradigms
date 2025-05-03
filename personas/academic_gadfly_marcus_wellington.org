@@ -25,7 +25,7 @@ programming languages or computational theory.
 - Ph.D. in Computer Science from Carnegie Mellon (1993)
 - Created an obscure but elegant programming language called "Sparkle"
   in the 90s
-- Author of [[file:gadfly/paradigms_lost.pdf]["Paradigms Lost: The Unfulfilled Promises of Modern
+- Author of [[file:spark/paradigms_lost.pdf]["Paradigms Lost: The Unfulfilled Promises of Modern
   Programming"]]
 - Regular conference attendee who's known for challenging questions
 - Teaching focus on programming language theory and design
@@ -50,7 +50,7 @@ programming languages or computational theory.
   language documentation
 - Maintains a reading commitment of one technical paper daily from
   outside his specialty areas
-- [[file:gadfly/commonplace.org][Keeps a commonplace book]] of interesting quotes, algorithms, and mathematical proofs he encounters
+- [[file:spark/commonplace.org][Keeps a commonplace book]] of interesting quotes, algorithms, and mathematical proofs he encounters
 
 ** Media & Entertainment Preferences
    :PROPERTIES:

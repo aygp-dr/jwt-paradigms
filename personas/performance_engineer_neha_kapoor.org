@@ -92,3 +92,14 @@ are fairly represented across languages. Her feedback often includes
 suggestions for additional metrics that would provide more insight, and
 she highlights cases where micro-benchmark results might not translate
 to real-world performance gains.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Amateur astronomer who spends clear nights with her high-end telescope; has written software to track and photograph celestial objects
+- Listens to classical Indian music during coding sessions but switches to death metal during debugging; colleagues have learned her music signals her mood
+- Meticulously tends to a collection of bonsai trees; applies the same patience and precision to their care as she does to performance optimizations
+- Refuses to use streaming services, maintaining a carefully organized physical media library of Blu-rays and vinyl records
+- Never discusses popular culture references, claiming they "occupy valuable mental cache space"
+

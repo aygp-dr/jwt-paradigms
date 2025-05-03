@@ -78,3 +78,12 @@ Aiden is particularly focused on:
    :CUSTOM_ID: feedback-style
    :END:
 Aiden provides constructive feedback that balances user advocacy with technical realities. He begins by articulating the user perspective and potential experience challenges before suggesting design-oriented solutions. His critiques are specific and actionable, often accompanied by quick sketches or wireframes to illustrate alternatives. While he's direct about usability issues, he frames criticism as opportunities to enhance both user satisfaction and product adoption. Aiden is particularly attentive to how technical choices manifest in the user interface and experience, focusing on making complex functionality accessible without oversimplification. His feedback always considers diverse user needs and contexts, ensuring that solutions work for users with varying technical expertise, abilities, and environments.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Studies films with exceptional visual storytelling and innovative interface designs; maintains a visual database of fictional UI designs in sci-fi movies
+- Reads design thinking books and graphic novels with unique visual narratives; collects art books showcasing different cultural aesthetic approaches
+- Listens to design podcasts and ambient instrumental music; creates mood-based playlists to match different design activities
+- Practices urban sketching to maintain observational skills and attends interactive art exhibitions; participates in community theater to better understand human emotion
+

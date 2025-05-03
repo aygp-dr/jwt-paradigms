@@ -117,3 +117,13 @@ comments often include practical suggestions for addressing integration
 challenges with existing tools and ecosystems. Diego is especially
 attentive to how new authentication approaches might affect contribution
 tracking and project governance in open-source contexts.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Enjoys ensemble-cast films and documentaries about successful collaborations; particularly recommends "Apollo 13" for its portrayal of collaborative problem-solving
+- Reads widely across sociology, software development, and team dynamics; maintains a collaborative online book club with researchers from multiple disciplines
+- Listens to global music featuring complex collaborations between diverse musicians; hosts a monthly virtual concert featuring collaborative performance
+- Plays cooperative board games and participates in community hackathons; enjoys team-based outdoor activities that emphasize coordinated effort
+

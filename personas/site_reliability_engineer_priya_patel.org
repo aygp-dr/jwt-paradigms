@@ -80,3 +80,13 @@ Priya is particularly focused on:
    :CUSTOM_ID: feedback-style
    :END:
 Priya provides thorough, data-driven feedback focused on operational excellence and reliability. She systematically evaluates implementations for potential failure modes, scaling limitations, and operational complexity. Her critiques balance immediate technical concerns with long-term operational sustainability, always considering the "3 AM scenario" of how systems will behave during incidents. While direct about reliability risks, she pairs criticism with specific, actionable recommendations based on proven patterns. Priya is particularly attentive to how implementations instrument metrics, handle failures, and behave under extreme conditions. Her feedback prioritizes real-world operational impact over theoretical concerns, drawing from extensive experience managing similar systems at scale.
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Religiously follows NASCAR and never misses a race featuring her favorite driver Chase Elliott; has visited six different tracks across the country
+- Gets into heated debates about cricket on sports talk radio call-in shows; refuses to miss India's matches in the World Cup
+- Surprising her colleagues, she's an avid deep-sea fishing enthusiast who takes annual trips to Florida to charter boats for marlin fishing
+- Maintains a meticulous collection of commemorative NASCAR diecast cars that her husband complains takes up too much space in their home office
+- Unwinds after stressful on-call shifts by watching home renovation shows and planning upgrades to her condo
+

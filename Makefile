@@ -60,6 +60,15 @@ slides: $(PRESENTATION_ORG)
 		--funcall org-beamer-export-to-pdf
 	@echo "Done! Generated $(PRESENTATION_PDF)"
 
+# File-based target for presentation.pdf with dependency tracking
+$(PRESENTATION_PDF): $(PRESENTATION_ORG)
+	@echo "Processing LaTeX file presentation.tex..."
+	@$(EMACS) $(ORG_REQUIRE) $(THEME_LOAD) \
+		--eval "(setq org-latex-pdf-process '(\"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\" \"pdflatex -interaction nonstopmode -output-directory %o %f\"))" \
+		--visit="$<" \
+		--funcall org-beamer-export-to-pdf
+	@echo "Done! Generated $(PRESENTATION_PDF)"
+
 # Generate PDF from paradigms_lost.org
 book: $(BOOK_PDF)
 

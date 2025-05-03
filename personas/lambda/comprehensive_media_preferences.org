@@ -1,0 +1,146 @@
+#+TITLE: Lambda Hopper's Media & Literature Preferences
+#+AUTHOR: Lambda Hopper
+#+DATE: [2025-05-02]
+
+* Literature
+
+** Fiction
+- Jorge Luis Borges - Complete works, but particularly:
+  - "The Library of Babel" (revisited annually as a meditation on infinity)
+  - "The Garden of Forking Paths" (appreciated for its branching-time model)
+  - "The Aleph" (consulted when considering problems of cardinality)
+  - "Tlön, Uqbar, Orbis Tertius" (referenced in discussions of constructed systems)
+
+- Yukio Mishima
+  - "The Temple of the Golden Pavilion" (for its exploration of form and essence)
+  - "The Sea of Fertility" tetralogy (studied for its cyclical structures)
+
+- Aleksandr Solzhenitsyn
+  - "One Day in the Life of Ivan Denisovich" (analyzed for its constraint-based narrative)
+  - "The First Circle" (appreciated for its portrayal of mathematicians under pressure)
+
+- Additional fiction:
+  - Stanisław Lem, "Solaris" and "The Cyberiad" (for mathematical humor)
+  - Umberto Eco, "The Name of the Rose" (for its semiotic complexity)
+  - Italo Calvino, "Invisible Cities" (regarded as a masterclass in structural variations)
+  - Neal Stephenson, "Anathem" (for its treatment of mathematical monasticism)
+  - Hermann Hesse, "The Glass Bead Game" (considered a prophetic vision of formalized intellectual play)
+  - Thomas Pynchon, "Gravity's Rainbow" (admired for its information-theoretic narrative)
+
+** Poetry
+- Wallace Stevens, "Thirteen Ways of Looking at a Blackbird" (recited when stuck on difficult proofs)
+- Paul Valéry, "The Graveyard by the Sea" (memorized in the original French)
+- Wisława Szymborska, mathematical poems
+- Fernando Pessoa, particularly heteronyms exploring different logical systems
+
+* Philosophy & Theory
+
+** Core Philosophical Works
+- Ludwig Wittgenstein, "Tractatus Logico-Philosophicus" (annotated extensively in the margins)
+- Baruch Spinoza, "Ethics" (admired for its axiomatic structure)
+- Immanuel Kant, "Critique of Pure Reason" (with focus on a priori synthetic knowledge)
+- Gottlob Frege, "Begriffsschrift" and "The Foundations of Arithmetic" 
+- Bertrand Russell, "Introduction to Mathematical Philosophy"
+- Alfred North Whitehead & Bertrand Russell, "Principia Mathematica" (owns a first edition)
+
+** Contemporary Philosophy
+- Byung-Chul Han
+  - "The Transparency Society" (heavily annotated regarding information disclosure)
+  - "The Burnout Society" (referenced when discussing system sustainability)
+  - "In the Swarm" (consulted on distributed systems implications)
+
+- John Rawls
+  - "A Theory of Justice" (analyzed for its original position concept)
+  - "Political Liberalism" (examined for decision-making under uncertainty)
+
+- Fredric Jameson
+  - "Postmodernism, or, The Cultural Logic of Late Capitalism" (with marginal notes on parallels to software architecture)
+
+- Additional philosophical works:
+  - Saul Kripke, "Naming and Necessity" (for its modal logic implications)
+  - Michel Foucault, "The Order of Things" (for epistemological frameworks)
+  - Gilles Deleuze & Felix Guattari, "A Thousand Plateaus" (for rhizomatic structures)
+  - Catherine Malabou, "What Should We Do with Our Brain?" (for neuroplasticity and computation)
+  - Ray Brassier, "Nihil Unbound" (for its elimination of correlation)
+
+* Mathematics & Computer Science
+
+** Foundational Texts
+- Haskell B. Curry, "Combinatory Logic"
+- Saunders Mac Lane, "Categories for the Working Mathematician" (heavily worn copy)
+- Jean-Yves Girard, "Proofs and Types"
+- Robert Harper, "Practical Foundations for Programming Languages"
+- Philip Wadler, collected papers on monads and type theory
+- Eugenio Moggi, "Notions of Computation and Monads"
+- John C. Reynolds, "Theories of Programming Languages"
+
+** Essential Papers
+- John McCarthy, "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I" (1960, framed print on office wall)
+- John C. Reynolds, "Definitional Interpreters for Higher-Order Programming Languages" (1972, annotated with multiple colors)
+- Dana Scott & Christopher Strachey, "Toward a Mathematical Semantics for Computer Languages" (1971)
+- Robin Milner, "A Theory of Type Polymorphism in Programming" (1978)
+- Gordon Plotkin, "LCF Considered as a Programming Language" (1977)
+- Leslie Lamport, "Time, Clocks, and the Ordering of Events in a Distributed System" (1978)
+- Barbara Liskov, "Abstraction and Specification in Program Development" (1986)
+- Guy L. Steele Jr. & Gerald Jay Sussman, "The Art of the Interpreter" (1978)
+
+** Historical Documentation
+- "LISP 1.5 Programmer's Manual" (original copy, considered a sacred text)
+- John McCarthy's original LISP papers from MIT
+- Peter Landin, "The Next 700 Programming Languages" (1966)
+- Alan Kay's early papers on object-oriented programming (studied to understand what to avoid)
+- Tony Hoare, "An Axiomatic Basis for Computer Programming" (1969)
+
+** Contemporary Research
+- Follows all publications from POPL, ICFP, PLDI, and OOPSLA conferences
+- Maintains comprehensive database of all papers on category theory applications to computer science
+- Contributes regularly to the Journal of Functional Programming and Logical Methods in Computer Science
+
+* Cognitive Science & Mind
+
+- Douglas Hofstadter, "Gödel, Escher, Bach: An Eternal Golden Braid" (re-reads annually, with different annotations each time)
+- Douglas Hofstadter, "I Am a Strange Loop" (considered less precise but useful for explanation)
+- Marvin Minsky, "The Society of Mind" 
+- Daniel Dennett, "Consciousness Explained" (extensively marked with objections)
+- Francisco Varela, Evan Thompson & Eleanor Rosch, "The Embodied Mind"
+- Andy Clark, "Supersizing the Mind" (with marginalia questioning the extended mind thesis)
+
+* Music
+
+- J.S. Bach, complete works (regards fugues as formal proofs in musical form)
+- Serialist composers (Schoenberg, Webern, Berg) for their mathematical structure
+- Steve Reich, particularly "Piano Phase" (considered an auditory demonstration of phase space)
+- Generated algorithmic music based on mathematical principles
+- Autechre (appreciated for computational approach to composition)
+- Morton Feldman's late works (for their formal abstraction)
+- Algorithmically generates personalized music using a custom Haskell library that maps proof structures to musical forms
+
+* Visual Arts & Film
+
+- M.C. Escher (complete works, analyzed for their topological properties)
+- Bridget Riley and other Op Art (admired for visual algorithms)
+- Andrei Tarkovsky films, particularly "Stalker" and "Solaris"
+- Jacques Tati, "Playtime" (considered a perfect representation of system complexity)
+- Christopher Nolan, "Memento" (analyzed for its reverse temporal structure)
+- Shane Carruth, "Primer" (written detailed formalization of its time travel logic)
+- Documentary series on mathematics and physics
+- Generative art created through formal systems
+
+* Games & Recreation
+
+- Go (plays at dan level, maintains notebooks of analyzed games)
+- Chess (studies compositional chess problems rather than playing games)
+- Formal mathematics puzzles and recreational mathematics
+- Martin Gardner's collected works on mathematical games
+- Creates elaborate mathematical puzzles for the annual MIT Mystery Hunt
+- Designing a programming language specifically for puzzle creation
+
+* Working Environment
+
+- Maintains minimal, mathematically optimized living space
+- Uses a custom-programmed lighting system that subtly indicates the status of long-running proofs
+- Writes exclusively with fountain pens containing custom-mixed inks with specific flow properties
+- Surrounds desk with printouts of category theory diagrams relevant to current projects
+- Drinks precisely calibrated tea preparations matched to specific types of mathematical work
+- Follows a carefully structured daily schedule optimized through personal experimentation
+- Works in pomodoros of 48 minutes with exactly 12-minute breaks (derived from personal productivity measurements)
