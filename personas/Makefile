@@ -1,6 +1,6 @@
 # Reviewer Personas Tooling
 
-.PHONY: all setup images tangle detangle publish clean help .venv alternatives dalle gemini claude-commands process-all org-lint org-ai-images
+.PHONY: all setup images tangle detangle publish clean help .venv alternatives dalle gemini claude-commands process-all org-lint org-ai-images headshot-audit
 
 # Configuration variables
 VENV := . .venv/bin/activate &&
@@ -19,6 +19,9 @@ SHELL := /bin/bash
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-15s\033[0m %s\n", $1, $2}' $(MAKEFILE_LIST)
+
+headshot-audit: ## Audit headshot images for existence and proper references
+	@$(SCRIPTS_DIR)/headshot_audit.sh
 
 all: images ## Setup and generate images
 
