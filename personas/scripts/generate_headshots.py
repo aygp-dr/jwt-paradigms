@@ -120,19 +120,16 @@ def extract_persona_from_file(file_path):
         role_match = re.search(role_pattern, content)
         role = role_match.group(1) if role_match else name_parts[0].replace('_', ' ').title()
         
-        # Try to extract image filename
-        # 1. Look for begin_ai with :file parameter
+        # Look for begin_ai with :file parameter
         file_pattern = r'#\+begin_ai\s+:image\s+:file\s+([^\s\n]+)'
         file_match = re.search(file_pattern, content)
         
         if file_match:
             image_filename = file_match.group(1)
         else:
-            # Default to lastname.png if no file specified
-            if len(name_parts) >= 3:
-                image_filename = f"images/{name_parts[2].lower()}.png"
-            else:
-                image_filename = f"images/{name_parts[-1].lower()}.png"
+            # If no file specified in begin_ai, don't process this persona
+            logger.warning(f"No :file parameter specified in begin_ai block for {file_path}")
+            return None
         
         # Extract prompt from begin_ai block
         prompt_pattern = r'#\+begin_ai\s+:image(?:\s+:file\s+[^\s\n]+)?\n(.*?)#\+end_ai'
@@ -149,29 +146,7 @@ def extract_persona_from_file(file_path):
                 "prompt": prompt
             }
         
-        # Fallback: try to find Headshot Generation Prompt section
-        headshot_section_pattern = r'\*\* Headshot Generation Prompt\s*\n(?:.*?:PROPERTIES:.*?:END:\s*\n)?(.*?)(?:\n\*\* |\Z)'
-        headshot_match = re.search(headshot_section_pattern, content, re.DOTALL)
-        
-        if headshot_match:
-            prompt = headshot_match.group(1).strip()
-            
-            # Try to extract the prompt from any AI block in this section
-            ai_block_pattern = r'#\+begin_ai[^\n]*\n(.*?)#\+end_ai'
-            ai_block_match = re.search(ai_block_pattern, prompt, re.DOTALL)
-            
-            if ai_block_match:
-                prompt = ai_block_match.group(1).strip()
-            
-            return {
-                "name": persona_name,
-                "role": role,
-                "filename": image_filename,
-                "file_path": file_path,
-                "prompt": prompt
-            }
-        
-        logger.warning(f"No prompt found in {file_path}")
+        logger.warning(f"No prompt found in begin_ai block in {file_path}")
         return None
         
     except Exception as e:

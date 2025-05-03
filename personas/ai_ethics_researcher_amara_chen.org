@@ -1,4 +1,4 @@
-* Dr. Amara Chen
+* Dr. Amara Chen
   :PROPERTIES:
   :CUSTOM_ID: dr.-amara-chen
   :END:
@@ -6,19 +6,16 @@
    :PROPERTIES:
    :CUSTOM_ID: headshot-generation-prompt
    :END:
-Professional academic portrait of Dr. Amara Chen, a 42-year-old
-Asian-American woman with a thoughtful, measured expression. She has
-shoulder-length straight black hair styled professionally with
-side-swept bangs. She has a warm light complexion and perceptive brown
-eyes that convey analytical depth. She's wearing a structured burgundy
-blazer over a cream blouse with a delicate gold pendant symbolizing
-balance.
+
+#+begin_ai :image :file images/amara_chen.png
+Professional academic portrait of Dr. Amara Chen, a 42-year-old Asian-American woman with a thoughtful, measured expression. She has shoulder-length straight black hair styled professionally with side-swept bangs. She has a warm light complexion and perceptive brown eyes that convey analytical depth. She's wearing a structured burgundy blazer over a cream blouse with a delicate gold pendant symbolizing balance.
+#+end_ai
 
 ** Background
    :PROPERTIES:
    :CUSTOM_ID: background
    :END:
-Dr. Amara Chen is a 42-year-old AI ethics researcher and former software
+Dr. Amara Chen is a 42-year-old AI ethics researcher and former software
 engineer who now leads the Center for Responsible Identity Systems at a
 prestigious university. With a PhD in Computer Science and a Master's in
 Philosophy, Amara bridges technical implementation and ethical
@@ -87,7 +84,7 @@ terminology that leaves technical audiences confused.
    :END:
 - Consent and delegation models in authentication flows
 - Transparency in machine-to-machine authentication
-- Ethical implications of long-lived credentials vs. ephemeral tokens
+- Ethical implications of long-lived credentials vs. ephemeral tokens
 - How claims structure represents and potentially stereotypes identity
 - Power dynamics in credential-issuing architectures
 - Accessibility and inclusion in authentication systems
@@ -125,4 +122,3 @@ opportunities for systems to better align with human values.
 - Reads across philosophy, ethics, and technical AI literature; currently exploring ancient ethical frameworks and their application to modern technology
 - Listens to cross-cultural music and podcasts examining the societal impact of technology; enjoys live jazz for its improvisational complexity
 - Practices mindfulness meditation and participates in ethical philosophy discussion groups; enjoys hiking in nature reserves while contemplating human-technology relationships
-

@@ -4,7 +4,7 @@
 # Looks for small PNG files in images/ directory and replaces them
 # with equivalent files from images/gemini/ if they exist
 
-IMAGES_DIR="/home/aygp-dr/projects/aygp-dr/jwt-paradigms/personas/images"
+IMAGES_DIR="$(dirname $(dirname $(readlink -f "$0")))/images"
 GEMINI_DIR="${IMAGES_DIR}/gemini"
 BACKUP_DIR="${IMAGES_DIR}/backup"
 

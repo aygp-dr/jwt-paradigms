@@ -102,7 +102,9 @@ def extract_personas_from_file(file_path):
                     if match[0]:  # If file parameter specified
                         img_filename = match[0]
                     else:
-                        img_filename = default_filename
+                        # Skip if no file parameter specified
+                        logger.info(f"Skipping prompt in {file_path} - no :file parameter specified")
+                        continue
                     
                     prompt = match[1].strip()
                     
@@ -115,73 +117,13 @@ def extract_personas_from_file(file_path):
                         "source": "begin_ai"
                     })
         
-        # If no AI blocks found, look for a "Headshot Generation Prompt" section
+        # No fallback for headshot sections - only use begin_ai blocks
         if not personas:
-            headshot_section_pattern = r'\*\* Headshot Generation Prompt\s*\n(?:.*?:PROPERTIES:.*?:END:\s*\n)?(.*?)(?:\n\*\* |\Z)'
-            headshot_match = re.search(headshot_section_pattern, content, re.DOTALL)
-            
-            if headshot_match:
-                prompt = headshot_match.group(1).strip()
-                
-                # Check if the section contains any AI blocks
-                ai_block_in_section = re.search(r'#\+begin_ai.*?#\+end_ai', prompt, re.DOTALL)
-                
-                # If there's no AI block, use the whole section content as prompt
-                if not ai_block_in_section:
-                    personas.append({
-                        "persona": persona_name,
-                        "role": role,
-                        "filename": default_filename,
-                        "file_path": file_path,
-                        "prompt": prompt,
-                        "source": "headshot_section"
-                    })
+            logger.info(f"No valid begin_ai blocks with :file parameters found in {file_path}")
         
-        # Check for PERSONA_IMAGE property as a fallback
-        if not personas:
-            image_prop_pattern = r'#\+PROPERTY:\s+PERSONA_IMAGE\s+([^\s\n]+)'
-            image_prop_match = re.search(image_prop_pattern, content)
-            
-            if image_prop_match:
-                # Look for a prompt in a section called "Image"
-                img_filename = image_prop_match.group(1)
-                image_section_pattern = r'\* Image\s*\n(.*?)(?:\n\* |$)'
-                image_section_match = re.search(image_section_pattern, content, re.DOTALL)
-                
-                if image_section_match:
-                    prompt = image_section_match.group(1).strip()
-                    
-                    # Check if there's an AI block in the section
-                    ai_block_pattern = r'#\+begin_ai[^\n]*\n(.*?)#\+end_ai'
-                    ai_block_match = re.search(ai_block_pattern, prompt, re.DOTALL)
-                    
-                    if ai_block_match:
-                        prompt = ai_block_match.group(1).strip()
-                    
-                    personas.append({
-                        "persona": persona_name,
-                        "role": role,
-                        "filename": img_filename,
-                        "file_path": file_path,
-                        "prompt": prompt,
-                        "source": "image_property"
-                    })
+        # Skip PERSONA_IMAGE property handling - only use begin_ai blocks
         
-        # Legacy gptel format as a last resort
-        if not personas:
-            gptel_block_pattern = r'#\+begin_src gptel :file\s+([^\n]+?)\n(.*?)#\+end_src'
-            gptel_matches = re.findall(gptel_block_pattern, content, re.DOTALL)
-            
-            if gptel_matches:
-                for file_ref, prompt in gptel_matches:
-                    personas.append({
-                        "persona": persona_name,
-                        "role": role,
-                        "filename": file_ref.strip(),
-                        "file_path": file_path,
-                        "prompt": prompt.strip(),
-                        "source": "gptel"
-                    })
+        # Skip legacy gptel format - only use begin_ai blocks
         
         if not personas:
             logger.warning(f"No prompt found in {file_path}")

@@ -98,7 +98,9 @@ dalle: $(IMAGES_DIR) ## Generate headshots using DALL-E
 gemini: images/gemini ## Generate headshots using Gemini
 	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py
 
-gemini-replace: gemini ## Generate headshots and replace placeholders
+gemini-replace: ## Generate headshots using Gemini and replace only files specified in :file
+	@echo "Generating headshots using file paths specified in :file attributes..."
+	$(PYTHON) $(SCRIPTS_DIR)/extract_personas.py --verbose
 	$(PYTHON) $(SCRIPTS_DIR)/generate_headshots.py --copy-to-target
 	$(SCRIPTS_DIR)/replace_placeholders.sh
 
