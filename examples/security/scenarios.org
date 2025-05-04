@@ -1,0 +1,117 @@
+#+TITLE: JWT Security Implementation Scenarios
+#+AUTHOR: aygp-dr
+#+DATE: [2025-05-03]
+#+PROPERTY: header-args :mkdirp yes
+
+* JWT Security Implementation Scenarios
+This document outlines comprehensive security scenarios for JWT implementations based on feedback from Jason Wilson (Staff Engineer) and Hannah Chen (Application Security Architect).
+
+** Overview
+The following scenarios demonstrate secure JWT implementations addressing:
+1. Secure-by-default parsing (verify-then-parse)
+2. Key management and rotation
+3. Algorithm confusion protection
+4. Secure error handling
+5. Validation pipeline
+6. Defense-in-depth strategies
+
+** Scenario 1: Secure-by-Default Parsing
+*** Problem
+Many JWT examples demonstrate parsing the header before validating the signature, creating a risk that developers will copy insecure patterns.
+
+*** Solution
+Replace all parsing examples with secure-by-default implementations that:
+1. Verify the signature first
+2. Then validate claims
+3. Finally parse and use the payload
+
+*** Implementation Examples
+We'll create implementations in:
+- Python
+- TypeScript/JavaScript
+- Rust
+- Clojure/JVM
+- Other languages as appropriate
+
+** Scenario 2: Key Management and Rotation
+*** Problem
+Production JWT implementations require proper key management and rotation, which is often overlooked.
+
+*** Solution
+Create examples demonstrating:
+1. JWK (JSON Web Key) integration
+2. Key rotation mechanisms
+3. Key ID (kid) handling
+4. Secure key storage
+5. HSM integration considerations
+
+*** Implementation Examples
+We'll create practical implementations for handling key rotation in microservice environments.
+
+** Scenario 3: Algorithm Confusion Protection
+*** Problem
+Algorithm confusion attacks can allow attackers to bypass signature verification.
+
+*** Solution
+Create examples showing proper algorithm constraint verification:
+1. Explicit algorithm whitelisting
+2. Rejecting "none" algorithm
+3. Preventing RS256/HS256 confusion
+4. Type-safe algorithm handling
+
+*** Implementation Examples
+We'll demonstrate algorithm confusion prevention in multiple languages.
+
+** Scenario 4: Secure Error Handling
+*** Problem
+Poor error handling can leak implementation details that help attackers.
+
+*** Solution
+Create examples of secure error handling:
+1. Consistent error messages regardless of failure type
+2. Proper logging without leaking sensitive information
+3. Language-specific error handling patterns
+4. Timing attack prevention
+
+*** Implementation Examples
+We'll implement proper error handling across languages.
+
+** Scenario 5: Validation Pipeline
+*** Problem
+JWT validation involves multiple steps that must be performed in the correct order.
+
+*** Solution
+Create a validation pipeline that clearly demonstrates:
+1. Signature verification first
+2. Expiration/time validation second
+3. Issuer/audience validation third
+4. Custom claim validation last
+5. Proper handling of each stage
+
+*** Implementation Examples
+We'll create pipeline implementations in functional and OO paradigms.
+
+** Scenario 6: Defense-in-Depth Strategy
+*** Problem
+JWT validation alone is insufficient for robust security.
+
+*** Solution
+Demonstrate integration with:
+1. Rate limiting
+2. Logging and monitoring
+3. Abnormal usage detection
+4. Token revocation mechanisms
+5. Complementary security controls
+
+*** Implementation Examples
+We'll create real-world security frameworks integrating JWT with additional protections.
+
+* Implementation Plan
+1. Create baseline implementations for each scenario
+2. Develop comprehensive test cases showing correct and incorrect usage
+3. Add detailed documentation and comments
+4. Ensure examples are production-ready
+5. Provide visual aids showing security vulnerabilities and protection
+
+* Timeframe
+The security examples should be completed by May 10, 2025, to allow integration with the presentation materials before the PyCon US 2025 presentation (May 14-22, 2025).
