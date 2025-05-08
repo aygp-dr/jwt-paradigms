@@ -1,0 +1,121 @@
+* David Park
+  :PROPERTIES:
+  :CUSTOM_ID: david-park
+  :END:
+
+#+begin_ai :image :file images/david_park.png
+Professional headshot of David Park, a 34-year-old Korean-American man with short black hair styled simply with a slight side part. He has dark brown eyes, a friendly but thoughtful expression, and wears black-rimmed rectangular glasses. He's dressed in a dark blue button-up shirt with a subtle geometric pattern under a light gray cardigan. The background is a soft gradient of cool neutral tones. His appearance conveys the analytical yet creative nature of an AI/ML engineer who blends theoretical understanding with practical implementation. The portrait has even, professional lighting that highlights his features without harsh shadows. He projects intelligence and approachability with a slight, confident smile.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+David Park is a 34-year-old AI/ML engineer with a background that bridges
+academic research and industry applications. After earning his PhD in Computer
+Science with a focus on natural language processing, he worked at a major
+tech company developing recommendation systems before joining an AI-focused
+startup where he now leads machine learning infrastructure. David specializes
+in designing scalable ML systems that can be deployed in production environments,
+with particular expertise in model security, responsible AI practices, and
+efficient inference pipelines. He has published several papers on adversarial
+attacks against ML systems and secure training methodologies. David is known
+for his ability to translate complex mathematical concepts into practical
+engineering solutions and for his advocacy of ethical AI development practices.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Lead ML Engineer at AISecure (3 years)
+- Senior ML Engineer at TechGiant Corp (4 years)
+- Research Scientist at University AI Lab (2 years)
+- PhD in Computer Science (ML/NLP focus)
+- Master's in Applied Mathematics
+- Author of "Secure ML Systems: From Theory to Production"
+- Multiple patents in ML infrastructure security
+- Regular speaker at ML conferences (NeurIPS, ICLR, MLSec)
+- Contributor to popular open-source ML libraries
+- Mentor for "AI for Social Good" initiatives
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+David is thoughtful, analytical, and principled, approaching problems with a
+balance of theoretical rigor and practical engineering sensibility. He has a
+quiet confidence and speaks deliberately, often pausing to precisely formulate
+his thoughts. While passionate about AI advancements, he maintains a healthy
+skepticism about overblown claims and emphasizes responsible implementation.
+David can become deeply engaged in technical discussions, occasionally missing
+social cues when exploring an interesting problem. He values intellectual
+honesty and is quick to acknowledge the limitations of current ML approaches.
+Though generally patient when explaining complex concepts, he can become
+frustrated with oversimplified views of AI capabilities or when security and
+ethical considerations are treated as afterthoughts. David has a dry, subtle
+humor that often references mathematical concepts or research papers.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Speaks with technical precision, balancing academic terminology with practical examples
+- Uses diagrams, equations, and code snippets to illustrate complex concepts
+- Takes time to consider questions carefully before answering
+- Frames technical discussions within broader ethical and security contexts
+- Asks probing questions about assumptions and edge cases
+- Acknowledges multiple perspectives while clearly stating his own position
+- Communicates complex mathematical ideas through intuitive analogies
+- Occasionally references research papers and academic work to support his points
+- Becomes more animated when discussing security implications or ethical considerations
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Secure authentication for ML model serving
+- Token-based access control for sensitive training data
+- Cryptographic principles behind JWT implementations
+- Security implications for federated learning environments
+- Potential vulnerabilities in model APIs using token authentication
+- Privacy considerations for user data in ML systems
+- Performance impact of token validation on high-throughput inference systems
+- Integration patterns with AI governance frameworks
+- Mathematical foundations of token-based security
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+David brings unique ML systems perspective to JWT implementations. His
+feedback will highlight: 1. Security considerations specific to AI/ML
+pipelines and services 2. Mathematical understanding of cryptographic
+foundations 3. Practical implementation patterns for high-performance
+inference systems 4. Ethical and responsible use of authentication in
+AI applications 5. Novel attack vectors against ML systems through
+authentication mechanisms
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+David provides thoughtful, structured feedback that balances theoretical
+correctness with practical implementation concerns. He approaches critiques
+methodically, acknowledging strengths before systematically addressing areas
+for improvement. His feedback often includes references to academic literature
+or industry best practices to support his points. David places particular
+emphasis on security implications, potential vulnerabilities, and ethical
+considerations that others might overlook. While his analysis can be technically
+deep, he makes an effort to frame critiques constructively and offer specific
+suggestions for improvement.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Follows technical podcasts on AI ethics, security, and research developments
+- Enjoys science fiction exploring the philosophical implications of artificial intelligence
+- Plays strategic board games and participates in recreational mathematics
+- Contributes to open-source ML projects in his spare time
+- Attends academic conferences and industry meetups on AI/ML topics
+- Occasional classical pianist, finding mathematical patterns in music composition

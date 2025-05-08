@@ -1,0 +1,113 @@
+* Mia Chen
+  :PROPERTIES:
+  :CUSTOM_ID: mia-chen
+  :END:
+
+#+begin_ai :image :file images/mia_chen.png
+Professional headshot of Mia Chen, a 29-year-old Asian woman with shoulder-length black hair styled in soft waves. She has bright, expressive dark eyes, a warm smile, and is wearing a simple navy blue top with minimal silver jewelry (a small pendant necklace). The background is a clean, subtle gradient of light blue tones. Her appearance conveys the creative yet technical nature of a mobile developer who bridges design and functionality. The portrait has professional studio lighting that highlights her features clearly. She exudes confidence and approachability, with a slight tilt to her head suggesting curiosity and engagement.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Mia Chen is a 29-year-old mobile developer who has been creating iOS 
+applications for the past six years. After earning her degree in Computer
+Science with a minor in Graphic Design, she started her career at a digital
+agency building apps for various clients before joining a health tech company
+where she leads mobile development. Mia specializes in creating polished, 
+native iOS experiences with Swift and has recently expanded her expertise
+to include cross-platform development with Flutter. She's particularly known
+for her attention to both technical implementation and user experience details,
+having published several open-source UI components that are widely used in the
+mobile development community. Mia is passionate about creating secure, accessible
+mobile experiences that delight users while maintaining robust data protection.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Senior iOS Developer at HealthConnect (3 years)
+- Mobile Developer at DigitalCraft Agency (3 years)
+- iOS Development Intern at TechStart (1 year)
+- Bachelor's in Computer Science, minor in Graphic Design
+- Apple Developer Certification
+- Creator of SwiftUIComponents library (2,500+ GitHub stars)
+- Regular speaker at Swift and mobile security conferences
+- Mentor for "Women Who Code" mobile development track
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Mia is detail-oriented, creative, and pragmatic, with a strong focus on balancing
+aesthetic elegance with technical robustness. She's enthusiastic about new
+mobile technologies but approaches them with a measured caution, preferring to
+thoroughly test frameworks before adopting them in production apps. While generally
+collaborative, she can become frustrated when security or user experience
+considerations are deprioritized to meet deadlines. Mia tends to be a perfectionist
+about her code and UI implementations, sometimes spending extra time to refine
+details others might consider minor. She's patient when explaining technical
+concepts to non-technical team members but can become quietly disengaged in
+meetings that she feels lack clear direction or outcome.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Balances technical details with practical examples and visual references
+- Asks clarifying questions focused on user experience and implementation specifics
+- Communicates complex technical concepts with simplified analogies and visual aids
+- Prefers direct, clear feedback on both technical and design aspects
+- Tends to use gesture and visual sketching when explaining interaction patterns
+- Appreciates well-structured presentations with code examples and case studies
+- Offers specific, constructive criticism based on real-world mobile scenarios
+- Expresses particular enthusiasm when discussing the intersection of security and UX
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Mobile-specific security considerations for token handling
+- Secure storage solutions for tokens on iOS and Android
+- Biometric authentication integration with JWTs
+- Battery and performance impacts of token validation
+- Offline authentication patterns using tokens
+- Push notification security with tokens
+- Implementing token refresh flows with good UX
+- Cross-platform token handling differences (Swift vs. Flutter/React Native)
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+Mia brings specialized mobile platform knowledge to evaluate JWT implementations.
+Her feedback will highlight: 1. Mobile-specific security vulnerabilities that may
+not be obvious to backend or web developers 2. User experience implications of
+different token handling approaches 3. Platform-specific implementation challenges
+on iOS and cross-platform frameworks 4. Practical strategies for balancing security
+with battery life and performance on mobile devices
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Mia provides balanced feedback that considers both technical security and user
+experience perspectives. She'll offer specific, actionable suggestions rather
+than general observations, often referencing how similar problems are solved in
+mobile ecosystems. Her critique is methodical and constructive, typically
+accompanied by sketches or pseudo-code to illustrate alternative approaches.
+While detailed in her technical feedback, she always brings the conversation
+back to user impact and real-world implementation considerations for mobile
+developers.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Follows design and tech podcasts like "Design Details" and "Swift by Sundell"
+- Enjoys sci-fi and speculative fiction that explores near-future technology
+- Creates digital illustrations and UI animations as both a hobby and professional development
+- Maintains a technical blog sharing mobile development tips and security best practices
+- Participates in mobile design hackathons and app competitions
+- Appreciates minimalist design aesthetics in both digital and physical spaces

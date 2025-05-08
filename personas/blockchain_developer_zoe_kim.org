@@ -1,0 +1,122 @@
+* Zoe Kim
+  :PROPERTIES:
+  :CUSTOM_ID: zoe-kim
+  :END:
+
+#+begin_ai :image :file images/zoe_kim.png
+Professional headshot of Zoe Kim, a 30-year-old Korean woman with shoulder-length black hair styled with subtle purple highlights. She has dark expressive eyes, a confident smile, and wears modern rectangular glasses with thin black frames. She's dressed in a black turtleneck with a geometric silver pendant necklace. Her makeup is minimalist with a hint of color on her lips. The background is a gradient of deep blue-purple tones. Her appearance conveys the forward-thinking and innovative nature of a blockchain developer. The portrait has professional lighting that creates depth and definition. She projects intelligence, confidence, and creative thinking with a direct, engaged expression.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Zoe Kim is a 30-year-old blockchain developer who has been at the forefront of
+Web3 technologies for the past five years. With a background in distributed
+systems and cryptography, she transitioned from traditional backend development
+to blockchain when she became fascinated by the potential of decentralized
+systems. Zoe currently leads blockchain architecture at a Web3 startup focused
+on decentralized identity solutions, where she designs secure, scalable systems
+that bridge traditional authentication with blockchain verification. She has
+contributed to multiple Ethereum Improvement Proposals (EIPs) related to identity
+management and has built several open-source tools for secure key management.
+Zoe regularly speaks at blockchain conferences about the intersection of
+traditional security paradigms and decentralized systems. She is particularly
+interested in zero-knowledge proofs, decentralized identity standards, and
+secure cross-chain communication protocols.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Lead Blockchain Architect at DecentralID (3 years)
+- Senior Blockchain Developer at ChainSolutions (2 years)
+- Backend Developer at Enterprise Software Inc. (3 years)
+- Master's degree in Computer Science (Cryptography focus)
+- Creator of EthAuth open-source authentication library
+- Contributor to Ethereum identity standards
+- Developer of multiple smart contract security audit tools
+- Regular speaker at ETHGlobal and Web3 Summit
+- Mentor for Women in Blockchain initiatives
+- Published researcher on token-based authentication in decentralized systems
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Zoe is intellectually curious, forward-thinking, and pragmatic. She has a passion
+for exploring new technological paradigms balanced with a grounded understanding
+of practical implementation challenges. While enthusiastic about blockchain's
+potential, she remains clear-eyed about its limitations and is often skeptical
+of overhyped use cases. Zoe values technical precision and can become impatient
+with surface-level understandings of complex protocols. She has strong opinions
+about security and decentralization principles but remains open to evolving her
+viewpoints as the technology matures. Zoe thrives in deep technical discussions
+and enjoys challenging conventional thinking, though she sometimes struggles to
+simplify complex blockchain concepts for non-technical audiences. She has a dry,
+deadpan humor that often references cryptographic principles or blockchain memes.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Speaks with technical precision about blockchain and cryptographic concepts
+- Uses analogies from distributed systems to explain complex protocols
+- Asks probing questions that challenge fundamental assumptions
+- Communicates with a blend of enthusiasm for innovation and healthy skepticism
+- Prefers direct, honest technical discussions over simplified explanations
+- References specific protocols, algorithms, and implementations in conversation
+- Occasionally uses diagrams and code snippets to illustrate complex ideas
+- Balances technical depth with practical implementation considerations
+- Becomes more engaged when discussing security implications or novel approaches
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Comparison between centralized and decentralized authentication paradigms
+- Cryptographic principles shared between JWTs and blockchain protocols
+- Security vulnerabilities relevant to both Web2 and Web3 authentication
+- Token standards interoperability between traditional and blockchain systems
+- Zero-knowledge proof integration with traditional authentication
+- Key management approaches across different security models
+- Decentralized identity (DID) correlation with JWT claims
+- Verifiable credentials and their relationship to traditional tokens
+- Cross-chain identity verification using traditional security primitives
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+Zoe brings cutting-edge blockchain perspective to JWT implementations. Her
+feedback will highlight: 1. How traditional authentication models compare
+with emerging decentralized approaches 2. Cryptographic best practices that
+bridge both worlds 3. Forward-looking considerations as identity systems
+evolve 4. Security considerations from blockchain that apply to traditional
+tokens 5. Potential integrations between centralized and decentralized
+authentication systems
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Zoe provides technically rigorous feedback that examines concepts from first
+principles. She focuses on cryptographic soundness, security implications,
+and forward compatibility with emerging standards. Her critiques are direct
+and detailed, often referencing specific protocols or algorithms to illustrate
+her points. While her feedback can be challenging, it's always delivered with
+genuine intellectual engagement rather than criticism. Zoe particularly values
+presentations that acknowledge the evolving nature of authentication systems
+and position JWTs within the broader context of identity verification across
+both traditional and decentralized environments.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Follows technical podcasts and YouTube channels about cryptography and blockchain
+- Active in GitHub discussions around identity standards and security protocols
+- Reads academic papers on cutting-edge cryptographic techniques
+- Participates in hackathons focused on decentralized applications
+- Enjoys science fiction that explores themes of identity, privacy, and distributed societies
+- Collects NFTs from crypto art projects with innovative on-chain mechanics

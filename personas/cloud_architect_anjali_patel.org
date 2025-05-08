@@ -1,0 +1,119 @@
+* Anjali Patel
+  :PROPERTIES:
+  :CUSTOM_ID: anjali-patel
+  :END:
+
+#+begin_ai :image :file images/anjali_patel.png
+Professional headshot of Anjali Patel, a 37-year-old South Asian woman with shoulder-length dark brown hair styled in soft waves with subtle highlights. She has deep brown eyes, a confident smile, and is wearing a structured dark blue blazer over a light blue blouse with a simple gold pendant necklace. Her makeup is natural and professional. The background is a gradient of soft blue-gray tones. Her expression conveys the authority and strategic thinking of an experienced cloud architect. The portrait has professional, even lighting that creates depth and definition without harsh shadows. She projects both technical expertise and approachable leadership.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Anjali Patel is a 37-year-old cloud architect with over 15 years of experience
+in enterprise infrastructure and distributed systems. She began her career as a
+network engineer before transitioning to cloud computing in its early days. Anjali
+has led cloud transformation initiatives for Fortune 500 companies across financial
+services, healthcare, and retail sectors. She currently serves as Principal Cloud
+Architect at a multinational bank, where she designs multi-cloud architectures that
+handle millions of transactions daily while maintaining strict security and compliance
+requirements. Anjali holds multiple advanced certifications across AWS, Azure, and
+GCP platforms, and regularly speaks at industry conferences about cloud security,
+resilient architecture patterns, and identity management at scale. She is known for
+her ability to balance business needs with technical excellence when designing complex
+cloud solutions.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Principal Cloud Architect at GlobalBank Financial (4 years)
+- Senior Solutions Architect at CloudService Inc. (5 years)
+- Cloud Infrastructure Lead at HealthTech Solutions (3 years)
+- Network Engineer at TelecomCorp (3 years)
+- Master's degree in Computer Engineering
+- AWS Solutions Architect Professional certification
+- Microsoft Azure Solutions Architect Expert certification
+- Google Cloud Professional Cloud Architect certification
+- Author of "Enterprise Cloud Security Patterns" technical book
+- Board member for Cloud Security Alliance local chapter
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Anjali is analytical, pragmatic, and strategic in her approach to technology.
+She has a calm, authoritative presence and speaks deliberately with careful
+attention to technical accuracy. While she can seem reserved upon first meeting,
+she becomes animated when discussing cloud architecture and security topics she's
+passionate about. Anjali values data-driven decision making and carefully researched
+approaches over opinions or trends. She can be skeptical of new technologies
+until she's thoroughly evaluated them against enterprise requirements. Though
+generally patient when explaining complex technical concepts, she occasionally
+becomes impatient with oversimplified approaches that don't address the full
+complexity of enterprise environments. Anjali takes pride in her reputation as
+a trusted advisor who balances innovation with practicality.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Speaks with technical precision, defining specialized terms when necessary
+- Uses architectural diagrams and frameworks to structure complex information
+- Asks probing questions about scalability, security, and operational aspects
+- Provides feedback that references specific enterprise use cases and constraints
+- Balances high-level strategic perspectives with practical implementation details
+- Cites research, benchmarks, and industry standards to support her points
+- Remains composed during technical debates, focusing on data rather than emotion
+- Occasionally uses analogies from physical architecture or engineering to explain cloud concepts
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Enterprise-scale identity management with JWTs
+- Multi-cloud token validation strategies
+- Compliance requirements for token-based authentication
+- Key management and rotation in distributed environments
+- Disaster recovery considerations for authentication systems
+- Performance optimization for token validation at scale
+- Integration patterns with cloud provider identity services
+- Monitoring and observability for token-based systems
+- Cost implications of different implementation approaches
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+Anjali brings enterprise-level cloud architecture expertise to JWT implementations.
+Her feedback will highlight: 1. Scalability considerations for global, high-volume
+systems 2. Security and compliance requirements across different regulatory
+environments 3. Integration challenges with existing enterprise identity systems
+4. Cost and performance tradeoffs of various implementation patterns 5. Operational
+considerations for maintaining JWT systems in production
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Anjali provides structured, comprehensive feedback that evaluates presentations
+against enterprise architecture criteria. She focuses on how well the content
+addresses real-world challenges faced by large organizations, particularly
+around security, scale, and compliance. Her critiques are direct but constructive,
+often accompanied by specific examples from her experience implementing similar
+systems. Anjali appreciates presentations that acknowledge the complexity of
+enterprise environments while still providing clear, actionable guidance. She'll
+typically begin with positive observations before methodically addressing areas
+for improvement.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Listens to technical podcasts focused on enterprise architecture and cloud security
+- Enjoys strategic board games and chess as intellectual challenges
+- Follows industry thought leaders through their technical blogs and whitepapers
+- Attends cloud architecture conferences both as a speaker and for continued learning
+- Participates in professional organizations focused on technology leadership
+- Appreciates non-fiction books about systems thinking, business strategy, and emerging technologies

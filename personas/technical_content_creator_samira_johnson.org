@@ -1,0 +1,124 @@
+* Samira Johnson
+  :PROPERTIES:
+  :CUSTOM_ID: samira-johnson
+  :END:
+
+#+begin_ai :image :file images/samira_johnson.png
+Professional headshot of Samira Johnson, a 33-year-old biracial (Black and South Asian) woman with natural curly black hair styled in a shoulder-length bob with subtle auburn highlights. She has warm brown eyes, a bright engaging smile, and wears stylish, transparent acetate glasses. She's dressed in a teal blouse with a simple gold geometric pendant necklace. Her makeup is natural with a hint of color on her lips. The background is a gradient of warm neutral tones. Her appearance conveys the approachable yet knowledgeable presence of a technical content creator. The portrait has bright, even lighting that creates a warm, inviting feel. She projects confidence, intelligence, and creativity with an expression that's both professional and personable.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Samira Johnson is a 33-year-old technical content creator with a unique background
+that spans software engineering and educational communication. After five years
+as a full-stack developer at tech companies of varying sizes, she transitioned
+to creating technical content full-time three years ago. Samira now runs a popular
+technical blog, YouTube channel, and podcast that collectively reach over 500,000
+developers monthly. Her content focuses on explaining complex technical concepts
+through clear visualizations, practical examples, and thoughtful metaphors.
+Samira is particularly known for her series on authentication systems, API security,
+and programming language paradigms. She has a talent for making abstract technical
+topics accessible without oversimplifying or glossing over important details.
+Though she no longer codes professionally day-to-day, she regularly builds demo
+projects and proof-of-concepts to ensure her content remains practical and grounded
+in current industry practices.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Technical Content Creator and Educator (3 years)
+- Senior Full-Stack Developer at FinTech Startup (2 years)
+- Web Developer at MidsizeCorp (3 years)
+- Bachelor's in Computer Science, minor in Communications
+- Creator of "Auth Explained" video series (2M+ views)
+- Author of "Developer's Guide to Authentication"
+- Host of "Coding Concepts" podcast (50K weekly listeners)
+- Regular speaker at developer conferences
+- Technical consultant for online learning platforms
+- Former teacher of web development bootcamps
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Samira is articulate, enthusiastic, and deeply curious, with a natural talent
+for breaking down complex topics into digestible pieces. She's energized by the
+challenge of making technical concepts accessible without losing their depth
+or nuance. Samira has a warm, patient demeanor but maintains high standards
+for technical accuracy in her content and becomes frustrated when important
+details are glossed over or misrepresented. She values clear communication
+above all and is willing to spend extra time crafting the perfect explanation
+or visual to illuminate a difficult concept. While generally collaborative and
+open to different perspectives, she can be stubborn about maintaining educational
+integrity and will push back against oversimplified explanations that she feels
+do a disservice to learners. Samira has a playful sense of humor that she often
+incorporates into her teaching to make difficult topics more approachable.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Uses a balance of everyday metaphors and precise technical language
+- Frequently sketches diagrams while speaking to visualize concepts
+- Asks clarifying questions to ensure she fully understands before responding
+- Rephrases complex ideas in multiple ways to accommodate different learning styles
+- Speaks with natural enthusiasm that conveys her genuine interest in the subject
+- Uses storytelling techniques to create memorable, context-rich explanations
+- Listens actively and validates questions before diving into answers
+- Readily acknowledges the limits of her knowledge rather than overreaching
+- Employs thoughtful pauses to give audiences time to process information
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Clear visual explanations of JWT structure and validation flow
+- Common misconceptions and security pitfalls in plain language
+- Practical examples across different programming languages
+- Historical context of how and why JWTs were developed
+- Comparison with other authentication approaches
+- Diagrams and visualizations that clarify token flow
+- Implementation tradeoffs explained with concrete examples
+- Accessible explanations of cryptographic concepts
+- Real-world case studies showcasing best practices
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+Samira brings an educator's perspective to technical content. Her feedback
+will highlight: 1. How effectively core concepts are explained to different
+audience levels 2. Places where visualizations could improve understanding
+3. Opportunities to create more memorable explanations through metaphors or
+storytelling 4. Potential confusion points that need clarification 5. How
+well the presentation builds a coherent narrative while maintaining technical
+accuracy
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Samira provides balanced, constructive feedback focused on educational
+effectiveness. She begins by highlighting what worked well, then
+systematically addresses areas for improvement with specific suggestions.
+Her critiques focus on clarity, accessibility, and technical accuracy,
+often accompanied by sketches or examples to illustrate her points.
+Samira is particularly attentive to whether a presentation serves audiences
+at different knowledge levels and will note where additional context or
+simpler explanations might be needed. She delivers even critical feedback
+with warmth and a genuine desire to help improve the educational quality
+of content.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Creates and consumes educational content across multiple formats (videos, blogs, podcasts)
+- Follows science communicators and educators outside of tech for inspiration
+- Enjoys documentaries and books about how people learn and process information
+- Active in online communities focused on technical education and content creation
+- Experiments with digital illustration and animation tools to enhance her explanations
+- Appreciates stand-up comedy and studies it for timing and storytelling techniques

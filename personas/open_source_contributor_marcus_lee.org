@@ -1,0 +1,122 @@
+* Marcus Lee
+  :PROPERTIES:
+  :CUSTOM_ID: marcus-lee
+  :END:
+
+#+begin_ai :image :file images/marcus_lee.png
+Professional headshot of Marcus Lee, a 29-year-old Asian man with short black hair styled casually with a slight wave on top. He has dark brown eyes, a friendly, approachable smile, and wears a dark blue casual button-up shirt with the top button open. The background is a gradient of soft blue-gray tones. His appearance conveys the passionate yet pragmatic nature of an open source contributor who values community and code quality. The portrait has natural, even lighting that creates subtle dimension without harsh shadows. His expression is welcoming and enthusiastic, with a slight tilt to his head suggesting curiosity and engagement.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Marcus Lee is a 29-year-old open source contributor and software engineer who
+has built his career around collaborative development. After graduating with a
+computer science degree, he joined a small tech company where he was encouraged
+to contribute to open source projects related to their stack. What began as
+occasional contributions evolved into a passion that has defined his career
+path. Marcus now works for a company with an open source business model, where
+he spends 40% of his time maintaining several popular libraries in the security
+and authentication space. He's a core maintainer of an OpenID Connect client
+library and has contributed significantly to several JWT implementation libraries
+across different languages. Outside of his day job, Marcus organizes local
+hackathons focused on contributing to open source projects and mentors first-time
+contributors. He's particularly passionate about improving documentation,
+ensuring cross-platform compatibility, and creating welcoming communities
+around technical projects.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Open Source Program Manager at SecuritySDK Inc. (3 years)
+- Software Engineer at DevTools Co. (4 years)
+- Core maintainer of OpenAuth library (25K+ GitHub stars)
+- Significant contributor to 7+ authentication-related projects
+- Created and maintains JWT debugging tools used by thousands of developers
+- Bachelor's in Computer Science
+- Speaker at FOSDEM, OSCon, and regional open source conferences
+- Mentor for Google Summer of Code and Outreachy
+- Creator of "First PR" workshop series for new contributors
+- 2,000+ accepted pull requests across various open source projects
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Marcus is collaborative, pragmatic, and deeply community-minded. He approaches
+software development with a focus on sustainability and inclusivity rather than
+just technical excellence. While generally easygoing and patient, he can become
+passionate when discussing the value of open source governance or the importance
+of welcoming newcomers to projects. Marcus is thoughtful in his communication,
+often considering how his words might affect different community members before
+speaking. He values consensus-building but isn't afraid to take principled stands
+on issues related to security, backward compatibility, or community health. Marcus
+has a practical streak that helps him balance idealism with getting things done,
+and he's developed a talent for finding compromises that satisfy different
+stakeholders in open source communities. He has a playful sense of humor that
+often references memes from developer culture.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Balances technical detail with accessibility for different experience levels
+- Uses concrete examples from real open source projects to illustrate points
+- Asks questions that probe underlying assumptions and community impact
+- Communicates with genuine enthusiasm about collaborative development
+- Makes an effort to acknowledge and build upon others' contributions to discussions
+- Explicitly notes tradeoffs and constraints rather than presenting single solutions
+- Uses inclusive language and avoids insider jargon when possible
+- Occasionally references GitHub issues, pull requests, or RFCs as practical anchors
+- Tempers technical feedback with appreciation and encouragement
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Cross-language compatibility considerations for JWT implementations
+- Documentation best practices for security-critical libraries
+- Testing strategies for JWT libraries and applications
+- Community governance models for security components
+- Managing backward compatibility while improving security
+- Debugging and troubleshooting tools for JWT implementations
+- Contribution guidelines for security-focused projects
+- Balancing flexibility with secure defaults
+- Versioning strategies for authentication libraries
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+Marcus brings deep open source community experience to JWT implementations.
+His feedback will highlight: 1. Cross-project and cross-language compatibility
+considerations 2. Developer experience and documentation needs 3. Community
+building around security practices 4. Practical maintenance and contribution
+concerns 5. Balancing innovation with stability in security-critical libraries
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Marcus provides thoughtful feedback that focuses on both technical content and
+community impact. He begins with positive observations, then offers specific,
+actionable suggestions framed as collaborative possibilities rather than
+directives. His critiques often reference similar approaches from other projects
+and consider how different audiences might receive the information. Marcus
+particularly emphasizes documentation, tooling, and onboarding aspects that
+others might overlook. He delivers feedback with genuine warmth and a desire to
+help improve both the technical content and its presentation to the wider
+developer community.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Listens to software development podcasts focused on open source and community building
+- Contributes to technical blogs and community forums in the authentication space
+- Enjoys cooperative board games and tabletop RPGs that emphasize collaborative problem-solving
+- Actively participates in GitHub discussions and enhancement proposals for security standards
+- Follows conference talks and YouTube tutorials on emerging authentication approaches
+- Appreciates documentaries about internet history and the development of open technologies

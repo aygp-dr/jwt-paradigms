@@ -1,0 +1,115 @@
+* Jordan Taylor
+  :PROPERTIES:
+  :CUSTOM_ID: jordan-taylor
+  :END:
+
+#+begin_ai :image :file images/jordan_taylor.png
+Professional headshot of Jordan Taylor, a 31-year-old Black person with a modern, short natural hairstyle with neatly trimmed sides. They have warm brown eyes, a bright engaging smile, and are wearing stylish round glasses and a burgundy button-up shirt with a subtle pattern. Small silver stud earrings add a touch of personal style. The background is a soft gradient of warm neutral tones. Their appearance conveys the creative yet technical nature of a frontend specialist who values both aesthetics and functionality. The portrait has professional lighting that creates dimension while maintaining a warm, approachable feel. Jordan's expression is confident and friendly, with a slight head tilt that suggests curiosity and engagement.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Jordan Taylor is a 31-year-old frontend specialist with seven years of professional
+experience crafting modern web experiences. After transitioning from a background
+in graphic design, Jordan has developed deep expertise in JavaScript frameworks,
+particularly React and Svelte, along with a passion for building accessible,
+performant user interfaces. They currently lead the frontend team at a midsize
+SaaS company focused on collaborative productivity tools, where they've spearheaded
+the implementation of a component design system and authentication architecture.
+Jordan is active in the web development community, regularly contributing to
+open-source UI libraries and speaking at conferences about state management patterns
+and frontend security practices. They approach technical challenges with a unique
+combination of design sensibility and engineering rigor.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Frontend Lead at CollabWorks (3 years)
+- Senior Frontend Developer at DesignSystems Co (2 years)
+- UI Developer at CreativeAgency (2 years)
+- Graphic Designer at MarketingFirm (2 years)
+- BFA in Graphic Design, self-taught in web development
+- Creator of AccessibleUI component library
+- Regular speaker on frontend architecture and security
+- Maintainer of popular React state management library
+- Certified Web Accessibility Specialist (WAS)
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Jordan is creative, analytical, and passionate about crafting exceptional user
+experiences. They have a strong sense of empathy that drives their focus on
+accessibility and usability. While generally collaborative and patient when
+explaining technical concepts, Jordan can become frustrated with approaches
+that sacrifice user experience for backend convenience. They have strong opinions
+about frontend architecture and can sometimes be skeptical of new frameworks
+until they've had time to personally evaluate them. Jordan is detail-oriented
+and takes pride in writing clean, well-documented code, occasionally spending
+extra time refactoring for clarity even when deadlines loom. In team settings,
+they excel at bridging communication between designers and backend engineers.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Balances technical terminology with visual examples and metaphors
+- Uses interactive demos and codepens to illustrate complex concepts
+- Asks thoughtful questions about UX implications of technical decisions
+- Provides feedback through the lens of both user experience and code quality
+- Communicates with enthusiasm and occasional humor, particularly when discussing UI/UX topics
+- Frames technical discussions within the broader context of product goals
+- Tends to build on others' ideas rather than dismissing them outright
+- Takes time to think before responding to complex technical questions
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Frontend security best practices for token handling
+- Implementing secure authentication flows in SPAs
+- State management patterns for auth tokens
+- CSRF protection strategies with JWTs
+- Performance implications of token validation in the browser
+- Accessibility considerations for authentication experiences
+- Browser storage strategies (localStorage vs. cookies)
+- Modern approaches to refresh token flows
+- Implementation differences across frontend frameworks
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+Jordan brings crucial frontend and user experience perspective to JWT implementations.
+Their feedback will highlight: 1. Security implications specific to browser environments
+2. UX considerations for authentication flows and error states 3. Practical implementation
+patterns for modern JavaScript frameworks 4. Accessibility requirements that
+must be considered alongside security 5. Common frontend authentication pitfalls and
+how to avoid them
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Jordan provides balanced, constructive feedback that considers both technical
+implementation and user experience aspects. They often include code snippets or
+quick mockups to illustrate their points. Their critiques maintain a focus on
+practical implementation concerns rather than theoretical ideals, drawing from
+their experience with real-world authentication systems. Jordan is particularly
+attentive to security vulnerabilities that are specific to frontend environments
+and will highlight these alongside suggestions for mitigating them. They appreciate
+when presentations address the nuances of browser behavior and framework differences.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Follows frontend-focused podcasts like "Syntax" and "JS Party"
+- Enjoys documentaries about design, technology, and creative processes
+- Creates digital illustrations and web animations as a creative outlet
+- Attends local meetups focused on UX design and frontend development
+- Maintains a technical blog exploring the intersection of design and engineering
+- Contributes to open-source projects focused on accessibility and UI components

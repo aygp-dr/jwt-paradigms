@@ -12,6 +12,18 @@ approaches.
    :END:
 These reviewers provide ongoing feedback during the active development and implementation phases.
 
+*** Mia Chen (Mobile Developer)
+    :PROPERTIES:
+    :CUSTOM_ID: mia-chen-mobile-developer
+    :END:
+- *File:* [[file:mobile_developer_mia_chen.org]]
+- *Role:* Senior iOS developer specializing in secure mobile experiences
+- *Focus:* Mobile-specific security considerations, cross-platform implementations, user experience
+- *Review Command:* =/review-presentation-mia=
+
+#+caption: Mia Chen
+[[file:images/mia_chen.png]]
+
 *** Jason Wilson (Staff Engineer)
     :PROPERTIES:
     :CUSTOM_ID: jason-wilson-staff-engineer
@@ -36,6 +48,18 @@ These reviewers provide ongoing feedback during the active development and imple
 
 #+caption: Hannah Chen
 [[file:images/hannah_chen.png]]
+
+*** Marcus Lee (Open Source Contributor)
+    :PROPERTIES:
+    :CUSTOM_ID: marcus-lee-open-source-contributor
+    :END:
+- *File:* [[file:open_source_contributor_marcus_lee.org]]
+- *Role:* Open source maintainer specializing in security libraries
+- *Focus:* Community building, cross-language compatibility, developer experience
+- *Review Command:* =/review-presentation-marcus=
+
+#+caption: Marcus Lee
+[[file:images/marcus_lee.png]]
 
 *** Raj Patel (Polyglot Developer)
     :PROPERTIES:
@@ -69,6 +93,18 @@ These reviewers provide ongoing feedback during the active development and imple
    :END:
 These reviewers provide comprehensive feedback at key project milestones and integration points.
 
+*** Alex Rodriguez (DevOps Engineer)
+    :PROPERTIES:
+    :CUSTOM_ID: alex-rodriguez-devops-engineer
+    :END:
+- *File:* [[file:devops_engineer_alex_rodriguez.org]]
+- *Role:* Senior DevOps engineer with extensive infrastructure automation experience
+- *Focus:* Operational excellence, security at scale, production readiness 
+- *Review Command:* =/review-presentation-alex=
+
+#+caption: Alex Rodriguez
+[[file:images/alex_rodriguez.png]]
+
 *** Dr. Vikram Shah (Systems Security Researcher)
     :PROPERTIES:
     :CUSTOM_ID: dr.-vikram-shah-systems-security-researcher
@@ -82,6 +118,18 @@ These reviewers provide comprehensive feedback at key project milestones and int
 
 #+caption: Dr. Vikram Shah
 [[file:images/vikram_shah.png]]
+
+*** Anjali Patel (Cloud Architect)
+    :PROPERTIES:
+    :CUSTOM_ID: anjali-patel-cloud-architect
+    :END:
+- *File:* [[file:cloud_architect_anjali_patel.org]]
+- *Role:* Principal cloud architect with multi-cloud enterprise expertise
+- *Focus:* Scalability, security, enterprise integration, multi-cloud architectures
+- *Review Command:* =/review-presentation-anjali=
+
+#+caption: Anjali Patel
+[[file:images/anjali_patel.png]]
 
 *** Dr. Neha Kapoor (Performance Engineer)
     :PROPERTIES:
@@ -109,6 +157,18 @@ These reviewers provide comprehensive feedback at key project milestones and int
 #+caption: Lambda Hopper
 [[file:images/lambda_hopper.png]]
 
+*** David Park (AI/ML Engineer)
+    :PROPERTIES:
+    :CUSTOM_ID: david-park-ai-ml-engineer
+    :END:
+- *File:* [[file:ai_ml_engineer_david_park.org]]
+- *Role:* Lead ML engineer specializing in secure, production ML systems
+- *Focus:* ML system security, ethical considerations, mathematical foundations
+- *Review Command:* =/review-presentation-david=
+
+#+caption: David Park
+[[file:images/david_park.png]]
+
 *** Alex "Zero" Chen (Paradigm Purist)
     :PROPERTIES:
     :CUSTOM_ID: alex-zero-chen-paradigm-purist
@@ -128,6 +188,30 @@ These reviewers provide comprehensive feedback at key project milestones and int
    :CUSTOM_ID: pre-presentation-reviewers
    :END:
 These reviewers provide final feedback before the presentation is delivered to ensure it meets accessibility, usability, and educational goals.
+
+*** Samira Johnson (Technical Content Creator)
+    :PROPERTIES:
+    :CUSTOM_ID: samira-johnson-technical-content-creator
+    :END:
+- *File:* [[file:technical_content_creator_samira_johnson.org]]
+- *Role:* Technical educator and content creator with engineering background
+- *Focus:* Educational clarity, visual explanations, accessible yet accurate content
+- *Review Command:* =/review-presentation-samira=
+
+#+caption: Samira Johnson
+[[file:images/samira_johnson.png]]
+
+*** Emily Patel (Junior Software Developer)
+    :PROPERTIES:
+    :CUSTOM_ID: emily-patel-junior-software-developer
+    :END:
+- *File:* [[file:junior_software_developer_emily_patel.org]]
+- *Role:* Junior developer at a fintech startup
+- *Focus:* Implementation clarity, practical applications, security foundations
+- *Review Command:* =/review-presentation-emily=
+
+#+caption: Emily Patel
+[[file:images/emily_patel.png]]
 
 *** Sofia Martinez (Beginner-Friendly Developer)
     :PROPERTIES:
@@ -153,6 +237,18 @@ These reviewers provide final feedback before the presentation is delivered to e
 
 #+caption: Marco Hernandez
 [[file:images/marco_hernandez.png]]
+
+*** Jordan Taylor (Frontend Specialist)
+    :PROPERTIES:
+    :CUSTOM_ID: jordan-taylor-frontend-specialist
+    :END:
+- *File:* [[file:frontend_specialist_jordan_taylor.org]]
+- *Role:* Frontend lead with expertise in modern JavaScript frameworks
+- *Focus:* Browser security, authentication UX, frontend implementation patterns
+- *Review Command:* =/review-presentation-jordan=
+
+#+caption: Jordan Taylor
+[[file:images/jordan_taylor.png]]
 
 *** Olivia Rodriguez (UX Researcher)
     :PROPERTIES:
@@ -199,6 +295,18 @@ These reviewers provide reflective analysis after the presentation has been deli
 
 #+caption: Professor Wellington
 [[file:images/spark_wellington.png]]
+
+*** Zoe Kim (Blockchain Developer)
+    :PROPERTIES:
+    :CUSTOM_ID: zoe-kim-blockchain-developer
+    :END:
+- *File:* [[file:blockchain_developer_zoe_kim.org]]
+- *Role:* Blockchain architect specializing in decentralized identity
+- *Focus:* Web3 authentication, decentralized identity, cross-chain verification
+- *Review Command:* =/review-presentation-zoe=
+
+#+caption: Zoe Kim
+[[file:images/zoe_kim.png]]
 
 *** Dr. Amara Chen (AI Ethics Researcher)
     :PROPERTIES:
@@ -314,6 +422,18 @@ These reviewers provide reflective analysis after the presentation has been deli
 
 #+caption: Sarah Johnson
 [[file:images/sarah_johnson.png]]
+
+*** Gabriel Santos (Technical Recruiter)
+    :PROPERTIES:
+    :CUSTOM_ID: gabriel-santos-technical-recruiter
+    :END:
+- *File:* [[file:technical_recruiter_gabriel_santos.org]]
+- *Role:* Senior technical recruiter with developer background
+- *Focus:* Career development, skill assessment, talent acquisition perspective
+- *Review Command:* =/review-presentation-gabriel=
+
+#+caption: Gabriel Santos
+[[file:images/gabriel_santos.png]]
 
 *** Jennifer Williams (VP of Sales)
     :PROPERTIES:

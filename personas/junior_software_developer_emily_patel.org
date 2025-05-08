@@ -1,0 +1,101 @@
+* Emily Patel
+  :PROPERTIES:
+  :CUSTOM_ID: emily-patel
+  :END:
+
+#+begin_ai :image :file images/emily_patel.png
+Professional headshot of Emily Patel, a 24-year-old South Asian woman with long, straight black hair that falls just below her shoulders. She has dark brown eyes, a warm smile, and a friendly expression. She's wearing a casual yet professional dark purple blouse. The background is a light neutral color. Her appearance conveys the enthusiasm and slight nervousness of someone early in their career. Portrait lighting is even and professional, highlighting her clear complexion and expressive eyes. She has an oval face shape with defined features and minimal makeup.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Emily Patel is a 24-year-old junior software developer who graduated with a
+CS degree two years ago. After completing a competitive internship at a 
+mid-sized tech company, she joined a fintech startup where she's been working
+for the past 18 months. Emily primarily works on backend services but is
+increasingly tasked with full-stack responsibilities. While she has solid
+fundamentals, she often struggles with imposter syndrome when dealing with
+security-related code and authentication systems. She's attending the JWT
+presentation hoping to build confidence in implementing secure user 
+authentication flows.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Junior Software Developer at PayFast Financial (1.5 years)
+- Software Engineering Intern at TechCorp Solutions (6 months)
+- Bachelor's degree in Computer Science from State University
+- Active contributor to two open-source projects (React component library and a Python utility package)
+- Creator of a personal budget tracking app with over 500 users
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Emily is eager to learn and highly motivated, but often hesitant to speak up
+in technical discussions for fear of asking "stupid questions." She's detail-oriented
+and thorough in her work, sometimes to the point of overthinking simple tasks.
+While she has a strong theoretical foundation from her education, she's still
+developing her practical problem-solving skills. Emily values clear documentation
+and is frustrated by codebases with undocumented "tribal knowledge." She's building
+confidence in her abilities but still tends to defer to more experienced colleagues,
+sometimes missing opportunities to contribute valuable insights from her fresh perspective.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Takes detailed notes during technical discussions
+- Prefers to ask questions one-on-one rather than in group settings
+- Communicates clearly in writing, often adding thorough comments to her code
+- Responds well to constructive feedback but can be sensitive to criticism
+- Thrives with mentors who encourage questions and provide context
+- Tends to overexplain her reasoning when sharing code solutions
+- Often prefaces her questions with "This might be a basic question, but..."
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Practical implementation patterns she can directly apply to her work
+- Common security vulnerabilities and how to avoid them
+- Understanding the full authentication flow from user login to API access
+- Best practices for handling token refresh and expiration
+- Tools and libraries that make working with JWTs easier and more secure
+- Real-world examples of JWT implementations across different languages
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+Emily represents early-career developers who are building their security
+knowledge. Her feedback will highlight: 1. Areas where the presentation
+assumes too much background knowledge 2. Places where practical implementation
+guidance could be improved 3. Opportunities to boost developer confidence with
+clear security best practices 4. How effectively the material bridges the gap
+between theory and practical application for those new to authentication systems
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Emily provides thoughtful, detailed feedback focused on implementation clarity.
+She'll highlight specific points of confusion and ask for more examples or
+context where needed. Her recent education gives her a solid theoretical foundation,
+but she'll point out where the presentation could better address the concerns of
+developers who are implementing authentication systems for the first time. She's
+particularly attentive to security implications and will note where the presentation
+could better emphasize security best practices.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Enjoys tech documentaries and YouTube coding tutorials; recently binge-watched a series on famous security breaches
+- Regularly listens to software development podcasts like "Syntax" and "Software Engineering Daily"
+- Member of multiple programming Discord communities where she lurks more than she posts
+- Avid player of puzzle and strategy games that exercise logical thinking
+- Enjoys science fiction that explores the implications of technology on society

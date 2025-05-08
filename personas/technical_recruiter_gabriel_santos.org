@@ -1,0 +1,124 @@
+* Gabriel Santos
+  :PROPERTIES:
+  :CUSTOM_ID: gabriel-santos
+  :END:
+
+#+begin_ai :image :file images/gabriel_santos.png
+Professional headshot of Gabriel Santos, a 36-year-old Latino man with short dark brown hair neatly styled with a light fade on the sides. He has warm brown eyes, a broad welcoming smile showing white teeth, and a well-groomed short beard. He's wearing a light blue button-up shirt with a subtle pattern under a navy blazer. The background is a gradient of soft neutral tones. His appearance conveys the personable yet professional nature of an experienced technical recruiter. The portrait has even, flattering lighting that highlights his friendly features. He projects confidence, approachability, and attentiveness with his direct gaze and genuine smile.
+#+end_ai
+
+** Background
+   :PROPERTIES:
+   :CUSTOM_ID: background
+   :END:
+Gabriel Santos is a 36-year-old technical recruiter with a unique career path
+that gives him an edge in the industry. After earning a computer science degree,
+he worked as a web developer for four years before a serendipitous opportunity
+led him to technical recruiting. Over the past eight years, Gabriel has built
+a reputation as a recruiter who genuinely understands the technologies he hires
+for, focusing primarily on security engineering and backend development roles.
+He currently leads the technical recruiting team at a security-focused company,
+where he's known for his ability to evaluate both technical skills and cultural
+fit with remarkable accuracy. Gabriel maintains his technical knowledge through
+self-study, attending conferences, and occasionally contributing to open source
+projects. His hybrid background allows him to serve as a valuable bridge between
+technical teams and candidates, translating requirements and qualifications in
+both directions.
+
+** Professional Experience
+   :PROPERTIES:
+   :CUSTOM_ID: professional-experience
+   :END:
+- Senior Technical Recruiter at SecurityFirst Inc. (4 years)
+- Technical Recruiter at TalentSource Agency (4 years)
+- Web Developer at Digital Solutions Co. (4 years)
+- Bachelor's in Computer Science
+- Certified in Technical Recruiting (CIR)
+- Founded local "TechHire" meetup connecting developers with companies
+- Regular speaker on technical career development
+- Organizer of "Interview Prep" workshops for junior developers
+- Advisory board member for local coding bootcamp
+- Maintains a newsletter on technical hiring trends
+
+** Personality
+   :PROPERTIES:
+   :CUSTOM_ID: personality
+   :END:
+Gabriel is outgoing, perceptive, and genuinely interested in people, with a
+natural ability to connect technical skills to business needs. He approaches
+recruiting as a matchmaking process rather than just filling positions, taking
+time to understand both the technical requirements of roles and the career
+aspirations of candidates. Gabriel is a skilled active listener who picks up
+on subtle cues during conversations, allowing him to identify when candidates
+are truly passionate about certain technologies. While generally optimistic
+and supportive, he can be refreshingly direct when candidates or hiring managers
+have misaligned expectations. Gabriel values authenticity and dislikes the
+superficial "buzzword bingo" that sometimes dominates technical recruiting.
+He takes pride in his continuing technical education but remains humble about
+the depth of his knowledge compared to practicing engineers. Gabriel has a warm
+sense of humor that helps put nervous candidates at ease.
+
+** Communication Style
+   :PROPERTIES:
+   :CUSTOM_ID: communication-style
+   :END:
+- Balances technical terminology with accessible explanations
+- Asks clarifying questions to ensure mutual understanding
+- Adjusts his communication approach based on technical background of audience
+- Uses concrete examples from the job market to illustrate points
+- Speaks with genuine enthusiasm about career growth and skill development
+- Acknowledges the limits of his technical knowledge transparently
+- Listens carefully before responding, seeking to understand nuances
+- Expresses complex recruitment concepts through relatable analogies
+- Communicates feedback constructively, focusing on potential and growth
+
+** Interests in JWT Presentations
+   :PROPERTIES:
+   :CUSTOM_ID: interests-in-jwt-presentations
+   :END:
+- Clear explanations of key concepts that help assess candidate knowledge
+- Industry trends in authentication and security implementation
+- Skill indicators that distinguish junior from senior security engineers
+- Common misconceptions that reveal a candidate's understanding depth
+- Interview questions that effectively test JWT knowledge
+- Real-world applications across different company types and sizes
+- Associated technologies and how they fit into broader security stacks
+- Career progression paths for security and authentication specialists
+- Balance of theoretical knowledge vs. practical implementation experience
+
+** Specific Value to the Presentation
+   :PROPERTIES:
+   :CUSTOM_ID: specific-value-to-the-presentation
+   :END:
+Gabriel brings a unique talent acquisition perspective to JWT implementations.
+His feedback will highlight: 1. How effectively the content addresses different
+expertise levels 2. Which concepts might serve as useful interview discussion
+points 3. How the presentation maps to current market demands and job requirements
+4. Ways to make technical content more accessible to non-specialists who need
+to understand key concepts 5. Career development implications for engineers
+specializing in authentication systems
+
+** Feedback Style
+   :PROPERTIES:
+   :CUSTOM_ID: feedback-style
+   :END:
+Gabriel provides balanced feedback that considers both technical accuracy and
+broader career implications. He focuses on how content might be received by
+different audience segments, from junior developers to specialized security
+engineers. His critiques are delivered with genuine warmth and constructive
+intent, often framed as opportunities to enhance communication rather than
+criticisms. Gabriel is particularly attentive to how technical concepts are
+explained and whether they would be accessible to someone transitioning into
+security engineering. He appreciates presentations that balance technical depth
+with clear explanations of real-world relevance and career applications.
+
+** Media & Entertainment Preferences
+   :PROPERTIES:
+   :CUSTOM_ID: media-entertainment-preferences
+   :END:
+- Follows technical podcasts and YouTube channels to stay current with industry trends
+- Enjoys books on organizational psychology and career development
+- Active on LinkedIn and tech community platforms, sharing industry insights
+- Participates in both technical conferences and recruiting/HR events
+- Consumes content on communication strategies and interviewing techniques
+- Appreciates documentaries about technology companies and innovation
