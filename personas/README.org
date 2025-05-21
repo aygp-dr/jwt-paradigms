@@ -157,6 +157,18 @@ These reviewers provide comprehensive feedback at key project milestones and int
 #+caption: Lambda Hopper
 [[file:images/lambda_hopper.png]]
 
+*** Aidan Pace (Research Infrastructure Architect)
+    :PROPERTIES:
+    :CUSTOM_ID: aidan-pace-research-infrastructure-architect
+    :END:
+- *File:* [[file:research_infrastructure_architect_aidan_pace.org]]
+- *Role:* Research Infrastructure Architect bridging theory and implementation
+- *Focus:* Cross-paradigm integration, reproducible research workflows, declarative approaches
+- *Review Command:* =/review-presentation-aidan=
+
+#+caption: Aidan Pace
+[[file:images/aidan_pace.png]]
+
 *** David Park (AI/ML Engineer)
     :PROPERTIES:
     :CUSTOM_ID: david-park-ai-ml-engineer
