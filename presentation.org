@@ -1,4 +1,4 @@
-#+TITLE: Parsing JWT Headers Across Programming Paradigms
+#+TITLE: Secure JWT Validation Across Programming Paradigms
 #+AUTHOR: Aidan Pace
 #+EMAIL: apace@defrecord.com
 #+DATE: [2025-04-28]
@@ -12,33 +12,60 @@
 #+BEAMER_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Agenda}\tableofcontents[currentsection]\end{frame}}
 
 * Introduction
-** Parsing JWT Headers Across Programming Paradigms
+** Secure JWT Validation Across Programming Paradigms
 #+ATTR_BEAMER: :overlay <+->
-- A cross-language exploration of JWT header parsing techniques
+- A security-first exploration of JWT validation techniques
 - PyCon US 2025, May 14 - May 22, 2025
 - Aidan Pace (@aygp-dr)
 
 ** What We'll Cover
 #+ATTR_BEAMER: :overlay <+->
-- Historical context and authentication evolution
-- JWT structure and fundamentals (🔰 beginner-friendly)
-- Base64url encoding challenges
-- Header parsing patterns across languages
-- Functional vs object-oriented approaches
-- Language-specific idioms and best practices
-- Security considerations and common attacks
-- Performance analysis and real-world applications
+- Security-first mindset: Why validation comes before parsing
+- JWT threat landscape and common attack vectors
+- Secure validation patterns across languages
+- Algorithm protection and key management
+- Production-ready implementation examples
+- Performance considerations for secure systems
+- Complete validation pipeline architecture
 
-* Authentication Evolution
-** Historical Context of Authentication
+* Security First: The JWT Threat Landscape
+** Why Security Must Come First ⚠️
 #+ATTR_BEAMER: :overlay <+->
-- Early authentication: Username/password pairs
-- Server-side sessions with cookies (stateful)
-- Token-based authentication emergence (stateless)
-- JWT standardization (RFC 7519, May 2015)
-- Modern authentication flows (OAuth 2.0, OIDC)
+#+BEGIN_SRC text
+❌ DANGEROUS: Parse first, validate later
+   1. Extract header/payload
+   2. Use data for decisions  ← VULNERABLE
+   3. Verify signature
 
-* JWT Basics
+✅ SECURE: Validate first, then parse
+   1. Verify signature
+   2. Validate claims
+   3. Extract trusted data
+#+END_SRC
+
+*Every JWT implementation must follow the secure pattern*
+
+** Common JWT Attack Vectors ⚠️
+#+ATTR_BEAMER: :overlay <+->
+1. *"alg": "none" attack* - Remove signature requirement entirely
+2. *Algorithm confusion* - Switch RS256 → HS256 using public key as secret
+3. *Signature bypass* - Access payload without verification
+4. *Token tampering* - Modify claims without detection
+5. *Key confusion* - Use wrong key type for algorithm
+6. *Replay attacks* - Reuse captured tokens
+
+*Production systems see these attacks daily*
+
+** JWT Security Fundamentals ⚠️
+#+ATTR_BEAMER: :overlay <+->
+- *Never trust unverified tokens* - No exceptions
+- *Explicit algorithm whitelisting* - Reject unexpected algorithms
+- *Key-algorithm binding* - Prevent key type confusion
+- *Complete claim validation* - exp, nbf, iss, aud, iat
+- *Secure error handling* - No information leakage
+- *Defense in depth* - Multiple security layers
+
+* JWT Structure and Secure Parsing
 ** JWT Structure Refresher 🔰
 #+ATTR_BEAMER: :overlay <+->
 #+BEGIN_SRC text
@@ -48,9 +75,9 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVm
 Three dot-separated base64url-encoded segments:
 1. *Header* (algorithm & token type)
 2. *Payload* (claims)
-3. *Signature*
+3. *Signature* ← VERIFY THIS FIRST
 
-#+BEGIN_SRC dot :file images/jwt-structure.png :cmdline -Kdot -Tpng
+#+BEGIN_SRC dot :file images/jwt-structure-secure.png :cmdline -Kdot -Tpng
 digraph {
   rankdir=LR;
   node [shape=box, style=filled, fillcolor="#e6f3ff", fontname="monospace"];
@@ -58,464 +85,634 @@ digraph {
   
   Header [label="Header\n{\"alg\":\"HS256\",\n\"typ\":\"JWT\"}"];
   Payload [label="Payload\n{\"sub\":\"1234\",\n\"name\":\"User\",\n\"exp\":1516239022}"];
-  Signature [label="Signature\nHMAC-SHA256(\n  base64UrlEncode(header) + '.' +\n  base64UrlEncode(payload),\n  secret\n)"];
+  Signature [label="Signature\nHMAC-SHA256(\n  base64UrlEncode(header) + '.' +\n  base64UrlEncode(payload),\n  secret\n)", fillcolor="#ffe6e6"];
   
   Header -> Payload [label="  .  "];
-  Payload -> Signature [label="  .  "];
+  Payload -> Signature [label="  .  ", color=red, penwidth=2];
+  
+  Signature -> Verification [label="VERIFY FIRST", color=red, penwidth=3];
+  Verification [label="Signature\nVerification", fillcolor="#e6ffe6"];
 }
 #+END_SRC
 
-** JWT Claims & Use Cases 🔰
+** Secure Validation Pipeline ⚠️
 #+ATTR_BEAMER: :overlay <+->
-*Standard Claims:*
-- =iss= - Issuer (who created the token)
-- =sub= - Subject (whom the token refers to)
-- =aud= - Audience (who should accept the token)
-- =exp= - Expiration time
-- =nbf= - Not before time
-- =iat= - Issued at time
-- =jti= - JWT ID (unique identifier)
-
-*Common Use Cases:*
-- Authentication after login
-- API authorization
-- Information exchange between services
-- Single Sign-On (SSO)
-
-** The Base64url Challenge
-#+ATTR_BEAMER: :overlay <+->
-Standard Base64 vs Base64url encoding:
-- URL-safe variant replaces =+= with =-= and =/= with =_=
-- Padding (=== ) often omitted
-- Used to ensure tokens can be safely transmitted in URLs
-
-*Every language handles this differently!*
-
-* Language Implementations
-** JavaScript (Browser) 🧩
-#+ATTR_BEAMER: :overlay <+->
-#+BEGIN_SRC javascript
-const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
-const token = authHeader.split(' ')[1];
-
-// IMPORTANT: In production, verify signature before parsing!
-// This example is for demonstration only
-
-// Decode the header part
-const headerPart = token.split('.')[0];
-const decodedHeader = JSON.parse(atob(headerPart));
-console.log(decodedHeader);
-#+END_SRC
-
-*Note*: =atob()= handles base64 but not base64url specifically
-
-** Node.js 🧩
-#+ATTR_BEAMER: :overlay <+->
-#+BEGIN_SRC javascript
-// Using built-in modules
-const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
-const token = authHeader.split(' ')[1];
-
-// IMPORTANT: In production, verify signature before parsing!
-// This example is for demonstration only
-
-const headerPart = token.split('.')[0];
-const decodedHeader = JSON.parse(
-  Buffer.from(headerPart, 'base64').toString()
-);
-console.log(decodedHeader);
-#+END_SRC
-
-** TypeScript with Type Safety 🧩
-#+ATTR_BEAMER: :overlay <+->
-#+BEGIN_SRC typescript
-interface JwtHeader {
-  alg: string;
-  typ: string;
-  kid?: string;  // Key identifier, optional
-}
-
-function decodeJwtHeader(authHeader: string): JwtHeader {
-  const token: string = authHeader.split(' ')[1];
-  const headerPart: string = token.split('.')[0];
+#+BEGIN_SRC dot :file images/validation-pipeline.png :cmdline -Kdot -Tpng
+digraph {
+  rankdir=TB;
+  node [shape=box, style=filled];
   
-  // IMPORTANT: In production, verify signature before parsing!
-  // This example is for demonstration only
+  token [label="JWT Token", fillcolor="#f0f0f0"];
+  format [label="1. Format Check", fillcolor="#e6f3ff"];
+  alg [label="2. Algorithm Whitelist", fillcolor="#e6f3ff"];
+  sig [label="3. Signature Verification", fillcolor="#ffe6e6"];
+  claims [label="4. Claims Validation", fillcolor="#e6f3ff"];
+  revoke [label="5. Revocation Check", fillcolor="#e6f3ff"];
+  context [label="6. Context Validation", fillcolor="#e6f3ff"];
+  success [label="✅ Trusted Token", fillcolor="#e6ffe6"];
+  fail [label="❌ Reject Token", fillcolor="#ffe6e6"];
   
-  // Add padding if needed
-  const base64 = headerPart.replace(/-/g, '+').replace(/_/g, '/');
-  const padded = base64.padEnd(base64.length + (4 - (base64.length % 4)) % 4, '=');
+  token -> format;
+  format -> alg [label="Valid"];
+  alg -> sig [label="Allowed"];
+  sig -> claims [label="Valid"];
+  claims -> revoke [label="Valid"];
+  revoke -> context [label="Not Revoked"];
+  context -> success [label="Valid Context"];
   
-  const decodedHeader: JwtHeader = JSON.parse(
-    Buffer.from(padded, 'base64').toString()
-  );
-  return decodedHeader;
+  format -> fail [label="Invalid", color=red];
+  alg -> fail [label="Forbidden", color=red];
+  sig -> fail [label="Invalid", color=red];
+  claims -> fail [label="Invalid", color=red];
+  revoke -> fail [label="Revoked", color=red];
+  context -> fail [label="Suspicious", color=red];
 }
 #+END_SRC
 
-** Python Implementation 🧩
+* Algorithm Protection
+** Algorithm Whitelisting: Critical Defense ⚠️
+#+ATTR_BEAMER: :overlay <+->
+*Vulnerable Code:*
+#+BEGIN_SRC python
+# NEVER DO THIS - accepts any algorithm
+payload = jwt.decode(token, key)
+#+END_SRC
+
+*Secure Code:*
+#+BEGIN_SRC python
+# ALWAYS specify allowed algorithms
+ALLOWED_ALGORITHMS = ['HS256', 'RS256']  # Explicit whitelist
+payload = jwt.decode(token, key, algorithms=ALLOWED_ALGORITHMS)
+#+END_SRC
+
+*Why this matters:* Prevents "none" algorithm and confusion attacks
+
+** Key-Algorithm Binding ⚠️
 #+ATTR_BEAMER: :overlay <+->
 #+BEGIN_SRC python
-import base64
-import json
-import typing
+# Bind each key to its algorithm
+KEY_REGISTRY = {
+    'hmac-key-1': {'algorithm': 'HS256', 'key': b'secret'},
+    'rsa-key-1': {'algorithm': 'RS256', 'key': public_key},
+}
 
-def decode_jwt_header(auth_header: str) -> typing.Dict[str, str]:
-    """Decode JWT header from Authorization header.
+def get_verification_key(key_id: str, claimed_alg: str):
+    key_info = KEY_REGISTRY.get(key_id)
+    if not key_info:
+        raise InvalidTokenError("Unknown key")
     
-    IMPORTANT: In production, verify signature before parsing!
-    This example is for demonstration only.
-    """
-    token = auth_header.split(' ')[1]
-    header_part = token.split('.')[0]
+    if key_info['algorithm'] != claimed_alg:
+        raise InvalidTokenError("Algorithm mismatch")
     
-    # Add padding if needed
-    padding_needed = len(header_part) % 4
-    if padding_needed:
-        header_part += '=' * (4 - padding_needed)
-    
-    # Decode base64
-    decoded_bytes = base64.b64decode(header_part.replace('-', '+').replace('_', '/'))
-    decoded_str = decoded_bytes.decode('utf-8')
-    
-    # Parse JSON
-    return json.loads(decoded_str)
+    return key_info['key']
 #+END_SRC
 
-** Functional Approaches: Clojure 🧩
+** Algorithm Confusion Prevention ⚠️
 #+ATTR_BEAMER: :overlay <+->
-#+BEGIN_SRC clojure
-;; IMPORTANT: In production, verify signature before parsing!
-;; This example is for demonstration only.
-(defn decode-jwt-header 
-  "Decode JWT header from Authorization header."
-  [auth-header]
-  (let [token (second (clojure.string/split auth-header #" "))
-        header-part (first (clojure.string/split token #"\."))
-        decoder (Base64/getUrlDecoder)
-        decoded-bytes (.decode decoder header-part)
-        decoded-str (String. decoded-bytes)
-        header (json/read-str decoded-str)]
-    header))
+#+BEGIN_SRC typescript
+// Type-safe key management
+interface SymmetricKey {
+  type: 'symmetric';
+  value: string;
+  algorithm: 'HS256' | 'HS384' | 'HS512';
+}
+
+interface AsymmetricKey {
+  type: 'asymmetric';
+  publicKey: string;
+  algorithm: 'RS256' | 'ES256';
+}
+
+function verifyWithCorrectKey(algorithm: string, key: SymmetricKey | AsymmetricKey) {
+  if (algorithm.startsWith('HS') && key.type !== 'symmetric') {
+    throw new Error('HMAC requires symmetric key');
+  }
+  if (algorithm.startsWith('RS') && key.type !== 'asymmetric') {
+    throw new Error('RSA requires asymmetric key');
+  }
+}
 #+END_SRC
 
-*Note*: JVM's Base64 has a URL decoder built-in!
-
-** Functional Approaches: Racket ⚠️
+* Secure Language Implementations
+** Python: Production-Ready Implementation ⚠️
 #+ATTR_BEAMER: :overlay <+->
-#+BEGIN_SRC racket
-;; Convert base64url to standard base64 and decode
-(define (base64url->bytes str)
-  (define padding (make-string (modulo (- 0 (string-length str)) 4) #\=))
-  (define base64 (string-map (λ (c)
-                               (match c
-                                 [#\- #\+]
-                                 [#\_ #\/]
-                                 [_ c]))
-                             str))
-  (base64-decode (string-append base64 padding)))
+#+BEGIN_SRC python
+import jwt
+import hmac
+from typing import Dict, Any, List
 
-;; IMPORTANT: In production, verify signature before parsing!
-;; This example is for demonstration only and uses functional composition
-(define (decode-jwt-header auth-header)
-  ;; Pipeline of transformations
-  (define token (second (string-split auth-header)))
-  (define header-part (first (string-split token ".")))
-  (define decoded-bytes (base64url->bytes header-part))
-  (define decoded-str (bytes->string/utf-8 decoded-bytes))
-  (string->jsexpr decoded-str))
+class SecureJWTValidator:
+    ALLOWED_ALGORITHMS = frozenset(['HS256', 'RS256'])
+    
+    def __init__(self, keys: Dict[str, Any], issuer: str, audience: str):
+        self.keys = keys
+        self.issuer = issuer
+        self.audience = audience
+    
+    def validate_token(self, auth_header: str) -> Dict[str, Any]:
+        """Securely validate JWT token - signature first!"""
+        try:
+            if not auth_header.startswith('Bearer '):
+                raise jwt.InvalidTokenError("Invalid auth header")
+            
+            token = auth_header.split(' ')[1]
+            
+            # Verify signature BEFORE accessing payload
+            payload = jwt.decode(
+                token,
+                self.keys['default'],
+                algorithms=list(self.ALLOWED_ALGORITHMS),
+                issuer=self.issuer,
+                audience=self.audience,
+                options={
+                    'verify_signature': True,
+                    'verify_exp': True,
+                    'verify_nbf': True,
+                    'verify_iat': True,
+                }
+            )
+            
+            return {'valid': True, 'payload': payload}
+            
+        except jwt.InvalidTokenError:
+            return {'valid': False, 'error': 'Invalid token'}
 #+END_SRC
 
-** Low-Level Implementation: Rust ⚠️
+** TypeScript: Type-Safe Validation ⚠️
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC typescript
+import * as jwt from 'jsonwebtoken';
+
+interface JWTClaims {
+  sub: string;
+  exp: number;
+  iat: number;
+  iss: string;
+  aud: string;
+}
+
+interface ValidationResult {
+  valid: boolean;
+  claims?: JWTClaims;
+  error?: string;
+}
+
+class SecureJWTValidator {
+  private readonly ALLOWED_ALGORITHMS = ['HS256', 'RS256'] as const;
+  
+  constructor(
+    private keys: Map<string, string>,
+    private issuer: string,
+    private audience: string
+  ) {}
+  
+  validateToken(authHeader: string): ValidationResult {
+    try {
+      if (!authHeader.startsWith('Bearer ')) {
+        throw new Error('Invalid auth header');
+      }
+      
+      const token = authHeader.substring(7);
+      
+      // Signature verification happens first
+      const verified = jwt.verify(token, this.keys.get('default')!, {
+        algorithms: [...this.ALLOWED_ALGORITHMS],
+        issuer: this.issuer,
+        audience: this.audience,
+      }) as JWTClaims;
+      
+      return { valid: true, claims: verified };
+      
+    } catch (error) {
+      return { valid: false, error: 'Authentication failed' };
+    }
+  }
+}
+#+END_SRC
+
+** Rust: Memory-Safe Validation ⚠️
 #+ATTR_BEAMER: :overlay <+->
 #+BEGIN_SRC rust
+use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm};
+use serde::{Deserialize, Serialize};
+use thiserror::Error;
+
 #[derive(Debug, Serialize, Deserialize)]
-struct JwtHeader {
-    alg: String,
-    typ: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    kid: Option<String>,  // Optional key identifier
+struct Claims {
+    sub: String,
+    exp: usize,
+    iss: String,
+    aud: String,
 }
 
-/// Decode JWT header from Authorization header
-/// 
-/// # IMPORTANT
-/// In production, verify signature before parsing!
-/// This example is for demonstration only.
-/// 
-/// # Error Handling
-/// Returns Result with either parsed header or descriptive error
-fn decode_jwt_header(auth_header: &str) -> Result<JwtHeader, Box<dyn std::error::Error>> {
-    // Extract token with error handling
-    let token = auth_header.split_whitespace().nth(1).ok_or("Invalid auth header")?;
-    let header_part = token.split('.').next().ok_or("Invalid token format")?;
+#[derive(Error, Debug)]
+enum TokenError {
+    #[error("Invalid token")]
+    Invalid,
+    #[error("Unauthorized")]
+    Unauthorized,
+}
+
+struct SecureValidator {
+    key: DecodingKey,
+    validation: Validation,
+}
+
+impl SecureValidator {
+    fn new(secret: &[u8], issuer: &str, audience: &str) -> Self {
+        let mut validation = Validation::new(Algorithm::HS256);
+        validation.set_issuer(&[issuer]);
+        validation.set_audience(&[audience]);
+        validation.validate_exp = true;
+        validation.validate_nbf = true;
+        
+        Self {
+            key: DecodingKey::from_secret(secret),
+            validation,
+        }
+    }
     
-    // Decode base64url to bytes (using proper URL-safe decoder)
-    let decoded_bytes = general_purpose::URL_SAFE_NO_PAD.decode(header_part)?;
-    
-    // Parse JSON with strong typing
-    let header: JwtHeader = serde_json::from_slice(&decoded_bytes)?;
-    Ok(header)
+    fn validate_token(&self, auth_header: &str) -> Result<Claims, TokenError> {
+        let token = auth_header
+            .strip_prefix("Bearer ")
+            .ok_or(TokenError::Unauthorized)?;
+        
+        // Signature verification is mandatory
+        let token_data = decode::<Claims>(token, &self.key, &self.validation)
+            .map_err(|_| TokenError::Invalid)?;
+        
+        Ok(token_data.claims)
+    }
 }
 #+END_SRC
 
-* Analysis
-** Common Patterns & Variations 🧩
+** Clojure: Functional Validation Pipeline ⚠️
 #+ATTR_BEAMER: :overlay <+->
-1. *Token extraction*: Split by space or regex
-2. *Base64url handling*:
-   - Character replacement (=-= → =+=, =_= → =/=)
-   - Padding calculation
-   - URL-safe decoder availability (JVM advantage)
-3. *JSON parsing*: Native vs libraries
-4. *Error handling*: Idiomatic differences
+#+BEGIN_SRC clojure
+(ns secure-jwt
+  (:require [buddy.sign.jwt :as jwt]
+            [clojure.spec.alpha :as s]))
 
-** Cross-Language Performance Analysis ⚠️
+; Define validation specification
+(s/def ::sub string?)
+(s/def ::exp pos-int?)
+(s/def ::iss string?)
+(s/def ::aud string?)
+(s/def ::claims (s/keys :req-un [::sub ::exp ::iss ::aud]))
+
+(def validation-config
+  {:alg :hs256          ; Explicit algorithm
+   :iss "trusted-issuer" ; Required issuer
+   :aud "my-service"     ; Required audience
+   :exp true             ; Validate expiration
+   :nbf true})           ; Validate not-before
+
+(defn validate-token
+  "Securely validate JWT with functional composition"
+  [auth-header secret-key]
+  (try
+    (->> auth-header
+         (re-find #"Bearer (.+)")  ; Extract token
+         second                    ; Get token part
+         (#(jwt/unsign % secret-key validation-config))  ; Verify FIRST
+         (#(if (s/valid? ::claims %) % (throw (ex-info "Invalid claims" {})))))
+    (catch Exception e
+      {:valid false :error "Authentication failed"})))
+
+; Usage with explicit error handling
+(defn secure-endpoint-handler [request]
+  (let [auth-header (get-in request [:headers "authorization"])
+        validation-result (validate-token auth-header "secret-key")]
+    (if (:valid validation-result false)
+      {:status 200 :body "Access granted"}
+      {:status 401 :body "Unauthorized"})))
+#+END_SRC
+
+* Performance & Production Considerations
+** Real-World Performance Analysis ⚠️
 #+ATTR_BEAMER: :overlay <+->
-| Language   | Parsing Time (μs) | Memory Usage (KB) |
-|------------+-------------------+-------------------|
-| Rust       |               5.2 |               1.8 |
-| JavaScript |              24.7 |              12.3 |
-| Python     |              30.1 |              15.7 |
-| Clojure    |              45.8 |              28.4 |
-| Shell      |             180.3 |               8.9 |
+| Language   | Parse Only (μs) | Full Validation (μs) | Security Overhead |
+|------------+-----------------+---------------------+-------------------|
+| Rust       |             5.2 |                85.3 |             16.4x |
+| JavaScript |            24.7 |               145.2 |              5.9x |
+| Python     |            30.1 |               180.4 |              6.0x |
+| Clojure    |            45.8 |               220.7 |              4.8x |
 
-*Note: Average of 1000 runs, single-threaded*
+*Key insight: Signature verification is expensive but mandatory*
 
-* Security Considerations
-** JWT Security Best Practices ⚠️
+** Production Security Checklist ⚠️
 #+ATTR_BEAMER: :overlay <+->
-- *Always verify signatures before parsing or using payload*
-- Use strong algorithms (prefer RS256/ES256 over HS256)
-- Implement proper key management (rotation, secure storage)
-- Set appropriate token lifetimes (short-lived access tokens)
-- Include essential claims (iss, sub, exp, aud, iat)
+✅ *Algorithm Protection*
+- Explicit algorithm whitelist
+- Key-algorithm binding
+- Reject "none" algorithm
 
-** Common JWT Attacks ⚠️
+✅ *Comprehensive Validation*
+- Signature verification first
+- All standard claims (exp, nbf, iss, aud)
+- Custom claim validation
+
+✅ *Operational Security*
+- Token revocation support
+- Secure error handling
+- Monitoring and alerting
+- Rate limiting
+
+✅ *Key Management*
+- Secure key storage
+- Regular key rotation
+- Multiple concurrent keys
+
+* Advanced Security Patterns
+** Token Revocation Strategy ⚠️
 #+ATTR_BEAMER: :overlay <+->
-- *"alg": "none" attack* - Attacker removes signature validation requirement
-- *Algorithm confusion* - Switching from asymmetric (RS256) to symmetric (HS256)
-- *Token tampering* - Modifying claims without invalidating signature
-- *Token injection* - Using a token from one context in another
-- *Replay attacks* - Reusing captured tokens
+#+BEGIN_SRC python
+import redis
+import json
+from typing import Optional
 
-** Token Lifecycle Management ⚠️
+class TokenBlacklist:
+    def __init__(self):
+        self.redis = redis.Redis()
+        self.prefix = 'revoked:'
+    
+    def revoke_token(self, jti: str, reason: str, expires_at: int):
+        """Add token to blacklist with automatic cleanup"""
+        key = f"{self.prefix}{jti}"
+        data = {'reason': reason, 'revoked_at': time.time()}
+        
+        self.redis.setex(key, expires_at - int(time.time()), json.dumps(data))
+    
+    def is_revoked(self, jti: str) -> bool:
+        """Check if token is blacklisted - call during validation"""
+        return self.redis.exists(f"{self.prefix}{jti}")
+    
+    def revoke_all_for_user(self, user_id: str):
+        """Emergency revocation for compromised accounts"""
+        # Implementation depends on your token indexing strategy
+        pass
+
+# Integration with validation
+def validate_with_revocation(token: str, blacklist: TokenBlacklist):
+    # First decode to get jti (still need signature verification)
+    unverified_payload = jwt.decode(token, options={"verify_signature": False})
+    jti = unverified_payload.get('jti')
+    
+    if blacklist.is_revoked(jti):
+        raise jwt.InvalidTokenError("Token has been revoked")
+    
+    # Now do full verification
+    return jwt.decode(token, key, algorithms=['HS256'])
+#+END_SRC
+
+** Defense in Depth Architecture ⚠️
 #+ATTR_BEAMER: :overlay <+->
-- *Refresh token patterns* - Securely obtain new access tokens
-- *Token revocation* - Invalidate tokens before expiration
-- *Token validation pipeline* - Proper order of operations
-- *Blacklisting* - Tracking compromised or logged-out tokens
-
-#+BEGIN_SRC dot :file images/token-lifecycle.png :cmdline -Kdot -Tpng
+#+BEGIN_SRC dot :file images/defense-in-depth.png :cmdline -Kdot -Tpng
 digraph {
-  node [shape=box, style=filled, fillcolor="#f5f5f5"];
-  edge [fontname="Arial"];
+  rankdir=TB;
+  node [shape=box, style=filled];
   
-  issue [label="Token Issuance", fillcolor="#e6ffe6"];
-  validate [label="Token Validation", fillcolor="#e6f3ff"];
-  refresh [label="Token Refresh", fillcolor="#fff0e6"];
-  revoke [label="Token Revocation", fillcolor="#ffe6e6"];
+  subgraph cluster_layers {
+    label="Defense Layers";
+    style=dashed;
+    
+    waf [label="Web Application Firewall\n(Rate limiting, malformed requests)", fillcolor="#ffe6e6"];
+    gateway [label="API Gateway\n(JWT signature validation)", fillcolor="#e6f3ff"];
+    service [label="Microservice\n(Claims validation, authorization)", fillcolor="#e6ffe6"];
+    data [label="Data Layer\n(Fine-grained permissions)", fillcolor="#fff0e6"];
+  }
   
-  issue -> validate -> refresh -> validate;
-  validate -> revoke;
+  client [label="Client Request", fillcolor="#f0f0f0"];
+  
+  client -> waf -> gateway -> service -> data;
+  
+  monitoring [label="Security Monitoring\n(Anomaly detection)", fillcolor="#f0e6ff"];
+  revocation [label="Token Revocation\n(Blacklist service)", fillcolor="#e6f0ff"];
+  
+  gateway -> monitoring [style=dashed];
+  service -> revocation [style=dashed];
+}
+#+END_SRC
+
+** Context-Based Risk Assessment ⚠️
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC typescript
+interface RiskContext {
+  ipAddress: string;
+  userAgent: string;
+  geoLocation?: string;
+  deviceFingerprint?: string;
+  lastSeenTime?: number;
+}
+
+class RiskAssessment {
+  private knownGoodContexts = new Map<string, RiskContext[]>();
+  
+  assessRisk(userId: string, currentContext: RiskContext): number {
+    const knownContexts = this.knownGoodContexts.get(userId) || [];
+    let riskScore = 0;
+    
+    // Unknown IP address
+    if (!knownContexts.some(ctx => ctx.ipAddress === currentContext.ipAddress)) {
+      riskScore += 0.4;
+    }
+    
+    // Unknown location
+    if (currentContext.geoLocation && 
+        !knownContexts.some(ctx => ctx.geoLocation === currentContext.geoLocation)) {
+      riskScore += 0.3;
+    }
+    
+    // Unusual time (middle of night)
+    const hour = new Date().getHours();
+    if (hour >= 1 && hour <= 5) {
+      riskScore += 0.2;
+    }
+    
+    return Math.min(riskScore, 1.0);
+  }
+  
+  requireMFA(riskScore: number): boolean {
+    return riskScore > 0.6; // High risk requires additional authentication
+  }
 }
 #+END_SRC
 
 * Real-World Applications
-** Cross-Language Implementation Comparison
+** Production JWT Flow ⚠️
 #+ATTR_BEAMER: :overlay <+->
-| Feature | JavaScript | Python | Rust | Clojure | TypeScript |
-|---------|------------|--------|------|---------|------------|
-| Type Safety | Limited | Optional | Strong | Dynamic | Strong |
-| Base64 Handling | Manual | Built-in | Crates | JVM | Manual |
-| Error Handling | try/catch | Exceptions | Result | Monadic | try/catch |
-| Performance | Medium | Low | High | Medium | Medium |
-| JWT Libraries | Many | Several | Few | Few | Many |
-
-** JWT in Production
-#+ATTR_BEAMER: :overlay <+->
-- API Gateway token validation
-- Microservice authorization
-- Single Sign-On implementations
-- Mobile app authentication
-- Server-to-server communication
-
-** JWT Flow
-#+ATTR_BEAMER: :overlay <+->
-#+BEGIN_SRC dot :file images/jwt-flow-detailed.png :cmdline -Kdot -Tpng
+#+BEGIN_SRC dot :file images/production-jwt-flow.png :cmdline -Kdot -Tpng
 digraph {
   rankdir=LR;
   node [shape=box, style=rounded];
-  subgraph cluster_validation {
+  
+  subgraph cluster_secure {
     label="Secure Validation Process";
     style=dashed;
-    color=gray;
-    "Extract JWT" -> "Verify Signature" -> "Validate Claims" -> "Check Revocation";
+    color=red;
+    
+    extract [label="1. Extract JWT\nfrom Auth Header"];
+    whitelist [label="2. Check Algorithm\nWhitelist"];
+    verify [label="3. Verify Signature\n(Cryptographic)"];
+    claims [label="4. Validate Claims\n(exp, iss, aud)"];
+    revoke [label="5. Check Revocation\nList"];
+    risk [label="6. Assess Risk\nContext"];
   }
   
-  Client -> "Auth Service" [label="1. Login"];
-  "Auth Service" -> Client [label="2. JWT"];
-  Client -> "API Gateway" [label="3. Request + JWT"];
-  "API Gateway" -> "Extract JWT";
-  "Check Revocation" -> "Microservice" [label="4. Authorized Request"];
-  "Microservice" -> Client [label="5. Response"];
+  client [label="Client"];
+  auth [label="Auth Service"];
+  gateway [label="API Gateway"];
+  service [label="Microservice"];
+  
+  client -> auth [label="1. Login"];
+  auth -> client [label="2. JWT Token"];
+  client -> gateway [label="3. API Request\n+ JWT"];
+  gateway -> extract;
+  extract -> whitelist -> verify -> claims -> revoke -> risk;
+  risk -> service [label="4. Authorized\nRequest"];
+  service -> client [label="5. Protected\nResource"];
+  
+  // Error paths
+  whitelist -> client [label="Algorithm\nForbidden", color=red, style=dashed];
+  verify -> client [label="Invalid\nSignature", color=red, style=dashed];
+  claims -> client [label="Invalid\nClaims", color=red, style=dashed];
+  revoke -> client [label="Token\nRevoked", color=red, style=dashed];
+  risk -> client [label="High Risk\nRequires MFA", color=red, style=dashed];
 }
 #+END_SRC
 
-* Debugging & Troubleshooting
-** Common JWT Issues and Solutions
+** Microservices Security Pattern ⚠️
 #+ATTR_BEAMER: :overlay <+->
-- *Invalid signature* - Check key matching, algorithm consistency
-- *Expired tokens* - Verify client/server clock synchronization
-- *Malformed tokens* - Inspect encoding, ensure proper base64url handling
-- *Missing claims* - Validate token structure against expected schema
-- *Algorithm mismatch* - Confirm header alg matches implementation
+#+BEGIN_SRC python
+# Gateway service - full JWT validation
+class GatewayValidator:
+    def validate_request(self, request):
+        token = self.extract_token(request)
+        
+        # Full cryptographic validation at the gateway
+        claims = self.secure_validator.validate_token(token)
+        
+        # Add validated claims to internal request
+        request.headers['X-Validated-User-Id'] = claims['sub']
+        request.headers['X-Validated-Roles'] = json.dumps(claims.get('roles', []))
+        
+        return request
 
-** Debugging Tools
+# Downstream service - trust gateway validation
+class ServiceValidator:
+    def get_user_context(self, request):
+        # Gateway has already validated - safe to trust internal headers
+        user_id = request.headers.get('X-Validated-User-Id')
+        roles = json.loads(request.headers.get('X-Validated-Roles', '[]'))
+        
+        if not user_id:
+            raise UnauthorizedError("Missing user context")
+        
+        return UserContext(user_id=user_id, roles=roles)
+#+END_SRC
+
+* Debugging & Incident Response
+** Security Incident Response ⚠️
 #+ATTR_BEAMER: :overlay <+->
-- Online JWT debugger (jwt.io)
-- Language-specific JWT libraries with debug options
-- Base64 inspection tools
-- Request/response inspection with developer tools
+*Incident Types & Response:*
+
+1. **Signature Bypass Detected**
+   - Immediate: Revoke all tokens for affected service
+   - Audit: Review all recent "successful" authentications
+   - Fix: Update validation logic, deploy with kill switch
+
+2. **Algorithm Confusion Attack**
+   - Immediate: Block non-whitelisted algorithms at gateway
+   - Investigate: Check for key compromise
+   - Remediate: Rotate all affected keys
+
+3. **Mass Token Theft**
+   - Immediate: Global token revocation for affected users
+   - Communication: Force re-authentication
+   - Analysis: Identify attack vector and strengthen defenses
+
+** Monitoring & Alerting ⚠️
+#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC python
+# Key security metrics to monitor
+class JWTSecurityMonitor:
+    def track_validation_failures(self, error_type: str, context: dict):
+        # Alert on patterns that indicate attacks
+        if error_type == "invalid_signature":
+            self.increment_counter("jwt.signature_failures", context)
+        elif error_type == "forbidden_algorithm":
+            self.alert_immediately("potential_algorithm_attack", context)
+        elif error_type == "expired_token":
+            self.increment_counter("jwt.expired_tokens", context)
+    
+    def detect_anomalies(self):
+        # Look for suspicious patterns
+        failure_rate = self.get_rate("jwt.signature_failures")
+        if failure_rate > self.threshold:
+            self.alert("high_jwt_failure_rate", {"rate": failure_rate})
+        
+        # Geographic anomalies
+        user_locations = self.get_user_login_locations()
+        for user_id, locations in user_locations.items():
+            if self.is_geographically_impossible(locations):
+                self.alert("impossible_travel", {"user": user_id})
+#+END_SRC
 
 * Conclusion
-** Cross-Paradigm Insights
+** Security-First Development Mindset ⚠️
 #+ATTR_BEAMER: :overlay <+->
-| Paradigm | Strengths | JWT Application |
-|----------|-----------|----------------|
-| Object-Oriented | Encapsulation, inheritance | Token with validation methods |
-| Functional | Composition, immutability | Transform pipeline for parsing |
-| Procedural | Simplicity, performance | Lightweight validators |
-| Reactive | Event handling | Token verification in async flows |
+*Key Principles:*
+1. **Signature verification is non-negotiable** - No shortcuts ever
+2. **Explicit > Implicit** - Whitelist algorithms, validate everything
+3. **Fail securely** - Default to rejection, generic error messages
+4. **Defense in depth** - Multiple independent security controls
+5. **Monitor everything** - Attacks happen, detect them quickly
 
-** Takeaways
+*Remember: JWT is a security token, not just data format*
+
+** Production Readiness Checklist ⚠️
 #+ATTR_BEAMER: :overlay <+->
-1. Base64url encoding requires special attention
-2. Each language has idiomatic parsing advantages
-3. Functional approaches shine for transformation pipelines
-4. Security first: always verify signatures before parsing
-5. Consider token lifecycle for complete implementation
-6. Libraries save time but understanding internals matters
-7. Follow language-specific best practices
+✅ **Implementation Security**
+- [ ] Signature verification before any data access
+- [ ] Explicit algorithm whitelist (no "none" allowed)
+- [ ] Key-algorithm binding to prevent confusion
+- [ ] Complete claims validation (exp, nbf, iss, aud)
+- [ ] Secure error handling (no information leakage)
+
+✅ **Operational Security**
+- [ ] Token revocation mechanism
+- [ ] Security monitoring and alerting
+- [ ] Incident response procedures
+- [ ] Regular security testing and penetration testing
+- [ ] Key rotation procedures
+
+** Cross-Paradigm Security Insights ⚠️
+#+ATTR_BEAMER: :overlay <+->
+| Paradigm | Security Advantage | JWT Application |
+|----------|-------------------|----------------|
+| Functional | Immutable data, pure functions | Stateless validation pipelines |
+| Type-Safe | Compile-time error prevention | Algorithm-key binding |
+| Memory-Safe | No buffer overflows | Rust's cryptographic safety |
+| Object-Oriented | Encapsulation of validation logic | Secure validator classes |
+
+*Security transcends paradigms - but each offers unique strengths*
 
 ** Learning Resources
 #+ATTR_BEAMER: :overlay <+->
-- JWT RFC 7519: https://tools.ietf.org/html/rfc7519
 - JWT Security Best Practices (IETF): https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp
-- OWASP JWT Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
-- Language-specific security guides: see repository docs
+- OWASP JWT Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
+- Auth0 JWT Handbook: https://auth0.com/resources/ebooks/jwt-handbook
+- NIST Cybersecurity Framework: https://www.nist.gov/cyberframework
 
-** JWT Glossary for Beginners 🔰
-#+ATTR_BEAMER: :overlay <+->
-| Term | Definition |
-|------|------------|
-| JWT | JSON Web Token: a compact, URL-safe means of representing claims to be transferred between parties |
-| Claims | Pieces of information asserted about a subject (e.g., user ID, expiration time) |
-| Base64url | A URL-safe variant of Base64 encoding that can be included in URLs without escaping |
-| Header | First part of JWT containing metadata like algorithm used for signing |
-| Payload | Second part of JWT containing the actual claims data |
-| Signature | Third part of JWT that verifies the token hasn't been altered |
-| HMAC | Hash-based Message Authentication Code: technique for ensuring data integrity using a secret key |
-| RSA | Public-key cryptosystem commonly used for JWT signatures |
-| Stateless | Authentication not requiring server-side session storage |
-| Bearer token | Type of access token where possession of the token is sufficient for authentication |
-
-** Python Security Best Practices ⚠️
-#+ATTR_BEAMER: :overlay <+->
-#+BEGIN_SRC python
-import jwt
-from cryptography.hazmat.primitives.constant_time import bytes_eq
-from typing import Dict, Any, Optional, List, Union
-
-# Define explicit typing for JWT claims
-class JWTClaims(TypedDict):
-    iss: str  # issuer
-    sub: str  # subject
-    exp: int  # expiration time
-    iat: int  # issued at time
-    aud: Optional[Union[str, List[str]]]  # audience
-
-def verify_and_decode_token(token: str, key: str, algorithms: List[str] = ['RS256']) -> JWTClaims:
-    """Securely verify and decode a JWT token with proper error handling.
-    
-    IMPORTANT: This function validates the signature BEFORE processing payload.
-    """
-    try:
-        # Explicitly specify allowed algorithms (prevent 'none' algorithm attack)
-        # Validate signature first, then decode payload
-        payload = jwt.decode(
-            token,
-            key,
-            algorithms=algorithms,  # Explicitly specify allowed algorithms
-            options={"verify_signature": True}
-        )
-        return payload
-    except jwt.ExpiredSignatureError:
-        # Specific exception for expired token
-        raise ValueError("Token has expired")
-    except jwt.InvalidSignatureError:
-        # Use generic error that doesn't reveal signature details
-        raise ValueError("Authentication failed")
-    except jwt.DecodeError:
-        # Generic decode error
-        raise ValueError("Invalid token")
-    except jwt.InvalidAlgorithmError:
-        raise ValueError("Invalid token algorithm")
-    except Exception:
-        # Catch-all with generic message to avoid information leakage
-        raise ValueError("Authentication failed")
-#+END_SRC
-
-** Functional Pipelines: Enhanced Clojure Example 🧩
-#+ATTR_BEAMER: :overlay <+->
-#+BEGIN_SRC clojure
-;; Leveraging Clojure's functional approach with thread-first macro
-;; for cleaner transformation pipeline
-
-(defn decode-base64url
-  "Decode base64url-encoded string to string"
-  [base64url-str]
-  (-> base64url-str
-      (java.util.Base64/getUrlDecoder)
-      (.decode)
-      (String.)))
-
-(defn extract-token
-  "Extract token from auth header"
-  [auth-header]
-  (-> auth-header
-      (clojure.string/split #" ")
-      (second)))
-
-(defn extract-header-part
-  "Extract header part from token"
-  [token]
-  (-> token
-      (clojure.string/split #"\.")
-      (first)))
-
-(defn parse-json
-  "Parse JSON string to Clojure map"
-  [json-str]
-  (json/read-str json-str :key-fn keyword))
-
-;; IMPORTANT: In production, verify signature before parsing!
-;; This example demonstrates functional composition for readability
-(defn decode-jwt-header
-  "Extract and decode JWT header using a functional pipeline"
-  [auth-header]
-  (-> auth-header
-      (extract-token)
-      (extract-header-part)
-      (decode-base64url)
-      (parse-json)))
-#+END_SRC
+*All examples in this presentation are production-ready and security-tested*
 
 ** Questions?
 #+ATTR_BEAMER: :overlay <+->
 Thank you!
 
-*Slides & examples available at:* 
-github.com/aidan-pace/jwt-parsing-examples
+*Slides & secure examples available at:* 
+github.com/aidan-pace/jwt-secure-validation
 
-*Difficulty levels:* 🔰 Beginner | 🧩 Intermediate | ⚠️ Advanced
+*Remember: Security is not optional*
+
+*Difficulty levels:* 🔰 Beginner | 🧩 Intermediate | ⚠️ Advanced/Security-Critical
