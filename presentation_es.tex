@@ -1,0 +1,572 @@
+% Created 2025-05-03 Sat 14:50
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation,aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{inputenc}
+\usepackage{fontenc}
+\usepackage{babel}
+\usetheme{metropolis}
+\usecolortheme{default}
+\author{Aidan Pace}
+\date{\textit{{[}2025-04-28 Mon]}}
+\title{Análisis de Cabeceras JWT a través de Paradigmas de Programación}
+\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Agenda}\tableofcontents[currentsection]\end{frame}}
+\hypersetup{
+ pdfauthor={Aidan Pace},
+ pdftitle={Análisis de Cabeceras JWT a través de Paradigmas de Programación},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 31.0.50 (Org mode 9.7.11)}, 
+ pdflang={Spanish}}
+\begin{document}
+
+\maketitle
+\begin{frame}[label={sec:org59842cd}]{Introducción}
+\begin{block}{Análisis de Cabeceras JWT a través de Paradigmas de Programación}
+\begin{itemize}[<+->]
+\item Una exploración entre lenguajes de técnicas de análisis de cabeceras JWT
+\item PyCon US 2025, 14 de mayo - 22 de mayo, 2025
+\item Aidan Pace (@aygp-dr)
+\end{itemize}
+\end{block}
+\begin{block}{Lo que cubriremos}
+\begin{itemize}[<+->]
+\item Contexto histórico y evolución de la autenticación
+\item Estructura JWT y fundamentos (🔰 amigable para principiantes)
+\item Desafíos de la codificación Base64url
+\item Patrones de análisis de cabeceras en diferentes lenguajes
+\item Enfoques funcionales vs orientados a objetos
+\item Modismos y mejores prácticas específicos de cada lenguaje
+\item Consideraciones de seguridad y ataques comunes
+\item Análisis de rendimiento y aplicaciones del mundo real
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org30143c7}]{Evolución de la Autenticación}
+\begin{block}{Contexto Histórico de la Autenticación}
+\begin{itemize}[<+->]
+\item Autenticación temprana: Pares de nombre de usuario/contraseña
+\item Sesiones del lado del servidor con cookies (con estado)
+\item Surgimiento de la autenticación basada en tokens (sin estado)
+\item Estandarización JWT (RFC 7519, mayo 2015)
+\item Flujos de autenticación modernos (OAuth 2.0, OIDC)
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org86199bc},fragile]{Conceptos Básicos de JWT}
+ \begin{block}{Repaso de la Estructura JWT 🔰}
+\begin{verbatim}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U
+\end{verbatim}
+
+Tres segmentos codificados en base64url separados por puntos:
+\begin{enumerate}
+\item \alert{Cabecera} (algoritmo y tipo de token)
+\item \alert{Carga útil} (reclamaciones/claims)
+\item \alert{Firma}
+\end{enumerate}
+
+\begin{verbatim}
+digraph {
+  rankdir=LR;
+  node [shape=box, style=filled, fillcolor="#e6f3ff", fontname="monospace"];
+  edge [fontname="Arial"];
+
+  Header [label="Cabecera\n{\"alg\":\"HS256\",\n\"typ\":\"JWT\"}"];
+  Payload [label="Carga útil\n{\"sub\":\"1234\",\n\"name\":\"User\",\n\"exp\":1516239022}"];
+  Signature [label="Firma\nHMAC-SHA256(\n  base64UrlEncode(header) + '.' +\n  base64UrlEncode(payload),\n  secret\n)"];
+
+  Header -> Payload [label="  .  "];
+  Payload -> Signature [label="  .  "];
+}
+\end{verbatim}
+\end{block}
+\begin{block}{Reclamaciones JWT y Casos de Uso 🔰}
+\alert{Reclamaciones Estándar:}
+\begin{itemize}
+\item \texttt{iss} - Emisor (quién creó el token)
+\item \texttt{sub} - Sujeto (a quién se refiere el token)
+\item \texttt{aud} - Audiencia (quién debe aceptar el token)
+\item \texttt{exp} - Tiempo de expiración
+\item \texttt{nbf} - No antes de (este tiempo)
+\item \texttt{iat} - Emitido en (este tiempo)
+\item \texttt{jti} - ID JWT (identificador único)
+\end{itemize}
+
+\alert{Casos de Uso Comunes:}
+\begin{itemize}
+\item Autenticación después del inicio de sesión
+\item Autorización de API
+\item Intercambio de información entre servicios
+\item Inicio de Sesión Único (SSO)
+\end{itemize}
+\end{block}
+\begin{block}{El Desafío Base64url}
+Base64 estándar vs codificación Base64url:
+\begin{itemize}
+\item La variante segura para URL reemplaza \texttt{+} con \texttt{-} y \texttt{/} con \texttt{\_}
+\item El relleno (\texttt{=} ) a menudo se omite
+\item Se utiliza para garantizar que los tokens puedan transmitirse de forma segura en las URL
+\end{itemize}
+
+\alert{¡Cada lenguaje maneja esto de manera diferente!}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orga7e0c44},fragile]{Implementaciones en Lenguajes}
+ \begin{block}{JavaScript (Navegador) 🧩}
+\begin{verbatim}
+const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
+const token = authHeader.split(' ')[1];
+
+// IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+// Este ejemplo es solo para demostración
+
+// Decodificar la parte de la cabecera
+const headerPart = token.split('.')[0];
+const decodedHeader = JSON.parse(atob(headerPart));
+console.log(decodedHeader);
+\end{verbatim}
+
+\alert{Nota}: \texttt{atob()} maneja base64 pero no específicamente base64url
+\end{block}
+\begin{block}{Node.js 🧩}
+\begin{verbatim}
+// Usando módulos incorporados
+const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
+const token = authHeader.split(' ')[1];
+
+// IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+// Este ejemplo es solo para demostración
+
+const headerPart = token.split('.')[0];
+const decodedHeader = JSON.parse(
+  Buffer.from(headerPart, 'base64').toString()
+);
+console.log(decodedHeader);
+\end{verbatim}
+\end{block}
+\begin{block}{TypeScript con Seguridad de Tipos 🧩}
+\begin{verbatim}
+interface JwtHeader {
+  alg: string;
+  typ: string;
+  kid?: string;  // Identificador de clave, opcional
+}
+
+function decodeJwtHeader(authHeader: string): JwtHeader {
+  const token: string = authHeader.split(' ')[1];
+  const headerPart: string = token.split('.')[0];
+
+  // IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+  // Este ejemplo es solo para demostración
+
+  // Agregar relleno si es necesario
+  const base64 = headerPart.replace(/-/g, '+').replace(/_/g, '/');
+  const padded = base64.padEnd(base64.length + (4 - (base64.length % 4)) % 4, '=');
+
+  const decodedHeader: JwtHeader = JSON.parse(
+    Buffer.from(padded, 'base64').toString()
+  );
+  return decodedHeader;
+}
+\end{verbatim}
+\end{block}
+\begin{block}{Implementación Python 🧩}
+\begin{verbatim}
+import base64
+import json
+import typing
+
+def decode_jwt_header(auth_header: str) -> typing.Dict[str, str]:
+    """Decodifica la cabecera JWT del encabezado de autorización.
+
+    IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+    Este ejemplo es solo para demostración.
+    """
+    token = auth_header.split(' ')[1]
+    header_part = token.split('.')[0]
+
+    # Agregar relleno si es necesario
+    padding_needed = len(header_part) % 4
+    if padding_needed:
+        header_part += '=' * (4 - padding_needed)
+
+    # Decodificar base64
+    decoded_bytes = base64.b64decode(header_part.replace('-', '+').replace('_', '/'))
+    decoded_str = decoded_bytes.decode('utf-8')
+
+    # Analizar JSON
+    return json.loads(decoded_str)
+\end{verbatim}
+\end{block}
+\begin{block}{Enfoques Funcionales: Clojure 🧩}
+\begin{verbatim}
+;; IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+;; Este ejemplo es solo para demostración.
+(defn decode-jwt-header 
+  "Decodifica la cabecera JWT del encabezado de autorización."
+  [auth-header]
+  (let [token (second (clojure.string/split auth-header #" "))
+        header-part (first (clojure.string/split token #"\."))
+        decoder (Base64/getUrlDecoder)
+        decoded-bytes (.decode decoder header-part)
+        decoded-str (String. decoded-bytes)
+        header (json/read-str decoded-str)]
+    header))
+\end{verbatim}
+
+\alert{Nota}: ¡Base64 de la JVM tiene un decodificador URL incorporado!
+\end{block}
+\begin{block}{Enfoques Funcionales: Racket ⚠️}
+\begin{verbatim}
+;; Convertir base64url a base64 estándar y decodificar
+(define (base64url->bytes str)
+  (define padding (make-string (modulo (- 0 (string-length str)) 4) #\=))
+  (define base64 (string-map (λ (c)
+                               (match c
+                                 [#\- #\+]
+                                 [#\_ #\/]
+                                 [_ c]))
+                             str))
+  (base64-decode (string-append base64 padding)))
+
+;; IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+;; Este ejemplo es solo para demostración y usa composición funcional
+(define (decode-jwt-header auth-header)
+  ;; Tubería de transformaciones
+  (define token (second (string-split auth-header)))
+  (define header-part (first (string-split token ".")))
+  (define decoded-bytes (base64url->bytes header-part))
+  (define decoded-str (bytes->string/utf-8 decoded-bytes))
+  (string->jsexpr decoded-str))
+\end{verbatim}
+\end{block}
+\begin{block}{Implementación de Bajo Nivel: Rust ⚠️}
+\begin{verbatim}
+#[derive(Debug, Serialize, Deserialize)]
+struct JwtHeader {
+    alg: String,
+    typ: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    kid: Option<String>,  // Identificador de clave opcional
+}
+
+/// Decodifica la cabecera JWT del encabezado de autorización
+/// 
+/// # IMPORTANTE
+/// ¡En producción, verifica la firma antes de analizar!
+/// Este ejemplo es solo para demostración.
+/// 
+/// # Manejo de Errores
+/// Devuelve Result con la cabecera analizada o un error descriptivo
+fn decode_jwt_header(auth_header: &str) -> Result<JwtHeader, Box<dyn std::error::Error>> {
+    // Extraer token con manejo de errores
+    let token = auth_header.split_whitespace().nth(1).ok_or("Encabezado de autenticación inválido")?;
+    let header_part = token.split('.').next().ok_or("Formato de token inválido")?;
+
+    // Decodificar base64url a bytes (usando un decodificador seguro para URL adecuado)
+    let decoded_bytes = general_purpose::URL_SAFE_NO_PAD.decode(header_part)?;
+
+    // Analizar JSON con tipado fuerte
+    let header: JwtHeader = serde_json::from_slice(&decoded_bytes)?;
+    Ok(header)
+}
+\end{verbatim}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org407a009},fragile]{Análisis}
+ \begin{block}{Patrones Comunes y Variaciones 🧩}
+\begin{enumerate}[<+->]
+\item \alert{Extracción de tokens}: Dividir por espacio o regex
+\item \alert{Manejo de Base64url}:
+\begin{itemize}
+\item Reemplazo de caracteres (\texttt{-} → \texttt{+}, \texttt{\_} → \texttt{/})
+\item Cálculo de relleno
+\item Disponibilidad de decodificador seguro para URL (ventaja JVM)
+\end{itemize}
+\item \alert{Análisis JSON}: Nativo vs bibliotecas
+\item \alert{Manejo de errores}: Diferencias idiomáticas
+\end{enumerate}
+\end{block}
+\begin{block}{Análisis de Rendimiento entre Lenguajes ⚠️}
+\begin{center}
+\begin{tabular}{lrr}
+Lenguaje & Tiempo de análisis (μs) & Uso de memoria (KB)\\
+\hline
+Rust & 5.2 & 1.8\\
+JavaScript & 24.7 & 12.3\\
+Python & 30.1 & 15.7\\
+Clojure & 45.8 & 28.4\\
+Shell & 180.3 & 8.9\\
+\end{tabular}
+\end{center}
+
+\alert{Nota: Promedio de 1000 ejecuciones, un solo hilo}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orga1ed9c1},fragile]{Consideraciones de Seguridad}
+ \begin{block}{Mejores Prácticas de Seguridad JWT ⚠️}
+\begin{itemize}[<+->]
+\item \alert{Siempre verificar firmas antes de analizar o usar la carga útil}
+\item Usar algoritmos fuertes (preferir RS256/ES256 sobre HS256)
+\item Implementar gestión de claves adecuada (rotación, almacenamiento seguro)
+\item Establecer tiempos de vida de token apropiados (tokens de acceso de corta duración)
+\item Incluir reclamaciones esenciales (iss, sub, exp, aud, iat)
+\end{itemize}
+\end{block}
+\begin{block}{Ataques JWT Comunes ⚠️}
+\begin{itemize}[<+->]
+\item \alert{Ataque "alg": "none"} - El atacante elimina el requisito de validación de firma
+\item \alert{Confusión de algoritmo} - Cambiar de asimétrico (RS256) a simétrico (HS256)
+\item \alert{Manipulación de tokens} - Modificar reclamaciones sin invalidar la firma
+\item \alert{Inyección de tokens} - Usar un token de un contexto en otro
+\item \alert{Ataques de repetición} - Reutilizar tokens capturados
+\end{itemize}
+\end{block}
+\begin{block}{Gestión del Ciclo de Vida de Tokens ⚠️}
+\begin{itemize}[<+->]
+\item \alert{Patrones de token de actualización} - Obtener nuevos tokens de acceso de forma segura
+\item \alert{Revocación de tokens} - Invalidar tokens antes de la expiración
+\item \alert{Tubería de validación de tokens} - Orden adecuado de operaciones
+\item \alert{Lista negra} - Seguimiento de tokens comprometidos o cerrados de sesión
+\end{itemize}
+
+\begin{verbatim}
+digraph {
+  node [shape=box, style=filled, fillcolor="#f5f5f5"];
+  edge [fontname="Arial"];
+
+  issue [label="Emisión de Token", fillcolor="#e6ffe6"];
+  validate [label="Validación de Token", fillcolor="#e6f3ff"];
+  refresh [label="Actualización de Token", fillcolor="#fff0e6"];
+  revoke [label="Revocación de Token", fillcolor="#ffe6e6"];
+
+  issue -> validate -> refresh -> validate;
+  validate -> revoke;
+}
+\end{verbatim}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org9619d75},fragile]{Aplicaciones del Mundo Real}
+ \begin{block}{Comparación de Implementación entre Lenguajes}
+\begin{center}
+\begin{tabular}{llllll}
+Característica & JavaScript & Python & Rust & Clojure & TypeScript\\
+\hline
+Seguridad de tipos & Limitada & Opcional & Fuerte & Dinámica & Fuerte\\
+Manejo de Base64 & Manual & Incorporado & Crates & JVM & Manual\\
+Manejo de errores & try/catch & Excepciones & Result & Monádico & try/catch\\
+Rendimiento & Medio & Bajo & Alto & Medio & Medio\\
+Bibliotecas JWT & Muchas & Varias & Pocas & Pocas & Muchas\\
+\end{tabular}
+\end{center}
+\end{block}
+\begin{block}{JWT en Producción}
+\begin{itemize}[<+->]
+\item Validación de tokens en API Gateway
+\item Autorización de microservicios
+\item Implementaciones de Inicio de Sesión Único
+\item Autenticación de aplicaciones móviles
+\item Comunicación servidor a servidor
+\end{itemize}
+\end{block}
+\begin{block}{Flujo JWT}
+\begin{verbatim}
+digraph {
+  rankdir=LR;
+  node [shape=box, style=rounded];
+  subgraph cluster_validation {
+    label="Proceso de Validación Segura";
+    style=dashed;
+    color=gray;
+    "Extraer JWT" -> "Verificar Firma" -> "Validar Reclamaciones" -> "Verificar Revocación";
+  }
+
+  Client -> "Servicio Auth" [label="1. Inicio de sesión"];
+  "Servicio Auth" -> Client [label="2. JWT"];
+  Client -> "API Gateway" [label="3. Solicitud + JWT"];
+  "API Gateway" -> "Extraer JWT";
+  "Verificar Revocación" -> "Microservicio" [label="4. Solicitud Autorizada"];
+  "Microservicio" -> Client [label="5. Respuesta"];
+}
+\end{verbatim}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org026c79c}]{Depuración y Solución de Problemas}
+\begin{block}{Problemas Comunes de JWT y Soluciones}
+\begin{itemize}[<+->]
+\item \alert{Firma inválida} - Verificar coincidencia de claves, consistencia de algoritmo
+\item \alert{Tokens expirados} - Verificar sincronización de reloj cliente/servidor
+\item \alert{Tokens mal formados} - Inspeccionar codificación, asegurar manejo adecuado de base64url
+\item \alert{Reclamaciones faltantes} - Validar estructura del token contra esquema esperado
+\item \alert{Desajuste de algoritmo} - Confirmar que el alg de cabecera coincide con la implementación
+\end{itemize}
+\end{block}
+\begin{block}{Herramientas de Depuración}
+\begin{itemize}[<+->]
+\item Depurador JWT en línea (jwt.io)
+\item Bibliotecas JWT específicas de lenguaje con opciones de depuración
+\item Herramientas de inspección Base64
+\item Inspección de solicitudes/respuestas con herramientas de desarrollador
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org8853002},fragile]{Conclusión}
+ \begin{block}{Perspectivas entre Paradigmas}
+\begin{center}
+\begin{tabular}{lll}
+Paradigma & Fortalezas & Aplicación JWT\\
+\hline
+Orientado a objetos & Encapsulación, herencia & Token con métodos de validación\\
+Funcional & Composición, inmutabilidad & Tubería de transformación para análisis\\
+Procedural & Simplicidad, rendimiento & Validadores ligeros\\
+Reactivo & Manejo de eventos & Verificación de token en flujos asíncronos\\
+\end{tabular}
+\end{center}
+\end{block}
+\begin{block}{Conclusiones Principales}
+\begin{enumerate}[<+->]
+\item La codificación Base64url requiere atención especial
+\item Cada lenguaje tiene ventajas idiomáticas de análisis
+\item Los enfoques funcionales brillan para tuberías de transformación
+\item Seguridad primero: siempre verificar firmas antes de analizar
+\item Considerar el ciclo de vida del token para una implementación completa
+\item Las bibliotecas ahorran tiempo pero entender los mecanismos internos es importante
+\item Seguir las mejores prácticas específicas del lenguaje
+\end{enumerate}
+\end{block}
+\begin{block}{Recursos de Aprendizaje}
+\begin{itemize}[<+->]
+\item JWT RFC 7519: \url{https://tools.ietf.org/html/rfc7519}
+\item Mejores Prácticas de Seguridad JWT (IETF): \url{https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp}
+\item Hoja de trucos OWASP JWT: \url{https://cheatsheetseries.owasp.org/cheatsheets/JSON\_Web\_Token\_for\_Java\_Cheat\_Sheet.html}
+\item Guías de seguridad específicas de lenguaje: ver documentación del repositorio
+\end{itemize}
+\end{block}
+\begin{block}{Glosario JWT para Principiantes 🔰}
+\begin{center}
+\begin{tabular}{ll}
+Término & Definición\\
+\hline
+JWT & JSON Web Token: un medio compacto y seguro para URL de representar reclamaciones para transferir entre partes\\
+Reclamaciones & Piezas de información afirmadas sobre un sujeto (p. ej., ID de usuario, tiempo de expiración)\\
+Base64url & Una variante de la codificación Base64 segura para URL que puede incluirse en URLs sin escape\\
+Cabecera & Primera parte del JWT que contiene metadatos como el algoritmo utilizado para firmar\\
+Carga útil & Segunda parte del JWT que contiene los datos de reclamaciones reales\\
+Firma & Tercera parte del JWT que verifica que el token no ha sido alterado\\
+HMAC & Código de Autenticación de Mensajes basado en Hash: técnica para garantizar la integridad de datos usando una clave secreta\\
+RSA & Criptosistema de clave pública comúnmente usado para firmas JWT\\
+Sin estado & Autenticación que no requiere almacenamiento de sesión del lado del servidor\\
+Token al portador & Tipo de token de acceso donde la posesión del token es suficiente para la autenticación\\
+\end{tabular}
+\end{center}
+\end{block}
+\begin{block}{Mejores Prácticas de Seguridad Python ⚠️}
+\begin{verbatim}
+import jwt
+from cryptography.hazmat.primitives.constant_time import bytes_eq
+from typing import Dict, Any, Optional, List, Union
+
+# Definir tipado explícito para reclamaciones JWT
+class JWTClaims(TypedDict):
+    iss: str  # emisor
+    sub: str  # sujeto
+    exp: int  # tiempo de expiración
+    iat: int  # emitido en
+    aud: Optional[Union[str, List[str]]]  # audiencia
+
+def verify_and_decode_token(token: str, key: str, algorithms: List[str] = ['RS256']) -> JWTClaims:
+    """Verificar y decodificar un token JWT de forma segura con manejo de errores adecuado.
+
+    IMPORTANTE: Esta función valida la firma ANTES de procesar la carga útil.
+    """
+    try:
+        # Especificar explícitamente los algoritmos permitidos (prevenir ataque de algoritmo 'none')
+        # Validar firma primero, luego decodificar carga útil
+        payload = jwt.decode(
+            token,
+            key,
+            algorithms=algorithms,  # Especificar explícitamente algoritmos permitidos
+            options={"verify_signature": True}
+        )
+        return payload
+    except jwt.ExpiredSignatureError:
+        # Excepción específica para token expirado
+        raise ValueError("El token ha expirado")
+    except jwt.InvalidSignatureError:
+        # Usar error genérico que no revela detalles de firma
+        raise ValueError("Autenticación fallida")
+    except jwt.DecodeError:
+        # Error de decodificación genérico
+        raise ValueError("Token inválido")
+    except jwt.InvalidAlgorithmError:
+        raise ValueError("Algoritmo de token inválido")
+    except Exception:
+        # Captura todo con mensaje genérico para evitar fugas de información
+        raise ValueError("Autenticación fallida")
+\end{verbatim}
+\end{block}
+\begin{block}{Tuberías Funcionales: Ejemplo Clojure Mejorado 🧩}
+\begin{verbatim}
+;; Aprovechando el enfoque funcional de Clojure con macro thread-first
+;; para una tubería de transformación más limpia
+
+(defn decode-base64url
+  "Decodificar cadena codificada en base64url a cadena"
+  [base64url-str]
+  (-> base64url-str
+      (java.util.Base64/getUrlDecoder)
+      (.decode)
+      (String.)))
+
+(defn extract-token
+  "Extraer token del encabezado de autorización"
+  [auth-header]
+  (-> auth-header
+      (clojure.string/split #" ")
+      (second)))
+
+(defn extract-header-part
+  "Extraer parte de cabecera del token"
+  [token]
+  (-> token
+      (clojure.string/split #"\.")
+      (first)))
+
+(defn parse-json
+  "Analizar cadena JSON a mapa Clojure"
+  [json-str]
+  (json/read-str json-str :key-fn keyword))
+
+;; IMPORTANTE: ¡En producción, verifica la firma antes de analizar!
+;; Este ejemplo demuestra la composición funcional para legibilidad
+(defn decode-jwt-header
+  "Extraer y decodificar cabecera JWT usando una tubería funcional"
+  [auth-header]
+  (-> auth-header
+      (extract-token)
+      (extract-header-part)
+      (decode-base64url)
+      (parse-json)))
+\end{verbatim}
+\end{block}
+\begin{block}{¿Preguntas?}
+¡Gracias!
+
+\alert{Diapositivas y ejemplos disponibles en:} 
+github.com/aidan-pace/jwt-parsing-examples
+
+\alert{Niveles de dificultad:} 🔰 Principiante | 🧩 Intermedio | ⚠️ Avanzado
+\end{block}
+\end{frame}
+\end{document}

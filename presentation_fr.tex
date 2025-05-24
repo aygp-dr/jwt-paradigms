@@ -1,0 +1,572 @@
+% Created 2025-05-03 Sat 14:49
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation,aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{inputenc}
+\usepackage{fontenc}
+\usepackage{babel}
+\usetheme{metropolis}
+\usecolortheme{default}
+\author{Aidan Pace}
+\date{\textit{{[}2025-04-28 Mon]}}
+\title{Analyse des en-têtes JWT à travers les paradigmes de programmation}
+\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Agenda}\tableofcontents[currentsection]\end{frame}}
+\hypersetup{
+ pdfauthor={Aidan Pace},
+ pdftitle={Analyse des en-têtes JWT à travers les paradigmes de programmation},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 31.0.50 (Org mode 9.7.11)}, 
+ pdflang={French}}
+\begin{document}
+
+\maketitle
+\begin{frame}[label={sec:org367be5f}]{Introduction}
+\begin{block}{Analyse des en-têtes JWT à travers les paradigmes de programmation}
+\begin{itemize}[<+->]
+\item Une exploration inter-langages des techniques d'analyse des en-têtes JWT
+\item PyCon US 2025, 14 mai - 22 mai 2025
+\item Aidan Pace (@aygp-dr)
+\end{itemize}
+\end{block}
+\begin{block}{Ce que nous allons couvrir}
+\begin{itemize}[<+->]
+\item Contexte historique et évolution de l'authentification
+\item Structure JWT et fondamentaux (🔰 adapté aux débutants)
+\item Défis de l'encodage Base64url
+\item Modèles d'analyse d'en-têtes dans différents langages
+\item Approches fonctionnelles vs. orientées objet
+\item Idiomes et bonnes pratiques spécifiques aux langages
+\item Considérations de sécurité et attaques courantes
+\item Analyse des performances et applications réelles
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org70c48b0}]{Évolution de l'authentification}
+\begin{block}{Contexte historique de l'authentification}
+\begin{itemize}[<+->]
+\item Authentification primitive : Paires nom d'utilisateur/mot de passe
+\item Sessions côté serveur avec cookies (avec état)
+\item Émergence de l'authentification par jetons (sans état)
+\item Standardisation JWT (RFC 7519, mai 2015)
+\item Flux d'authentification modernes (OAuth 2.0, OIDC)
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orgf0db282},fragile]{Bases de JWT}
+ \begin{block}{Rappel de la structure JWT 🔰}
+\begin{verbatim}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U
+\end{verbatim}
+
+Trois segments encodés en base64url séparés par des points :
+\begin{enumerate}
+\item \alert{En-tête} (algorithme et type de jeton)
+\item \alert{Charge utile} (revendications/claims)
+\item \alert{Signature}
+\end{enumerate}
+
+\begin{verbatim}
+digraph {
+  rankdir=LR;
+  node [shape=box, style=filled, fillcolor="#e6f3ff", fontname="monospace"];
+  edge [fontname="Arial"];
+
+  Header [label="En-tête\n{\"alg\":\"HS256\",\n\"typ\":\"JWT\"}"];
+  Payload [label="Charge utile\n{\"sub\":\"1234\",\n\"name\":\"User\",\n\"exp\":1516239022}"];
+  Signature [label="Signature\nHMAC-SHA256(\n  base64UrlEncode(header) + '.' +\n  base64UrlEncode(payload),\n  secret\n)"];
+
+  Header -> Payload [label="  .  "];
+  Payload -> Signature [label="  .  "];
+}
+\end{verbatim}
+\end{block}
+\begin{block}{Revendications JWT et cas d'utilisation 🔰}
+\alert{Revendications standard :}
+\begin{itemize}
+\item \texttt{iss} - Émetteur (qui a créé le jeton)
+\item \texttt{sub} - Sujet (à qui le jeton fait référence)
+\item \texttt{aud} - Audience (qui devrait accepter le jeton)
+\item \texttt{exp} - Temps d'expiration
+\item \texttt{nbf} - Pas avant (ce temps)
+\item \texttt{iat} - Émis à (ce temps)
+\item \texttt{jti} - ID JWT (identifiant unique)
+\end{itemize}
+
+\alert{Cas d'utilisation courants :}
+\begin{itemize}
+\item Authentification après connexion
+\item Autorisation d'API
+\item Échange d'informations entre services
+\item Authentification unique (SSO)
+\end{itemize}
+\end{block}
+\begin{block}{Le défi Base64url}
+Base64 standard vs encodage Base64url :
+\begin{itemize}
+\item La variante URL-safe remplace \texttt{+} par \texttt{-} et \texttt{/} par \texttt{\_}
+\item Le rembourrage (\texttt{=} ) est souvent omis
+\item Utilisé pour garantir que les jetons peuvent être transmis en toute sécurité dans les URL
+\end{itemize}
+
+\alert{Chaque langage gère cela différemment !}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org25093b4},fragile]{Implémentations dans différents langages}
+ \begin{block}{JavaScript (Navigateur) 🧩}
+\begin{verbatim}
+const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
+const token = authHeader.split(' ')[1];
+
+// IMPORTANT : En production, vérifiez la signature avant l'analyse !
+// Cet exemple est uniquement à des fins de démonstration
+
+// Décodage de la partie en-tête
+const headerPart = token.split('.')[0];
+const decodedHeader = JSON.parse(atob(headerPart));
+console.log(decodedHeader);
+\end{verbatim}
+
+\alert{Remarque} : \texttt{atob()} gère base64 mais pas spécifiquement base64url
+\end{block}
+\begin{block}{Node.js 🧩}
+\begin{verbatim}
+// Utilisation des modules intégrés
+const authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOi..."
+const token = authHeader.split(' ')[1];
+
+// IMPORTANT : En production, vérifiez la signature avant l'analyse !
+// Cet exemple est uniquement à des fins de démonstration
+
+const headerPart = token.split('.')[0];
+const decodedHeader = JSON.parse(
+  Buffer.from(headerPart, 'base64').toString()
+);
+console.log(decodedHeader);
+\end{verbatim}
+\end{block}
+\begin{block}{TypeScript avec sûreté du typage 🧩}
+\begin{verbatim}
+interface JwtHeader {
+  alg: string;
+  typ: string;
+  kid?: string;  // Identifiant de clé, optionnel
+}
+
+function decodeJwtHeader(authHeader: string): JwtHeader {
+  const token: string = authHeader.split(' ')[1];
+  const headerPart: string = token.split('.')[0];
+
+  // IMPORTANT : En production, vérifiez la signature avant l'analyse !
+  // Cet exemple est uniquement à des fins de démonstration
+
+  // Ajout de rembourrage si nécessaire
+  const base64 = headerPart.replace(/-/g, '+').replace(/_/g, '/');
+  const padded = base64.padEnd(base64.length + (4 - (base64.length % 4)) % 4, '=');
+
+  const decodedHeader: JwtHeader = JSON.parse(
+    Buffer.from(padded, 'base64').toString()
+  );
+  return decodedHeader;
+}
+\end{verbatim}
+\end{block}
+\begin{block}{Implémentation Python 🧩}
+\begin{verbatim}
+import base64
+import json
+import typing
+
+def decode_jwt_header(auth_header: str) -> typing.Dict[str, str]:
+    """Décode l'en-tête JWT à partir de l'en-tête d'autorisation.
+
+    IMPORTANT : En production, vérifiez la signature avant l'analyse !
+    Cet exemple est uniquement à des fins de démonstration.
+    """
+    token = auth_header.split(' ')[1]
+    header_part = token.split('.')[0]
+
+    # Ajout de rembourrage si nécessaire
+    padding_needed = len(header_part) % 4
+    if padding_needed:
+        header_part += '=' * (4 - padding_needed)
+
+    # Décodage base64
+    decoded_bytes = base64.b64decode(header_part.replace('-', '+').replace('_', '/'))
+    decoded_str = decoded_bytes.decode('utf-8')
+
+    # Analyse JSON
+    return json.loads(decoded_str)
+\end{verbatim}
+\end{block}
+\begin{block}{Approches fonctionnelles : Clojure 🧩}
+\begin{verbatim}
+;; IMPORTANT : En production, vérifiez la signature avant l'analyse !
+;; Cet exemple est uniquement à des fins de démonstration.
+(defn decode-jwt-header 
+  "Décode l'en-tête JWT à partir de l'en-tête d'autorisation."
+  [auth-header]
+  (let [token (second (clojure.string/split auth-header #" "))
+        header-part (first (clojure.string/split token #"\."))
+        decoder (Base64/getUrlDecoder)
+        decoded-bytes (.decode decoder header-part)
+        decoded-str (String. decoded-bytes)
+        header (json/read-str decoded-str)]
+    header))
+\end{verbatim}
+
+\alert{Remarque} : Base64 de la JVM possède un décodeur URL intégré !
+\end{block}
+\begin{block}{Approches fonctionnelles : Racket ⚠️}
+\begin{verbatim}
+;; Convertir base64url en base64 standard et décoder
+(define (base64url->bytes str)
+  (define padding (make-string (modulo (- 0 (string-length str)) 4) #\=))
+  (define base64 (string-map (λ (c)
+                               (match c
+                                 [#\- #\+]
+                                 [#\_ #\/]
+                                 [_ c]))
+                             str))
+  (base64-decode (string-append base64 padding)))
+
+;; IMPORTANT : En production, vérifiez la signature avant l'analyse !
+;; Cet exemple est uniquement à des fins de démonstration et utilise la composition fonctionnelle
+(define (decode-jwt-header auth-header)
+  ;; Pipeline de transformations
+  (define token (second (string-split auth-header)))
+  (define header-part (first (string-split token ".")))
+  (define decoded-bytes (base64url->bytes header-part))
+  (define decoded-str (bytes->string/utf-8 decoded-bytes))
+  (string->jsexpr decoded-str))
+\end{verbatim}
+\end{block}
+\begin{block}{Implémentation de bas niveau : Rust ⚠️}
+\begin{verbatim}
+#[derive(Debug, Serialize, Deserialize)]
+struct JwtHeader {
+    alg: String,
+    typ: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    kid: Option<String>,  // Identifiant de clé optionnel
+}
+
+/// Décode l'en-tête JWT à partir de l'en-tête d'autorisation
+/// 
+/// # IMPORTANT
+/// En production, vérifiez la signature avant l'analyse !
+/// Cet exemple est uniquement à des fins de démonstration.
+/// 
+/// # Gestion des erreurs
+/// Renvoie Result avec soit l'en-tête analysé, soit une erreur descriptive
+fn decode_jwt_header(auth_header: &str) -> Result<JwtHeader, Box<dyn std::error::Error>> {
+    // Extraction du jeton avec gestion des erreurs
+    let token = auth_header.split_whitespace().nth(1).ok_or("En-tête d'auth invalide")?;
+    let header_part = token.split('.').next().ok_or("Format de jeton invalide")?;
+
+    // Décodage base64url en octets (avec décodeur URL sécurisé approprié)
+    let decoded_bytes = general_purpose::URL_SAFE_NO_PAD.decode(header_part)?;
+
+    // Analyse JSON avec typage fort
+    let header: JwtHeader = serde_json::from_slice(&decoded_bytes)?;
+    Ok(header)
+}
+\end{verbatim}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org68edeb1},fragile]{Analyse}
+ \begin{block}{Modèles communs et variations 🧩}
+\begin{enumerate}[<+->]
+\item \alert{Extraction de jeton} : Division par espace ou regex
+\item \alert{Gestion Base64url} :
+\begin{itemize}
+\item Remplacement de caractères (\texttt{-} → \texttt{+}, \texttt{\_} → \texttt{/})
+\item Calcul de rembourrage
+\item Disponibilité du décodeur URL-safe (avantage JVM)
+\end{itemize}
+\item \alert{Analyse JSON} : Native vs bibliothèques
+\item \alert{Gestion des erreurs} : Différences idiomatiques
+\end{enumerate}
+\end{block}
+\begin{block}{Analyse des performances inter-langages ⚠️}
+\begin{center}
+\begin{tabular}{lrr}
+Langage & Temps d'analyse (μs) & Utilisation mémoire (KB)\\
+\hline
+Rust & 5.2 & 1.8\\
+JavaScript & 24.7 & 12.3\\
+Python & 30.1 & 15.7\\
+Clojure & 45.8 & 28.4\\
+Shell & 180.3 & 8.9\\
+\end{tabular}
+\end{center}
+
+\alert{Remarque : Moyenne de 1000 exécutions, mono-thread}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org24b20a0},fragile]{Considérations de sécurité}
+ \begin{block}{Bonnes pratiques de sécurité JWT ⚠️}
+\begin{itemize}[<+->]
+\item \alert{Toujours vérifier les signatures avant d'analyser ou d'utiliser la charge utile}
+\item Utiliser des algorithmes solides (préférer RS256/ES256 à HS256)
+\item Mettre en œuvre une gestion appropriée des clés (rotation, stockage sécurisé)
+\item Définir des durées de vie de jeton appropriées (jetons d'accès de courte durée)
+\item Inclure les revendications essentielles (iss, sub, exp, aud, iat)
+\end{itemize}
+\end{block}
+\begin{block}{Attaques JWT courantes ⚠️}
+\begin{itemize}[<+->]
+\item \alert{Attaque "alg": "none"} - L'attaquant supprime l'exigence de validation de signature
+\item \alert{Confusion d'algorithme} - Passage de l'asymétrique (RS256) au symétrique (HS256)
+\item \alert{Falsification de jeton} - Modification des revendications sans invalider la signature
+\item \alert{Injection de jeton} - Utilisation d'un jeton d'un contexte dans un autre
+\item \alert{Attaques par rejeu} - Réutilisation de jetons capturés
+\end{itemize}
+\end{block}
+\begin{block}{Gestion du cycle de vie des jetons ⚠️}
+\begin{itemize}[<+->]
+\item \alert{Modèles de jeton de rafraîchissement} - Obtention sécurisée de nouveaux jetons d'accès
+\item \alert{Révocation de jeton} - Invalidation des jetons avant expiration
+\item \alert{Pipeline de validation de jeton} - Ordre approprié des opérations
+\item \alert{Liste noire} - Suivi des jetons compromis ou déconnectés
+\end{itemize}
+
+\begin{verbatim}
+digraph {
+  node [shape=box, style=filled, fillcolor="#f5f5f5"];
+  edge [fontname="Arial"];
+
+  issue [label="Émission du jeton", fillcolor="#e6ffe6"];
+  validate [label="Validation du jeton", fillcolor="#e6f3ff"];
+  refresh [label="Rafraîchissement du jeton", fillcolor="#fff0e6"];
+  revoke [label="Révocation du jeton", fillcolor="#ffe6e6"];
+
+  issue -> validate -> refresh -> validate;
+  validate -> revoke;
+}
+\end{verbatim}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org9bdba1c},fragile]{Applications réelles}
+ \begin{block}{Comparaison d'implémentation inter-langages}
+\begin{center}
+\begin{tabular}{llllll}
+Fonctionnalité & JavaScript & Python & Rust & Clojure & TypeScript\\
+\hline
+Sûreté du type & Limitée & Optionnelle & Forte & Dynamique & Forte\\
+Gestion Base64 & Manuelle & Intégrée & Crates & JVM & Manuelle\\
+Gestion erreurs & try/catch & Exceptions & Result & Monadique & try/catch\\
+Performance & Moyenne & Faible & Élevée & Moyenne & Moyenne\\
+Bibliothèques JWT & Nombreuses & Plusieurs & Peu & Peu & Nombreuses\\
+\end{tabular}
+\end{center}
+\end{block}
+\begin{block}{JWT en production}
+\begin{itemize}[<+->]
+\item Validation de jeton par passerelle API
+\item Autorisation de microservices
+\item Implémentations d'authentification unique
+\item Authentification d'applications mobiles
+\item Communication serveur à serveur
+\end{itemize}
+\end{block}
+\begin{block}{Flux JWT}
+\begin{verbatim}
+digraph {
+  rankdir=LR;
+  node [shape=box, style=rounded];
+  subgraph cluster_validation {
+    label="Processus de validation sécurisé";
+    style=dashed;
+    color=gray;
+    "Extraire JWT" -> "Vérifier signature" -> "Valider revendications" -> "Vérifier révocation";
+  }
+
+  Client -> "Service Auth" [label="1. Connexion"];
+  "Service Auth" -> Client [label="2. JWT"];
+  Client -> "Passerelle API" [label="3. Requête + JWT"];
+  "Passerelle API" -> "Extraire JWT";
+  "Vérifier révocation" -> "Microservice" [label="4. Requête autorisée"];
+  "Microservice" -> Client [label="5. Réponse"];
+}
+\end{verbatim}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org0af7ffd}]{Débogage et dépannage}
+\begin{block}{Problèmes JWT courants et solutions}
+\begin{itemize}[<+->]
+\item \alert{Signature invalide} - Vérifier la correspondance des clés, la cohérence de l'algorithme
+\item \alert{Jetons expirés} - Vérifier la synchronisation d'horloge client/serveur
+\item \alert{Jetons mal formés} - Inspecter l'encodage, assurer une gestion base64url appropriée
+\item \alert{Revendications manquantes} - Valider la structure du jeton par rapport au schéma attendu
+\item \alert{Incompatibilité d'algorithme} - Confirmer que l'alg d'en-tête correspond à l'implémentation
+\end{itemize}
+\end{block}
+\begin{block}{Outils de débogage}
+\begin{itemize}[<+->]
+\item Débogueur JWT en ligne (jwt.io)
+\item Bibliothèques JWT spécifiques au langage avec options de débogage
+\item Outils d'inspection Base64
+\item Inspection des requêtes/réponses avec les outils de développement
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orgc6c3753},fragile]{Conclusion}
+ \begin{block}{Aperçus inter-paradigmes}
+\begin{center}
+\begin{tabular}{lll}
+Paradigme & Forces & Application JWT\\
+\hline
+Orienté objet & Encapsulation, héritage & Jeton avec méthodes de validation\\
+Fonctionnel & Composition, immuabilité & Pipeline de transformation pour l'analyse\\
+Procédural & Simplicité, performance & Validateurs légers\\
+Réactif & Gestion d'événements & Vérification de jeton dans les flux asynchrones\\
+\end{tabular}
+\end{center}
+\end{block}
+\begin{block}{À retenir}
+\begin{enumerate}[<+->]
+\item L'encodage Base64url nécessite une attention particulière
+\item Chaque langage présente des avantages d'analyse idiomatiques
+\item Les approches fonctionnelles excellent pour les pipelines de transformation
+\item La sécurité d'abord : toujours vérifier les signatures avant l'analyse
+\item Considérer le cycle de vie du jeton pour une implémentation complète
+\item Les bibliothèques font gagner du temps mais comprendre les mécanismes internes est important
+\item Suivre les meilleures pratiques spécifiques au langage
+\end{enumerate}
+\end{block}
+\begin{block}{Ressources d'apprentissage}
+\begin{itemize}[<+->]
+\item JWT RFC 7519 : \url{https://tools.ietf.org/html/rfc7519}
+\item Meilleures pratiques de sécurité JWT (IETF) : \url{https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp}
+\item Fiche de triche OWASP JWT : \url{https://cheatsheetseries.owasp.org/cheatsheets/JSON\_Web\_Token\_for\_Java\_Cheat\_Sheet.html}
+\item Guides de sécurité spécifiques aux langages : voir la documentation du dépôt
+\end{itemize}
+\end{block}
+\begin{block}{Glossaire JWT pour débutants 🔰}
+\begin{center}
+\begin{tabular}{ll}
+Terme & Définition\\
+\hline
+JWT & JSON Web Token : un moyen compact et sécurisé pour les URL de représenter des revendications à transférer entre parties\\
+Revendications & Morceaux d'information affirmés à propos d'un sujet (p. ex. ID utilisateur, heure d'expiration)\\
+Base64url & Une variante de l'encodage Base64 sûre pour les URL qui peut être incluse dans les URL sans échappement\\
+En-tête & Première partie du JWT contenant des métadonnées comme l'algorithme utilisé pour la signature\\
+Charge utile & Deuxième partie du JWT contenant les données de revendication réelles\\
+Signature & Troisième partie du JWT qui vérifie que le jeton n'a pas été altéré\\
+HMAC & Code d'authentification de message basé sur le hachage : technique pour assurer l'intégrité des données à l'aide d'une clé secrète\\
+RSA & Cryptosystème à clé publique couramment utilisé pour les signatures JWT\\
+Sans état & Authentification ne nécessitant pas de stockage de session côté serveur\\
+Jeton au porteur & Type de jeton d'accès où la possession du jeton est suffisante pour l'authentification\\
+\end{tabular}
+\end{center}
+\end{block}
+\begin{block}{Meilleures pratiques de sécurité Python ⚠️}
+\begin{verbatim}
+import jwt
+from cryptography.hazmat.primitives.constant_time import bytes_eq
+from typing import Dict, Any, Optional, List, Union
+
+# Définir un typage explicite pour les revendications JWT
+class JWTClaims(TypedDict):
+    iss: str  # émetteur
+    sub: str  # sujet
+    exp: int  # temps d'expiration
+    iat: int  # émis à (ce temps)
+    aud: Optional[Union[str, List[str]]]  # audience
+
+def verify_and_decode_token(token: str, key: str, algorithms: List[str] = ['RS256']) -> JWTClaims:
+    """Vérifier et décoder un jeton JWT de manière sécurisée avec une gestion appropriée des erreurs.
+
+    IMPORTANT : Cette fonction valide la signature AVANT de traiter la charge utile.
+    """
+    try:
+        # Spécifier explicitement les algorithmes autorisés (prévenir l'attaque d'algorithme 'none')
+        # Valider la signature d'abord, puis décoder la charge utile
+        payload = jwt.decode(
+            token,
+            key,
+            algorithms=algorithms,  # Spécifier explicitement les algorithmes autorisés
+            options={"verify_signature": True}
+        )
+        return payload
+    except jwt.ExpiredSignatureError:
+        # Exception spécifique pour un jeton expiré
+        raise ValueError("Le jeton a expiré")
+    except jwt.InvalidSignatureError:
+        # Utiliser une erreur générique qui ne révèle pas les détails de la signature
+        raise ValueError("Authentification échouée")
+    except jwt.DecodeError:
+        # Erreur de décodage générique
+        raise ValueError("Jeton invalide")
+    except jwt.InvalidAlgorithmError:
+        raise ValueError("Algorithme de jeton invalide")
+    except Exception:
+        # Attrape-tout avec message générique pour éviter les fuites d'informations
+        raise ValueError("Authentification échouée")
+\end{verbatim}
+\end{block}
+\begin{block}{Pipelines fonctionnels : Exemple Clojure amélioré 🧩}
+\begin{verbatim}
+;; Exploiter l'approche fonctionnelle de Clojure avec la macro thread-first
+;; pour un pipeline de transformation plus propre
+
+(defn decode-base64url
+  "Décoder une chaîne encodée en base64url en chaîne"
+  [base64url-str]
+  (-> base64url-str
+      (java.util.Base64/getUrlDecoder)
+      (.decode)
+      (String.)))
+
+(defn extract-token
+  "Extraire le jeton de l'en-tête d'autorisation"
+  [auth-header]
+  (-> auth-header
+      (clojure.string/split #" ")
+      (second)))
+
+(defn extract-header-part
+  "Extraire la partie d'en-tête du jeton"
+  [token]
+  (-> token
+      (clojure.string/split #"\.")
+      (first)))
+
+(defn parse-json
+  "Analyser une chaîne JSON en map Clojure"
+  [json-str]
+  (json/read-str json-str :key-fn keyword))
+
+;; IMPORTANT : En production, vérifiez la signature avant l'analyse !
+;; Cet exemple démontre la composition fonctionnelle pour la lisibilité
+(defn decode-jwt-header
+  "Extraire et décoder l'en-tête JWT en utilisant un pipeline fonctionnel"
+  [auth-header]
+  (-> auth-header
+      (extract-token)
+      (extract-header-part)
+      (decode-base64url)
+      (parse-json)))
+\end{verbatim}
+\end{block}
+\begin{block}{Questions ?}
+Merci !
+
+\alert{Diapositives et exemples disponibles sur :} 
+github.com/aidan-pace/jwt-parsing-examples
+
+\alert{Niveaux de difficulté :} 🔰 Débutant | 🧩 Intermédiaire | ⚠️ Avancé
+\end{block}
+\end{frame}
+\end{document}
