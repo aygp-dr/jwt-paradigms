@@ -15,13 +15,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 :CUSTOM_ID: build-test-commands
 :END:
 
+*** Makefile Commands
+- *Presentation*:
+  - =make slides= - Generate presentation.pdf from presentation.org
+  - =make view= - View the generated PDF (if available)
+  - =make present= - Present slides using pdfpc (optimal presentation tool)
+- *Code Extraction*:
+  - =make tangle= - Tangle all .org files in the root directory
+  - =make examples= - Extract code from examples.org to examples/ directory
+- *Book*:
+  - =make book= - Generate PDF from personas/gadfly/paradigms_lost.org
+  - =make book-examples= - Extract and validate code examples from book chapters
+- *Utility*:
+  - =make clean= - Remove generated files
+  - =make build= - Build all artifacts (tangle code and generate PDFs)
+  - =make build-all= - Build everything including code examples from the book
+
+*** Language-Specific Commands
 - *JavaScript/Node.js*: =cd examples/js && node browser.js= or =node node.js=
 - *TypeScript*: =cd examples/ts && npm install && npm run build && npm start=
 - *Python*: =cd examples/python && python jwt_header.py=
 - *Rust*: =cd examples/rust && cargo build && cargo run=
 - *Single Test*: Use language-specific test runners (e.g., =pytest examples/python/test_file.py::test_name -v=)
-- *Org-mode*: =make examples= (extract code), =make slides= (PDF), =make book= (book PDF)
-- *Validation*: =make book-examples= (extracts and validates book examples)
 - *Linting*: TypeScript: =tsc --noEmit --allowJs=, Python: =python -m py_compile=
 
 ** Code Style Guidelines

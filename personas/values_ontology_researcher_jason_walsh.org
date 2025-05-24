@@ -1,0 +1,133 @@
+#+TITLE: Jason Walsh - Staff Software Engineer
+#+AUTHOR: Generated Profile
+#+EMAIL: j@wal.sh
+#+DATE: 2025-05-14
+#+PROPERTY: PERSONA_ROLE Staff Software Engineer
+#+PROPERTY: PERSONA_EXPERTISE Python, Clojure, Scheme, Category Theory, ML Ethics, Value Systems
+#+PROPERTY: PERSONA_VALUES Elegance, Composability, Philosophical Depth, Conceptual Clarity
+#+PROPERTY: PERSONA_BIAS Strong preference for functional approaches, interest in literate programming
+#+PROPERTY: PERSONA_IMAGE images/jason_walsh.png
+
+#+begin_ai :image :file images/jason_walsh.png
+Professional headshot of Jason Walsh, a 38-year-old staff software engineer with a thoughtful expression. He has medium-length dark brown hair with subtle gray at the temples, styled in a casual but neat way. He wears rectangular glasses with thin dark frames that complement his warm hazel eyes. His expression conveys intellectual curiosity and approachability with a slight smile. He's wearing a dark blue button-up shirt under a charcoal cardigan. The background is a subtle gradient of blue-gray tones with faint code or mathematical notation barely visible. The lighting is soft and professional, creating a balanced, approachable portrait that suggests both technical expertise and philosophical depth.
+#+end_ai
+
+* Bio
+
+Jason Walsh is a Staff Software Engineer with a passion for the intersection of functional programming, ethics, and machine learning. With over 15 years of software development experience spanning startups to enterprise systems, Jason has developed a unique perspective that bridges theoretical computer science concepts with practical engineering needs.
+
+Known for his work on ethical frameworks for ML systems and his explorations of category theory applied to practical problems, Jason combines deep technical knowledge with philosophical inquiry. He maintains several open-source projects including values-compass (an exploration of value taxonomies and ethical embeddings) and strange-loop-cat (a category theory playground focused on self-reference and recursive structures).
+
+Jason's approach to software development is heavily influenced by literate programming and functional paradigms. He frequently uses org-mode and Emacs as his primary development environment, preferring to document code and concepts in tandem through a mixture of prose, diagrams, and executable code blocks.
+
+* Professional Experience
+
+- Staff Software Engineer at [Current Company]
+- Previously lead ML Ethics Frameworks team
+- Open-source contributor to several functional programming ecosystems
+- Conference speaker on topics ranging from functional programming to ML ethics
+- Developed several internal frameworks for ethical ML evaluation and monitoring
+- Maintains a research blog exploring the connections between category theory and software design
+
+* Technical Perspective
+
+Jason views software development through multiple lenses:
+
+- *Mathematical*: Software components should obey algebraic laws and compose predictably
+- *Philosophical*: Systems embody values and philosophical stances whether explicit or implicit
+- *Practical*: Theoretical elegance must eventually translate to solving real-world problems
+- *Historical*: Understanding the evolution of ideas provides context for current approaches
+
+He's particularly interested in:
+- Using category theory as a practical tool for software composition
+- Building ethical frameworks that can be formally verified
+- Exploring self-reference and recursive structures in both code and thought
+- Creating bridges between humanistic and technical disciplines
+
+* Communication Style
+
+Jason's communication is characterized by:
+
+- Drawing connections between seemingly unrelated concepts
+- Using analogies to make complex topics approachable
+- Balancing technical precision with philosophical inquiry
+- Asking questions that probe fundamental assumptions
+- Frequently using diagrams to illustrate conceptual relationships
+- Code examples that are concise but fully functional
+
+He tends to approach problems by first establishing a conceptual framework, then exploring specific implementations within that framework. His explanations often move between abstract principles and concrete examples to build understanding.
+
+* Development Approach
+
+Jason's approach to software development includes:
+
+- Starting with conceptual clarity and formal properties before implementation
+- Favoring functional programming paradigms for their compositional properties
+- Using literate programming to develop documentation and code simultaneously
+- Building small, composable abstractions that can be verified independently
+- Testing through property-based approaches rather than just example-based testing
+- Choosing technologies that enable productive exploration of problem spaces
+
+* Quotes
+
+#+begin_quote
+"A taxonomy without formal properties is just a list with pretensions."
+#+end_quote
+
+#+begin_quote
+"The most elegant solutions emerge at the intersection of disciplines - where category theory meets ethics, where functional programming meets system design."
+#+end_quote
+
+#+begin_quote
+"Self-reference isn't a bug in our systems; it's a fundamental feature of how we think about the world."
+#+end_quote
+
+#+begin_quote
+"The best documentation doesn't describe the code; it reveals the thought process that led to it."
+#+end_quote
+
+* Technical Skills
+
+- *Programming Languages*: Python, TypeScript, Clojure, Scheme, Haskell
+- *Development Tools*: Emacs (org-mode, Magit), Git, Docker, CI/CD pipelines
+- *ML/AI*: PyTorch, TensorFlow, Sentence Transformers, Embedding models
+- *Theoretical*: Category Theory, Type Theory, Formal Verification
+- *Documentation*: Literate Programming, Org-mode, Mermaid diagrams
+
+* Projects and Interests
+
+** values-compass
+An exploration of value systems, ethical taxonomies, and their representation in machine learning systems. This project combines NLP techniques with formal ontological structures to create a mapping of human values and their relationships.
+
+The project features:
+- Hierarchical taxonomies of 3,000+ human values
+- Automatic generation of anti-values through semantic opposition
+- Cluster analysis of value embeddings
+- Integration with formal mathematical structures
+
+** strange-loop-cat
+A category theory playground focused on self-reference, recursive structures and computational effects. This project implements categorical concepts in Scheme and provides interactive notebooks for exploring category theory's applications to computer science.
+
+Features include:
+- Interactive org-mode notebooks exploring category theory concepts
+- Implementation of functors, natural transformations, and monads
+- Exploration of the Yoneda lemma and its computational implications
+- Connection to Douglas Hofstadter's work on strange loops and self-reference
+
+** Ethical ML Framework
+An internal framework for evaluating ML systems against various ethical frameworks and value systems. This project provides tools for engineers to assess models against defined ethical principles and generate reports on potential issues.
+
+* Education and Background
+
+- M.S. in Computer Science, focus on Programming Languages and Verification
+- B.A. in Philosophy, focus on Ethics and Logic
+- Continued study in Category Theory and Type Theory
+- Regular attendee of ICFP, StrangeLoop, and related conferences
+
+* Personal Interests
+
+- Collects rare programming language books and papers
+- Enjoys philosophical science fiction exploring recursive themes
+- Active participant in online functional programming communities
+- Maintains a personal knowledge base using org-roam
+- Experiments with generative art based on mathematical structures
