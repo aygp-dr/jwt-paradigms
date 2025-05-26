@@ -270,8 +270,23 @@ These examples include both the theory and practical implementations across diff
 :CUSTOM_ID: references
 :END:
 
+*** Core JWT/JOSE Specifications
+- [[https://tools.ietf.org/html/rfc7515][RFC 7515: JSON Web Signature (JWS)]]
+- [[https://tools.ietf.org/html/rfc7516][RFC 7516: JSON Web Encryption (JWE)]]
+- [[https://tools.ietf.org/html/rfc7517][RFC 7517: JSON Web Key (JWK)]]
+- [[https://tools.ietf.org/html/rfc7518][RFC 7518: JSON Web Algorithms (JWA)]]
 - [[https://tools.ietf.org/html/rfc7519][RFC 7519: JSON Web Token (JWT)]]
+- [[https://tools.ietf.org/html/rfc7520][RFC 7520: Examples of Protecting Content Using JSON Object Signing and Encryption (JOSE)]]
+
+*** OAuth 2.0 JWT Integration
+- [[https://tools.ietf.org/html/rfc7521][RFC 7521: Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants]]
+- [[https://tools.ietf.org/html/rfc7523][RFC 7523: JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants]]
+
+*** Security Best Practices
+- [[https://tools.ietf.org/html/rfc8725][RFC 8725: JSON Web Token Best Current Practices]]
+- [[https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp][JWT Security Best Practices (IETF Draft)]]
+- [[https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html][OWASP JWT Security Cheat Sheet]]
+
+*** Additional Resources
 - [[https://tools.ietf.org/html/rfc4648][RFC 4648: Base64 and Base64url Encoding]]
 - [[https://auth0.com/docs/tokens/json-web-tokens/json-web-token-structure][JWT Structure Explained]]
-- [[https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp][JWT Security Best Practices (IETF)]]
-- [[https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html][OWASP JWT Security Cheat Sheet]]

@@ -699,6 +699,12 @@ class JWTSecurityMonitor:
 
 ** Learning Resources
 #+ATTR_BEAMER: :overlay <+->
+*Core JWT/JOSE RFCs:*
+- RFC 7515-7520: Complete JOSE specification suite
+- RFC 7519: JSON Web Token (JWT) - https://tools.ietf.org/html/rfc7519
+- RFC 8725: JWT Best Current Practices - https://tools.ietf.org/html/rfc8725
+
+*Security Resources:*
 - JWT Security Best Practices (IETF): https://datatracker.ietf.org/doc/html/draft-ietf-oauth-jwt-bcp
 - OWASP JWT Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
 - Auth0 JWT Handbook: https://auth0.com/resources/ebooks/jwt-handbook
