@@ -1,0 +1,29 @@
+Context and Details for direnv Support
+
+BACKGROUND:
+The project needed environment variable management for API keys, particularly the Gemini API key used for generating persona headshots. direnv provides automatic environment loading when entering the project directory, improving developer experience.
+
+CHANGES MADE:
+1. Added .env to .gitignore to prevent API key exposure
+2. Created .env.example with template for required environment variables
+3. Created verbose .envrc with helpful setup instructions and tool detection
+
+TESTING:
+- Verified .env is properly ignored by git
+- Tested direnv loads environment when entering directory
+- Confirmed helpful messages display when .env is missing
+- Validated GEMINI_API_KEY detection logic works
+
+EXPERIMENTS:
+None directly related - this supports the persona generation workflow
+
+DEVIATIONS:
+Enhanced .envrc beyond basic functionality to include:
+- Detailed setup instructions
+- API key verification
+- Development tool detection
+- Project-specific guidance
+
+FOLLOW-UP:
+- Users need to copy .env.example to .env and add their API keys
+- Documentation may need updates to reference direnv setup
