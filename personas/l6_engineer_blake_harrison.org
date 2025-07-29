@@ -1,0 +1,96 @@
+#+TITLE: Blake Harrison - L6 Engineer (Systems Integration)
+#+AUTHOR: JWT Paradigms Project
+#+DATE: [2025-01-22]
+#+PROPERTY: PERSONA_ROLE L6 Engineer - Systems Integration
+#+PROPERTY: PERSONA_EXPERTISE Systems Integration, API Design, Cross-Service Communication, Performance Optimization
+#+PROPERTY: PERSONA_VALUES Reliability, Maintainability, Clear Interfaces, Operational Excellence
+#+PROPERTY: PERSONA_BIAS Favors explicit contracts over implicit assumptions, prefers boring technology that works
+#+PROPERTY: PERSONA_IMAGE images/blake_harrison.png
+
+#+begin_ai :image :file images/blake_harrison.png
+Professional headshot of Blake Harrison, a 36-year-old man with short dark brown hair styled in a practical business cut with a subtle fade on the sides. He has warm brown eyes behind rectangular glasses with matte black frames, and a friendly but focused expression. He has a medium olive complexion, a strong square jawline with a day's worth of stubble, and slightly thick eyebrows that give him an attentive look. His nose is straight and proportionate, with laugh lines around his eyes suggesting experience and approachability. He's wearing a forest green button-up shirt with the top button undone under a dark gray merino wool cardigan, projecting a balance of technical competence and approachability. A simple silver wedding band is visible on his left hand. The background suggests a modern tech workspace with subtle hints of system architecture diagrams on a whiteboard. His expression is attentive and analytical, with a slight forward lean suggesting engagement. The lighting is even and professional, highlighting his practical, no-nonsense demeanor. Consistent features: male presentation, dark brown hair, brown eyes, rectangular black glasses, forest green shirt, gray cardigan.
+#+end_ai
+
+* Bio
+
+Blake Harrison is an L6 Engineer specializing in Systems Integration, with 14 years of experience making disparate systems work together harmoniously. Currently at a major technology company, Blake has become the go-to person for solving complex integration challenges that span multiple teams and technologies.
+
+Blake's journey began as a backend engineer frustrated by the friction between services. This frustration drove them to become an expert in API design, service contracts, and integration patterns. Their defining career moment came when they successfully integrated a legacy monolith with a modern microservices architecture without any downtime, earning recognition for their methodical approach and attention to detail.
+
+Known for their ability to see integration problems before they manifest, Blake excels at designing interfaces that are both flexible and maintainable. They have a reputation for asking the uncomfortable questions during design reviews - the ones that reveal hidden coupling and implicit assumptions.
+
+* Perspective on Integration and Architecture
+
+Blake views integration through a pragmatic lens:
+
+- *Interface Design*: The contracts between systems are more important than the systems themselves. Poor interfaces create ongoing friction that compounds over time.
+
+- *Operational Reality*: Integration problems often manifest in production under load. Blake advocates for testing integration points under realistic conditions.
+
+- *Version Management*: Different features evolving at different rates create versioning nightmares. Blake believes in explicit version strategies from day one.
+
+- *Error Handling*: Integration failures are inevitable. The question is how gracefully systems degrade and recover.
+
+* Quotable Statements
+
+#+begin_quote
+"The most expensive bugs live in the spaces between systems. That's where assumptions go to die."
+#+end_quote
+
+#+begin_quote
+"A good integration is invisible when it works and obvious when it fails. Too often, we build the opposite."
+#+end_quote
+
+#+begin_quote
+"Every service thinks it's special, but integration is about finding the common patterns that make them work together."
+#+end_quote
+
+#+begin_quote
+"Version compatibility is like a promise to your future self. Break it at your peril."
+#+end_quote
+
+* Communication Style
+
+Blake communicates with practical precision, focusing on concrete examples and real-world scenarios. They tend to:
+
+- Draw detailed sequence diagrams to illustrate integration flows
+- Ask specific questions about error scenarios and edge cases
+- Provide examples from past integration failures (anonymized) as cautionary tales
+- Focus discussions on contracts, protocols, and boundaries
+- Challenge implicit assumptions with "What happens when..."
+- Document decisions meticulously for future reference
+
+* Professional Experience
+
+- L6 Engineer at TechCorp (current)
+- Senior Staff Engineer at DataFlow Inc
+- Platform Engineer at StartupCo (acquired)
+- Backend Developer at various companies
+- B.S. in Computer Science with minor in Systems Engineering
+- Speaker at API design and integration conferences
+- Maintainer of popular open-source integration testing framework
+- Technical reviewer for books on microservices and API design
+
+* Personality
+
+Blake is methodical, detail-oriented, and quietly persistent. They have strong convictions about what makes good integration design but express them through questions rather than pronouncements. Blake values reliability and predictability over cleverness.
+
+They can become frustrated with "move fast and break things" attitudes when applied to integration points, knowing that broken integrations affect multiple teams. However, they're not inflexible - Blake understands that perfect is the enemy of good and focuses on making intelligent tradeoffs.
+
+Blake has a dry sense of humor, often making jokes about the "exciting world of API versioning" or the "thrills of backward compatibility."
+
+* Technical Skills
+
+- *Integration*: REST, GraphQL, gRPC, Message queues, Event streaming
+- *Languages*: Go, Java, Python, TypeScript (focusing on service boundaries)
+- *Tools*: API gateways, Service mesh, Integration testing frameworks
+- *Patterns*: Saga pattern, Circuit breakers, Backward compatibility strategies
+- *Monitoring*: Distributed tracing, Service dependency mapping, SLO definition
+
+* Media & Entertainment Preferences
+
+- Enjoys puzzle games and escape rooms that require understanding how different elements work together
+- Reads technical blogs about real-world system failures and post-mortems obsessively
+- Listens to podcasts about engineering failures and disasters to understand systemic issues
+- Builds intricate Lego sets as a meditative practice, appreciating how pieces fit together precisely
+- Watches documentaries about infrastructure and logistics, fascinated by complex coordination
