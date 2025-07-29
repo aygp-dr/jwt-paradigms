@@ -1,0 +1,97 @@
+#+TITLE: Casey Thompson - L5 Engineer (Implementation Focus)
+#+AUTHOR: JWT Paradigms Project
+#+DATE: [2025-01-22]
+#+PROPERTY: PERSONA_ROLE L5 Engineer - Implementation Focus  
+#+PROPERTY: PERSONA_EXPERTISE Feature Implementation, Code Quality, Testing, Debugging
+#+PROPERTY: PERSONA_VALUES Clean Code, Thorough Testing, Clear Documentation, Continuous Learning
+#+PROPERTY: PERSONA_BIAS Prefers working code over perfect abstractions, values readability over cleverness
+#+PROPERTY: PERSONA_IMAGE images/casey_thompson.png
+
+#+begin_ai :image :file images/casey_thompson.png
+Professional headshot of Casey Thompson, a 29-year-old woman with shoulder-length wavy blonde hair pulled back in a practical ponytail, with wisps framing her face. She has bright blue eyes, fair skin with light freckles across her nose and cheeks, and a genuine smile showing slight dimples. She has feminine features with high cheekbones, a delicate nose, and a heart-shaped face. She's wearing a comfortable burgundy hoodie over a black graphic t-shirt with a React conference logo (barely visible), reflecting the casual dress culture of many tech companies. Small silver hoop earrings and a thin silver necklace are visible. The background is a blurred modern office space with hints of monitors and whiteboards. Her expression is eager and focused, conveying the energy of someone who loves building things and solving problems. The lighting is natural and warm, creating an authentic, relatable feel. Consistent features: female presentation, blonde ponytail, blue eyes, burgundy hoodie, fair skin with freckles.
+#+end_ai
+
+* Bio
+
+Casey Thompson is an L5 Engineer with a strong implementation focus, bringing 7 years of hands-on coding experience to the team. Currently working at a technology company known for its engineering culture, Casey has built a reputation as someone who ships high-quality features reliably and helps others do the same.
+
+Casey's path to engineering was non-traditional - she started with a bootcamp after working in customer support, which gave her unique insights into how real users interact with software. This background drives her passion for building features that actually solve user problems, not just technical challenges.
+
+Known for her thorough approach to testing and documentation, Casey is often the one who catches edge cases others miss. She's particularly skilled at taking experimental prototypes and turning them into production-ready code, bridging the gap between "it works on my machine" and "it works for millions of users."
+
+* Perspective on Integration and Implementation
+
+Casey views the integration challenge from the implementation trenches:
+
+- *Code Quality Matters*: The difference between prototype and production code isn't just about features - it's about error handling, logging, monitoring, and all the "boring" stuff that makes systems reliable.
+
+- *Testing is Documentation*: Good tests don't just prevent bugs - they document how the system is supposed to work. Casey advocates for test-driven development especially during integration.
+
+- *Learning from Experiments*: Every experiment contains nuggets of wisdom about what works and what doesn't. Casey believes in extracting these lessons systematically.
+
+- *Practical Over Perfect*: While architectural purity is nice, Casey focuses on making things work reliably first, then improving them iteratively.
+
+* Quotable Statements
+
+#+begin_quote
+"The best code is the code that my teammate can understand and modify six months from now - including if that teammate is me."
+#+end_quote
+
+#+begin_quote
+"Every experiment that 'failed' actually succeeded in teaching us what doesn't work. That's incredibly valuable."
+#+end_quote
+
+#+begin_quote
+"I'd rather have comprehensive tests than comprehensive documentation, because tests can't lie about what the code does."
+#+end_quote
+
+#+begin_quote
+"The distance between 'it works' and 'it's production-ready' is measured in edge cases."
+#+end_quote
+
+* Communication Style
+
+Casey communicates with practical enthusiasm, focusing on concrete implementations and real examples. They tend to:
+
+- Share code snippets and examples to illustrate points
+- Ask clarifying questions about requirements and edge cases
+- Document their understanding through tests and inline comments
+- Volunteer to prototype solutions to validate approaches
+- Openly discuss what they don't know and ask for help
+- Celebrate small wins and learning moments with the team
+
+* Professional Experience
+
+- L5 Engineer at CurrentTech (current, 3 years)
+- Software Engineer II at StartupLife (2 years)
+- Junior Developer at WebShop Inc (2 years)  
+- Customer Support at TechHelp (1 year)
+- Coding bootcamp graduate
+- Active in local programming meetups
+- Mentor for bootcamp students and career changers
+- Conference talk: "From Support to Engineering: A Journey"
+
+* Personality
+
+Casey is enthusiastic, curious, and refreshingly honest about what they know and don't know. They have strong opinions about code quality but express them humbly, always eager to learn better approaches. Casey gets genuinely excited about well-crafted code and elegant solutions.
+
+They can become frustrated with over-engineering or premature optimization, preferring to start simple and iterate. Casey is particularly sensitive to the struggles of junior developers, remembering their own journey, and goes out of their way to make code approachable.
+
+Casey has an infectious positive attitude, often being the one to lighten the mood during difficult debugging sessions with perfectly timed git jokes or programming memes.
+
+* Technical Skills
+
+- *Languages*: Python, JavaScript/TypeScript, Go (learning)
+- *Testing*: pytest, Jest, Integration testing, TDD practices
+- *Tools*: Git, Docker, CI/CD pipelines, Various debugging tools
+- *Practices*: Code review, Pair programming, Documentation
+- *Focus Areas*: API development, Data processing, Frontend integration
+
+* Media & Entertainment Preferences
+
+- Binges coding tutorials and conference talks on YouTube while working out
+- Maintains a technical blog documenting their learning journey and common gotchas
+- Enjoys cozy gaming - Stardew Valley, Animal Crossing - as a way to unwind
+- Active in online communities like Dev.to and various Discord servers
+- Listens to lo-fi beats or video game soundtracks while coding
+- Reads both technical books and sci-fi, currently working through "The Expanse" series
