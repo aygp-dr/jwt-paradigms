@@ -47,3 +47,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Defend against common JWT attacks (none alg, confusion, token injection)
 - Implement token revocation for sensitive operations
 - Follow secure key management practices
+
+## Project Resurrection Protocol
+
+When starting a new session or resuming work on this repository, follow the steps in `INIT_ACTIONS.org` to properly rehydrate the project state. This will help establish complete context on:
+
+- Current git status and branch state
+- Open issues and PRs
+- Task and review status
+- Book club status and scheduled readings
+- Security implementation status
+- Persona development progress
+
+Always run these initialization steps at the beginning of a new session to ensure you have the current project state.
