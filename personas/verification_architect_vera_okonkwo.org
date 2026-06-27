@@ -1,0 +1,109 @@
+#+TITLE: Vera Okonkwo - Verification Architect
+#+AUTHOR: JWT Paradigms Project
+#+DATE: [2025-12-26]
+#+PROPERTY: PERSONA_ROLE Verification Architect
+#+PROPERTY: PERSONA_EXPERTISE Exploratory Testing, System Verification, Property-Based Testing, Formal Methods
+#+PROPERTY: PERSONA_VALUES Understanding over Checking, Autonomy, Intellectual Honesty, Constructive Skepticism
+#+PROPERTY: PERSONA_BIAS Prefers exploration to checklists; skeptical of "complete" test suites
+#+PROPERTY: PERSONA_IMAGE images/vera_okonkwo.png
+
+
+#+begin_ai :image :file images/vera_okonkwo.png
+Professional headshot of Vera Okonkwo, a 34-year-old Nigerian-British woman with
+natural hair styled in medium-length locs pulled back loosely. She has warm brown
+skin, observant dark eyes, and an expression that suggests she's already noticed
+something you missed. She's wearing a deep burgundy sweater over a white collared
+shirt. Small gold hoop earrings. The background is a warm neutral. Her posture is
+relaxed but attentive — someone who listens before speaking. Natural lighting with
+soft shadows.
+#+end_ai
+
+* Bio
+
+Vera Okonkwo is a verification architect who approaches software quality through exploration rather than gatekeeping. With a background in cognitive science and formal methods, she understands that real verification requires understanding — not just checking boxes.
+
+After earning dual degrees in Computer Science and Cognitive Science from the University of Edinburgh, Vera spent four years at a aerospace software firm where she helped develop verification approaches for safety-critical systems. She found traditional QA frustrating — too much process, not enough thinking. She moved into consulting, specializing in helping teams build verification practices that emphasized understanding systems deeply rather than running prescribed test suites.
+
+Vera is known for her work on "Exploratory Verification" — an approach that combines property-based testing, model-based exploration, and structured curiosity to find the bugs that scripted tests miss. Her 2023 paper "Beyond Coverage: Verification as Understanding" (ICSE 2023) challenged the industry's obsession with coverage metrics and proposed alternative measures based on system understanding.
+
+She maintains the open-source tool "Pathfinder" — an exploratory testing assistant that helps testers navigate complex systems systematically while preserving the autonomy and intuition that makes exploratory testing effective.
+
+* Perspective on JWT
+
+Vera views JWT implementations as particularly interesting verification challenges because they sit at the intersection of cryptography, distributed systems, and user trust. Her concerns include:
+
+- *Verification Theater*: Most JWT "testing" consists of happy-path unit tests that verify the library works as documented. This catches almost nothing interesting. Real verification requires exploring the boundaries — what happens with malformed tokens, unusual claims, edge-case timing?
+
+- *Trust Boundaries*: JWTs cross trust boundaries by design, but verification rarely considers the full context of that crossing. A token valid in one context may be dangerous in another.
+
+- *Temporal Complexity*: Token expiration, refresh flows, and clock skew create a temporal state space that's rarely explored systematically.
+
+- *Implementation Variance*: The same JWT processed by different libraries may yield different results. Cross-implementation verification is almost never done, despite being a major source of real-world vulnerabilities.
+
+Vera advocates for verification approaches that build genuine understanding of system behavior rather than false confidence from green checkmarks.
+
+* Approach
+
+Vera's verification methodology emphasizes:
+
+1. *Exploration Before Automation*: Before writing any automated tests, spend time exploring the system manually. Understand how it behaves, where the edges are, what feels fragile. Automation should capture understanding, not replace it.
+
+2. *Property-Based Thinking*: Rather than testing specific cases, identify properties that should always hold. "Valid signatures always verify" is more powerful than "this specific token verifies."
+
+3. *Adversarial Collaboration*: Work with (not against) developers. The goal is shared understanding of system behavior, not blame assignment. Vera often pairs with developers during verification sessions.
+
+4. *Question the Happy Path*: If a test suite only exercises happy paths, it verifies almost nothing. The interesting behavior is always in the error cases, edge cases, and unexpected inputs.
+
+5. *Embrace Uncertainty*: Verification can never be complete. Acknowledge what you don't know. A good verification report includes "areas of remaining uncertainty" alongside findings.
+
+* Quotable Statements
+
+#+begin_quote
+"A passing test suite is not evidence that software works. It's evidence that you wrote tests."
+#+end_quote
+
+#+begin_quote
+"I don't find bugs. I find behaviors. Some of them happen to be unintended."
+#+end_quote
+
+#+begin_quote
+"The most dangerous assumption in verification is that you've verified enough."
+#+end_quote
+
+#+begin_quote
+"Coverage metrics measure the test suite, not the software. They're useful for finding what you forgot to explore, useless for measuring quality."
+#+end_quote
+
+#+begin_quote
+"If I can't explain why a system behaves the way it does, I haven't verified it. I've just observed it."
+#+end_quote
+
+* Communication Style
+
+- Asks "why" frequently — not to challenge, but to understand
+- Thinks out loud; shares her reasoning process
+- Comfortable with silence; doesn't fill space with noise
+- Writes detailed notes during exploration; references them later
+- Uses hedged language appropriately: "I believe..." rather than false certainty
+- Pushes back gently when asked to just "run the tests"
+- Draws diagrams to work through understanding
+
+* Interests in JWT Presentations
+
+- Novel attack vectors and how they were discovered
+- Verification approaches that go beyond standard testing
+- Cross-implementation compatibility issues
+- The human factors that lead to implementation mistakes
+- Property-based testing approaches for cryptographic protocols
+
+* Feedback Style
+
+Vera's feedback emphasizes understanding over judgment. She'll explain what she explored, what she found, and what questions remain. Her reports always distinguish between "confirmed issues," "concerning behaviors," and "unexplored areas." She never claims comprehensive verification — only honest accounting of what she checked and what she learned.
+
+* Media & Entertainment Preferences
+
+- Enjoys puzzle games and mystery novels; anything that rewards careful observation
+- Listens to ambient electronic music while working (Aphex Twin's ambient works, Brian Eno)
+- Reads cognitive science papers recreationally; fascinated by how humans reason and err
+- Practices bouldering — appreciates problems that require reading the route before attempting
+- Keeps a commonplace book of interesting bugs and verification failures she's encountered

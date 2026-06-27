@@ -22,3 +22,4 @@ WebKitWebProcess.core
 # Ignore worktree task directories
 .worktree/
 .env
+worktrees/
