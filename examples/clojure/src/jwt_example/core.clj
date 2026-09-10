@@ -15,17 +15,17 @@
           decoded-bytes (.decode decoder header-part)
           decoded-str (String. decoded-bytes)
           header (json/read-str decoded-str)]
-      
+
       ;; Validate structure
       (when-not (map? header)
         (throw (Exception. "JWT header is not a JSON object")))
-      
+
       ;; Verify required fields
       (when-not (contains? header "alg")
         (throw (Exception. "JWT header missing 'alg' field")))
       (when-not (contains? header "typ")
         (throw (Exception. "JWT header missing 'typ' field")))
-      
+
       ;; Return valid header
       header)
     (catch Exception e
