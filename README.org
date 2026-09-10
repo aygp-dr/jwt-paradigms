@@ -95,10 +95,30 @@ hy jwt_header.hy
 
 *** Clojure
 #+BEGIN_SRC shell
-cd clojure
-lein deps
-lein run
+cd examples/clojure
+clojure -M:run    # or: bb run
 #+END_SRC
+
+**** Development
+
+=examples/clojure= is a Clojure project that follows the aygp-dr Clojure
+standard. =deps.edn= is the manifest and =bb.edn= holds the tasks.
+=src/jwt_example/core.clj= is tangled from =examples.org=, so edit the org
+block and then run =make examples=.
+
+| Task                    | What it does                     |
+|-------------------------+----------------------------------|
+| =bb test=               | test suite (=clojure -M:test=)   |
+| =bb lint=               | clj-kondo (fails on errors)      |
+| =bb fmt= / =bb fmt:fix= | cljfmt check / fix               |
+| =bb check=              | lint + fmt + test (CI runs this) |
+
+=src/jwt_example/specs.clj= holds data specs for base64url segments, the
+JOSE header, compact tokens and the bearer =Authorization= header.
+=decode-jwt-header= has an =s/fdef= next to its =defn= (see the
+[[https://clojure.org/guides/spec][clojure.spec guide]]).
+=test/jwt_example/specs_test.clj= runs =stest/check= on it, and
+=core_test.clj= checks the encode/decode round trip generatively.
 
 *** Racket
 #+BEGIN_SRC shell
