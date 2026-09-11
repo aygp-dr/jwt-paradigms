@@ -349,7 +349,9 @@ def securely_verify_jwt(token: str, secret_key: str) -> JwtVerifyResult:
 
 #+BEGIN_SRC clojure :tangle examples/clojure/src/jwt_example/core.clj :mkdirp yes
 (ns jwt-example.core
-  (:require [clojure.data.json :as json])
+  (:require [clojure.data.json :as json]
+            [clojure.spec.alpha :as s]
+            [jwt-example.specs :as specs])
   (:import [java.util Base64])
   (:gen-class))
 
@@ -365,25 +367,37 @@ def securely_verify_jwt(token: str, secret_key: str) -> JwtVerifyResult:
           decoded-bytes (.decode decoder header-part)
           decoded-str (String. decoded-bytes)
           header (json/read-str decoded-str)]
-      
+
       ;; Validate structure
       (when-not (map? header)
         (throw (Exception. "JWT header is not a JSON object")))
-      
+
       ;; Verify required fields
       (when-not (contains? header "alg")
         (throw (Exception. "JWT header missing 'alg' field")))
       (when-not (contains? header "typ")
         (throw (Exception. "JWT header missing 'typ' field")))
-      
+
       ;; Return valid header
       header)
     (catch Exception e
       (throw (Exception. (str "Invalid JWT header: " (.getMessage e)))))))
 
+;; Spec (https://clojure.org/guides/spec): the header comes back exactly as
+;; the token's first segment encodes it. The data specs are in
+;; examples/clojure/src/jwt_example/specs.clj.
+(s/fdef decode-jwt-header
+  :args (s/cat :auth-header ::specs/auth-header)
+  :ret ::specs/jose-header
+  :fn (fn [{{:keys [auth-header]} :args ret :ret}]
+        (= ret (specs/auth-header->jose-header auth-header))))
+
 (defn -main [& args]
   (let [auth-header "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U"]
     (println (decode-jwt-header auth-header))))
+
+(s/fdef -main
+  :args (s/* string?))
 
 ;; SECURE ALTERNATIVE:
 ;; (defn securely-verify-jwt [token secret-key]
